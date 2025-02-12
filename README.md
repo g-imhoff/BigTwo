@@ -7,6 +7,8 @@
 - [ ] [Rapport d'activité du 11 février](https://docs.google.com/document/d/1O7ilVU5W-g-nsrT-ImbPu5izcw8g3Hxj84XJF_CaZXw/edit?usp=sharing)
 - [ ] [Rapport de réunion du 12 février](https://docs.google.com/document/d/1RXEjfCDJVvTFk8rJ1h9g6UasJgr4QsVXGRZ4ElUr5Ao/edit?usp=sharing)
 
+- [ ] [Spécification du jeu](https://docs.google.com/document/d/16dK9idrLsqIaKZnwfrsFBTqkz9WRccWG2lJpzLYXNPo/edit?usp=sharing)
+
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
