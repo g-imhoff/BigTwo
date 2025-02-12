@@ -1,6 +1,4 @@
-# Projet_Chor_Dai_Di
-
-
+# Projet_Big-Two
 
 ## Getting started
 
