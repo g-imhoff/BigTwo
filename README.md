@@ -2,7 +2,7 @@
 
 ## Document link
 
-- [ ] [GANTT et google sheet](https://docs.google.com/spreadsheets/d/15E0ZqsRuYU18wtngXLdZtjkoHMbxgvk6md2QXh5olPc/edit?usp=sharing)
+- [ ] [GANTT et timesheet](https://docs.google.com/spreadsheets/d/15E0ZqsRuYU18wtngXLdZtjkoHMbxgvk6md2QXh5olPc/edit?usp=sharing)
 - [ ] [Rapport de réunion du 5 février](https://docs.google.com/document/d/11jb0i9E6qgMx2kGWyEJkUGXuNtBYWi_8ye2jBXUAGRo/edit?usp=sharing)
 - [ ] [Rapport d'activité du 11 février](https://docs.google.com/document/d/1O7ilVU5W-g-nsrT-ImbPu5izcw8g3Hxj84XJF_CaZXw/edit?usp=sharing)
 - [ ] [Rapport de réunion du 12 février](https://docs.google.com/document/d/1RXEjfCDJVvTFk8rJ1h9g6UasJgr4QsVXGRZ4ElUr5Ao/edit?usp=sharing)
