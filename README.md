@@ -8,6 +8,10 @@
 - [ ] [Rapport de réunion du 12 février](https://docs.google.com/document/d/1RXEjfCDJVvTFk8rJ1h9g6UasJgr4QsVXGRZ4ElUr5Ao/edit?usp=sharing)
 
 - [ ] [Spécification du jeu](https://docs.google.com/document/d/16dK9idrLsqIaKZnwfrsFBTqkz9WRccWG2lJpzLYXNPo/edit?usp=sharing)
+- [ ] [Cahier des charges version 1](https://docs.google.com/document/d/1Sz56qtAcEbLAoe62q1_LQB3uff1bZQEsKPienvkuipE/edit?usp=sharing)
+- [ ] [Cahier des charges version 2](https://docs.google.com/document/d/1dy-nstU-lWUUd4Eh0OMxNbfvvQbNMUIrZywqtnA1zao/edit?usp=sharing)
+
+
 
 ## Getting started
 
