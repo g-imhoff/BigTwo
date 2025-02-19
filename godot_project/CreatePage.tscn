@@ -1,11 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://fq8y23pl3rwf"]
+[gd_scene load_steps=10 format=3 uid="uid://fq8y23pl3rwf"]
 
 [ext_resource type="Script" path="res://create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_vm0o5"]
 [ext_resource type="Texture2D" uid="uid://cp6gvl7q3kwp0" path="res://assets/ui/Text field.png" id="4_cwooc"]
+[ext_resource type="Texture2D" uid="uid://yuptm5fmlar0" path="res://assets/ui/hideicon.png" id="5_84oho"]
 [ext_resource type="Texture2D" uid="uid://ckmwq5fbp3g6e" path="res://assets/ui/Divider create page.png" id="5_subxe"]
 [ext_resource type="Texture2D" uid="uid://wusfm5iffkwg" path="res://assets/ui/login google.png" id="6_uxr2r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dx0t"]
+size = Vector2(66, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aue3f"]
 size = Vector2(668.496, 50)
@@ -22,7 +26,7 @@ position = Vector2(960, 130)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_vm0o5")
 
-[node name="Label" type="Label" parent="."]
+[node name="CREATE AN ACCOUNT" type="Label" parent="."]
 offset_left = 701.0
 offset_top = 270.0
 offset_right = 1220.0
@@ -96,6 +100,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 placeholder_text = "Enter your password"
 alignment = 1
 flat = true
+secret = true
 
 [node name="Label" type="Label" parent="Password/LabelPassword"]
 layout_mode = 0
@@ -112,6 +117,24 @@ offset_right = 515.0
 offset_bottom = 83.0
 text = "Use 8 or more characters with a mix of letters, numbers & symbols"
 
+[node name="HideButton" type="Label" parent="Password/LabelPassword"]
+layout_mode = 0
+offset_left = 625.0
+offset_top = -36.0
+offset_right = 665.0
+offset_bottom = -13.0
+text = "Hide"
+
+[node name="Area2D" type="Area2D" parent="Password/LabelPassword/HideButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Password/LabelPassword/HideButton/Area2D"]
+position = Vector2(5, 13)
+shape = SubResource("RectangleShape2D_0dx0t")
+
+[node name="Sprite2D" type="Sprite2D" parent="Password/LabelPassword/HideButton"]
+position = Vector2(-15, 12)
+texture = ExtResource("5_84oho")
+
 [node name="CreateAccount" type="Button" parent="."]
 offset_left = 629.0
 offset_top = 720.0
@@ -120,7 +143,7 @@ offset_bottom = 777.0
 theme_override_font_sizes/font_size = 25
 text = "Create Account"
 
-[node name="Label2" type="Label" parent="."]
+[node name="OR and Divider" type="Label" parent="."]
 offset_left = 940.0
 offset_top = 790.0
 offset_right = 983.0
@@ -128,12 +151,12 @@ offset_bottom = 832.0
 theme_override_font_sizes/font_size = 30
 text = "OR"
 
-[node name="DividerLeft" type="Sprite2D" parent="Label2"]
+[node name="DividerLeft" type="Sprite2D" parent="OR and Divider"]
 position = Vector2(-170.5, 22)
 scale = Vector2(0.942177, 1)
 texture = ExtResource("5_subxe")
 
-[node name="DividerRight" type="Sprite2D" parent="Label2"]
+[node name="DividerRight" type="Sprite2D" parent="OR and Divider"]
 position = Vector2(214.5, 22)
 scale = Vector2(0.942177, 1)
 texture = ExtResource("5_subxe")
@@ -157,6 +180,7 @@ texture = ExtResource("6_uxr2r")
 position = Vector2(-0.251648, 1)
 shape = SubResource("RectangleShape2D_aue3f")
 
+[connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="." method="_on_hide_button_input_event"]
 [connection signal="pressed" from="CreateAccount" to="." method="_on_create_account_pressed"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
 [connection signal="input_event" from="OAuthGoogle/Area2D" to="." method="_on_oauth_google_input_event"]
