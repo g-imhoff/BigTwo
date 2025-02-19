@@ -1,12 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://7mcc8557hsh8"]
+[gd_scene load_steps=17 format=3 uid="uid://7mcc8557hsh8"]
 
 [ext_resource type="Script" path="res://homepage.gd" id="1_66dqq"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_h7fba"]
 [ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_3cxme"]
-[ext_resource type="Script" path="res://UserButton.gd" id="4_jfx0i"]
+[ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="5_0yh4y"]
+[ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="5_15spk"]
+[ext_resource type="Texture2D" uid="uid://i2eyyfstmhsu" path="res://assets/ui/instagram social media logo.png" id="6_oop00"]
+[ext_resource type="Texture2D" uid="uid://bn6mcmfehnnxb" path="res://assets/ui/sound on.png" id="7_bfv3c"]
+[ext_resource type="Texture2D" uid="uid://bvkdl6114misq" path="res://assets/ui/sound off.png" id="8_88ydq"]
+[ext_resource type="Script" path="res://sound_button.gd" id="9_bb75b"]
+
+[sub_resource type="GDScript" id="GDScript_yeoxk"]
+script/source = "extends Area2D
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iwhy5"]
 radius = 46.0977
+
+[sub_resource type="GDScript" id="GDScript_j6q4l"]
+script/source = "extends Area2D
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ofba"]
+radius = 25.625
+height = 58.75
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eyes3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_bfv3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_88ydq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k18rn"]
+size = Vector2(106, 60.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gae61"]
+radius = 56.0089
 
 [node name="Homepage" type="Node2D"]
 script = ExtResource("1_66dqq")
@@ -20,10 +57,63 @@ position = Vector2(110, 75)
 texture = ExtResource("3_3cxme")
 
 [node name="Area2D" type="Area2D" parent="UserButton"]
-script = ExtResource("4_jfx0i")
+script = SubResource("GDScript_yeoxk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UserButton/Area2D"]
 position = Vector2(-3, 4)
 shape = SubResource("CircleShape2D_iwhy5")
 
+[node name="RulesButton" type="Sprite2D" parent="."]
+position = Vector2(1827, 79)
+texture = ExtResource("5_15spk")
+
+[node name="Area2D" type="Area2D" parent="RulesButton"]
+script = SubResource("GDScript_j6q4l")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RulesButton/Area2D"]
+position = Vector2(-3.05176e-05, 0)
+scale = Vector2(1.06099, 1.04036)
+polygon = PackedVector2Array(1, 47, -14, 40, -31, 18, -38, -13, -35, -29, 3, -48, 37, -33, 41, -29, 43, -25, 45, -9, 42, 9, 32, 29, 20, 40, 5, 48)
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(960, 300)
+texture = ExtResource("5_0yh4y")
+
+[node name="PlayNow" type="Button" parent="."]
+offset_left = 783.0
+offset_top = 800.0
+offset_right = 1138.0
+offset_bottom = 913.0
+theme_override_font_sizes/font_size = 55
+text = "PLAY NOW"
+
+[node name="InstagramButton" type="Sprite2D" parent="."]
+position = Vector2(107, 990)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("6_oop00")
+
+[node name="Area2D" type="Area2D" parent="InstagramButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstagramButton/Area2D"]
+shape = SubResource("CapsuleShape2D_0ofba")
+
+[node name="SoundButton" type="AnimatedSprite2D" parent="."]
+position = Vector2(1830, 950)
+sprite_frames = SubResource("SpriteFrames_eyes3")
+script = ExtResource("9_bb75b")
+
+[node name="Area2D" type="Area2D" parent="SoundButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoundButton/Area2D"]
+position = Vector2(1, 59.75)
+shape = SubResource("RectangleShape2D_k18rn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SoundButton/Area2D"]
+position = Vector2(0, -39)
+shape = SubResource("CircleShape2D_gae61")
+
 [connection signal="input_event" from="UserButton/Area2D" to="." method="_on_user_button_input_event"]
+[connection signal="input_event" from="RulesButton/Area2D" to="." method="_on_rules_button_input_event"]
+[connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
+[connection signal="input_event" from="InstagramButton/Area2D" to="." method="_on_instagram_button_input_event"]
+[connection signal="input_event" from="SoundButton/Area2D" to="SoundButton" method="_on_sound_button_input_event"]

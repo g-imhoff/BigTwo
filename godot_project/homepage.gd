@@ -1,17 +1,33 @@
 extends Node2D
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_user_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+# Function called when an input event (e.g., mouse click) is detected on the user button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event (e.g., mouse click).
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_user_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("UserButtonClicked")
+	pass # Replace with function body.
+
+# Function called when an input event is detected on the rules button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event.
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed("leftclick"):
+		print("RulesButtonClicked")
+	pass # Replace with function body.
+
+# Function called when the "Play Now" button is pressed.
+func _on_play_now_pressed() -> void:
+	print("PlayNowClicked")
+	pass # Replace with function body.
+
+# Function called when an input event is detected on the Instagram button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event.
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_instagram_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed("leftclick"):
+		print("InstagramButtonClicked")
 	pass # Replace with function body.
