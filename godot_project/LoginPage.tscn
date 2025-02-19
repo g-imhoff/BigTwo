@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://fq8y23pl3rwf"]
+
+[ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
+
+[node name="LoginPage" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_wx55c")
