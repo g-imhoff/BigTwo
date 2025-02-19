@@ -20,7 +20,7 @@ func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx
 
 # Function called when the "Play Now" button is pressed.
 func _on_play_now_pressed() -> void:
-	print("PlayNowClicked")
+	get_tree().change_scene_to_file("res://ConnectionPage.tscn")
 	pass # Replace with function body.
 
 # Function called when an input event is detected on the Instagram button.
