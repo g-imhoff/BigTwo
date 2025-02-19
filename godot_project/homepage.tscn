@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmwhs780vfbye"]
+[gd_scene load_steps=6 format=3 uid="uid://7mcc8557hsh8"]
 
 [ext_resource type="Script" path="res://homepage.gd" id="1_66dqq"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_h7fba"]
+[ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_3cxme"]
+[ext_resource type="Script" path="res://UserButton.gd" id="4_jfx0i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iwhy5"]
+radius = 46.0977
 
 [node name="Homepage" type="Node2D"]
 script = ExtResource("1_66dqq")
@@ -9,3 +14,16 @@ script = ExtResource("1_66dqq")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("2_h7fba")
+
+[node name="UserButton" type="Sprite2D" parent="."]
+position = Vector2(110, 75)
+texture = ExtResource("3_3cxme")
+
+[node name="Area2D" type="Area2D" parent="UserButton"]
+script = ExtResource("4_jfx0i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UserButton/Area2D"]
+position = Vector2(-3, 4)
+shape = SubResource("CircleShape2D_iwhy5")
+
+[connection signal="input_event" from="UserButton/Area2D" to="." method="_on_user_button_input_event"]
