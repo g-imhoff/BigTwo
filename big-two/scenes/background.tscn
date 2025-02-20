@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn7t4aj4tu0v4"]
+
+[ext_resource type="Texture2D" uid="uid://6prp51c1ym0q" path="res://Capture d’écran du 2025-02-12 16-02-18.png" id="1_i7vwk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(960.5, 539.5)
+scale = Vector2(1.41753, 1.41906)
+texture = ExtResource("1_i7vwk")
