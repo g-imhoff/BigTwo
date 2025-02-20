@@ -14,7 +14,7 @@ func _on_user_button_input_event(_viewport: Node, event: InputEvent, _shape_idx:
 # _shape_idx: The shape index in the case of a collision shape node.
 func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
-		print("RulesButtonClicked")
+		get_tree().change_scene_to_file("res://RulesPage.tscn")
 
 # Function called when the "Play Now" button is pressed.
 func _on_play_now_pressed() -> void:
