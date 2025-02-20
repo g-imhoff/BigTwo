@@ -7,7 +7,6 @@ extends Node2D
 func _on_user_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("UserButtonClicked")
-	pass # Replace with function body.
 
 # Function called when an input event is detected on the rules button.
 # _viewport: The viewport node associated with the event.
@@ -16,12 +15,10 @@ func _on_user_button_input_event(_viewport: Node, event: InputEvent, _shape_idx:
 func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("RulesButtonClicked")
-	pass # Replace with function body.
 
 # Function called when the "Play Now" button is pressed.
 func _on_play_now_pressed() -> void:
 	get_tree().change_scene_to_file("res://ConnectionPage.tscn")
-	pass # Replace with function body.
 
 # Function called when an input event is detected on the Instagram button.
 # _viewport: The viewport node associated with the event.
@@ -30,4 +27,3 @@ func _on_play_now_pressed() -> void:
 func _on_instagram_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("InstagramButtonClicked")
-	pass # Replace with function body.

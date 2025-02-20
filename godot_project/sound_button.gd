@@ -8,4 +8,3 @@ func _on_sound_button_input_event(viewport: Node, event: InputEvent, shape_idx: 
 			frame = 0
 		else: 
 			frame = 1
-	pass # Replace with function body.

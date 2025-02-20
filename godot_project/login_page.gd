@@ -9,9 +9,6 @@ extends Node2D
 func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("OAuthGoogleClicked")
-	
-	pass # Replace with function body.
-
 
 func _on_login_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
@@ -24,15 +21,16 @@ func _on_login_pressed() -> void:
 	print("Password: ", password)
 	print("Remember me: ", rememberme)
 	print("LoginAccountClicked")
+	
+	# This is to delete when we will add the login method
+	get_tree().change_scene_to_file("res://ChooseModePage.tscn")
 
 	# You can add further logic here, such as sending these values to a server,
 	# saving them locally, or performing validation.
-	pass # Replace with function body.
 
 
 func _on_create_account_pressed() -> void:
 	get_tree().change_scene_to_file("res://CreatePage.tscn")
-	pass # Replace with function body.
 
 
 func _on_hide_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -41,5 +39,3 @@ func _on_hide_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			password_line_edit.set_secret(false)
 		else:
 			password_line_edit.set_secret(true)
-		
-	pass # Replace with function body.
