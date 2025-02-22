@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn7t4aj4tu0v4"]
+
+[ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_4cva7"]
+[ext_resource type="Texture2D" uid="uid://cuk6hbvus1iya" path="res://assets/ui/logo sans welcome.png" id="2_1uw4c"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(960, 540)
+texture = ExtResource("1_4cva7")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_1uw4c")
