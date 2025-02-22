@@ -172,6 +172,7 @@ offset_bottom = 19.0
 theme_override_font_sizes/font_size = 10
 text = "Remember me"
 
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="input_event" from="OAuthGoogle/Area2D" to="." method="_on_oauth_google_input_event"]
 [connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="." method="_on_hide_input_event"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]

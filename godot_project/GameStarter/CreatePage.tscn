@@ -180,6 +180,7 @@ texture = ExtResource("6_uxr2r")
 position = Vector2(-0.251648, 1)
 shape = SubResource("RectangleShape2D_aue3f")
 
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="." method="_on_hide_button_input_event"]
 [connection signal="pressed" from="CreateAccount" to="." method="_on_create_account_pressed"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
