@@ -40,3 +40,24 @@ func _on_hide_button_input_event(_viewport: Node, event: InputEvent, _shape_idx:
 		else:
 			password_line_edit.set_secret(true)
 		
+
+# The URL we will connect to.
+@export var websocket_url = "ws://localhost:18014/"
+
+# Our WebSocketClient instance.
+var socket = WebSocketPeer.new()
+
+func _ready():
+	# Initiate connection to the given URL.
+	var err = socket.connect_to_url(websocket_url)
+	if err != OK:
+		print("Unable to connect")
+		set_process(false)
+
+func _process(_delta):
+	# Call this in _process or _physics_process. Data transfer and state updates
+	# will only happen when calling this function.
+	socket.poll()
+
+	# get_ready_state() tells you what state the socket is in.
+	var state = socket.get_ready_state()

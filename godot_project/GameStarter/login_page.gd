@@ -30,7 +30,7 @@ func _on_login_pressed() -> void:
 
 
 func _on_create_account_pressed() -> void:
-	get_tree().change_scene_to_file("res://CreatePage.tscn")
+	get_tree().change_scene_to_file("res://GameStarter/CreatePage.tscn")
 
 
 func _on_hide_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
