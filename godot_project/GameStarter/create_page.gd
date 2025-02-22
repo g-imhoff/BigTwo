@@ -4,7 +4,7 @@ extends Node2D
 @onready var profile_name_line_edit = $ProfileName/LabelProfileName
 @onready var email_line_edit = $Email/LabelEmail
 @onready var password_line_edit = $Password/LabelPassword
-
+var socket = WebSocketPeer.new()
 
 func _on_create_account_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
@@ -18,20 +18,24 @@ func _on_create_account_pressed() -> void:
 	print("Password: ", password)
 	print("CreateAccountClicked")
 	
+	var content = JSON.stringify({
+		"function": "create_account",
+		"data": {
+			"profile_name": profile_name,
+			"email": email,
+			"password": password
+		}})
+		
+	socket.send_text(content)
 	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
-	# You can add further logic here, such as sending these values to a server,
-	# saving them locally, or performing validation.
-
 
 func _on_login_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
-
 
 func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("OAuthGoogleClicked")
 	
-
 
 func _on_hide_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
@@ -41,23 +45,27 @@ func _on_hide_button_input_event(_viewport: Node, event: InputEvent, _shape_idx:
 			password_line_edit.set_secret(true)
 		
 
-# The URL we will connect to.
-@export var websocket_url = "ws://localhost:18014/"
+func _on_tree_exited() -> void:
+	socket.close()
 
-# Our WebSocketClient instance.
-var socket = WebSocketPeer.new()
-
-func _ready():
-	# Initiate connection to the given URL.
-	var err = socket.connect_to_url(websocket_url)
+func _ready() -> void:
+	print("hello")
+	var err = socket.connect_to_url(Global.websocket_url)
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
 
-func _process(_delta):
-	# Call this in _process or _physics_process. Data transfer and state updates
-	# will only happen when calling this function.
+func _process(delta):
 	socket.poll()
-
-	# get_ready_state() tells you what state the socket is in.
 	var state = socket.get_ready_state()
+	if state == WebSocketPeer.STATE_OPEN:
+		while socket.get_available_packet_count():
+			print("Packet: ", socket.get_packet())
+	elif state == WebSocketPeer.STATE_CLOSING:
+		# Keep polling to achieve proper close.
+		pass
+	elif state == WebSocketPeer.STATE_CLOSED:
+		var code = socket.get_close_code()
+		var reason = socket.get_close_reason()
+		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
+		set_process(false) # Stop processing.
