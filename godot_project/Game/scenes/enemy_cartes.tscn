@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0hr5sw6b080y"]
+
+[ext_resource type="Script" path="res://Game/scripts/cartes_enemy.gd" id="1_b45h2"]
+[ext_resource type="Texture2D" uid="uid://d28uptq7kpfli" path="res://assets/cards/card_clubs_02.png" id="2_y5b18"]
+
+[node name="cartes" type="Node2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_b45h2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-40, 60)
+scale = Vector2(4.73214, 5.08929)
+texture = ExtResource("2_y5b18")
