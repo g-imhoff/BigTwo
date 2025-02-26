@@ -3,10 +3,11 @@
 ## Document link
 
 - [ ] [GANTT et timesheet](https://docs.google.com/spreadsheets/d/15E0ZqsRuYU18wtngXLdZtjkoHMbxgvk6md2QXh5olPc/edit?usp=sharing)
-- [ ] [Rapport de réunion du 5 février](https://docs.google.com/document/d/11jb0i9E6qgMx2kGWyEJkUGXuNtBYWi_8ye2jBXUAGRo/edit?usp=sharing)
+- [ ] [Rapport de la réunion du 5 février](https://docs.google.com/document/d/11jb0i9E6qgMx2kGWyEJkUGXuNtBYWi_8ye2jBXUAGRo/edit?usp=sharing)
 - [ ] [Rapport d'activité du 11 février](https://docs.google.com/document/d/1O7ilVU5W-g-nsrT-ImbPu5izcw8g3Hxj84XJF_CaZXw/edit?usp=sharing)
-- [ ] [Rapport de réunion du 12 février](https://docs.google.com/document/d/1RXEjfCDJVvTFk8rJ1h9g6UasJgr4QsVXGRZ4ElUr5Ao/edit?usp=sharing)
+- [ ] [Rapport de la réunion du 12 février](https://docs.google.com/document/d/1RXEjfCDJVvTFk8rJ1h9g6UasJgr4QsVXGRZ4ElUr5Ao/edit?usp=sharing)
 - [ ] [Rapport d'activité du 25 février](https://docs.google.com/document/d/12w1zpeiP1RH7Fscmp40_PoFLTSQ_utAobxjqKVZaAPU/edit?usp=sharing)
+- [ ] [Rapport de la réunion du 26 février](https://docs.google.com/document/d/1-mXKK1LMUcgsjbXCtO_TClxUmgsuhQdWOF0VTwiXHno/edit?usp=sharing)
 
 
 - [ ] [Spécification du jeu](https://docs.google.com/document/d/16dK9idrLsqIaKZnwfrsFBTqkz9WRccWG2lJpzLYXNPo/edit?usp=sharing)
@@ -15,7 +16,7 @@
 - [ ] [Cahier des charges version 2](https://docs.google.com/document/d/1dy-nstU-lWUUd4Eh0OMxNbfvvQbNMUIrZywqtnA1zao/edit?usp=sharing)
 - [ ] [Cahier des charges Big Two](https://docs.google.com/document/d/1F_gyKgck95wseiYwWiz2SGWMVEPGrqgXn3C2dWwvzI0/edit?usp=sharing)
 
-- [ ] [Marketing Strategy for Big Two](https://docs.google.com/document/d/19KqT00znp7Pb1uboOLwAQXty23cpIadZpo1pfiS5gDU/edit?usp=sharing)
+- [ ] [Stratégie marketing pour Big Two](https://docs.google.com/document/d/19KqT00znp7Pb1uboOLwAQXty23cpIadZpo1pfiS5gDU/edit?usp=sharing)
 
 
 
