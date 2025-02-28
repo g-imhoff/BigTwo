@@ -157,6 +157,7 @@ theme_override_font_sizes/font_size = 25
 text = "Create Account"
 
 [node name="RememberMe" type="CheckBox" parent="."]
+texture_filter = 1
 offset_left = 628.0
 offset_top = 787.0
 offset_right = 652.0
@@ -164,6 +165,7 @@ offset_bottom = 811.0
 scale = Vector2(2, 2)
 
 [node name="Label" type="Label" parent="RememberMe"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 28.5
 offset_top = 5.0

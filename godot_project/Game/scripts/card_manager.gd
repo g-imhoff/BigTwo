@@ -3,16 +3,18 @@ extends Node2D
 signal card_played
 
 const COLLISION_MASK_CARD=1
-const COLLISION_MASK_SLOT=2
 
 var screen_size
 var is_hovering_on_card
 var num_card_up=0
 var card_clicked=[]
-var compteur=0
+var cmpt_card_in_slot=0
 var played=false
+var lst_card_in_slot=[]
+var card_base_scale=Vector2(0.7,0.7)
+var card_highlight_scale=Vector2(0.8,0.8)
 
-@onready var player_hand=$"../PlayerHand"
+@onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
 @onready var children_slots=Cardslots.get_children()
 
@@ -27,8 +29,8 @@ func _input(event):
 			var card=raycast_check_for_card()
 			if card and played == false:
 				var current_pos=card.position
-				card.scale=Vector2(0.7,0.7)
-				if current_pos.y==player_hand.HAND_Y_POSITION:
+				card.scale=card_base_scale
+				if current_pos.y==hand.HAND_Y_POSITION:
 					if num_card_up ==5:
 						print("to much card up")
 					else:
@@ -67,26 +69,12 @@ func on_hovered_off_card(card):
 
 func highlight_card(card,hovered):
 	var current_pos=card.position
-	if hovered and current_pos.y==player_hand.HAND_Y_POSITION:
-		card.scale=Vector2(0.8,0.8)
+	if hovered and current_pos.y==hand.HAND_Y_POSITION:
+		card.scale=card_highlight_scale
 		card.z_index=2
 	else:
-		card.scale=Vector2(0.7,0.7)
+		card.scale=card_base_scale
 		card.z_index=1
-
-
-func raycast_check_for_card_slot():
-	var space_state = get_world_2d().direct_space_state
-	var parameters=PhysicsPointQueryParameters2D.new()
-	parameters.position=get_global_mouse_position()
-	parameters.collide_with_areas=true
-	parameters.collision_mask=COLLISION_MASK_SLOT
-	var result=space_state.intersect_point(parameters)
-	if result.size()>0:
-		return result[0].collider.get_parent()
-	return null
-
-
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
@@ -98,8 +86,6 @@ func raycast_check_for_card():
 	if result.size()>0:
 		return get_card_with_hightest_z_index(result)
 	return null
-
-
 
 
 func get_card_with_hightest_z_index(card):
@@ -128,19 +114,23 @@ func _on_button_pressed() -> void:
 			print(card_clicked[i].value,card_clicked[i].form)
 	else:
 		for card in card_clicked:
-			move_card_to_slot(card, children_slots[compteur])  # Déplace la carte avec la nouvelle fonction
-			compteur += 1
+			move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction
+			cmpt_card_in_slot += 1
 			num_card_up -= 1
 		played = true
-		player_hand.update_hand_position()  # Met à jour l'affichage de la main
-		emit_signal("card_played")
+		hand.update_hand_position()  # Met à jour l'affichage de la main
+		if hand.player_hand.size() == 0:
+			end_game()
+		else:
+			emit_signal("card_played")
 
 
 func move_card_to_slot(card, slot):
-	if card in player_hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
-		player_hand.remove_card_from_hand(card)  # Supprime la carte de la main
-		player_hand.animate_card_to_position(card,slot.position)
+	if card in hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
+		hand.remove_card_from_hand(card)  # Supprime la carte de la main
+		hand.animate_card_to_position(card,slot.position)
 		slot.card_in_slot = true  # Marque le slot comme occupé
+		lst_card_in_slot.append(card)
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
 
@@ -196,3 +186,26 @@ func check_cards_clicked():
 				if tab_val[0].value == tab_val[1].value and tab_val[1].value == tab_val[2].value:
 					check=true
 	return check
+
+func clear_slot():
+	if lst_card_in_slot.size()!=0:
+		var cards_to_remove = lst_card_in_slot.duplicate()
+		
+		for card in cards_to_remove:
+			card.queue_free()
+			lst_card_in_slot.erase(card)
+			children_slots[cmpt_card_in_slot-1].card_in_slot = false
+			cmpt_card_in_slot-=1
+
+func _on_card_manager_enemy_card_enemy_played() -> void:
+	played = false
+	var cards_to_remove = card_clicked.duplicate()
+	for card in cards_to_remove:
+		card.queue_free()
+		card_clicked.erase(card)
+	clear_slot()
+	
+func end_game():
+	print("tu as gagné")
+	get_tree().quit()
+	

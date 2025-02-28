@@ -7,6 +7,7 @@ const HAND_Y_POSITION=50
 
 var player_hand=[]
 var center_screen_x
+var card_scale=Vector2(0.5,0.5)
 
 var card_images=[
 	"res://assets/cards/card_clubs_02.png",
@@ -71,13 +72,13 @@ func _ready() -> void:
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
 		var selected_card=random_card()
-		
 		var new_texture=load("res://assets/cards/card_back.png") #montre juste le dos 
 		 # Extraire la valeur et la couleur de la carte
 		var card_info =get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
+		new_card.img = load(selected_card)
 		new_card.form = card_info[0]
-		new_card.scale=Vector2(0.5,0.5)
+		new_card.scale=card_scale
 		sprite.texture=new_texture
 		$"../card_manager".add_child(new_card)
 		new_card.name="Card"

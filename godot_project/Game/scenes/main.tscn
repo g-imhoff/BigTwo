@@ -67,4 +67,6 @@ position = Vector2(730, 250)
 position = Vector2(1270, 250)
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy" method="_on_card_manager_card_played"]
+[connection signal="card_played" from="card_manager" to="Button" method="_on_card_manager_card_played"]
+[connection signal="card_enemy_played" from="card_manager_enemy" to="card_manager" method="_on_card_manager_enemy_card_enemy_played"]
 [connection signal="pressed" from="Button" to="card_manager" method="_on_button_pressed"]
