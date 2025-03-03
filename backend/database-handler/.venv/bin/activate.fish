@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/g-imhoff/Desktop/projet_chor_dai_di/backend/database-handler/.venv
+set -gx VIRTUAL_ENV /home/g-imhoff/projet_chor_dai_di/backend/database-handler/.venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

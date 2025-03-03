@@ -2,6 +2,9 @@ import asyncio
 import json
 from websockets.asyncio.server import serve
 
+WEBSOCKETS_URL = "localhost"
+WEBSOCKETS_PORT = 18005 # 10000 + 8 * 1000 + 8 * 0 + 5
+
 async def handler(websocket):
     async for message in websocket:
         content = json.loads(message)
@@ -19,7 +22,7 @@ async def handler(websocket):
                 print(profile_name_email, password)
 
 async def main():
-    async with serve(handler, "localhost", 18014) as server:
+    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT) as server:
         await server.serve_forever()
 
 if __name__ == "__main__": 

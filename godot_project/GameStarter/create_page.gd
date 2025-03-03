@@ -49,7 +49,6 @@ func _on_tree_exited() -> void:
 	socket.close()
 
 func _ready() -> void:
-	print("hello")
 	var err = socket.connect_to_url(Global.websocket_url)
 	if err != OK:
 		print("Unable to connect")

@@ -1,4 +1,4 @@
-#!/home/g-imhoff/Desktop/projet_chor_dai_di/backend/database-handler/.venv/bin/python3
+#!/home/g-imhoff/projet_chor_dai_di/backend/database-handler/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
