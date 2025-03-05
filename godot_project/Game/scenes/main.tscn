@@ -95,22 +95,26 @@ position = Vector2(1200, 250)
 
 [node name="Cardslots3" type="Node2D" parent="."]
 z_index = -1
-rotation = 1.5708
 
 [node name="cardslot" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(480, -500)
+position = Vector2(500, 500)
+rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(580, -500)
+position = Vector2(500, 600)
+rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(380, -500)
+position = Vector2(500, 400)
+rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(280, -500)
+position = Vector2(500, 300)
+rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(680, -500)
+position = Vector2(500, 700)
+rotation = 1.5708
 
 [node name="Cardslots4" type="Node2D" parent="."]
 z_index = -1
