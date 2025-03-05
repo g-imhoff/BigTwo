@@ -19,7 +19,8 @@
 
 - [ ] [Stratégie marketing pour Big Two](https://docs.google.com/document/d/19KqT00znp7Pb1uboOLwAQXty23cpIadZpo1pfiS5gDU/edit?usp=sharing)
 
-
+- [ ] [TRELLO](https://trello.com/invite/b/679d293fbde1b5fc0c2e2cce/ATTIf0261d6801ba0fbefad46339d4f04f838BA24F76/projetintegrateurbigtwo)
+- [ ] [FIGMA](https://www.figma.com/design/v0wRdYGTAdq3kdPItiU2gD/BIG-TWO?node-id=0-1&t=kxgVQpi6z2BbzmYw-1)
 
 
 
