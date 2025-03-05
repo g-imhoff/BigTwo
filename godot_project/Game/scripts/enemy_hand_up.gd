@@ -2,7 +2,7 @@ extends Node2D
 
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
-const CARD_WIDTH=120 #80
+const CARD_WIDTH=80 #80
 const HAND_Y_POSITION=50
 
 var player_hand=[]

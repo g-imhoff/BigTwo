@@ -13,8 +13,8 @@ var cmpt_card_in_slot=0
 var played=false
 var lst_card_in_slot=[]
 
-@onready var hand=$"../EnemyHandUp"
-@onready var Cardslots=$"../Cardslots2"
+@onready var hand=$"../EnemyHandRight"
+@onready var Cardslots=$"../Cardslots4"
 @onready var children_slots=Cardslots.get_children()
 
 
@@ -27,6 +27,7 @@ func on_card_played():
 	await get_tree().create_timer(2.0).timeout
 	if played==false:
 		move_card_to_slot(hand.player_hand[1],children_slots[cmpt_card_in_slot])
+		print(hand.player_hand[1].position)
 		cmpt_card_in_slot += 1
 		played = true
 		hand.update_hand_position()  # Met à jour l'affichage de la main
@@ -38,6 +39,7 @@ func move_card_to_slot(card, slot):
 		var sprite=card.get_node("Sprite")
 		sprite.texture=card.img
 		hand.animate_card_to_position(card,slot.position)
+		print(slot.position)
 		slot.card_in_slot = true  # Marque le slot comme occupé
 		lst_card_in_slot.append(card)
 		emit_signal("enemy")
@@ -64,7 +66,7 @@ func end_game():
 	get_tree().quit()
 
 
-func _on_card_manager_enemy_left_enemy() -> void:
+func _on_card_manager_enemy_enemy() -> void:
 	played=false
 	remove_card_in_slot()
 	on_card_played()

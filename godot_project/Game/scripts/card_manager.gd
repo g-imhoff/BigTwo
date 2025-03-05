@@ -11,8 +11,8 @@ var card_clicked=[]
 var cmpt_card_in_slot=0
 var played=false
 var lst_card_in_slot=[]
-var card_base_scale=Vector2(0.6,0.6)
-var card_highlight_scale=Vector2(0.65,0.65)
+var card_base_scale=Vector2(0.5,0.5)
+var card_highlight_scale=Vector2(0.55,0.55)
 
 @onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
@@ -185,12 +185,7 @@ func check_cards_clicked():
 	return check
 
 
-func _on_card_manager_enemy_enemy() -> void:
-	played=false
-	for card in card_clicked.duplicate():
-		card.queue_free()
-		card_clicked.erase(card)
-	remove_card_in_slot()
+	
 
 
 func remove_card_in_slot():
@@ -217,3 +212,12 @@ func _on_button_2_pressed() -> void:
 		num_card_up-=1
 		card_clicked.erase(card)
 	emit_signal("card_played")
+
+
+
+func _on_card_manager_enemy_right_enemy() -> void:
+	played=false
+	for card in card_clicked.duplicate():
+		card.queue_free()
+		card_clicked.erase(card)
+	remove_card_in_slot() 

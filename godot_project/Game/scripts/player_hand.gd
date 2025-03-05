@@ -2,12 +2,12 @@ extends Node2D
 
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
-const CARD_WIDTH=100
+const CARD_WIDTH=80
 const HAND_Y_POSITION=870
 
 var player_hand=[]
 var center_screen_x
-var card_scale=Vector2(0.6,0.6)
+var card_scale=Vector2(0.5,0.5)
 
 @onready var lst_img=Global.card_images
 

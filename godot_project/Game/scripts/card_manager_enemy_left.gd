@@ -13,8 +13,8 @@ var cmpt_card_in_slot=0
 var played=false
 var lst_card_in_slot=[]
 
-@onready var hand=$"../EnemyHandUp"
-@onready var Cardslots=$"../Cardslots2"
+@onready var hand=$"../EnemyHandLeft"
+@onready var Cardslots=$"../Cardslots3"
 @onready var children_slots=Cardslots.get_children()
 
 
@@ -44,7 +44,10 @@ func move_card_to_slot(card, slot):
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
 
-	
+func _on_card_manager_card_played() -> void:
+	played=false
+	remove_card_in_slot()
+	on_card_played()
 	
 
 func remove_card_in_slot():
@@ -62,9 +65,3 @@ func remove_card_in_slot():
 func end_game():
 	print("tu a gagné")
 	get_tree().quit()
-
-
-func _on_card_manager_enemy_left_enemy() -> void:
-	played=false
-	remove_card_in_slot()
-	on_card_played()
