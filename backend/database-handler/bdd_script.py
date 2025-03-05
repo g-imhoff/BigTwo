@@ -7,6 +7,29 @@ DB_PARAMS = {
     "password": "BiG2@l3info#"
 }
 
+def create_account(profile_name, email, password):
+    """
+    Check if an account exists in the database, and create it if it doesn't.
+
+    :param profile_name: profile_name of the user
+    :param username: username of the user
+    :param password: password of the user
+    """
+    try: 
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute("SELECT 1 FROM users WHERE username = %s", (profile_name,))
+
+        if cur.fetchone():
+            return -1 # error : already exist
+
+        cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (profile_name, email, password))
+        conn.commit()
+        return 0 # Worked
+    except psycopg2.Error as e:
+        print("Database error : ", e)
+        return -2 #Error psycopg2
+
 def creer_table():
     conn = None
     cur = None

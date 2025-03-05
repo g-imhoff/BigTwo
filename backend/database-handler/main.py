@@ -1,6 +1,7 @@
 import asyncio
 import json
 from websockets.asyncio.server import serve
+from bdd_script import create_account
 
 WEBSOCKETS_URL = "0.0.0.0"
 WEBSOCKETS_PORT = 10005 # 10000 + 8 * 1000 + 8 * 0 + 5
@@ -15,6 +16,7 @@ async def handler(websocket):
                 password = content["data"]["password"]
 
                 print(profile_name, email, password)
+                create_account(profile_name, email, password)
             case "login":
                 profile_name_email = content["data"]["profile_name_email"]
                 password = content["data"]["password"]
