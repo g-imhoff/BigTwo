@@ -2,8 +2,8 @@ import asyncio
 import json
 from websockets.asyncio.server import serve
 
-WEBSOCKETS_URL = "localhost"
-WEBSOCKETS_PORT = 18005 # 10000 + 8 * 1000 + 8 * 0 + 5
+WEBSOCKETS_URL = "0.0.0.0"
+WEBSOCKETS_PORT = 10005 # 10000 + 8 * 1000 + 8 * 0 + 5
 
 async def handler(websocket):
     async for message in websocket:

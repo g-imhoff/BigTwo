@@ -118,4 +118,4 @@ def select_user() :
             conn.close()
 
 if __name__ == "__main__": 
-    select_user()
+    creer_table()
