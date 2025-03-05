@@ -1,15 +1,16 @@
 extends Node2D
 
 const HAND_COUNT=13
-const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
-const CARD_WIDTH=100
-const HAND_Y_POSITION=870
+const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
+const CARD_WIDTH=120 #80
+const HAND_Y_POSITION=50
 
 var player_hand=[]
 var center_screen_x
-var card_scale=Vector2(0.6,0.6)
+var card_scale=Vector2(0.5,0.5)
 
 @onready var lst_img=Global.card_images
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,14 +21,15 @@ func _ready() -> void:
 		var sprite=new_card.get_node("Sprite")
 		var selected_card=random_card()
 		
-		var new_texture=load(selected_card)
+		var new_texture=load("res://assets/cards/card_back.png") #montre juste le dos 
 		 # Extraire la valeur et la couleur de la carte
 		var card_info =get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
 		new_card.form = card_info[0]
+		new_card.img=load(selected_card)
+		new_card.scale=card_scale
 		sprite.texture=new_texture
 		$"../card_manager".add_child(new_card)
-		new_card.scale=card_scale
 		new_card.name="Card"
 		add_card_to_hand(new_card)
 
@@ -53,8 +55,6 @@ func get_card_info_from_texture(path:String)->Array:
 		card_info[1]=12
 	elif value_str=="J":
 		card_info[1]=11
-	elif value_str=="2":
-		card_info[1]=15
 	elif value_str.is_valid_float():
 		card_info[1] = int(value_str)
 	return card_info

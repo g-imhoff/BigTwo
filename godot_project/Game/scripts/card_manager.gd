@@ -11,8 +11,8 @@ var card_clicked=[]
 var cmpt_card_in_slot=0
 var played=false
 var lst_card_in_slot=[]
-var card_base_scale=Vector2(0.7,0.7)
-var card_highlight_scale=Vector2(0.8,0.8)
+var card_base_scale=Vector2(0.6,0.6)
+var card_highlight_scale=Vector2(0.65,0.65)
 
 @onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
@@ -110,8 +110,6 @@ func _on_button_pressed() -> void:
 		print("pas de carte clicked")
 	elif check_cards_clicked()==false:
 		print("combinaison incorrect")
-		for i in range(card_clicked.size()):
-			print(card_clicked[i].value,card_clicked[i].form)
 	else:
 		for card in card_clicked:
 			move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction
@@ -119,10 +117,9 @@ func _on_button_pressed() -> void:
 			num_card_up -= 1
 		played = true
 		hand.update_hand_position()  # Met à jour l'affichage de la main
-		if hand.player_hand.size() == 0:
+		if hand.player_hand.size()==0:
 			end_game()
-		else:
-			emit_signal("card_played")
+		emit_signal("card_played")
 
 
 func move_card_to_slot(card, slot):
@@ -187,25 +184,36 @@ func check_cards_clicked():
 					check=true
 	return check
 
-func clear_slot():
-	if lst_card_in_slot.size()!=0:
+
+func _on_card_manager_enemy_enemy() -> void:
+	played=false
+	for card in card_clicked.duplicate():
+		card.queue_free()
+		card_clicked.erase(card)
+	remove_card_in_slot()
+
+
+func remove_card_in_slot():
+	if lst_card_in_slot.size() != 0:
+		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
 		
 		for card in cards_to_remove:
-			card.queue_free()
-			lst_card_in_slot.erase(card)
-			children_slots[cmpt_card_in_slot-1].card_in_slot = false
+			card.queue_free()  # Marque la carte pour suppression
+			lst_card_in_slot.erase(card)  # Retire la carte de la liste
+			children_slots[cmpt_card_in_slot-1].card_in_slot=false
 			cmpt_card_in_slot-=1
 
-func _on_card_manager_enemy_card_enemy_played() -> void:
-	played = false
-	var cards_to_remove = card_clicked.duplicate()
-	for card in cards_to_remove:
-		card.queue_free()
-		card_clicked.erase(card)
-	clear_slot()
-	
 func end_game():
-	print("tu as gagné")
+	print("tu a gagné")
 	get_tree().quit()
-	
+
+
+func _on_button_2_pressed() -> void:
+	played=true
+	var card_to_remove=card_clicked.duplicate()
+	for card in card_to_remove:
+		card.position.y+=50
+		num_card_up-=1
+		card_clicked.erase(card)
+	emit_signal("card_played")

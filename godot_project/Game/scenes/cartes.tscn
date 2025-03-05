@@ -4,22 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://d28uptq7kpfli" path="res://assets/cards/card_clubs_02.png" id="2_r5uji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ledpc"]
-size = Vector2(191.429, 297.143)
+size = Vector2(200, 315)
 
 [node name="cartes" type="Node2D"]
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.6, 0.6)
 script = ExtResource("1_dk0el")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture_filter = 1
 position = Vector2(-40, 60)
-scale = Vector2(4.73214, 5.08929)
+scale = Vector2(5, 5.377)
 texture = ExtResource("2_r5uji")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-40, 60)
+position = Vector2(-40, 60.8333)
 shape = SubResource("RectangleShape2D_ledpc")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

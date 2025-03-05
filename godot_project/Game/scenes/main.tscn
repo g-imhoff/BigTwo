@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=10 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
 [ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
 [ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
-[ext_resource type="Script" path="res://Game/scripts/enemy_hand.gd" id="3_exhj1"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="3_j44is"]
 [ext_resource type="Script" path="res://Game/scripts/button.gd" id="4_mhkmc"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="5_dlrfd"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
 
 [node name="Main" type="Node2D"]
 
@@ -19,8 +21,14 @@ script = ExtResource("2_a261a")
 [node name="PlayerHand" type="Node2D" parent="."]
 script = ExtResource("2_mnt7b")
 
-[node name="EnemyHand" type="Node2D" parent="."]
+[node name="EnemyHandUp" type="Node2D" parent="."]
 script = ExtResource("3_exhj1")
+
+[node name="EnemyHandRight" type="Node2D" parent="."]
+script = ExtResource("5_ppmxl")
+
+[node name="EnemyHandLeft" type="Node2D" parent="."]
+script = ExtResource("6_brei5")
 
 [node name="Background" parent="." instance=ExtResource("3_j44is")]
 
@@ -30,6 +38,15 @@ offset_top = 1027.0
 offset_right = 764.0
 offset_bottom = 1075.0
 text = "PLAY"
+script = ExtResource("4_mhkmc")
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1081.0
+offset_top = 1027.0
+offset_right = 1239.0
+offset_bottom = 1075.0
+text = "PASS
+"
 script = ExtResource("4_mhkmc")
 
 [node name="Cardslots" type="Node2D" parent="."]
@@ -67,6 +84,6 @@ position = Vector2(730, 250)
 position = Vector2(1270, 250)
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy" method="_on_card_manager_card_played"]
-[connection signal="card_played" from="card_manager" to="Button" method="_on_card_manager_card_played"]
-[connection signal="card_enemy_played" from="card_manager_enemy" to="card_manager" method="_on_card_manager_enemy_card_enemy_played"]
+[connection signal="enemy" from="card_manager_enemy" to="card_manager" method="_on_card_manager_enemy_enemy"]
 [connection signal="pressed" from="Button" to="card_manager" method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="card_manager" method="_on_button_2_pressed"]

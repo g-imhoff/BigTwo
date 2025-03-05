@@ -1,6 +1,5 @@
 extends Node
 
-var websocket_url = "ws://localhost:18014/"
 
 var card_images=[
 	"res://assets/cards/card_clubs_02.png",
