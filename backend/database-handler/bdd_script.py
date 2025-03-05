@@ -1,4 +1,5 @@
 import psycopg2
+import re
 
 DB_PARAMS = {
     "host": "localhost",
@@ -6,6 +7,8 @@ DB_PARAMS = {
     "user": "postgres",
     "password": "BiG2@l3info#"
 }
+
+pattern_email = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 
 def create_account(profile_name, email, password):
     """
@@ -15,20 +18,48 @@ def create_account(profile_name, email, password):
     :param username: username of the user
     :param password: password of the user
     """
+    
+    if re.match(pattern, email):
+        try: 
+            conn = psycopg2.connect(**DB_PARAMS)
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM users WHERE username = %s", (profile_name,))
+
+            if cur.fetchone():
+                return 1 # error : already exist
+
+            cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (profile_name, email, password))
+            conn.commit()
+            return 0 # Worked
+        except psycopg2.Error as e:
+            print("Database error : ", e)
+            return 2 #Error psycopg2
+    else:
+        return 3 #not a valid email
+
+def login_account(profile_name_email, password):
+    """
+    Check if an account exists in the database, and create it if it doesn't.
+
+    :param profile_name_email: profile_name or email of the user
+    :param password: password of the user
+    """
     try: 
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
-        cur.execute("SELECT 1 FROM users WHERE username = %s", (profile_name,))
+        cur.execute("SELECT * FROM users WHERE username = %s OR email = %s", (profile_name_email, profile_name_email))
 
-        if cur.fetchone():
-            return -1 # error : already exist
+        result = cur.fetchone()
+        if result:
+            bdd_username, bdd_email, bdd_password = result 
 
-        cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (profile_name, email, password))
-        conn.commit()
-        return 0 # Worked
-    except psycopg2.Error as e:
-        print("Database error : ", e)
-        return -2 #Error psycopg2
+            if bdd_password == password: 
+                return 0 #connection worked
+            else:
+                return 2 #wrong password
+        else: 
+            return 1 #account not found
+
 
 def creer_table():
     conn = None
