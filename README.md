@@ -2,7 +2,6 @@
 
 ## Document link report
 
-- [ ] [GANTT et timesheet](https://docs.google.com/spreadsheets/d/15E0ZqsRuYU18wtngXLdZtjkoHMbxgvk6md2QXh5olPc/edit?usp=sharing)
 - [ ] [Rapport de la réunion du 5 février](https://docs.google.com/document/d/11jb0i9E6qgMx2kGWyEJkUGXuNtBYWi_8ye2jBXUAGRo/edit?usp=sharing)
 - [ ] [Rapport d'activité du 11 février](https://docs.google.com/document/d/1O7ilVU5W-g-nsrT-ImbPu5izcw8g3Hxj84XJF_CaZXw/edit?usp=sharing)
 - [ ] [Rapport de la réunion du 12 février](https://docs.google.com/document/d/1RXEjfCDJVvTFk8rJ1h9g6UasJgr4QsVXGRZ4ElUr5Ao/edit?usp=sharing)
@@ -26,6 +25,8 @@
 
 
 ## Link other
+
+- [ ] [GANTT et timesheet](https://docs.google.com/spreadsheets/d/15E0ZqsRuYU18wtngXLdZtjkoHMbxgvk6md2QXh5olPc/edit?usp=sharing)
 
 - [ ] [TRELLO](https://trello.com/invite/b/679d293fbde1b5fc0c2e2cce/ATTIf0261d6801ba0fbefad46339d4f04f838BA24F76/projetintegrateurbigtwo)
 
