@@ -22,6 +22,8 @@
 
 - [ ] [Stratégie marketing pour Big Two](https://docs.google.com/document/d/19KqT00znp7Pb1uboOLwAQXty23cpIadZpo1pfiS5gDU/edit?usp=sharing)
 
+- [ ] [Integrative project - Big two - Cahier des charges Final](https://docs.google.com/document/d/1F_gyKgck95wseiYwWiz2SGWMVEPGrqgXn3C2dWwvzI0/edit?usp=sharing)
+
 
 ## Link other
 
