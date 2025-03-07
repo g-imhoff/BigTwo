@@ -56,9 +56,12 @@ def login_account(profile_name_email, password):
             if bdd_password == password: 
                 return 0 #connection worked
             else:
-                return 2 #wrong password
+                return 3 #wrong password
         else: 
             return 1 #account not found
+    except psycopg2.Error as e:
+        print("Database error : ", e)
+        return 2 #Error psycopg2
 
 
 def creer_table():
