@@ -19,7 +19,7 @@ def create_account(profile_name, email, password):
     :param password: password of the user
     """
     
-    if re.match(pattern, email):
+    if re.match(pattern_email, email):
         try: 
             conn = psycopg2.connect(**DB_PARAMS)
             cur = conn.cursor()

@@ -43,7 +43,7 @@ async def handler(websocket):
                     "message": create_account_error[result]
                 }
 
-                websocket.send(json.dumps(result_message))
+                await websocket.send(json.dumps(result_message))
             case "login":
                 profile_name_email = content["data"]["profile_name_email"]
                 password = content["data"]["password"]
@@ -57,7 +57,7 @@ async def handler(websocket):
                     "message": login_account_error[result]
                 }
 
-                websocket.send(json.dumps(result_message))
+                await websocket.send(json.dumps(result_message))
 
 async def main():
     async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
