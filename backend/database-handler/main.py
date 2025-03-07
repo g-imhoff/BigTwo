@@ -1,6 +1,6 @@
 import asyncio
 import json
-import websockets
+from websockets.asyncio.server import serve
 from bdd_script import create_account, login_account
 import ssl
 
@@ -42,7 +42,7 @@ async def handler(websocket):
                     "message": create_account_error[result]
                 }
 
-                websockets.send(json.dumps(result_message))
+                websocket.send(json.dumps(result_message))
             case "login":
                 profile_name_email = content["data"]["profile_name_email"]
                 password = content["data"]["password"]
@@ -56,10 +56,10 @@ async def handler(websocket):
                     "message": login_account_error[result]
                 }
 
-                websockets.send(json.dumps(result_message))
+                websocket.send(json.dumps(result_message))
 
 async def main():
-    async with websockets.asyncio.server.serve_forever(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
+    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
         await server.serve_forever()
 
 if __name__ == "__main__": 
