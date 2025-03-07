@@ -49,7 +49,8 @@ func _on_tree_exited() -> void:
 	socket.close()
 
 func _ready() -> void:
-	var err = socket.connect_to_url(Global.websocket_url)
+	var clientCAS = load("res://cert.crt")
+	var err = socket.connect_to_url(Global.websocket_url, TLSOptions.client_unsafe(clientCAS))
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)

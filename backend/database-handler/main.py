@@ -5,6 +5,7 @@ from bdd_script import create_account, login_account
 import ssl
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
 ssl_context.load_cert_chain(certfile="../certs/cert.pem", keyfile="../certs/key.pem")
 
 WEBSOCKETS_URL = "0.0.0.0"
