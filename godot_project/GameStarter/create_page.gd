@@ -4,6 +4,7 @@ extends Node2D
 @onready var profile_name_line_edit = $ProfileName/LabelProfileName
 @onready var email_line_edit = $Email/LabelEmail
 @onready var password_line_edit = $Password/LabelPassword
+
 var socket = WebSocketPeer.new()
 
 func _on_create_account_pressed() -> void:
@@ -27,7 +28,6 @@ func _on_create_account_pressed() -> void:
 		}})
 		
 	socket.send_text(content)
-	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 func _on_login_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
@@ -55,12 +55,12 @@ func _ready() -> void:
 		print("Unable to connect")
 		set_process(false)
 
-func _process(delta):
+func _process(_delta):
 	socket.poll()
 	var state = socket.get_ready_state()
-	if state == WebSocketPeer.STATE_OPEN:
+	if state == WebSocketPeer.STATE_OPEN: 
 		while socket.get_available_packet_count():
-			print("Packet: ", socket.get_packet())
+			_data_received_handler(JSON.parse_string(socket.get_packet().get_string_from_utf8()))
 	elif state == WebSocketPeer.STATE_CLOSING:
 		# Keep polling to achieve proper close.
 		pass
@@ -69,3 +69,10 @@ func _process(delta):
 		var reason = socket.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
+
+func _data_received_handler(data):
+	if (data["code"] == 0):
+		# Needs to setup a token of connection
+		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+	else :
+		Notification.show_side(data["message"])
