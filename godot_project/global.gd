@@ -1,3 +1,3 @@
 extends Node
 
-var websocket_url = "ws://localhost:18014/"
+var websocket_url = "wss://185.155.93.105:18005"

@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 [autoload]
 
 Global="*res://global.gd"
+Notification="*res://sprite/notification.tscn"
 
 [display]
 
