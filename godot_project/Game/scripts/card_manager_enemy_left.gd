@@ -26,8 +26,11 @@ func _ready() -> void:
 func on_card_played():
 	await get_tree().create_timer(2.0).timeout
 	if played==false:
-		move_card_to_slot(hand.player_hand[1],children_slots[cmpt_card_in_slot])
-		cmpt_card_in_slot += 1
+		var num_cards_played = min(2, hand.player_hand.size())
+		for i in range(num_cards_played):
+			if cmpt_card_in_slot < children_slots.size():
+				move_card_to_slot(hand.player_hand[0],children_slots[cmpt_card_in_slot])
+				cmpt_card_in_slot += 1
 		played = true
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 
@@ -37,10 +40,10 @@ func move_card_to_slot(card, slot):
 		hand.remove_card_from_hand(card)  # Supprime la carte de la main
 		var sprite=card.get_node("Sprite")
 		sprite.texture=card.img
-		hand.animate_card_to_position(card,slot.position)
+		var pos = Vector2(slot.position.y, slot.position.x)# Fait la rotation de 90 degrés
+		hand.animate_card_to_position(card,pos)
 		slot.card_in_slot = true  # Marque le slot comme occupé
 		lst_card_in_slot.append(card)
-		emit_signal("enemy")
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
 
@@ -48,6 +51,7 @@ func _on_card_manager_card_played() -> void:
 	played=false
 	remove_card_in_slot()
 	on_card_played()
+	emit_signal("enemy")
 	
 
 func remove_card_in_slot():
