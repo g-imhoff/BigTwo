@@ -26,7 +26,7 @@ func _ready() -> void:
 func on_card_played():
 	await get_tree().create_timer(2.0).timeout
 	if played==false:
-		var num_cards_played = min(2, hand.player_hand.size())
+		var num_cards_played = min(5, hand.player_hand.size())
 		for i in range(num_cards_played):
 			if cmpt_card_in_slot < children_slots.size():
 				move_card_to_slot(hand.player_hand[0],children_slots[cmpt_card_in_slot])
@@ -40,8 +40,8 @@ func move_card_to_slot(card, slot):
 		hand.remove_card_from_hand(card)  # Supprime la carte de la main
 		var sprite=card.get_node("Sprite")
 		sprite.texture=card.img
-		var pos = Vector2(slot.position.y, slot.position.x)# Fait la rotation de 90 degrés
-		hand.animate_card_to_position(card,pos)
+		#var pos = Vector2(slot.position.y, slot.position.x)# Fait la rotation de 90 degrés
+		hand.animate_card_to_position(card,slot.position)
 		slot.card_in_slot = true  # Marque le slot comme occupé
 		lst_card_in_slot.append(card)
 	else:
