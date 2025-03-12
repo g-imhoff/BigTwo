@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fq8y23pl3rwf"]
+[gd_scene load_steps=12 format=3 uid="uid://fq8y23pl3rwf"]
 
 [ext_resource type="Script" path="res://GameStarter/create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
@@ -10,6 +10,30 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dx0t"]
 size = Vector2(66, 22)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ej5m7"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eoaj"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aue3f"]
 size = Vector2(668.496, 50)
@@ -47,7 +71,6 @@ offset_right = 665.0
 offset_bottom = 57.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-placeholder_text = "Enter your profile name"
 alignment = 1
 flat = true
 
@@ -72,7 +95,6 @@ offset_right = 665.0
 offset_bottom = 57.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-placeholder_text = "Enter your email address"
 alignment = 1
 flat = true
 
@@ -97,7 +119,6 @@ offset_right = 665.0
 offset_bottom = 57.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-placeholder_text = "Enter your password"
 alignment = 1
 flat = true
 secret = true
@@ -141,6 +162,7 @@ offset_top = 720.0
 offset_right = 1294.0
 offset_bottom = 777.0
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_ej5m7")
 text = "Create Account"
 
 [node name="OR and Divider" type="Label" parent="."]
@@ -162,11 +184,12 @@ scale = Vector2(0.942177, 1)
 texture = ExtResource("5_subxe")
 
 [node name="LoginButton" type="Button" parent="."]
-offset_left = 629.0
-offset_top = 850.0
-offset_right = 1294.0
-offset_bottom = 907.0
+offset_left = 627.0
+offset_top = 856.0
+offset_right = 1292.0
+offset_bottom = 913.0
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_6eoaj")
 text = "Login"
 
 [node name="OAuthGoogle" type="Sprite2D" parent="."]
