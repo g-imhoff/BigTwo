@@ -5,12 +5,7 @@ extends Node2D
 @onready var rememberme_checkbox = $RememberMe
 var socket = WebSocketPeer.new()
 
-func hash_password(password: String) -> String:
-	var context = HashingContext.new()
-	context.start(HashingContext.HASH_SHA256)
-	context.update(password.to_utf8_buffer())
-	var hash = context.finish()
-	return hash.hex_encode()
+var HasH = load("res://hashage.gd")
 	
 
 func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -29,7 +24,7 @@ func _on_login_pressed() -> void:
 	print("Remember me: ", rememberme)
 	print("LoginAccountClicked")
 	
-	var password_hash = hash_password(password)
+	var password_hash = HasH.hash_password(password) #Hashing 
 	
 	
 	var content = JSON.stringify({
@@ -40,6 +35,9 @@ func _on_login_pressed() -> void:
 	}})
 		
 	socket.send_text(content)
+	# This is to delete when we will add the login method
+	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+
 
 func _on_create_account_pressed() -> void: 
 	get_tree().change_scene_to_file("res://GameStarter/CreatePage.tscn")
@@ -53,8 +51,8 @@ func _on_hide_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			password_line_edit.set_secret(true)
 
 func _ready() -> void:
-	var clientCAS = load("res://cert.crt")
-	var err = socket.connect_to_url(Global.websocket_url, TLSOptions.client_unsafe(clientCAS))
+	print("hello")
+	var err = socket.connect_to_url(Global.websocket_url)
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
@@ -62,9 +60,9 @@ func _ready() -> void:
 func _process(_delta):
 	socket.poll()
 	var state = socket.get_ready_state()
-	if state == WebSocketPeer.STATE_OPEN: 
+	if state == WebSocketPeer.STATE_OPEN:
 		while socket.get_available_packet_count():
-			_data_received_handler(JSON.parse_string(socket.get_packet().get_string_from_utf8()))
+			print("Packet: ", socket.get_packet())
 	elif state == WebSocketPeer.STATE_CLOSING:
 		# Keep polling to achieve proper close.
 		pass
@@ -74,12 +72,6 @@ func _process(_delta):
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
 
-func _data_received_handler(data):
-	if (data["code"] == 0):
-		# Needs to setup a token of connection
-		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
-	else :
-		Notification.show_side(data["message"])
 
 func _on_tree_exited() -> void:
 	socket.close()

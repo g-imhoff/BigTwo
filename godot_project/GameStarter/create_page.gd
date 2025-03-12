@@ -7,13 +7,14 @@ extends Node2D
 
 var socket = WebSocketPeer.new()
 
+var HasH = load("res://hashage.gd")
 
-func hash_password(password: String) -> String:
-	var context = HashingContext.new()
-	context.start(HashingContext.HASH_SHA256) 
-	context.update(password.to_utf8_buffer())
-	var hash = context.finish()
-	return hash.hex_encode()
+#func hash_password(password: String) -> String:
+#	var context = HashingContext.new()
+#	context.start(HashingContext.HASH_SHA256) 
+#	context.update(password.to_utf8_buffer())
+#	var hash = context.finish()
+#	return hash.hex_encode()#
 
 
 
@@ -29,7 +30,9 @@ func _on_create_account_pressed() -> void:
 	print("Password: ", password)
 	print("CreateAccountClicked")
 	
-	var password_hash = hash_password(password)  #hache le password 
+	
+	var password_hash = HasH.hash_password(password) #hache le password 
+	
 	var content = JSON.stringify({
 		"function": "create_account",
 		"data": {

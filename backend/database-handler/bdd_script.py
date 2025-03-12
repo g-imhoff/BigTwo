@@ -54,7 +54,10 @@ def login_account(profile_name_email, password):
             bdd_username, bdd_email, bdd_password = result 
 
             if bdd_password == password: 
+               
+                  
                 return 0 #connection worked
+                
             else:
                 return 3 #wrong password
         else: 
