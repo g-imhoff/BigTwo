@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://7mcc8557hsh8"]
+[gd_scene load_steps=18 format=3 uid="uid://7mcc8557hsh8"]
 
 [ext_resource type="Script" path="res://GameStarter/home_page.gd" id="1_ed3xu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_gu8ip"]
@@ -20,6 +20,18 @@ radius = 46.0977
 [sub_resource type="GDScript" id="GDScript_j6q4l"]
 script/source = "extends Area2D
 "
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upulg"]
+bg_color = Color(0.0190904, 0.014443, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ofba"]
 radius = 25.625
@@ -85,6 +97,7 @@ offset_top = 800.0
 offset_right = 1138.0
 offset_bottom = 913.0
 theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxFlat_upulg")
 text = "PLAY NOW"
 
 [node name="InstagramButton" type="Sprite2D" parent="."]
