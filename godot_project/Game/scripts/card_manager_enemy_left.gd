@@ -7,7 +7,7 @@ const COLLISION_MASK_SLOT=2
 
 var screen_size
 var is_hovering_on_card
-var num_card_up=0
+var num_card_played=0
 var card_clicked=[]
 var cmpt_card_in_slot=0
 var played=false
@@ -26,8 +26,8 @@ func _ready() -> void:
 func on_card_played():
 	await get_tree().create_timer(2.0).timeout
 	if played==false:
-		var num_cards_played = min(5, hand.player_hand.size())
-		for i in range(num_cards_played):
+		num_card_played = 2
+		for i in range(num_card_played):
 			if cmpt_card_in_slot < children_slots.size():
 				move_card_to_slot(hand.player_hand[0],children_slots[cmpt_card_in_slot])
 				cmpt_card_in_slot += 1
@@ -43,6 +43,7 @@ func move_card_to_slot(card, slot):
 		hand.animate_card_to_position(card,slot.position)
 		slot.card_in_slot = true  # Marque le slot comme occupé
 		lst_card_in_slot.append(card)
+		emit_signal("enemy")
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
 
@@ -50,7 +51,6 @@ func _on_card_manager_card_played() -> void:
 	played=false
 	remove_card_in_slot()
 	on_card_played()
-	emit_signal("enemy")
 	
 
 func remove_card_in_slot():
@@ -68,3 +68,4 @@ func remove_card_in_slot():
 func end_game():
 	print("tu a gagné")
 	get_tree().quit()
+	

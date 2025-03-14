@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
+[ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
 [ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
 [ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
 [ext_resource type="Script" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
 [ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_right.gd" id="3_isv1k"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="3_j44is"]
 [ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_left.gd" id="4_awnpp"]
-[ext_resource type="Script" path="res://Game/scripts/button.gd" id="4_mhkmc"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="5_dlrfd"]
 [ext_resource type="Script" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
 [ext_resource type="Script" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
@@ -47,7 +47,6 @@ offset_top = 1027.0
 offset_right = 764.0
 offset_bottom = 1075.0
 text = "PLAY"
-script = ExtResource("4_mhkmc")
 
 [node name="Button2" type="Button" parent="."]
 offset_left = 1081.0
@@ -56,7 +55,6 @@ offset_right = 1239.0
 offset_bottom = 1075.0
 text = "PASS
 "
-script = ExtResource("4_mhkmc")
 
 [node name="Cardslots" type="Node2D" parent="."]
 
@@ -128,7 +126,7 @@ position = Vector2(1483, 492)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1482, 694)
+position = Vector2(1482, 696)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
@@ -138,6 +136,9 @@ rotation = 1.5708
 [node name="cardslot5" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
 position = Vector2(1483, 392)
 rotation = 1.5708
+
+[node name="start" type="Node2D" parent="."]
+script = ExtResource("1_8ka4x")
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]
 [connection signal="enemy" from="card_manager_enemy" to="card_manager_enemy_right" method="_on_card_manager_enemy_enemy"]

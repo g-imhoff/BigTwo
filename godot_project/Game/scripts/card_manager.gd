@@ -221,3 +221,8 @@ func _on_card_manager_enemy_right_enemy() -> void:
 		card.queue_free()
 		card_clicked.erase(card)
 	remove_card_in_slot() 
+
+
+#test pour faire commencé celui qui a le 3 de diamonds
+func on_card_played():
+	played = false
