@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dui1hqinflue4"]
+[gd_scene load_steps=12 format=3 uid="uid://dui1hqinflue4"]
 
 [ext_resource type="Script" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ckmwq5fbp3g6e" path="res://assets/ui/Divider create page.png" id="4_3wjrt"]
 [ext_resource type="Texture2D" uid="uid://cp6gvl7q3kwp0" path="res://assets/ui/Text field.png" id="4_cl3p3"]
 [ext_resource type="Texture2D" uid="uid://yuptm5fmlar0" path="res://assets/ui/hideicon.png" id="6_b3rm8"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="8_i56jj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0fgs"]
 size = Vector2(668.496, 50)
@@ -14,12 +15,31 @@ size = Vector2(668.496, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb2qk"]
 size = Vector2(66, 22)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg8a2"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="LoginPage" type="Node2D"]
 script = ExtResource("1_6t1k7")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("1_wx55c")
+
+[node name="BackButton login" type="TextureButton" parent="Background"]
+offset_left = -932.0
+offset_top = -523.0
+offset_right = -858.0
+offset_bottom = -449.0
+texture_normal = ExtResource("8_i56jj")
 
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(960, 130)
@@ -77,7 +97,6 @@ offset_right = 665.0
 offset_bottom = 57.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-placeholder_text = "Enter your email address or username"
 alignment = 1
 flat = true
 
@@ -102,7 +121,6 @@ offset_right = 665.0
 offset_bottom = 57.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-placeholder_text = "Enter your password"
 alignment = 1
 flat = true
 secret = true
@@ -146,15 +164,8 @@ offset_top = 850.0
 offset_right = 1294.0
 offset_bottom = 907.0
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_yg8a2")
 text = "Login"
-
-[node name="CreateAccount" type="Button" parent="."]
-offset_left = 629.0
-offset_top = 930.0
-offset_right = 1294.0
-offset_bottom = 987.0
-theme_override_font_sizes/font_size = 25
-text = "Create Account"
 
 [node name="RememberMe" type="CheckBox" parent="."]
 offset_left = 628.0
@@ -170,10 +181,10 @@ offset_top = 5.0
 offset_right = 100.5
 offset_bottom = 19.0
 theme_override_font_sizes/font_size = 10
-text = "Remember me"
+text = "Rember me"
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]
 [connection signal="input_event" from="OAuthGoogle/Area2D" to="." method="_on_oauth_google_input_event"]
 [connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="." method="_on_hide_input_event"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
-[connection signal="pressed" from="CreateAccount" to="." method="_on_create_account_pressed"]

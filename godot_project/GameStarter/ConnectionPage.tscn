@@ -1,9 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://6wqgrvrccnso"]
+[gd_scene load_steps=7 format=3 uid="uid://6wqgrvrccnso"]
 
 [ext_resource type="Script" path="res://GameStarter/connection_page.gd" id="1_euxgu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_ynr6k"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="2_a85sy"]
 [ext_resource type="Texture2D" uid="uid://d01s88i8stsj" path="res://assets/ui/connection page divider.png" id="4_n7tl5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlr3"]
+bg_color = Color(0.156863, 0.654902, 0.270588, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6cay"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="ConnectionPage" type="Node2D"]
 script = ExtResource("1_euxgu")
@@ -18,52 +42,37 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_a85sy")
 
 [node name="LoginButton" type="Button" parent="."]
-offset_left = 250.0
-offset_top = 700.0
-offset_right = 821.0
-offset_bottom = 811.0
+offset_left = 254.0
+offset_top = 601.0
+offset_right = 825.0
+offset_bottom = 712.0
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_orlr3")
 text = "Login with an existing account"
 
 [node name="RegisterButton" type="Button" parent="."]
-offset_left = 1099.0
-offset_top = 700.0
-offset_right = 1670.0
-offset_bottom = 811.0
+offset_left = 1103.0
+offset_top = 601.0
+offset_right = 1674.0
+offset_bottom = 712.0
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_y6cay")
 text = "Create a new account"
 
-[node name="I\'ve Played Before" type="Label" parent="."]
-offset_left = 438.0
-offset_top = 637.0
-offset_right = 652.0
-offset_bottom = 672.0
-theme_override_font_sizes/font_size = 25
-text = "I’ve Played Before 
-"
-
-[node name="I\'m A New Player" type="Label" parent="."]
-offset_left = 1293.0
-offset_top = 637.0
-offset_right = 1495.0
-offset_bottom = 672.0
-theme_override_font_sizes/font_size = 25
-text = "I’m A New Player"
-
 [node name="Or" type="Label" parent="."]
-offset_left = 932.0
-offset_top = 727.0
-offset_right = 989.0
-offset_bottom = 782.0
+offset_left = 936.0
+offset_top = 628.0
+offset_right = 993.0
+offset_bottom = 683.0
 theme_override_font_sizes/font_size = 40
 text = "OR"
 
 [node name="RightDivider" type="Sprite2D" parent="."]
-position = Vector2(883, 755)
+position = Vector2(887, 656)
 texture = ExtResource("4_n7tl5")
 
 [node name="LeftDivider" type="Sprite2D" parent="."]
-position = Vector2(1037, 755)
+position = Vector2(1041, 656)
 texture = ExtResource("4_n7tl5")
 
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]

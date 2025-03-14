@@ -69,3 +69,7 @@ func _process(_delta):
 
 func _on_tree_exited() -> void:
 	socket.close()
+
+
+func _on_back_button_login_pressed() -> void:
+	get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")
