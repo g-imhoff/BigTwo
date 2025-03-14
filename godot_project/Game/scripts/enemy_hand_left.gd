@@ -25,7 +25,7 @@ func _ready() -> void:
 		var sprite=new_card.get_node("Sprite")
 		var selected_card=random_card()
 		
-		var new_texture=load(selected_card) #montre juste le dos "res://assets/cards/card_back.png"
+		var new_texture=load("res://assets/cards/card_back.png") #montre juste le dos "res://assets/cards/card_back.png"
 		 # Extraire la valeur et la couleur de la carte
 		var card_info =get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
@@ -66,7 +66,7 @@ func get_card_info_from_texture(path:String)->Array:
 
 func add_card_to_hand(card):
 	if card not in player_hand:
-		player_hand.insert(0,card)
+		player_hand.append(card)
 		update_hand_position()
 	else:
 		animate_card_to_position(card,card.hand_position)

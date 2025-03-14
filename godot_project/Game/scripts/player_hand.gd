@@ -61,7 +61,7 @@ func get_card_info_from_texture(path:String)->Array:
 
 func add_card_to_hand(card):
 	if card not in player_hand:
-		player_hand.insert(0,card)
+		player_hand.append(card)
 		update_hand_position()
 	else:
 		animate_card_to_position(card,card.hand_position)
