@@ -23,8 +23,10 @@ func _ready() -> void:
 
 # Fonction générique pour vérifier la présence de la carte et appeler la méthode sur le script
 func check_for_card(value: int, form: String, hand: Array, script: Node) -> bool:
+	script.played=true
 	for card in hand:
 		if card.value == value and card.form == form:
 			script.on_card_played()
+			script.played=false
 			return true  # Sortir dès qu'on trouve la carte pour éviter des appels multiples
 	return false
