@@ -77,7 +77,7 @@ func remove_card_in_slot():
 	if lst_card_in_slot.size() != 0:
 		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
-		
+		children_slots[0].combi=null
 		for card in cards_to_remove:
 			card.queue_free()  # Marque la carte pour suppression
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
@@ -110,6 +110,8 @@ func check_for_simple_combi(card_to_put,lst_card):
 					tmp.append(card2)
 			if tmp.size()>card_to_put.size():
 				card_to_put=tmp
+	children_slots[0].combi_value=card_to_put[0].value
+	children_slots[0].combi_form=card_to_put[0].form
 	return card_to_put
 
 func check_for_straight(lst_card):
@@ -122,6 +124,8 @@ func check_for_straight(lst_card):
 		else:
 			tmp.clear()
 		if tmp.size()==5:
+			children_slots[0].combi_value=tmp[4].value
+			children_slots[0].combi_form=tmp[4].form
 			return tmp
 	return null
 
@@ -138,6 +142,9 @@ func check_for_flush(lst_card):
 			for card in tmp2:
 				tmp.erase(card)
 		if tmp.size()==5:
+			tmp.sort_custom(func(a, b): return a.value < b.value)
+			children_slots[0].combi_value=tmp[4].value
+			children_slots[0].combi_form=tmp[4].form
 			return tmp
 	return null
 
@@ -154,6 +161,8 @@ func check_for_fullhouse(card_to_put,lst_card):
 						if card1.value==card2.value:
 							tmp.append(card2)
 					if tmp.size()==2:
+						children_slots[0].combi_value=card_to_put[0].value
+						children_slots[0].combi_form=card_to_put[0].form
 						for card in tmp:
 							card_to_put.append(card)
 						return card_to_put
@@ -162,6 +171,8 @@ func check_for_fullhouse(card_to_put,lst_card):
 func check_for_four_kind(card_to_put,lst_card):
 	card_to_put=check_for_simple_combi(card_to_put,lst_card)
 	if card_to_put.size()==4 and hand.player_hand.size()>4:#check four of a kind
+			children_slots[0].combi_value=card_to_put[0].value
+			children_slots[0].combi_form=card_to_put[0].form
 			for card in lst_card:
 				if card not in card_to_put:
 					card_to_put.append(card)

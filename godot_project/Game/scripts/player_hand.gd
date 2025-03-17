@@ -1,6 +1,6 @@
 extends Node2D
 
-const HAND_COUNT=13
+const HAND_COUNT=7
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 const CARD_WIDTH=80
 const HAND_Y_POSITION=870
@@ -9,9 +9,18 @@ var player_hand=[]
 var center_screen_x
 var card_scale=Vector2(0.5,0.5)
 
-@onready var lst_img=Global.card_images
+#@onready var lst_img=Global.card_images
 
 
+var lst_img=[
+	"res://assets/cards/card_clubs_02.png",
+	"res://assets/cards/card_clubs_03.png",
+	"res://assets/cards/card_clubs_04.png",
+	"res://assets/cards/card_clubs_05.png",
+	"res://assets/cards/card_clubs_06.png",
+	"res://assets/cards/card_clubs_07.png",
+	"res://assets/cards/card_clubs_08.png",
+	]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,13 +47,13 @@ func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
 	
 	if path.find("clubs")!=-1:
-		card_info[0]="clubs"
+		card_info[0]=3
 	elif path.find("diamonds")!=-1:
-		card_info[0]="diamonds"
+		card_info[0]=4
 	elif path.find("hearts")!=-1:
-		card_info[0]="hearts"
+		card_info[0]=2
 	elif path.find("spades")!=-1:
-		card_info[0]="spades"
+		card_info[0]=1
 	
 	var value_str=path.split("_")[2].split(".")[0]
 	

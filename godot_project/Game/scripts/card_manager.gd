@@ -13,6 +13,7 @@ var played=false
 var lst_card_in_slot=[]
 var card_base_scale=Vector2(0.5,0.5)
 var card_highlight_scale=Vector2(0.55,0.55)
+var brelan=[]
 
 @onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
@@ -185,11 +186,13 @@ func check_cards_clicked():
 			for i in range(tab_check_brelan.size()):
 				tab_val.erase(tab_check_brelan[i])
 			if val == 2:
+				brelan=tab_check_brelan.duplicate()
 				if tab_val[0].value == tab_val[1].value:
 					check = "full house"
 					print("full house")
 			
 			elif val == 1:
+				brelan=tab_val.duplicate()
 				if tab_val.size() == 3 and tab_val[0].value == tab_val[1].value:  # Assure que seulement 2 cartes restent
 					check = "full house"
 					print("full house")
@@ -230,6 +233,7 @@ func _on_button_2_pressed() -> void:
 
 func _on_card_manager_enemy_right_enemy() -> void:
 	await get_tree().create_timer(2.0).timeout
+	print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
 	played=false
 	for card in card_clicked.duplicate():
 		card.queue_free()
@@ -243,15 +247,36 @@ func on_card_played():
 
 
 func check_other_cards():
+	var lst_card=card_clicked.duplicate()
+	lst_card.sort_custom(func(a, b): return a.value < b.value)
 	var check_combi=check_cards_clicked()
 	if children_slots_right[0].combi==null and check_combi!=null:
 		return true
 	
 	var combi_enemy
 	combi_enemy=children_slots_right[0].combi
-	
 	if typeof(check_combi) == typeof(combi_enemy) and check_combi == combi_enemy and check_combi!=null:
-		return true
+		if (check_combi == "1" or check_combi == "2" or check_combi =="3"):
+			if lst_card[0].value >children_slots_right[0].combi_value:
+				return true
+			lst_card.sort_custom(func(a, b): return a.form > b.form)
+			if (lst_card[0].value==children_slots_right[0].combi_value and lst_card[0].form==children_slots_right[0].combi_form ):
+				return true
+		elif check_combi=="four of a kind":
+			var val_a_check=lst_card[0]
+			if val_a_check!=lst_card[1]:
+				val_a_check=lst_card[1]
+			if val_a_check.value > children_slots_right[0].combi_value:
+				return true
+		elif check_combi=="straight":
+			if lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ):
+				return true
+		elif check_combi=="flush":
+			if lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ):
+				return true
+		elif check_combi=="full house":
+			if brelan[0].value>children_slots_right[0].combi_value:
+				return true
 	return false
 	
 	
