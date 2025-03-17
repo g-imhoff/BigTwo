@@ -12,6 +12,7 @@ var card_scale=Vector2(0.5,0.5)
 @onready var lst_img=Global.card_images
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_y=get_viewport().size.y/2
@@ -21,7 +22,7 @@ func _ready() -> void:
 		var sprite=new_card.get_node("Sprite")
 		var selected_card=random_card()
 		
-		var new_texture=load("res://assets/cards/card_back.png") #montre juste le dos "res://assets/cards/card_back.png"
+		var new_texture=load(selected_card) #montre juste le dos "res://assets/cards/card_back.png"
 		 # Extraire la valeur et la couleur de la carte
 		var card_info =get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
@@ -56,6 +57,8 @@ func get_card_info_from_texture(path:String)->Array:
 		card_info[1]=12
 	elif value_str=="J":
 		card_info[1]=11
+	elif value_str=="02":
+		card_info[1]=15
 	elif value_str.is_valid_float():
 		card_info[1] = int(value_str)
 	return card_info

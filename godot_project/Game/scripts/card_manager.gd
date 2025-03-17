@@ -17,7 +17,12 @@ var card_highlight_scale=Vector2(0.55,0.55)
 @onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
 @onready var children_slots=Cardslots.get_children()
-
+@onready var Cardslots_up=$"../Cardslots2"
+@onready var children_slots_up=Cardslots_up.get_children()
+@onready var Cardslots_left=$"../Cardslots3"
+@onready var children_slots_left=Cardslots_left.get_children()
+@onready var Cardslots_right=$"../Cardslots4"
+@onready var children_slots_right=Cardslots_right.get_children()
 
 
 func _ready() -> void:
@@ -108,7 +113,7 @@ func get_card_with_hightest_z_index(card):
 func _on_button_pressed() -> void:
 	if card_clicked == []:
 		print("pas de carte clicked")
-	elif check_cards_clicked()==false:
+	elif check_other_cards()==false:
 		print("combinaison incorrect")
 	else:
 		for card in card_clicked:
@@ -127,26 +132,23 @@ func move_card_to_slot(card, slot):
 		hand.remove_card_from_hand(card)  # Supprime la carte de la main
 		hand.animate_card_to_position(card,slot.position)
 		slot.card_in_slot = true  # Marque le slot comme occupé
+		slot.card_value=card.value
+		slot.card_form=card.form
 		lst_card_in_slot.append(card)
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
 
 func check_cards_clicked():
-	var check=false
+	var check=null
 	if card_clicked.size()==1:
-		check=true
+		check=1
+		
 
-	elif card_clicked.size()==2:
-		if card_clicked[0].value ==  card_clicked[1].value:
-			check=true
-		else:
-			check=false
+	elif card_clicked.size()==2 and card_clicked[0].value ==  card_clicked[1].value:
+		check=2
 
-	elif card_clicked.size()==3:
-		if card_clicked[0].value == card_clicked[1].value and card_clicked[1].value == card_clicked[2].value:
-			check = true
-		else:
-			check =false
+	elif card_clicked.size()==3 and card_clicked[0].value == card_clicked[1].value and card_clicked[1].value == card_clicked[2].value:
+		check=3
 
 	elif card_clicked.size()==5:
 		card_clicked.sort_custom(func(a, b): return a.value < b.value)#trie les carte clique par leur valeur
@@ -154,34 +156,43 @@ func check_cards_clicked():
 		var signe=0
 		var suite=0
 		var tab_check_brelan=[]
+		var tmp=0
 		tab_check_brelan.append(card_clicked[0])
+		var tmp_tab=tab_check_brelan.duplicate()
 		for i in range(card_clicked.size()-1):
 			if card_clicked[i].value== card_clicked[i+1].value:
-				val+=1
-				tab_check_brelan.append(card_clicked[i+1])
+				tmp+=1
+				tmp_tab.append(card_clicked[i+1])
+			else:
+				val=tmp
+				tab_check_brelan=tmp_tab.duplicate()
+				tmp=0
 			if card_clicked[i].form==card_clicked[i+1].form:
 				signe+=1
 			if card_clicked[i+1].value== card_clicked[i].value+1:
 				suite+=1
 		if val == 3:#check Four of a Kind
-			check=true
+			check="four of a kind"
 		elif suite==4 and signe ==4:#check pour Straight Flush
-			check =true 
+			check ="straight" 
 			print("Straight Flush")
 		elif signe==4:#check Flush
-			check= true
+			check= "flush"
 		elif suite==4:#check pour straight
-			check =true
-		elif val==1 or val==2:#check pour full house
-			var tab_val=card_clicked.duplicate()
+			check ="straight"
+		elif val == 1 or val == 2:  # check pour full house
+			var tab_val = card_clicked.duplicate()
 			for i in range(tab_check_brelan.size()):
 				tab_val.erase(tab_check_brelan[i])
-			if val==2:
-				if tab_val[0].value ==  tab_val[1].value:
-					check=true
-			if val==1:
-				if tab_val[0].value == tab_val[1].value and tab_val[1].value == tab_val[2].value:
-					check=true
+			if val == 2:
+				if tab_val[0].value == tab_val[1].value:
+					check = "full house"
+					print("full house")
+			
+			elif val == 1:
+				if tab_val.size() == 3 and tab_val[0].value == tab_val[1].value:  # Assure que seulement 2 cartes restent
+					check = "full house"
+					print("full house")
 	return check
 
 
@@ -197,6 +208,8 @@ func remove_card_in_slot():
 			card.queue_free()  # Marque la carte pour suppression
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
+			children_slots[cmpt_card_in_slot-1].card_value=null
+			children_slots[cmpt_card_in_slot-1].card_form=null
 			cmpt_card_in_slot-=1
 
 func end_game():
@@ -216,6 +229,7 @@ func _on_button_2_pressed() -> void:
 
 
 func _on_card_manager_enemy_right_enemy() -> void:
+	await get_tree().create_timer(2.0).timeout
 	played=false
 	for card in card_clicked.duplicate():
 		card.queue_free()
@@ -226,3 +240,18 @@ func _on_card_manager_enemy_right_enemy() -> void:
 #test pour faire commencé celui qui a le 3 de diamonds
 func on_card_played():
 	played = false
+
+
+func check_other_cards():
+	var check_combi=check_cards_clicked()
+	if children_slots_right[0].combi==null and check_combi!=null:
+		return true
+	
+	var combi_enemy
+	combi_enemy=children_slots_right[0].combi
+	
+	if typeof(check_combi) == typeof(combi_enemy) and check_combi == combi_enemy and check_combi!=null:
+		return true
+	return false
+	
+	

@@ -42,6 +42,8 @@ func move_card_to_slot(card, slot):
 		sprite.texture=card.img
 		hand.animate_card_to_position(card,slot.position)
 		slot.card_in_slot = true  # Marque le slot comme occupé
+		slot.card_value=card.value
+		slot.card_form=card.form
 		lst_card_in_slot.append(card)
 		emit_signal("enemy")
 	else:
@@ -62,6 +64,8 @@ func remove_card_in_slot():
 			card.queue_free()  # Marque la carte pour suppression
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
+			children_slots[cmpt_card_in_slot-1].card_value=null
+			children_slots[cmpt_card_in_slot-1].card_form=null
 			cmpt_card_in_slot-=1
 			
 
