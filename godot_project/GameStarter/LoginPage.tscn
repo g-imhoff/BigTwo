@@ -31,7 +31,7 @@ corner_radius_bottom_left = 10
 script = ExtResource("1_6t1k7")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(958, 534)
 texture = ExtResource("1_wx55c")
 
 [node name="BackButton login" type="TextureButton" parent="Background"]
@@ -54,7 +54,7 @@ texture = ExtResource("3_nhusd")
 [node name="Area2D" type="Area2D" parent="OAuthGoogle"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OAuthGoogle/Area2D"]
-position = Vector2(-0.251648, 1)
+position = Vector2(3.27693, 0)
 shape = SubResource("RectangleShape2D_b0fgs")
 
 [node name="LOG IN" type="Label" parent="."]
@@ -168,20 +168,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_yg8a2")
 text = "Login"
 
 [node name="RememberMe" type="CheckBox" parent="."]
-offset_left = 628.0
-offset_top = 787.0
-offset_right = 652.0
-offset_bottom = 811.0
-scale = Vector2(2, 2)
+offset_left = 644.0
+offset_top = 791.0
+offset_right = 670.0
+offset_bottom = 817.0
 
-[node name="Label" type="Label" parent="RememberMe"]
-layout_mode = 0
-offset_left = 28.5
-offset_top = 5.0
-offset_right = 100.5
-offset_bottom = 19.0
-theme_override_font_sizes/font_size = 10
-text = "Rember me"
+[node name="Label2" type="Label" parent="RememberMe"]
+offset_left = 26.0
+offset_top = 2.0
+offset_right = 141.0
+offset_bottom = 25.0
+text = "Remember me
+"
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]

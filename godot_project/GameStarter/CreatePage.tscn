@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://fq8y23pl3rwf"]
+[gd_scene load_steps=13 format=3 uid="uid://fq8y23pl3rwf"]
 
 [ext_resource type="Script" path="res://GameStarter/create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_jap0u"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_vm0o5"]
 [ext_resource type="Texture2D" uid="uid://cp6gvl7q3kwp0" path="res://assets/ui/Text field.png" id="4_cwooc"]
 [ext_resource type="Texture2D" uid="uid://yuptm5fmlar0" path="res://assets/ui/hideicon.png" id="5_84oho"]
@@ -44,6 +45,13 @@ script = ExtResource("1_5iowa")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("2_ssd5f")
+
+[node name="backicon connection page" type="TextureButton" parent="Background"]
+offset_left = -924.0
+offset_top = -510.0
+offset_right = -850.0
+offset_bottom = -436.0
+texture_normal = ExtResource("3_jap0u")
 
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(960, 130)

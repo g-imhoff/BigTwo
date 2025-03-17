@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://6wqgrvrccnso"]
+[gd_scene load_steps=8 format=3 uid="uid://6wqgrvrccnso"]
 
 [ext_resource type="Script" path="res://GameStarter/connection_page.gd" id="1_euxgu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_ynr6k"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="2_a85sy"]
 [ext_resource type="Texture2D" uid="uid://d01s88i8stsj" path="res://assets/ui/connection page divider.png" id="4_n7tl5"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="5_f65x8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlr3"]
 bg_color = Color(0.156863, 0.654902, 0.270588, 1)
@@ -74,6 +75,13 @@ texture = ExtResource("4_n7tl5")
 [node name="LeftDivider" type="Sprite2D" parent="."]
 position = Vector2(1041, 656)
 texture = ExtResource("4_n7tl5")
+
+[node name="backicon connection page" type="TextureButton" parent="."]
+offset_left = 51.0
+offset_top = 48.0
+offset_right = 91.0
+offset_bottom = 88.0
+texture_normal = ExtResource("5_f65x8")
 
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
 [connection signal="pressed" from="RegisterButton" to="." method="_on_register_button_pressed"]
