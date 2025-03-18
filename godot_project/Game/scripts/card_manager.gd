@@ -142,14 +142,14 @@ func move_card_to_slot(card, slot):
 func check_cards_clicked():
 	var check=null
 	if card_clicked.size()==1:
-		check=1
+		check="1"
 		
 
 	elif card_clicked.size()==2 and card_clicked[0].value ==  card_clicked[1].value:
-		check=2
+		check="2"
 
 	elif card_clicked.size()==3 and card_clicked[0].value == card_clicked[1].value and card_clicked[1].value == card_clicked[2].value:
-		check=3
+		check="3"
 
 	elif card_clicked.size()==5:
 		card_clicked.sort_custom(func(a, b): return a.value < b.value)#trie les carte clique par leur valeur
@@ -221,13 +221,14 @@ func end_game():
 
 
 func _on_button_2_pressed() -> void:
-	played=true
-	var card_to_remove=card_clicked.duplicate()
-	for card in card_to_remove:
-		card.position.y+=50
-		num_card_up-=1
-		card_clicked.erase(card)
-	emit_signal("card_played")
+	if played == false :
+		played=true
+		var card_to_remove=card_clicked.duplicate()
+		for card in card_to_remove:
+			card.position.y+=50
+			num_card_up-=1
+			card_clicked.erase(card)
+		emit_signal("card_played")
 
 
 
