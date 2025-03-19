@@ -35,18 +35,20 @@ async def handler(websocket):
               "code": 0,
               "message": "Connection worked"
           }
-        await websocket.send(json.dumps(result_message))
 
-        if nb_client == 4:
-          starting_game_message = {
-              "code": 1,
-              "message": "game starting"
-          }
+          await websocket.send(json.dumps(result_message))
+          print("connection from", content["profile_name"])
 
-          message = json.dumps(starting_game_message)
+          if nb_client == 4:
+            starting_game_message = {
+                "code": 1,
+                "message": "game starting"
+            }
 
-          for client in connected_client:
-            client.send(message)
+            message = json.dumps(starting_game_message)
+
+            for client in connected_client:
+              client.send(message)
 
 
 async def main():
