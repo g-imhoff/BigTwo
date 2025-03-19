@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://20pkkhkt0f7u"]
+[gd_scene load_steps=6 format=3 uid="uid://20pkkhkt0f7u"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_58fyg"]
 [ext_resource type="Script" path="res://GameStarter/profile.gd" id="1_wj8vm"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_fdaiq"]
+[ext_resource type="FontFile" uid="uid://cmjhwlahgh8i6" path="res://assets/ui/porter-sans-inline-block-webfont.ttf" id="4_gnwbp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13uxv"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
@@ -32,12 +33,32 @@ offset_bottom = -424.0
 texture_normal = ExtResource("3_fdaiq")
 
 [node name="Button" type="Button" parent="Background"]
-offset_left = -647.0
-offset_top = 216.0
-offset_right = -401.0
-offset_bottom = 253.0
+offset_left = -701.0
+offset_top = 240.0
+offset_right = -446.0
+offset_bottom = 290.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_13uxv")
 text = "change my avatar"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 734.0
+offset_top = 274.0
+offset_right = 1134.0
+offset_bottom = 367.0
+theme_override_fonts/normal_font = ExtResource("4_gnwbp")
+theme_override_font_sizes/normal_font_size = 64
+text = "Games"
+tab_size = 5
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 1369.0
+offset_top = 268.0
+offset_right = 1636.0
+offset_bottom = 361.0
+theme_override_fonts/normal_font = ExtResource("4_gnwbp")
+theme_override_font_sizes/normal_font_size = 64
+text = "WINS"
+tab_size = 5
 
 [connection signal="pressed" from="Background/TextureButton" to="." method="_on_texture_button_pressed"]
