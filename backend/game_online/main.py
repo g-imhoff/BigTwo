@@ -8,7 +8,7 @@ ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
 ssl_context.load_cert_chain(
     certfile="../certs/cert.pem", keyfile="../certs/key.pem")
 
-WEBSOCKETS_URL = "localhost"  # for the moment, turn to 0.0.0.0 after
+WEBSOCKETS_URL = "0.0.0.0"  # for the moment, turn to 0.0.0.0 after
 WEBSOCKETS_PORT = 10006
 
 connected_client = {}
