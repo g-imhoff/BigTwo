@@ -35,9 +35,10 @@ func _process(_delta):
 func _data_received_handler(data):
 	match int(data["code"]):
 		0:
-			print("connected")
+			# Connected to the server game
+			pass
 		1: 
-			print("game started")
+			print(data["card_hand"])
 
 func _server_handshake():
 	var content = JSON.stringify({

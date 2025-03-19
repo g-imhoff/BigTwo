@@ -76,11 +76,14 @@ placeholder_card_list = card_list.copy()
 def random_hand():
     global placeholder_card_list
     result_list = []
+    bool_first = False
     for i in range(13):
         t = random.choice(placeholder_card_list)
+        if (t[0] == "3" && t[1] == "diamonds"): 
+            bool_first = True
         placeholder_card_list.remove(t)
         result_list.append(t)
-    return result_list
+    return result_list, bool_first
 
 
 async def connect_handler(content, websocket):
@@ -101,11 +104,12 @@ async def connect_handler(content, websocket):
 
         if nb_client == 4:
             for client in connected_client:
-                list_hand = random_hand()
+                list_hand, bool_first = random_hand()
                 starting_game_message = {
                     "code": 1,
                     "message": "game starting",
-                    "card_hand": enumerate(list_hand)
+                    "card_hand": enumerate(list_hand),
+                    "first_player": 1 if bool_first else 0
                 }
 
                 message = json.dumps(starting_game_message)
