@@ -5,9 +5,7 @@ extends Node2D
 @onready var rememberme_checkbox = $RememberMe
 var socket = WebSocketPeer.new()
 
-func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("leftclick"):
-		print("OAuthGoogleClicked")
+
 
 func _on_login_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
@@ -73,3 +71,7 @@ func _on_tree_exited() -> void:
 
 func _on_back_button_login_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")
+
+
+func _on_texture_button_pressed() -> void:
+		print("OAuthGoogleClicked")
