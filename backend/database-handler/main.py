@@ -28,47 +28,48 @@ login_account_error = [
     "This is the wrong password"
 ]
 
+
 async def handler(websocket):
-  async for message in websocket:
-    content = json.loads(message)
-    match content["function"]:
-      case "create_account":
-        profile_name = content["data"]["profile_name"]
-        email = content["data"]["email"]
-        password = content["data"]["password"]
+    async for message in websocket:
+        content = json.loads(message)
+        match content["function"]:
+            case "create_account":
+                profile_name = content["data"]["profile_name"]
+                email = content["data"]["email"]
+                password = content["data"]["password"]
 
-        print("Trying a register from", profile_name, email, password)
-        result = create_account(profile_name, email, password)
-        print(create_account_error[result],
-              profile_name, email, password)
+                print("Trying a register from", profile_name, email, password)
+                result = create_account(profile_name, email, password)
+                print(create_account_error[result],
+                      profile_name, email, password)
 
-        result_message = {
-            "code": result,
-            "message": create_account_error[result]
-        }
+                result_message = {
+                    "code": result,
+                    "message": create_account_error[result]
+                }
 
-        await websocket.send(json.dumps(result_message))
-      case "login":
-        profile_name_email = content["data"]["profile_name_email"]
-        password = content["data"]["password"]
+                await websocket.send(json.dumps(result_message))
+            case "login":
+                profile_name_email = content["data"]["profile_name_email"]
+                password = content["data"]["password"]
 
-        print("Trying a login from", profile_name_email, password)
-        result, username = login_account(profile_name_email, password)
-        print(login_account_error[result],
-              profile_name_email, password)
+                print("Trying a login from", profile_name_email, password)
+                result, username = login_account(profile_name_email, password)
+                print(login_account_error[result],
+                      profile_name_email, password)
 
-        result_message = {
-            "code": result,
-            "message": login_account_error[result],
-            "username": username 
-        }
+                result_message = {
+                    "code": result,
+                    "message": login_account_error[result],
+                    "username": username
+                }
 
-        await websocket.send(json.dumps(result_message))
+                await websocket.send(json.dumps(result_message))
 
 
 async def main():
-  async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
-    await server.serve_forever()
+    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
+        await server.serve_forever()
 
 if __name__ == "__main__":
-  asyncio.run(main())
+    asyncio.run(main())

@@ -1,4 +1,5 @@
 import asyncio
+import random
 import json
 from websockets.asyncio.server import serve
 import ssl
@@ -14,46 +15,115 @@ WEBSOCKETS_PORT = 10006
 connected_client = {}
 nb_client = 0
 
+card_list = [
+    ("02", "clubs"),
+    ("03", "clubs"),
+    ("04", "clubs"),
+    ("05", "clubs"),
+    ("06", "clubs"),
+    ("07", "clubs"),
+    ("08", "clubs"),
+    ("09", "clubs"),
+    ("10", "clubs"),
+    ("11", "clubs"),
+    ("12", "clubs"),
+    ("13", "clubs"),
+    ("14", "clubs"),
+    ("02", "diamonds"),
+    ("03", "diamonds"),
+    ("04", "diamonds"),
+    ("05", "diamonds"),
+    ("06", "diamonds"),
+    ("07", "diamonds"),
+    ("08", "diamonds"),
+    ("09", "diamonds"),
+    ("10", "diamonds"),
+    ("11", "diamonds"),
+    ("12", "diamonds"),
+    ("13", "diamonds"),
+    ("14", "diamonds"),
+    ("02", "hearts"),
+    ("03", "hearts"),
+    ("04", "hearts"),
+    ("05", "hearts"),
+    ("06", "hearts"),
+    ("07", "hearts"),
+    ("08", "hearts"),
+    ("09", "hearts"),
+    ("10", "hearts"),
+    ("11", "hearts"),
+    ("12", "hearts"),
+    ("13", "hearts"),
+    ("14", "hearts"),
+    ("02", "spades"),
+    ("03", "spades"),
+    ("04", "spades"),
+    ("05", "spades"),
+    ("06", "spades"),
+    ("07", "spades"),
+    ("08", "spades"),
+    ("09", "spades"),
+    ("10", "spades"),
+    ("11", "spades"),
+    ("12", "spades"),
+    ("13", "spades"),
+    ("14", "spades"),
+]
+
+placeholder_card_list = card_list.copy()
+
+
+def random_hand():
+    global placeholder_card_list
+    for i in range(13):
+        (value, form) = random.choice(placeholder_card_list)
+        placeholder_card_list.remove((value, form))
+        print(value, form)
+
+
+async def connect_handler(content, websocket):
+    global nb_client
+    global connected_client
+    if nb_client < 4:
+        connected_client[content["profile_name"]] = websocket
+        nb_client += 1
+
+        result_message = {
+            "code": 0,
+            "message": "Connection worked"
+        }
+
+        await websocket.send(json.dumps(result_message))
+        print("connection from", content["profile_name"])
+
+        if nb_client == 4:
+            for client in connected_client:
+                list_hand = random_hand()
+                starting_game_message = {
+                    "code": 1,
+                    "message": "game starting",
+                    "card_hand": enumerate(list_hand)
+                }
+
+                message = json.dumps(starting_game_message)
+                await connected_client[client].send(message)
+
 
 async def handler(websocket):
-  global nb_client
-  global connected_client
+    global nb_client
+    global connected_client
 
-  async for message in websocket:
-    content = json.loads(message)
-    result_message = {
-        "code": -99,
-        "message": "undefined behavior"
-    }
-    match content["function"]:
-      case "connect":
-        if nb_client < 4:
-          connected_client[content["profile_name"]] = websocket
-          nb_client += 1
-
-          result_message = {
-              "code": 0,
-              "message": "Connection worked"
-          }
-
-          await websocket.send(json.dumps(result_message))
-          print("connection from", content["profile_name"])
-
-          if nb_client == 4:
-            starting_game_message = {
-                "code": 1,
-                "message": "game starting"
-            }
-
-            message = json.dumps(starting_game_message)
-
-            for client in connected_client:
-              await connected_client[client].send(message)
+    async for message in websocket:
+        content = json.loads(message)
+        match content["function"]:
+            case "connect":
+                await connect_handler(content, websocket)
 
 
 async def main():
-  async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
-    await server.serve_forever()
+    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
+        await server.serve_forever()
 
 if __name__ == "__main__":
-  asyncio.run(main())
+    random_hand()
+    # asyncio.run(main())
