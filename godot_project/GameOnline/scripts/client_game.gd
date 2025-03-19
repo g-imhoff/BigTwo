@@ -11,7 +11,8 @@ func _ready() -> void:
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
-	_server_handshake()
+	else:
+		_server_handshake()
 
 func _process(_delta):
 	socket.poll()
