@@ -12,6 +12,9 @@ func _ready() -> void:
 		print("Unable to connect")
 		set_process(false)
 	else:
+		while socket.get_ready_state() != WebSocketPeer.STATE_OPEN:
+			socket.poll()
+			await get_tree().create_timer(0.1).timeout # Small delay to prevent CPU overload
 		_server_handshake()
 
 func _process(_delta):
@@ -30,7 +33,14 @@ func _process(_delta):
 		set_process(false) # Stop processing.
 
 func _data_received_handler(data):
-	print(data["code"])
+	match data["code"]:
+		0: 
+			#Handle waiting for team
+			pass
+		1: 
+			print("game starting")
+		_: 
+			get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 func _server_handshake():
 	var content = JSON.stringify({
