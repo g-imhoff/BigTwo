@@ -1,0 +1,8 @@
+#!/home/g-imhoff/projet_chor_dai_di/backend/game_online/.env/bin/python3
+# -*- coding: utf-8 -*-
+import re
+import sys
+from autopep8 import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

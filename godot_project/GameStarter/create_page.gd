@@ -73,6 +73,6 @@ func _process(_delta):
 func _data_received_handler(data):
 	if (data["code"] == 0):
 		# Needs to setup a token of connection
-		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+		get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
 	else :
 		Notification.show_side(data["message"])
