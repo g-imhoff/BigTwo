@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7mcc8557hsh8"]
+[gd_scene load_steps=15 format=3 uid="uid://7mcc8557hsh8"]
 
 [ext_resource type="Script" path="res://GameStarter/home_page.gd" id="1_ed3xu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_gu8ip"]
@@ -9,17 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bn6mcmfehnnxb" path="res://assets/ui/sound on.png" id="7_7stl6"]
 [ext_resource type="Texture2D" uid="uid://bvkdl6114misq" path="res://assets/ui/sound off.png" id="8_j8861"]
 [ext_resource type="Script" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
-
-[sub_resource type="GDScript" id="GDScript_yeoxk"]
-script/source = "extends Area2D
-"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_iwhy5"]
-radius = 46.0977
-
-[sub_resource type="GDScript" id="GDScript_j6q4l"]
-script/source = "extends Area2D
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upulg"]
 bg_color = Color(0.0190904, 0.014443, 0, 1)
@@ -64,29 +53,6 @@ script = ExtResource("1_ed3xu")
 position = Vector2(960, 540)
 texture = ExtResource("2_gu8ip")
 
-[node name="UserButton" type="Sprite2D" parent="."]
-position = Vector2(110, 75)
-texture = ExtResource("3_q42id")
-
-[node name="Area2D" type="Area2D" parent="UserButton"]
-script = SubResource("GDScript_yeoxk")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UserButton/Area2D"]
-position = Vector2(-3, 4)
-shape = SubResource("CircleShape2D_iwhy5")
-
-[node name="RulesButton" type="Sprite2D" parent="."]
-position = Vector2(1827, 79)
-texture = ExtResource("4_b1bmy")
-
-[node name="Area2D" type="Area2D" parent="RulesButton"]
-script = SubResource("GDScript_j6q4l")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RulesButton/Area2D"]
-position = Vector2(-3.05176e-05, 0)
-scale = Vector2(1.06099, 1.04036)
-polygon = PackedVector2Array(1, 47, -14, 40, -31, 18, -38, -13, -35, -29, 3, -48, 37, -33, 41, -29, 43, -25, 45, -9, 42, 9, 32, 29, 20, 40, 5, 48)
-
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(960, 300)
 texture = ExtResource("5_hq1fw")
@@ -108,6 +74,7 @@ texture = ExtResource("6_80co7")
 [node name="Area2D" type="Area2D" parent="InstagramButton"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InstagramButton/Area2D"]
+position = Vector2(78.125, -18.75)
 shape = SubResource("CapsuleShape2D_0ofba")
 
 [node name="SoundButton" type="AnimatedSprite2D" parent="."]
@@ -125,8 +92,24 @@ shape = SubResource("RectangleShape2D_k18rn")
 position = Vector2(0, -39)
 shape = SubResource("CircleShape2D_gae61")
 
-[connection signal="input_event" from="UserButton/Area2D" to="." method="_on_user_button_input_event"]
-[connection signal="input_event" from="RulesButton/Area2D" to="." method="_on_rules_button_input_event"]
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 82.0
+offset_top = 60.0
+offset_right = 191.0
+offset_bottom = 173.0
+scale = Vector2(1.2, 1.2)
+texture_normal = ExtResource("3_q42id")
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+offset_left = 1686.0
+offset_top = 60.0
+offset_right = 1801.0
+offset_bottom = 184.0
+scale = Vector2(1.2, 1.2)
+texture_normal = ExtResource("4_b1bmy")
+
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
 [connection signal="input_event" from="InstagramButton/Area2D" to="." method="_on_instagram_button_input_event"]
 [connection signal="input_event" from="SoundButton/Area2D" to="SoundButton" method="_on_sound_button_input_event"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="TextureButton2" to="." method="_on_texture_button_2_pressed"]
