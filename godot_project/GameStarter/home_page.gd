@@ -27,3 +27,6 @@ func _on_play_now_pressed() -> void:
 func _on_instagram_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("InstagramButtonClicked")
+
+func _on_texture_button_2_pressed() -> void:
+		get_tree().change_scene_to_file("res://GameStarter/RulesPage.tscn")
