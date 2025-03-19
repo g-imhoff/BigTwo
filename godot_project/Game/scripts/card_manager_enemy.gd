@@ -85,6 +85,9 @@ func remove_card_in_slot():
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
 			children_slots[cmpt_card_in_slot-1].card_value=null
 			children_slots[cmpt_card_in_slot-1].card_form=null
+			children_slots[cmpt_card_in_slot-1].combi=null
+			children_slots[cmpt_card_in_slot-1].combi_value=null
+			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
 			
 

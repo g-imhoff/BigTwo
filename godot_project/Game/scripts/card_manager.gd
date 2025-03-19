@@ -165,14 +165,16 @@ func check_cards_clicked():
 	var check=null
 	if card_clicked.size()==1:
 		check="1"
-		
+		children_slots[0].combi="1"
 
 	elif card_clicked.size()==2 and card_clicked[0].value ==  card_clicked[1].value:
 		check="2"
+		children_slots[0].combi="2"
 
 	elif card_clicked.size()==3 and card_clicked[0].value == card_clicked[1].value and card_clicked[1].value == card_clicked[2].value:
 		check="3"
-
+		children_slots[0].combi="3"
+		
 	elif card_clicked.size()==5:
 		card_clicked.sort_custom(func(a, b): return a.value < b.value)#trie les carte clique par leur valeur
 		var val=0
@@ -196,13 +198,17 @@ func check_cards_clicked():
 				suite+=1
 		if val == 3:#check Four of a Kind
 			check="four of a kind"
+			children_slots[0].combi="four of a kind"
 		elif suite==4 and signe ==4:#check pour Straight Flush
 			check ="straight" 
+			children_slots[0].combi="straight"
 			print("Straight Flush")
 		elif signe==4:#check Flush
 			check= "flush"
+			children_slots[0].combi="flush"
 		elif suite==4:#check pour straight
 			check ="straight"
+			children_slots[0].combi="straight"
 		elif val == 1 or val == 2:  # check pour full house
 			var tab_val = card_clicked.duplicate()
 			for i in range(tab_check_brelan.size()):
@@ -211,11 +217,13 @@ func check_cards_clicked():
 				brelan=tab_check_brelan.duplicate()
 				if tab_val[0].value == tab_val[1].value:
 					check = "full house"
+					children_slots[0].combi="full house"
 					print("full house")
 			
 			elif val == 1:
 				brelan=tab_val.duplicate()
 				if tab_val.size() == 3 and tab_val[0].value == tab_val[1].value:  # Assure que seulement 2 cartes restent
+					children_slots[0].combi="full house"
 					check = "full house"
 					print("full house")
 	return check
@@ -235,6 +243,9 @@ func remove_card_in_slot():
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
 			children_slots[cmpt_card_in_slot-1].card_value=null
 			children_slots[cmpt_card_in_slot-1].card_form=null
+			children_slots[cmpt_card_in_slot-1].combi=null
+			children_slots[cmpt_card_in_slot-1].combi_value=null
+			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
 
 func end_game():
@@ -300,6 +311,7 @@ func check_other_cards():
 		elif check_combi=="full house":
 			if brelan[0].value>children_slots_right[0].combi_value:
 				return true
+	children_slots[0].combi=null
 	return false
 	
 	
