@@ -13,8 +13,8 @@ var cmpt_card_in_slot=0
 var played=false
 var lst_card_in_slot=[]
 
-@onready var hand=$"../EnemyHandUp"
-@onready var Cardslots=$"../Cardslots2"
+@onready var hand=$"../EnemyHandRight"
+@onready var Cardslots=$"../Cardslots4"
 @onready var children_slots=Cardslots.get_children()
 
 
@@ -50,7 +50,7 @@ func on_card_played():
 			if card_to_put.size()>3:
 				card_to_put.erase(card_to_put[0])
 			print("combi de :",card_to_put.size()," cartes")
-			children_slots[0].combi=card_to_put.size()
+			children_slots[0].combi=str(card_to_put.size())
 		put_cards(card_to_put)
 		played = true
 		emit_signal("enemy")
@@ -67,7 +67,6 @@ func move_card_to_slot(card, slot):
 		slot.card_value=card.value
 		slot.card_form=card.form
 		lst_card_in_slot.append(card)
-		emit_signal("enemy")
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
 
@@ -78,7 +77,7 @@ func remove_card_in_slot():
 	if lst_card_in_slot.size() != 0:
 		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
-		
+		children_slots[0].combi=null
 		for card in cards_to_remove:
 			card.queue_free()  # Marque la carte pour suppression
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
@@ -96,10 +95,12 @@ func end_game():
 	get_tree().quit()
 
 
-func _on_card_manager_enemy_left_enemy() -> void:
+func _on_card_manager_enemy_enemy() -> void:
 	played=false
 	remove_card_in_slot()
 	on_card_played()
+	
+
 
 func check_for_simple_combi(card_to_put,lst_card):
 	for i in range (lst_card.size()):
@@ -181,11 +182,12 @@ func check_for_four_kind(card_to_put,lst_card):
 					return card_to_put
 	return null
 
+
 func put_cards(card_to_put):
 	var card_to_remove=card_to_put.duplicate()
 	for card in card_to_remove:
 		if card_to_remove.size() < 5:
-			move_card_to_slot(card,children_slots[cmpt_card_in_slot])
+			move_card_to_slot(card_to_put[0],children_slots[cmpt_card_in_slot])
 			card_to_put.erase(card)
 			cmpt_card_in_slot += 1
 		else:

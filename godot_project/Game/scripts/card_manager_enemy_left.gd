@@ -7,15 +7,17 @@ const COLLISION_MASK_SLOT=2
 
 var screen_size
 var is_hovering_on_card
-var num_card_up=0
+var num_card_played=0
 var card_clicked=[]
 var cmpt_card_in_slot=0
 var played=false
 var lst_card_in_slot=[]
 
-@onready var hand=$"../EnemyHandUp"
-@onready var Cardslots=$"../Cardslots2"
+@onready var hand=$"../EnemyHandLeft"
+@onready var Cardslots=$"../Cardslots3"
 @onready var children_slots=Cardslots.get_children()
+@onready var Cardslots_right=$"../Cardslots"
+@onready var children_slots_right=Cardslots_right.get_children()
 
 
 
@@ -26,31 +28,48 @@ func _ready() -> void:
 func on_card_played():
 	await get_tree().create_timer(2.0).timeout
 	if played==false:
+		print(children_slots_right[0].combi)
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
 		lst_card.sort_custom(func(a, b): return a.value < b.value)
-		if check_for_straight(lst_card)!=null:
+		if (check_for_straight(lst_card)!=null and children_slots_right[0].combi==null) or (check_for_straight(lst_card)!=null and children_slots_right[0].combi=="straight") :
 			print("straight")
 			children_slots[0].combi="straight"
 			card_to_put=check_for_straight(lst_card)
-		elif check_for_flush(lst_card)!=null:
+		elif (check_for_flush(lst_card)!=null and children_slots_right[0].combi==null) or (check_for_flush(lst_card)!=null and children_slots_right[0].combi=="flush") :
 			print("flush")
 			children_slots[0].combi="flush"
 			card_to_put=check_for_flush(lst_card)
-		elif check_for_four_kind(card_to_put,lst_card)!=null:
+		elif (check_for_four_kind(card_to_put,lst_card)!=null and children_slots_right[0].combi==null) or (check_for_four_kind(card_to_put,lst_card)!=null and children_slots_right[0].combi=="four of a kind") :
 			print("four of a kind")
 			children_slots[0].combi="four of a kind"
 			card_to_put=check_for_four_kind(card_to_put,lst_card)
-		elif check_for_fullhouse(card_to_put,lst_card)!=null:
+		elif (check_for_fullhouse(card_to_put,lst_card)!=null and children_slots_right[0].combi==null) or (check_for_fullhouse(card_to_put,lst_card)!=null and children_slots_right[0].combi=="full house") :
 			print("full house")
 			children_slots[0].combi="full house"
 			card_to_put=check_for_fullhouse(card_to_put,lst_card)
 		else:
-			card_to_put=check_for_simple_combi(card_to_put,lst_card)
-			if card_to_put.size()>3:
-				card_to_put.erase(card_to_put[0])
-			print("combi de :",card_to_put.size()," cartes")
-			children_slots[0].combi=card_to_put.size()
+			if children_slots_right[0].combi==null:
+				card_to_put=check_for_simple_combi(card_to_put,lst_card)
+				if card_to_put.size()>3:
+					card_to_put.erase(card_to_put[0])
+				print("combi de :",card_to_put.size()," cartes")
+				children_slots[0].combi=card_to_put.size()
+			else:
+				card_to_put=check_for_simple_combi(card_to_put,lst_card)
+				while(lst_card.size()!=0 and card_to_put.size()!=int(children_slots_right[0].combi)):
+					print("here")
+					print(lst_card.size())
+					print("here")
+					if card_to_put.size()>3:
+						card_to_put.erase(card_to_put[0])
+					for card in card_to_put:
+						lst_card.erase(card)
+					card_to_put=[]
+					card_to_put=check_for_simple_combi(card_to_put,lst_card)
+					for card in card_to_put:
+						print(card.value)
+
 		put_cards(card_to_put)
 		played = true
 		emit_signal("enemy")
@@ -71,7 +90,10 @@ func move_card_to_slot(card, slot):
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
 
-	
+func _on_card_manager_card_played() -> void:
+	played=false
+	remove_card_in_slot()
+	on_card_played()
 	
 
 func remove_card_in_slot():
@@ -95,12 +117,6 @@ func end_game():
 	print("tu a gagné")
 	get_tree().quit()
 
-
-func _on_card_manager_enemy_left_enemy() -> void:
-	played=false
-	remove_card_in_slot()
-	on_card_played()
-
 func check_for_simple_combi(card_to_put,lst_card):
 	for i in range (lst_card.size()):
 			var card1 = lst_card[i]
@@ -112,8 +128,9 @@ func check_for_simple_combi(card_to_put,lst_card):
 					tmp.append(card2)
 			if tmp.size()>card_to_put.size():
 				card_to_put=tmp
-	children_slots[0].combi_value=card_to_put[0].value
-	children_slots[0].combi_form=card_to_put[0].form
+	if card_to_put.size()>0:
+		children_slots[0].combi_value=card_to_put[0].value
+		children_slots[0].combi_form=card_to_put[0].form
 	return card_to_put
 
 func check_for_straight(lst_card):
@@ -180,6 +197,9 @@ func check_for_four_kind(card_to_put,lst_card):
 					card_to_put.append(card)
 					return card_to_put
 	return null
+
+func check_for_defined_size(card_to_put,lst_card,taille):
+	pass
 
 func put_cards(card_to_put):
 	var card_to_remove=card_to_put.duplicate()
