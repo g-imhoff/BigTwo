@@ -29,7 +29,12 @@ func _process(_delta):
 		set_process(false) # Stop processing.
 
 func _data_received_handler(data):
-	print("got data")
+	print(data["code"])
 
 func _server_handshake():
-	pass
+	var content = JSON.stringify({
+		"function": "connect",
+		"profile_name": Global.username
+	})
+	
+	socket.send_text(content)
