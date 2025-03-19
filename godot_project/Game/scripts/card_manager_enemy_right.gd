@@ -189,22 +189,22 @@ func put_cards(card_to_put):
 			cmpt_card_in_slot += 1
 		else:
 			if cmpt_card_in_slot == 0:
-				move_card_to_slot(card_to_put[0],children_slots[4])
+				move_card_to_slot(card,children_slots[4])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 1:
-				move_card_to_slot(card_to_put[0],children_slots[1])
+				move_card_to_slot(card,children_slots[1])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 2:
-				move_card_to_slot(card_to_put[0],children_slots[0])
+				move_card_to_slot(card,children_slots[0])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 3:
-				move_card_to_slot(card_to_put[0],children_slots[2])
+				move_card_to_slot(card,children_slots[2])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 4:
-				move_card_to_slot(card_to_put[0],children_slots[3])
+				move_card_to_slot(card,children_slots[3])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1

@@ -118,9 +118,31 @@ func _on_button_pressed() -> void:
 		print("combinaison incorrect")
 	else:
 		for card in card_clicked:
-			move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction
-			cmpt_card_in_slot += 1
-			num_card_up -= 1
+			if card_clicked.size() < 5:
+				move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction
+				cmpt_card_in_slot += 1
+				num_card_up -= 1
+			else :
+				if cmpt_card_in_slot == 0:
+					move_card_to_slot(card,children_slots[4])
+					cmpt_card_in_slot += 1
+					num_card_up -=1
+				elif cmpt_card_in_slot == 1:
+					move_card_to_slot(card,children_slots[1])
+					cmpt_card_in_slot += 1
+					num_card_up -=1
+				elif cmpt_card_in_slot == 2:
+					move_card_to_slot(card,children_slots[0])
+					cmpt_card_in_slot += 1
+					num_card_up -=1
+				elif cmpt_card_in_slot == 3:
+					move_card_to_slot(card,children_slots[2])
+					cmpt_card_in_slot += 1
+					num_card_up -=1
+				elif cmpt_card_in_slot == 4:
+					move_card_to_slot(card,children_slots[3])
+					cmpt_card_in_slot += 1
+					num_card_up -=1
 		played = true
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 		if hand.player_hand.size()==0:

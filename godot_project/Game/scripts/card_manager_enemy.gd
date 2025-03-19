@@ -182,27 +182,27 @@ func put_cards(card_to_put):
 	var card_to_remove=card_to_put.duplicate()
 	for card in card_to_remove:
 		if card_to_remove.size() < 5:
-			move_card_to_slot(card_to_put[0],children_slots[cmpt_card_in_slot])
+			move_card_to_slot(card,children_slots[cmpt_card_in_slot])
 			card_to_put.erase(card)
 			cmpt_card_in_slot += 1
 		else:
 			if cmpt_card_in_slot == 0:
-				move_card_to_slot(card_to_put[0],children_slots[4])
+				move_card_to_slot(card,children_slots[4])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 1:
-				move_card_to_slot(card_to_put[0],children_slots[1])
+				move_card_to_slot(card,children_slots[1])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 2:
-				move_card_to_slot(card_to_put[0],children_slots[0])
+				move_card_to_slot(card,children_slots[0])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 3:
-				move_card_to_slot(card_to_put[0],children_slots[2])
+				move_card_to_slot(card,children_slots[2])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
 			elif cmpt_card_in_slot == 4:
-				move_card_to_slot(card_to_put[0],children_slots[3])
+				move_card_to_slot(card,children_slots[3])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
