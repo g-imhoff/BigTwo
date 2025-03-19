@@ -31,11 +31,9 @@ func _on_create_account_pressed() -> void:
 
 func _on_login_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
-
-func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("leftclick"):
-		print("OAuthGoogleClicked")
 	
+func _on_google_login_pressed() -> void:
+	print("OAuthGoogleClicked")
 
 func _on_hide_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):

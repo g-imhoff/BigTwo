@@ -56,3 +56,4 @@ offset_bottom = 92.0
 texture_normal = ExtResource("4_ndtx7")
 
 [connection signal="pressed" from="Button" to="." method="_on_lets_play_pressed"]
+[connection signal="pressed" from="Backicon rules" to="." method="_on_backicon_rules_pressed"]
