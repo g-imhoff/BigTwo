@@ -32,4 +32,4 @@ func _data_received_handler(data):
 	print("got data")
 
 func _server_handshake():
-	
+	pass

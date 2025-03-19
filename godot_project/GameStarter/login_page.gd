@@ -33,8 +33,6 @@ func _on_login_pressed() -> void:
 	}})
 		
 	socket.send_text(content)
-	# This is to delete when we will add the login method
-	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 
 func _on_create_account_pressed() -> void: 
@@ -49,11 +47,12 @@ func _on_hide_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			password_line_edit.set_secret(true)
 
 func _ready() -> void:
-	print("hello")
-	var err = socket.connect_to_url(Global.websocket_url)
+	var clientCAS = load("res://cert.crt")
+	var err = socket.connect_to_url(Global.websocket_url, TLSOptions.client_unsafe(clientCAS))
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
+		
 func _process(_delta):
 	socket.poll()
 	var state = socket.get_ready_state()

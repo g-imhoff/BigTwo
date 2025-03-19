@@ -59,7 +59,7 @@ async def handler(websocket):
 
         result_message = {
             "code": result,
-            "message": login_account_error[result]
+            "message": login_account_error[result],
             "username": username 
         }
 
