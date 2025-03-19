@@ -28,7 +28,6 @@ login_account_error = [
     "This is the wrong password"
 ]
 
-
 async def handler(websocket):
   async for message in websocket:
     content = json.loads(message)
@@ -54,13 +53,14 @@ async def handler(websocket):
         password = content["data"]["password"]
 
         print("Trying a login from", profile_name_email, password)
-        result = login_account(profile_name_email, password)
+        result, username = login_account(profile_name_email, password)
         print(login_account_error[result],
               profile_name_email, password)
 
         result_message = {
             "code": result,
             "message": login_account_error[result]
+            "username": username 
         }
 
         await websocket.send(json.dumps(result_message))

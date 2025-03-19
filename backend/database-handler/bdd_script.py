@@ -59,14 +59,14 @@ def login_account(profile_name_email, password):
       bdd_username, bdd_email, bdd_password = result
 
       if bdd_password == password:
-        return 0  # connection worked
+        return 0, bdd_username  # connection worked
       else:
-        return 3  # wrong password
+        return 3, ""  # wrong password
     else:
-      return 1  # account not found
+      return 1, ""  # account not found
   except psycopg2.Error as e:
     print("Database error : ", e)
-    return 2  # Error psycopg2
+    return 2, ""  # Error psycopg2
 
 
 def creer_table():
