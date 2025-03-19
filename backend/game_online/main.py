@@ -75,15 +75,18 @@ placeholder_card_list = card_list.copy()
 
 def random_hand():
     global placeholder_card_list
+    result_list = []
     for i in range(13):
-        (value, form) = random.choice(placeholder_card_list)
-        placeholder_card_list.remove((value, form))
-        print(value, form)
+        t = random.choice(placeholder_card_list)
+        placeholder_card_list.remove(t)
+        result_list.append(t)
+    return result_list
 
 
 async def connect_handler(content, websocket):
     global nb_client
     global connected_client
+    global placeholder_card_list
     if nb_client < 4:
         connected_client[content["profile_name"]] = websocket
         nb_client += 1
@@ -107,6 +110,7 @@ async def connect_handler(content, websocket):
 
                 message = json.dumps(starting_game_message)
                 await connected_client[client].send(message)
+            placeholder_card_list = card_list.copy()
 
 
 async def handler(websocket):
