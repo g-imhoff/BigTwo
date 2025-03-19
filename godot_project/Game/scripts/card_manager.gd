@@ -283,7 +283,7 @@ func check_other_cards():
 			if lst_card[0].value >children_slots_right[0].combi_value:
 				return true
 			lst_card.sort_custom(func(a, b): return a.form > b.form)
-			if (lst_card[0].value==children_slots_right[0].combi_value and lst_card[0].form==children_slots_right[0].combi_form ):
+			if (lst_card[0].value==children_slots_right[0].combi_value and lst_card[0].form>children_slots_right[0].combi_form ):
 				return true
 		elif check_combi=="four of a kind":
 			var val_a_check=lst_card[0]

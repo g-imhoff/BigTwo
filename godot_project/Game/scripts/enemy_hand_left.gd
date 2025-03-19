@@ -42,13 +42,13 @@ func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
 	
 	if path.find("clubs")!=-1:
-		card_info[0]=3
-	elif path.find("diamonds")!=-1:
-		card_info[0]=4
-	elif path.find("hearts")!=-1:
 		card_info[0]=2
-	elif path.find("spades")!=-1:
+	elif path.find("diamonds")!=-1:
 		card_info[0]=1
+	elif path.find("hearts")!=-1:
+		card_info[0]=3
+	elif path.find("spades")!=-1:
+		card_info[0]=4
 	
 	var value_str=path.split("_")[2].split(".")[0]
 	
