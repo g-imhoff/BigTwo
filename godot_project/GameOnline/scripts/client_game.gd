@@ -33,14 +33,9 @@ func _process(_delta):
 		set_process(false) # Stop processing.
 
 func _data_received_handler(data):
-	match data["code"]:
-		0: 
-			#Handle waiting for team
-			pass
-		1: 
-			print("game starting")
-		_: 
-			get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+	match int(data["code"]):
+		0:
+			print("connected")
 
 func _server_handshake():
 	var content = JSON.stringify({

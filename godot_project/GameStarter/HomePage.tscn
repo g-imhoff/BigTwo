@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://7mcc8557hsh8"]
 
-[ext_resource type="Script" path="res://GameStarter/home_page.gd" id="1_ed3xu"]
+[ext_resource type="Script" uid="uid://iwanh675f7xo" path="res://GameStarter/home_page.gd" id="1_ed3xu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_gu8ip"]
 [ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_q42id"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://i2eyyfstmhsu" path="res://assets/ui/instagram social media logo.png" id="6_80co7"]
 [ext_resource type="Texture2D" uid="uid://bn6mcmfehnnxb" path="res://assets/ui/sound on.png" id="7_7stl6"]
 [ext_resource type="Texture2D" uid="uid://bvkdl6114misq" path="res://assets/ui/sound off.png" id="8_j8861"]
-[ext_resource type="Script" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
+[ext_resource type="Script" uid="uid://cjr6qnn5ase5e" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
 
 [sub_resource type="GDScript" id="GDScript_yeoxk"]
 script/source = "extends Area2D
