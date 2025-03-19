@@ -74,39 +74,13 @@ func _ready() -> void:
 		
 		var new_texture=load(selected_card)
 		 # Extraire la valeur et la couleur de la carte
-		var card_info =get_card_info_from_texture(selected_card)
+		var card_info = Global.get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
 		new_card.form = card_info[0]
 		sprite.texture=new_texture
 		$"../card_manager".add_child(new_card)
 		new_card.name="Card"
 		add_card_to_hand(new_card)
-
-func get_card_info_from_texture(path:String)->Array:
-	var card_info=[null, null]
-	
-	if path.find("clubs")!=-1:
-		card_info[0]="clubs"
-	elif path.find("diamonds")!=-1:
-		card_info[0]="diamonds"
-	elif path.find("hearts")!=-1:
-		card_info[0]="hearts"
-	elif path.find("spades")!=-1:
-		card_info[0]="spades"
-	
-	var value_str=path.split("_")[2].split(".")[0]
-	
-	if value_str=="A":
-		card_info[1]=14
-	elif value_str=="K":
-		card_info[1]=13
-	elif value_str=="Q":
-		card_info[1]=12
-	elif value_str=="J":
-		card_info[1]=11
-	elif value_str.is_valid_float():
-		card_info[1] = int(value_str)
-	return card_info
 
 func add_card_to_hand(card):
 	if card not in player_hand:
