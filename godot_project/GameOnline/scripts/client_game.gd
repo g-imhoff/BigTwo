@@ -36,6 +36,8 @@ func _data_received_handler(data):
 	match int(data["code"]):
 		0:
 			print("connected")
+		1: 
+			print("game started")
 
 func _server_handshake():
 	var content = JSON.stringify({
