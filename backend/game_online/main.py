@@ -48,7 +48,7 @@ async def handler(websocket):
             message = json.dumps(starting_game_message)
 
             for client in connected_client:
-              client.send(message)
+              await connected_client[client].send(message)
 
 
 async def main():
