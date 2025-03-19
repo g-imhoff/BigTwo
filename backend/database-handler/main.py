@@ -1,8 +1,10 @@
 import asyncio
 import json
-from websockets.asyncio.server import serve
-from bdd_script import create_account, login_account
 import ssl
+
+from websockets.asyncio.server import serve
+
+from bdd_script import create_account, login_account
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2

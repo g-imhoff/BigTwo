@@ -5,6 +5,9 @@ extends Node2D
 @onready var rememberme_checkbox = $RememberMe
 var socket = WebSocketPeer.new()
 
+var HasH = load("res://hashage.gd")
+	
+
 func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("OAuthGoogleClicked")
@@ -21,11 +24,14 @@ func _on_login_pressed() -> void:
 	print("Remember me: ", rememberme)
 	print("LoginAccountClicked")
 	
+	var password_hash = HasH.hash_password(password) #Hashing 
+	
+	
 	var content = JSON.stringify({
 	"function": "login",
 	"data": {
 		"profile_name_email": profile_name_email,
-		"password": password
+		"password": password_hash
 	}})
 		
 	socket.send_text(content)
@@ -33,7 +39,7 @@ func _on_login_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 
-func _on_create_account_pressed() -> void:
+func _on_create_account_pressed() -> void: 
 	get_tree().change_scene_to_file("res://GameStarter/CreatePage.tscn")
 
 
