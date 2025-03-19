@@ -174,6 +174,7 @@ offset_right = 670.0
 offset_bottom = 817.0
 
 [node name="Label2" type="Label" parent="RememberMe"]
+layout_mode = 0
 offset_left = 26.0
 offset_top = 2.0
 offset_right = 141.0

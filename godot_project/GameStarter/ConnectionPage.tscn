@@ -8,10 +8,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlr3"]
 bg_color = Color(0.156863, 0.654902, 0.270588, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -20,10 +20,10 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6cay"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -47,7 +47,8 @@ offset_left = 254.0
 offset_top = 601.0
 offset_right = 825.0
 offset_bottom = 712.0
-theme_override_font_sizes/font_size = 25
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_orlr3")
 text = "Login with an existing account"
 
@@ -56,7 +57,8 @@ offset_left = 1103.0
 offset_top = 601.0
 offset_right = 1674.0
 offset_bottom = 712.0
-theme_override_font_sizes/font_size = 25
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_y6cay")
 text = "Create a new account"
 
@@ -85,3 +87,4 @@ texture_normal = ExtResource("5_f65x8")
 
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
 [connection signal="pressed" from="RegisterButton" to="." method="_on_register_button_pressed"]
+[connection signal="pressed" from="backicon connection page" to="." method="_on_backicon_connection_page_pressed"]

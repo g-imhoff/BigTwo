@@ -67,5 +67,6 @@ text = "MULTI PLAYER"
 position = Vector2(-3.5, 5)
 shape = SubResource("RectangleShape2D_52gvq")
 
+[connection signal="pressed" from="Background/backicon chooseMode page" to="." method="_on_backicon_choose_mode_page_pressed"]
 [connection signal="input_event" from="SinglePlayer/Area2D" to="." method="_on_single_player_input_event"]
 [connection signal="input_event" from="MultiPlayer/Area2D" to="." method="_on_multi_player_input_event"]
