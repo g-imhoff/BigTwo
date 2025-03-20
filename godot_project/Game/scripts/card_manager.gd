@@ -34,23 +34,7 @@ func _input(event):
 		if event.pressed:
 			var card=raycast_check_for_card()
 			if card and played == false:
-				var current_pos=card.position
-				card.scale=card_base_scale
-				if current_pos.y==hand.HAND_Y_POSITION:
-					if num_card_up ==5:
-						print("to much card up")
-					else:
-						num_card_up +=1
-						current_pos.y=current_pos.y-50
-						card.position=current_pos
-						card_clicked.append(card)
-				else:
-					num_card_up-=1
-					current_pos.y=current_pos.y+50
-					card.position=current_pos
-					card_clicked.erase(card)
-				
-				
+				move_card_up_or_down(card)
 
 
 func connect_card_signals(card):
@@ -112,10 +96,55 @@ func get_card_with_hightest_z_index(card):
 
 
 func _on_button_pressed() -> void:
+	var three_of_diamonds = null
+	for card in hand.player_hand:
+		if card.value == 3 and card.form ==1:
+			three_of_diamonds = card
+			break
 	if card_clicked == []:
 		print("pas de carte clicked")
 	elif check_other_cards()==false:
 		print("combinaison incorrect")
+	elif three_of_diamonds:
+		card_clicked.append(three_of_diamonds)
+		#var cards = card_clicked.duplicate()
+		#for card in cards:
+			#if card and not played:  # Si une carte est cliquée et que le jeu n'a pas encore été joué
+				#move_card_up_or_down(card)  # Déclenche le déplacement avec une seule ligne
+		if check_other_cards()==false:
+			print("combinaison incorrect")
+		else:
+			for card in card_clicked:
+				if card_clicked.size() < 5:
+					move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction
+					cmpt_card_in_slot += 1
+					num_card_up -= 1
+				else :
+					if cmpt_card_in_slot == 0:
+						move_card_to_slot(card,children_slots[4])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 1:
+						move_card_to_slot(card,children_slots[1])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 2:
+						move_card_to_slot(card,children_slots[0])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 3:
+						move_card_to_slot(card,children_slots[2])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 4:
+						move_card_to_slot(card,children_slots[3])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+			played = true
+			hand.update_hand_position()  # Met à jour l'affichage de la main
+			if hand.player_hand.size()==0:
+				end_game()
+			emit_signal("card_played")
 	else:
 		for card in card_clicked:
 			if card_clicked.size() < 5:
@@ -313,5 +342,20 @@ func check_other_cards():
 				return true
 	children_slots[0].combi=null
 	return false
-	
-	
+
+func move_card_up_or_down (card):
+	var current_pos=card.position
+	card.scale=card_base_scale
+	if current_pos.y==hand.HAND_Y_POSITION:
+		if num_card_up ==5:
+			print("to much card up")
+		else:
+			num_card_up +=1
+			current_pos.y=current_pos.y-50
+			card.position=current_pos
+			card_clicked.append(card)
+	else:
+		num_card_up-=1
+		current_pos.y=current_pos.y+50
+		card.position=current_pos
+		card_clicked.erase(card)

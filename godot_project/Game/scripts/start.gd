@@ -13,13 +13,13 @@ extends Node
 
 
 func _ready() -> void:
-	var card_found = check_for_card(3, 4, hand.player_hand, player_hand_script)
+	var card_found = check_for_card(3, 1, hand.player_hand, player_hand_script)
 	if not card_found:
-		card_found = check_for_card(3, 4, hand_left.player_hand, enemy_hand_left_script)
+		card_found = check_for_card(3, 1, hand_left.player_hand, enemy_hand_left_script)
 	if not card_found:
-		card_found = check_for_card(3, 4, hand_up.player_hand, enemy_hand_up_script)
+		card_found = check_for_card(3, 1, hand_up.player_hand, enemy_hand_up_script)
 	if not card_found:
-		check_for_card(3, 4, hand_right.player_hand, enemy_hand_right_script)
+		check_for_card(3, 1, hand_right.player_hand, enemy_hand_right_script)
 
 # Fonction générique pour vérifier la présence de la carte et appeler la méthode sur le script
 func check_for_card(value: int, form: int, hand: Array, script: Node) -> bool:

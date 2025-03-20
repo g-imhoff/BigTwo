@@ -28,8 +28,21 @@ func on_card_played():
 	if played==false:
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
+		var three_of_diamonds = null
 		lst_card.sort_custom(func(a, b): return a.value < b.value)
-		if check_for_straight(lst_card)!=null:
+		for card in lst_card:
+			if card.value == 3 and card.form == 1:
+				three_of_diamonds = card
+				break
+
+		if three_of_diamonds:
+			card_to_put.append(three_of_diamonds)
+			var combi_dict = check_for_best_combi_with_card(lst_card, three_of_diamonds)
+			if combi_dict:
+				var combi_name = combi_dict.keys()[0]
+				children_slots[0].combi = combi_name
+				card_to_put = combi_dict[combi_name]
+		elif check_for_straight(lst_card)!=null:
 			print("straight")
 			children_slots[0].combi="straight"
 			card_to_put=check_for_straight(lst_card)
@@ -85,7 +98,6 @@ func remove_card_in_slot():
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
 			children_slots[cmpt_card_in_slot-1].card_value=null
 			children_slots[cmpt_card_in_slot-1].card_form=null
-			children_slots[cmpt_card_in_slot-1].combi=null
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
@@ -209,3 +221,25 @@ func put_cards(card_to_put):
 				move_card_to_slot(card,children_slots[3])
 				card_to_put.erase(card)
 				cmpt_card_in_slot += 1
+
+func check_for_best_combi_with_card(lst_card, required_card):
+	var possible_combi = {
+		"straight" : check_for_straight(lst_card),
+		"flush":check_for_flush(lst_card),
+		"four of a kind":check_for_four_kind([required_card],lst_card),
+		"full house":check_for_fullhouse([required_card],lst_card)
+		}
+	#retourne la meilleur combinaison possible
+	for name in possible_combi:
+		if possible_combi[name] and required_card in possible_combi[name]:
+			return {"name":possible_combi[name]}
+	var simple_combi = check_for_simple_combi([required_card],lst_card)
+	for card in simple_combi:
+		print("carte joué :", card.value)
+	if required_card in simple_combi:
+		if simple_combi.size() == 3:
+			return {"3":simple_combi}
+		elif simple_combi.size() == 2:
+			return {"2":simple_combi}
+	else:
+		return {"1":[required_card]}
