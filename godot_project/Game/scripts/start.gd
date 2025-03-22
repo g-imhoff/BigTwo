@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @onready var hand = get_node_or_null("../PlayerHand")
 @onready var hand_left = get_node_or_null("../EnemyHandLeft")
@@ -13,6 +13,7 @@ extends Node
 
 
 func _ready() -> void:
+	print(type_string(typeof(null)))
 	var card_found = check_for_card(3, 1, hand.player_hand, player_hand_script)
 	if not card_found:
 		card_found = check_for_card(3, 1, hand_left.player_hand, enemy_hand_left_script)

@@ -296,7 +296,7 @@ func _on_button_2_pressed() -> void:
 
 func _on_card_manager_enemy_right_enemy() -> void:
 	await get_tree().create_timer(2.0).timeout
-	print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
+	#print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
 	played=false
 	for card in card_clicked.duplicate():
 		card.queue_free()
