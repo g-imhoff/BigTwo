@@ -15,6 +15,7 @@ func check_for_simple_combi(card_to_put,lst_card, children_slots):
 	if card_to_put!= null and card_to_put.size() > 0:
 		children_slots[0].combi_value=card_to_put[0].value
 		children_slots[0].combi_form=card_to_put[0].form
+		children_slots[0].combi = str(card_to_put.size())
 	else :
 		card_to_put = null
 	return card_to_put
@@ -167,6 +168,8 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot):
 	if played==false:
 		print("test :",type_string(typeof(children_slots_right[0].combi)))
+		if hand.player_hand.size() == 0:
+			end_game()
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
 		var three_of_diamonds = null
@@ -211,12 +214,12 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 				if card_to_put.size()>3:
 					card_to_put.erase(card_to_put[0])
 				#print("combi de :",card_to_put.size()," cartes")
-				children_slots[0].combi=card_to_put.size()
+				children_slots[0].combi=str(card_to_put.size())
 				can_play = true
 			else:
 				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots)
 				var check_size = children_slots_right[0].combi
-				if typeof(check_size) == TYPE_INT:
+				if check_size.length() == 1:
 					while(lst_card.size()!=0 and card_to_put.size()!=int(check_size)):
 					#print("here")
 					#print(lst_card.size())
