@@ -168,8 +168,6 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot):
 	if played==false:
 		print("test :",type_string(typeof(children_slots_right[0].combi)))
-		if hand.player_hand.size() == null:
-			end_game()
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
 		var three_of_diamonds = null
@@ -237,6 +235,8 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 		if can_play:
 			put_cards(card_to_put, children_slots, cmpt_card_in_slot, hand, lst_card_in_slot)
 			hand.update_hand_position()  # Met à jour l'affichage de la main
+			if hand.player_hand.size() == 0:
+				end_game()
 		else :
 			children_slots[0].combi = children_slots_right[0].combi
 			children_slots[0].combi_value = children_slots_right[0].combi_value

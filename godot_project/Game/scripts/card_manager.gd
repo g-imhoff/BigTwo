@@ -290,6 +290,9 @@ func _on_button_2_pressed() -> void:
 			card.position.y+=50
 			num_card_up-=1
 			card_clicked.erase(card)
+		children_slots[0].combi = children_slots_right[0].combi
+		children_slots[0].combi_value = children_slots_right[0].combi_value
+		children_slots[0].combi_form = children_slots_right[0].combi_form
 		emit_signal("card_played")
 
 
