@@ -126,7 +126,7 @@ func check_for_best_combi_with_card(lst_card, required_card, children_slots, han
 	#retourne la meilleur combinaison possible
 	for name in possible_combi:
 		if possible_combi[name] and required_card in possible_combi[name]:
-			return {"name":possible_combi[name]}
+			return {name:possible_combi[name]}
 	var simple_combi = check_for_simple_combi([required_card],lst_card, children_slots)
 	if required_card in simple_combi:
 		if simple_combi.size() == 3:
@@ -168,7 +168,7 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot):
 	if played==false:
 		print("test :",type_string(typeof(children_slots_right[0].combi)))
-		if hand.player_hand.size() == 0:
+		if hand.player_hand.size() == null:
 			end_game()
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
