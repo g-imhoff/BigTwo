@@ -12,15 +12,8 @@ var card_scale=Vector2(0.5,0.5)
 @onready var lst_img=Global.card_images
 
 
-#var lst_img=[
-	#"res://assets/cards/card_clubs_04.png",
-	#"res://assets/cards/card_diamonds_02.png",
-	#"res://assets/cards/card_hearts_02.png",
-	#"res://assets/cards/card_clubs_A.png",
-	#"res://assets/cards/card_diamonds_03.png",
-	#"res://assets/cards/card_clubs_03.png",
-	#"res://assets/cards/card_clubs_08.png",
-	#]
+
+
 
 
 # Called when the node enters the scene tree for the first time.

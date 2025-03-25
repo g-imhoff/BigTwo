@@ -106,13 +106,18 @@ func _on_button_pressed() -> void:
 	elif check_other_cards()==false:
 		print("combinaison incorrect")
 	elif three_of_diamonds:
-		card_clicked.append(three_of_diamonds)
+		var check=false
+		for card in card_clicked:
+			if card == three_of_diamonds:
+				check=true
 		#var cards = card_clicked.duplicate()
 		#for card in cards:
 			#if card and not played:  # Si une carte est cliquée et que le jeu n'a pas encore été joué
 				#move_card_up_or_down(card)  # Déclenche le déplacement avec une seule ligne
 		if check_other_cards()==false:
 			print("combinaison incorrect")
+		elif check!=true:
+			print("doit jouer 3 diamonds")
 		else:
 			for card in card_clicked:
 				if card_clicked.size() < 5:
@@ -218,7 +223,7 @@ func check_cards_clicked():
 			if card_clicked[i].value== card_clicked[i+1].value:
 				tmp+=1
 				tmp_tab.append(card_clicked[i+1])
-			else:
+			if card_clicked[i].value!= card_clicked[i+1].value or i+1==card_clicked.size()-1:
 				val=tmp
 				tab_check_brelan=tmp_tab.duplicate()
 				tmp=0
@@ -230,8 +235,8 @@ func check_cards_clicked():
 			check="four of a kind"
 			children_slots[0].combi="four of a kind"
 		elif suite==4 and signe ==4:#check pour Straight Flush
-			check ="straight" 
-			children_slots[0].combi="straight"
+			check ="straight flush" 
+			children_slots[0].combi="straight flush"
 			print("Straight Flush")
 		elif signe==4:#check Flush
 			check= "flush"
@@ -320,12 +325,13 @@ func check_other_cards():
 	var lst_card=card_clicked.duplicate()
 	lst_card.sort_custom(func(a, b): return a.value < b.value)
 	var check_combi=check_cards_clicked()
+
 	if children_slots_right[0].combi==null and check_combi!=null:
 		return true
-	
+	print(children_slots_right[0].combi, " and combi ",check_combi)
 	var combi_enemy
 	combi_enemy=children_slots_right[0].combi
-	if typeof(check_combi) == typeof(combi_enemy) and check_combi == combi_enemy and check_combi!=null:
+	if typeof(check_combi) == typeof(combi_enemy) and check_combi!=null:
 		if (check_combi == "1" or check_combi == "2" or check_combi =="3"):
 			if lst_card[0].value >children_slots_right[0].combi_value:
 				return true
@@ -336,16 +342,20 @@ func check_other_cards():
 			var val_a_check=lst_card[0]
 			if val_a_check!=lst_card[1]:
 				val_a_check=lst_card[1]
-			if val_a_check.value > children_slots_right[0].combi_value:
+			if (val_a_check.value > children_slots_right[0].combi_value) or (children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
+				return true
+		elif check_combi=="straight flush":
+			if (lst_card[4].value >children_slots_right[0].combi_value and lst_card[4].form >children_slots_right[0].combi_form) or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ) or (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
+				print ("straigth flush")
 				return true
 		elif check_combi=="straight":
 			if lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ):
 				return true
 		elif check_combi=="flush":
-			if lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ):
+			if (lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form )) or (children_slots_right[0].combi=="straight"):
 				return true
 		elif check_combi=="full house":
-			if brelan[0].value>children_slots_right[0].combi_value:
+			if brelan[0].value>children_slots_right[0].combi_value or (children_slots_right[0].combi=="straight" or children_slots_right[0].combi=="flush"):
 				return true
 	children_slots[0].combi=null
 	return false
