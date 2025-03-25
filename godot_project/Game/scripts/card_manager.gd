@@ -173,6 +173,7 @@ func _on_button_pressed() -> void:
 					cmpt_card_in_slot += 1
 					num_card_up -=1
 		played = true
+		children_slots[0].passing = 0
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 		if hand.player_hand.size()==0:
 			end_game()
@@ -293,6 +294,7 @@ func _on_button_2_pressed() -> void:
 		children_slots[0].combi = children_slots_right[0].combi
 		children_slots[0].combi_value = children_slots_right[0].combi_value
 		children_slots[0].combi_form = children_slots_right[0].combi_form
+		children_slots[0].passing = 1 + children_slots_right[0].passing
 		emit_signal("card_played")
 
 
@@ -305,6 +307,8 @@ func _on_card_manager_enemy_right_enemy() -> void:
 		card.queue_free()
 		card_clicked.erase(card)
 	remove_card_in_slot() 
+	if children_slots_right[0].passing == 3:
+		children_slots_right[0].combi = null
 
 
 #test pour faire commencé celui qui a le 3 de diamonds

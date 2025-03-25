@@ -168,6 +168,7 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot):
 	if played==false:
 		print("test :",type_string(typeof(children_slots_right[0].combi)))
+		print("pass :",children_slots_right[0].passing)
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
 		var three_of_diamonds = null
@@ -177,7 +178,8 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			if card.value == 3 and card.form == 1:
 				three_of_diamonds = card
 				break
-
+		if children_slots_right[0].passing == 3:
+			children_slots_right[0].combi = null
 		if three_of_diamonds:
 			card_to_put.append(three_of_diamonds)
 			var combi_dict = check_for_best_combi_with_card(lst_card, three_of_diamonds, children_slots, hand)
@@ -234,6 +236,7 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 						can_play = true
 		if can_play:
 			put_cards(card_to_put, children_slots, cmpt_card_in_slot, hand, lst_card_in_slot)
+			children_slots[0].passing = 0
 			hand.update_hand_position()  # Met à jour l'affichage de la main
 			if hand.player_hand.size() == 0:
 				end_game()
@@ -241,6 +244,7 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			children_slots[0].combi = children_slots_right[0].combi
 			children_slots[0].combi_value = children_slots_right[0].combi_value
 			children_slots[0].combi_form = children_slots_right[0].combi_form
+			children_slots[0].passing = 1 + children_slots_right[0].passing
 		played = true
 
 
