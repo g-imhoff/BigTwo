@@ -1,5 +1,8 @@
 extends Node2D
 
+func _ready():
+	UISounds.install_sounds(self)
+
 
 func _on_lets_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")

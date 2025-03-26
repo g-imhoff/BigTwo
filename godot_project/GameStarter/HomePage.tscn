@@ -1,6 +1,5 @@
 [gd_scene load_steps=15 format=3 uid="uid://7mcc8557hsh8"]
 
-[ext_resource type="Script" path="res://GameStarter/home_page.gd" id="1_ed3xu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_gu8ip"]
 [ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_q42id"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
@@ -9,6 +8,50 @@
 [ext_resource type="Texture2D" uid="uid://bn6mcmfehnnxb" path="res://assets/ui/sound on.png" id="7_7stl6"]
 [ext_resource type="Texture2D" uid="uid://bvkdl6114misq" path="res://assets/ui/sound off.png" id="8_j8861"]
 [ext_resource type="Script" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
+
+[sub_resource type="GDScript" id="GDScript_ppnjs"]
+script/source = "extends Node2D
+
+func _ready():
+	UISounds.install_sounds(self)
+
+
+
+
+# Function called when an input event (e.g., mouse click) is detected on the user button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event (e.g., mouse click).
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_user_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed(\"leftclick\"):
+		print(\"UserButtonClicked\")
+
+# Function called when an input event is detected on the rules button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event.
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed(\"leftclick\"):
+		get_tree().change_scene_to_file(\"res://GameStarter/RulesPage.tscn\")
+
+# Function called when the \"Play Now\" button is pressed.
+func _on_play_now_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
+
+# Function called when an input event is detected on the Instagram button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event.
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_instagram_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed(\"leftclick\"):
+		print(\"InstagramButtonClicked\")
+
+func _on_texture_button_2_pressed() -> void:
+		get_tree().change_scene_to_file(\"res://GameStarter/RulesPage.tscn\") 
+
+func _on_h_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"BGMusic\"), value)
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upulg"]
 bg_color = Color(0.0190904, 0.014443, 0, 1)
@@ -47,7 +90,7 @@ size = Vector2(106, 60.5)
 radius = 56.0089
 
 [node name="Homepage" type="Node2D"]
-script = ExtResource("1_ed3xu")
+script = SubResource("GDScript_ppnjs")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
@@ -74,7 +117,7 @@ texture = ExtResource("6_80co7")
 [node name="Area2D" type="Area2D" parent="InstagramButton"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InstagramButton/Area2D"]
-position = Vector2(7.62939e-06, -1.90735e-06)
+position = Vector2(78.125, -18.75)
 shape = SubResource("CapsuleShape2D_0ofba")
 
 [node name="SoundButton" type="AnimatedSprite2D" parent="."]

@@ -52,6 +52,8 @@ func _ready() -> void:
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
+	UISounds.install_sounds(self)
+
 
 func _process(_delta):
 	socket.poll()

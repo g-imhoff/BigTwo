@@ -1,5 +1,8 @@
 extends Node2D
 
+func _ready():
+	UISounds.install_sounds(self)
+
 func _on_single_player_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("SinglePlayerClicked")
