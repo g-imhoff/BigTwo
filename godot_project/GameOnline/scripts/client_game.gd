@@ -35,6 +35,7 @@ func _process(_delta):
 		set_process(false) # Stop processing.
 
 func _data_received_handler(data):
+	print(data)
 	match int(data["code"]):
 		0:
 			# Connected to the server game
