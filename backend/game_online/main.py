@@ -123,6 +123,7 @@ async def handler(websocket):
 
     async for message in websocket:
         content = json.loads(message)
+        print(content)
         match content["function"]:
             case "connect":
                 await connect_handler(content, websocket)
