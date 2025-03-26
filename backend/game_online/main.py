@@ -16,58 +16,58 @@ connected_client = {}
 nb_client = 0
 
 card_list = [
-    ("02", "clubs"),
-    ("03", "clubs"),
-    ("04", "clubs"),
-    ("05", "clubs"),
-    ("06", "clubs"),
-    ("07", "clubs"),
-    ("08", "clubs"),
-    ("09", "clubs"),
-    ("10", "clubs"),
-    ("11", "clubs"),
-    ("12", "clubs"),
-    ("13", "clubs"),
-    ("14", "clubs"),
-    ("02", "diamonds"),
-    ("03", "diamonds"),
-    ("04", "diamonds"),
-    ("05", "diamonds"),
-    ("06", "diamonds"),
-    ("07", "diamonds"),
-    ("08", "diamonds"),
-    ("09", "diamonds"),
-    ("10", "diamonds"),
-    ("11", "diamonds"),
-    ("12", "diamonds"),
-    ("13", "diamonds"),
-    ("14", "diamonds"),
-    ("02", "hearts"),
-    ("03", "hearts"),
-    ("04", "hearts"),
-    ("05", "hearts"),
-    ("06", "hearts"),
-    ("07", "hearts"),
-    ("08", "hearts"),
-    ("09", "hearts"),
-    ("10", "hearts"),
-    ("11", "hearts"),
-    ("12", "hearts"),
-    ("13", "hearts"),
-    ("14", "hearts"),
-    ("02", "spades"),
-    ("03", "spades"),
-    ("04", "spades"),
-    ("05", "spades"),
-    ("06", "spades"),
-    ("07", "spades"),
-    ("08", "spades"),
-    ("09", "spades"),
-    ("10", "spades"),
-    ("11", "spades"),
-    ("12", "spades"),
-    ("13", "spades"),
-    ("14", "spades"),
+        "res://assets/cards/card_clubs_02.png",
+        "res://assets/cards/card_clubs_03.png",
+        "res://assets/cards/card_clubs_04.png",
+        "res://assets/cards/card_clubs_05.png",
+        "res://assets/cards/card_clubs_06.png",
+        "res://assets/cards/card_clubs_07.png",
+        "res://assets/cards/card_clubs_08.png",
+        "res://assets/cards/card_clubs_09.png",
+        "res://assets/cards/card_clubs_10.png",
+        "res://assets/cards/card_clubs_A.png",
+        "res://assets/cards/card_clubs_J.png",
+        "res://assets/cards/card_clubs_K.png",
+        "res://assets/cards/card_clubs_Q.png",
+        "res://assets/cards/card_diamonds_02.png",
+        "res://assets/cards/card_diamonds_03.png",
+        "res://assets/cards/card_diamonds_04.png",
+        "res://assets/cards/card_diamonds_05.png",
+        "res://assets/cards/card_diamonds_06.png",
+        "res://assets/cards/card_diamonds_07.png",
+        "res://assets/cards/card_diamonds_08.png",
+        "res://assets/cards/card_diamonds_09.png",
+        "res://assets/cards/card_diamonds_10.png",
+        "res://assets/cards/card_diamonds_A.png",
+        "res://assets/cards/card_diamonds_J.png",
+        "res://assets/cards/card_diamonds_K.png",
+        "res://assets/cards/card_diamonds_Q.png",
+        "res://assets/cards/card_hearts_02.png",
+        "res://assets/cards/card_hearts_03.png",
+        "res://assets/cards/card_hearts_04.png",
+        "res://assets/cards/card_hearts_05.png",
+        "res://assets/cards/card_hearts_06.png",
+        "res://assets/cards/card_hearts_07.png",
+        "res://assets/cards/card_hearts_08.png",
+        "res://assets/cards/card_hearts_09.png",
+        "res://assets/cards/card_hearts_10.png",
+        "res://assets/cards/card_hearts_A.png",
+        "res://assets/cards/card_hearts_J.png",
+        "res://assets/cards/card_hearts_K.png",
+        "res://assets/cards/card_hearts_Q.png",
+        "res://assets/cards/card_spades_02.png",
+        "res://assets/cards/card_spades_03.png",
+        "res://assets/cards/card_spades_04.png",
+        "res://assets/cards/card_spades_05.png",
+        "res://assets/cards/card_spades_06.png",
+        "res://assets/cards/card_spades_07.png",
+        "res://assets/cards/card_spades_08.png",
+        "res://assets/cards/card_spades_09.png",
+        "res://assets/cards/card_spades_10.png",
+        "res://assets/cards/card_spades_A.png",
+        "res://assets/cards/card_spades_J.png",
+        "res://assets/cards/card_spades_K.png",
+        "res://assets/cards/card_spades_Q.png",
 ]
 
 placeholder_card_list = card_list.copy()
@@ -79,7 +79,7 @@ def random_hand():
     bool_first = False
     for i in range(13):
         t = random.choice(placeholder_card_list)
-        if (t[0] == "3" && t[1] == "diamonds"): 
+        if (t == "res://assets/cards/card_diamonds_03.png"): 
             bool_first = True
         placeholder_card_list.remove(t)
         result_list.append(t)
@@ -108,7 +108,7 @@ async def connect_handler(content, websocket):
                 starting_game_message = {
                     "code": 1,
                     "message": "game starting",
-                    "card_hand": enumerate(list_hand),
+                    "card_hand": list_hand,
                     "first_player": 1 if bool_first else 0
                 }
 
@@ -133,5 +133,4 @@ async def main():
         await server.serve_forever()
 
 if __name__ == "__main__":
-    random_hand()
-    # asyncio.run(main())
+    asyncio.run(main())
