@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c76j2ku4hiea6"]
+[gd_scene load_steps=3 format=3 uid="uid://dd71hgmmh6wut"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_nu3s2"]
 [ext_resource type="Script" path="res://GameStarter/rules_multiplayer.gd" id="2_f1gw3"]

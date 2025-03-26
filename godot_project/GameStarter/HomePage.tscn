@@ -74,7 +74,7 @@ texture = ExtResource("6_80co7")
 [node name="Area2D" type="Area2D" parent="InstagramButton"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InstagramButton/Area2D"]
-position = Vector2(78.125, -18.75)
+position = Vector2(7.62939e-06, -1.90735e-06)
 shape = SubResource("CapsuleShape2D_0ofba")
 
 [node name="SoundButton" type="AnimatedSprite2D" parent="."]
