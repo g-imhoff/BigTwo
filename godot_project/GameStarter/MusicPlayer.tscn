@@ -9,4 +9,5 @@ script = ExtResource("1_5l1hj")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_yce3a")
 autoplay = true
+bus = &"BGMusic"
 parameters/looping = true
