@@ -1,7 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://bn3olflapan7j"]
 
-[ext_resource type="Script" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
-[ext_resource type="Script" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
+[ext_resource type="Script" uid="uid://btq28qsetldab" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
+[ext_resource type="Script" uid="uid://bqvsk36nmwyjs" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
+[ext_resource type="Script" uid="uid://bx8wklebik2er" path="res://GameOnline/scripts/card_manager.gd" id="2_dxq6t"]
+[ext_resource type="Script" uid="uid://cr5yayl7wyxib" path="res://GameOnline/scripts/enemy_hand_up.gd" id="5_2b27f"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="7_5otmk"]
 
 [node name="ConnectServer" type="Node2D"]
@@ -9,10 +11,18 @@ script = ExtResource("1_abxww")
 
 [node name="card_manager" type="Node2D" parent="."]
 texture_filter = 1
+script = ExtResource("2_dxq6t")
 
 [node name="PlayerHand" type="Node2D" parent="."]
 script = ExtResource("2_c7fq1")
 
 [node name="Background" parent="." instance=ExtResource("7_5otmk")]
+
+[node name="EnemyHandUp" type="Node2D" parent="."]
+script = ExtResource("5_2b27f")
+
+[node name="EnemyHandRight" type="Node2D" parent="."]
+
+[node name="EnemyHandLeft" type="Node2D" parent="."]
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

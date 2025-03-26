@@ -1,35 +1,37 @@
 extends Node2D
 
-const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 var center_screen_x
-var player_hand=[]
-const HAND_Y_POSITION=870
-const CARD_WIDTH=80
+const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
+const HAND_COUNT=13
 var card_scale=Vector2(0.5,0.5)
+var player_hand=[]
+const CARD_WIDTH=80 #80
+const HAND_Y_POSITION=50
 
-func _card_hand_init(list_card, bool_first_player):
-	print("a")
+func _on_started() -> void:
 	center_screen_x=get_viewport().size.x/2
 	var card_scene=preload(CARD_SCENE_PATH)
-	for card in list_card: 
+	for i in range(HAND_COUNT):
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
 		
-		var new_texture=load(card)
-		var card_info = Global.get_card_info_from_texture(card)
-		new_card.value = card_info[1]
-		new_card.form = card_info[0]
-		new_card.name="Card"
+		var new_texture=load("res://assets/cards/card_back.png") #montre juste le dos "res://assets/cards/card_back.png"
+		 # Extraire la valeur et la couleur de la carte
+		new_card.value = ""
+		new_card.form = ""
+		new_card.scale=card_scale
 		sprite.texture=new_texture
 		$"../card_manager".add_child(new_card)
+		new_card.name="Card"
 		add_card_to_hand(new_card)
+
 
 func add_card_to_hand(card):
 	if card not in player_hand:
 		player_hand.append(card)
 		update_hand_position()
 	else:
-		animate_card_to_position(card, card.hand_position)
+		animate_card_to_position(card,card.hand_position)
 
 func update_hand_position():
 	for i in range (player_hand.size()):
@@ -37,8 +39,7 @@ func update_hand_position():
 		var card=player_hand[i]
 		card.hand_position=new_position
 		animate_card_to_position(card,new_position)
-
-
+		
 func calculate_card_position(index):
 	var total_with=(player_hand.size()-1)*CARD_WIDTH 
 	var x_offset=center_screen_x + index * CARD_WIDTH - total_with/2
@@ -47,7 +48,3 @@ func calculate_card_position(index):
 func animate_card_to_position(card,new_position):
 	var tween = get_tree().create_tween()
 	tween.tween_property(card,"position",new_position,0.1 )
-
-func remove_card_from_hand(card):
-	if card in player_hand:
-		player_hand.erase(card)
