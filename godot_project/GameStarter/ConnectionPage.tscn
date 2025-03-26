@@ -79,10 +79,10 @@ position = Vector2(1041, 656)
 texture = ExtResource("4_n7tl5")
 
 [node name="backicon connection page" type="TextureButton" parent="."]
-offset_left = 51.0
-offset_top = 48.0
-offset_right = 91.0
-offset_bottom = 88.0
+offset_left = 93.0
+offset_top = 66.0
+offset_right = 167.0
+offset_bottom = 140.0
 texture_normal = ExtResource("5_f65x8")
 
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]

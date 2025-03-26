@@ -32,10 +32,10 @@ position = Vector2(958, 534)
 texture = ExtResource("1_wx55c")
 
 [node name="BackButton login" type="TextureButton" parent="Background"]
-offset_left = -932.0
-offset_top = -523.0
-offset_right = -858.0
-offset_bottom = -449.0
+offset_left = -877.0
+offset_top = -489.0
+offset_right = -803.0
+offset_bottom = -415.0
 texture_normal = ExtResource("8_i56jj")
 
 [node name="Logo" type="Sprite2D" parent="."]

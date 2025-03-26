@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fq8y23pl3rwf"]
+[gd_scene load_steps=11 format=3 uid="uid://fq8y23pl3rwf"]
 
 [ext_resource type="Script" path="res://GameStarter/create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
@@ -24,18 +24,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eoaj"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [node name="CreatePage" type="Node2D"]
 script = ExtResource("1_5iowa")
 
@@ -44,10 +32,10 @@ position = Vector2(960, 540)
 texture = ExtResource("2_ssd5f")
 
 [node name="backicon connection page" type="TextureButton" parent="Background"]
-offset_left = -924.0
-offset_top = -510.0
-offset_right = -850.0
-offset_bottom = -436.0
+offset_left = -843.0
+offset_top = -473.0
+offset_right = -769.0
+offset_bottom = -399.0
 texture_normal = ExtResource("3_jap0u")
 
 [node name="Logo" type="Sprite2D" parent="."]
@@ -188,24 +176,15 @@ position = Vector2(214.5, 22)
 scale = Vector2(0.942177, 1)
 texture = ExtResource("5_subxe")
 
-[node name="LoginButton" type="Button" parent="."]
-offset_left = 627.0
-offset_top = 856.0
-offset_right = 1292.0
-offset_bottom = 913.0
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_6eoaj")
-text = "Login"
-
 [node name="GoogleLogin" type="TextureButton" parent="."]
-offset_left = 625.0
-offset_top = 939.0
-offset_right = 1294.0
-offset_bottom = 990.0
+offset_left = 634.0
+offset_top = 883.0
+offset_right = 1303.0
+offset_bottom = 934.0
 texture_normal = ExtResource("6_uxr2r")
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="Background/backicon connection page" to="." method="_on_backicon_connection_page_pressed"]
 [connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="." method="_on_hide_button_input_event"]
 [connection signal="pressed" from="CreateAccount" to="." method="_on_create_account_pressed"]
-[connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
 [connection signal="pressed" from="GoogleLogin" to="." method="_on_google_login_pressed"]

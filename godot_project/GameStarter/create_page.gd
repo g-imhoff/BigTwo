@@ -74,3 +74,7 @@ func _data_received_handler(data):
 		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 	else :
 		Notification.show_side(data["message"])
+
+
+func _on_backicon_connection_page_pressed() -> void:
+	get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")
