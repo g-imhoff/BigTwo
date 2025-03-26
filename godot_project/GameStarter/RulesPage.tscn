@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg2v1sunut0tk"]
+[gd_scene load_steps=6 format=3 uid="uid://bg2v1sunut0tk"]
 
 [ext_resource type="Script" path="res://GameStarter/rules_page.gd" id="1_0hlb0"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_b84sh"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="2_56ugk"]
+[ext_resource type="FontFile" uid="uid://5jxgu61a6xcp" path="res://assets/fonts/NotoColorEmoji-Regular.ttf" id="3_rlbo6"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_ndtx7"]
 
 [node name="RulesPage" type="Node2D"]
@@ -17,6 +18,7 @@ offset_left = 45.0
 offset_top = 372.0
 offset_right = 1905.0
 offset_bottom = 932.0
+theme_override_fonts/normal_font = ExtResource("3_rlbo6")
 theme_override_font_sizes/normal_font_size = 33
 text = "🎴 Big Two 
 
