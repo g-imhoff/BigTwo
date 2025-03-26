@@ -1,7 +1,7 @@
 extends Node2D
 
 
-func check_for_simple_combi(card_to_put,lst_card, children_slots):
+func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right):
 	for i in range (lst_card.size()):
 			var card1 = lst_card[i]
 			var tmp=[]
@@ -15,7 +15,8 @@ func check_for_simple_combi(card_to_put,lst_card, children_slots):
 	if card_to_put!= null and card_to_put.size() > 0:
 		children_slots[0].combi_value=card_to_put[0].value
 		children_slots[0].combi_form=card_to_put[0].form
-		children_slots[0].combi = str(card_to_put.size())
+		if children_slots_right[0].combi != null and children_slots_right[0].combi.length() == 1:
+			children_slots[0].combi = str(card_to_put.size())
 	else :
 		card_to_put = null
 	return card_to_put
@@ -54,8 +55,8 @@ func check_for_flush(lst_card, children_slots):
 			return tmp
 	return null
 
-func check_for_fullhouse(card_to_put,lst_card, children_slots, hand):
-	card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots)
+func check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right):
+	card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots,children_slots_right)
 	if hand.player_hand.size()>4 and card_to_put.size()==3:
 		for i in range (lst_card.size()):
 			if lst_card[i] not in card_to_put:
@@ -74,8 +75,8 @@ func check_for_fullhouse(card_to_put,lst_card, children_slots, hand):
 						return card_to_put
 	return null
 
-func check_for_four_kind(card_to_put,lst_card, children_slots, hand):
-	card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots)
+func check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right):
+	card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
 	if card_to_put.size()==4 and hand.player_hand.size()>4:#check four of a kind
 		children_slots[0].combi_value=card_to_put[0].value
 		children_slots[0].combi_form=card_to_put[0].form
@@ -128,21 +129,23 @@ func put_cards(card_to_put, children_slots, cmpt_card_in_slot, hand, lst_card_in
 				cmpt_card_in_slot += 1
 				
 	
-func check_for_best_combi_with_card(lst_card, required_card, children_slots, hand):
+func check_for_best_combi_with_card(lst_card, required_card, children_slots, hand, children_slots_right):
 	var possible_combi = {
 		"straight" : check_for_straight(lst_card, children_slots),
 		"flush":check_for_flush(lst_card, children_slots),
-		"four of a kind":check_for_four_kind([required_card],lst_card, children_slots, hand),
-		"full house":check_for_fullhouse([required_card],lst_card, children_slots, hand),
+		"four of a kind":check_for_four_kind([required_card],lst_card, children_slots, hand, children_slots_right),
+		"full house":check_for_fullhouse([required_card],lst_card, children_slots, hand, children_slots_right),
 		"straight flush": check_for_straightflush(lst_card, children_slots)
 		}
 	#retourne la meilleur combinaison possible
 	for name in possible_combi:
 		if possible_combi[name] and required_card in possible_combi[name]:
+			print("tier1")
 			return {name:possible_combi[name]}
-	var simple_combi = check_for_simple_combi([required_card],lst_card, children_slots)
+	var simple_combi = check_for_simple_combi([required_card],lst_card, children_slots, children_slots_right)
 	if required_card in simple_combi:
 		if simple_combi.size() == 3:
+			print("tier2")
 			return {"3":simple_combi}
 		elif simple_combi.size() == 2:
 			return {"2":simple_combi}
@@ -195,7 +198,7 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			children_slots_right[0].combi = null
 		if three_of_diamonds:
 			card_to_put.append(three_of_diamonds)
-			var combi_dict = check_for_best_combi_with_card(lst_card, three_of_diamonds, children_slots, hand)
+			var combi_dict = check_for_best_combi_with_card(lst_card, three_of_diamonds, children_slots, hand, children_slots_right)
 			if combi_dict:
 				var combi_name = combi_dict.keys()[0]
 				children_slots[0].combi = combi_name
@@ -216,26 +219,26 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			children_slots[0].combi="flush"
 			card_to_put=check_for_flush(lst_card, children_slots)
 			can_play = true
-		elif (check_for_four_kind(card_to_put,lst_card, children_slots, hand)!=null and children_slots_right[0].combi==null) or (check_for_four_kind(card_to_put,lst_card, children_slots, hand)!=null and children_slots_right[0].combi=="four of a kind") :
+		elif (check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi=="four of a kind") :
 			#print("four of a kind")
 			children_slots[0].combi="four of a kind"
-			card_to_put=check_for_four_kind(card_to_put,lst_card, children_slots, hand)
+			card_to_put=check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)
 			can_play = true
-		elif (check_for_fullhouse(card_to_put,lst_card, children_slots, hand)!=null and children_slots_right[0].combi==null) or (check_for_fullhouse(card_to_put,lst_card, children_slots, hand)!=null and children_slots_right[0].combi=="full house") :
+		elif (check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi=="full house") :
 			#print("full house")
 			children_slots[0].combi="full house"
-			card_to_put=check_for_fullhouse(card_to_put,lst_card, children_slots, hand)
+			card_to_put=check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)
 			can_play = true
 		else:
 			if children_slots_right[0].combi==null:
-				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots)
+				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
 				if card_to_put.size()>3:
 					card_to_put.erase(card_to_put[0])
 				#print("combi de :",card_to_put.size()," cartes")
 				children_slots[0].combi=str(card_to_put.size())
 				can_play = true
 			else:
-				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots)
+				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
 				var check_size = children_slots_right[0].combi
 				if check_size.length() == 1:
 					while(lst_card.size()!=0 and card_to_put.size()!=int(check_size)):
@@ -247,7 +250,7 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 						for card in card_to_put:
 							lst_card.erase(card)
 						card_to_put=[]
-						card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots)
+						card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
 					#for card in card_to_put:
 						#print(card.value)
 					if lst_card.size()!=0:

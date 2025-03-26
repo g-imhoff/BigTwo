@@ -1,6 +1,6 @@
 extends Node2D
 
-const HAND_COUNT=6
+const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 const CARD_WIDTH=80
 const HAND_Y_POSITION=870
@@ -9,17 +9,8 @@ var player_hand=[]
 var center_screen_x
 var card_scale=Vector2(0.5,0.5)
 
-#@onready var lst_img=Global.card_images
+@onready var lst_img=Global.card_images
 
-
-var lst_img=[
-	"res://assets/cards/card_diamonds_05.png",
-	"res://assets/cards/card_hearts_05.png",
-	"res://assets/cards/card_spades_05.png",
-	"res://assets/cards/card_diamonds_10.png",
-	"res://assets/cards/card_clubs_05.png",
-	"res://assets/cards/card_clubs_06.png",
-	]
 
 
 

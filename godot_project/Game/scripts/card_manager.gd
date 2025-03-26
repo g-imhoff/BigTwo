@@ -217,15 +217,20 @@ func check_cards_clicked():
 		var suite=0
 		var tab_check_brelan=[]
 		var tmp=0
-		tab_check_brelan.append(card_clicked[0])
 		var tmp_tab=tab_check_brelan.duplicate()
+		tmp_tab.append(card_clicked[0])
 		for i in range(card_clicked.size()-1):
 			if card_clicked[i].value== card_clicked[i+1].value:
 				tmp+=1
 				tmp_tab.append(card_clicked[i+1])
-			if card_clicked[i].value!= card_clicked[i+1].value or i+1==card_clicked.size()-1:
+			elif card_clicked[i].value!= card_clicked[i+1].value or i+1==card_clicked.size()-1:
 				val=tmp
-				tab_check_brelan=tmp_tab.duplicate()
+				for card in tmp_tab:
+					print("card tab:", card.value)
+				if tab_check_brelan.size()<2:
+					tab_check_brelan=tmp_tab.duplicate()
+				for card in tab_check_brelan:
+					print("card :", card.value)
 				tmp=0
 			if card_clicked[i].form==card_clicked[i+1].form:
 				signe+=1
@@ -333,7 +338,7 @@ func check_other_cards():
 	combi_enemy=children_slots_right[0].combi
 	if typeof(check_combi) == typeof(combi_enemy) and check_combi!=null:
 		if (check_combi == "1" or check_combi == "2" or check_combi =="3"):
-			if lst_card[0].value >children_slots_right[0].combi_value:
+			if lst_card[0].value >children_slots_right[0].combi_value or (lst_card[0].value == children_slots_right[0].combi_value and lst_card[0].form > children_slots_right[0].combi_form):
 				return true
 			lst_card.sort_custom(func(a, b): return a.form > b.form)
 			if (lst_card[0].value==children_slots_right[0].combi_value and lst_card[0].form>children_slots_right[0].combi_form ):
