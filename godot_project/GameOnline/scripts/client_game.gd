@@ -2,8 +2,7 @@ extends Node2D
 
 var socket = WebSocketPeer.new()
 
-const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
-var center_screen_x
+@onready var hand = $PlayerHand
 
 func _on_tree_exited() -> void:
 	socket.close()
@@ -41,7 +40,7 @@ func _data_received_handler(data):
 			# Connected to the server game
 			pass
 		1: 
-			_card_hand_init(data["card_hand"], data["first_player"])
+			hand._card_hand_init(data["card_hand"], data["first_player"])
 
 func _server_handshake():
 	var content = JSON.stringify({
@@ -50,18 +49,3 @@ func _server_handshake():
 	})
 	
 	socket.send_text(content)
-
-func _card_hand_init(list_card, bool_first_player):
-	center_screen_x=get_viewport().size.x/2
-	var card_scene=preload(CARD_SCENE_PATH)
-	for card in list_card: 
-		var new_card=card_scene.instantiate()
-		var sprite=new_card.get_node("Sprite")
-		
-		var new_texture=load(card)
-		var card_info = Global.get_card_info_from_texture(card)
-		new_card.value = card_info[1]
-		new_card.form = card_info[0]
-		new_card.name="Card"
-		sprite.texture=new_texture
-		$"../card_manager".add_child(new_card)
