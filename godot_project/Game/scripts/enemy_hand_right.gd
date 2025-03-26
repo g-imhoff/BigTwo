@@ -13,6 +13,9 @@ var card_scale=Vector2(0.5,0.5)
 
 
 
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_y=get_viewport().size.y/2

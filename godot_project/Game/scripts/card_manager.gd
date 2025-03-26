@@ -34,23 +34,7 @@ func _input(event):
 		if event.pressed:
 			var card=raycast_check_for_card()
 			if card and played == false:
-				var current_pos=card.position
-				card.scale=card_base_scale
-				if current_pos.y==hand.HAND_Y_POSITION:
-					if num_card_up ==5:
-						print("to much card up")
-					else:
-						num_card_up +=1
-						current_pos.y=current_pos.y-50
-						card.position=current_pos
-						card_clicked.append(card)
-				else:
-					num_card_up-=1
-					current_pos.y=current_pos.y+50
-					card.position=current_pos
-					card_clicked.erase(card)
-				
-				
+				move_card_up_or_down(card)
 
 
 func connect_card_signals(card):
@@ -112,10 +96,60 @@ func get_card_with_hightest_z_index(card):
 
 
 func _on_button_pressed() -> void:
+	var three_of_diamonds = null
+	for card in hand.player_hand:
+		if card.value == 3 and card.form ==1:
+			three_of_diamonds = card
+			break
 	if card_clicked == []:
 		print("pas de carte clicked")
 	elif check_other_cards()==false:
 		print("combinaison incorrect")
+	elif three_of_diamonds:
+		var check=false
+		for card in card_clicked:
+			if card == three_of_diamonds:
+				check=true
+		#var cards = card_clicked.duplicate()
+		#for card in cards:
+			#if card and not played:  # Si une carte est cliquée et que le jeu n'a pas encore été joué
+				#move_card_up_or_down(card)  # Déclenche le déplacement avec une seule ligne
+		if check_other_cards()==false:
+			print("combinaison incorrect")
+		elif check!=true:
+			print("doit jouer 3 diamonds")
+		else:
+			for card in card_clicked:
+				if card_clicked.size() < 5:
+					move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction
+					cmpt_card_in_slot += 1
+					num_card_up -= 1
+				else :
+					if cmpt_card_in_slot == 0:
+						move_card_to_slot(card,children_slots[4])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 1:
+						move_card_to_slot(card,children_slots[1])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 2:
+						move_card_to_slot(card,children_slots[0])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 3:
+						move_card_to_slot(card,children_slots[2])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+					elif cmpt_card_in_slot == 4:
+						move_card_to_slot(card,children_slots[3])
+						cmpt_card_in_slot += 1
+						num_card_up -=1
+			played = true
+			hand.update_hand_position()  # Met à jour l'affichage de la main
+			if hand.player_hand.size()==0:
+				end_game()
+			emit_signal("card_played")
 	else:
 		for card in card_clicked:
 			if card_clicked.size() < 5:
@@ -144,6 +178,7 @@ func _on_button_pressed() -> void:
 					cmpt_card_in_slot += 1
 					num_card_up -=1
 		played = true
+		children_slots[0].passing = 0
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 		if hand.player_hand.size()==0:
 			end_game()
@@ -188,7 +223,7 @@ func check_cards_clicked():
 			if card_clicked[i].value== card_clicked[i+1].value:
 				tmp+=1
 				tmp_tab.append(card_clicked[i+1])
-			else:
+			if card_clicked[i].value!= card_clicked[i+1].value or i+1==card_clicked.size()-1:
 				val=tmp
 				tab_check_brelan=tmp_tab.duplicate()
 				tmp=0
@@ -200,8 +235,8 @@ func check_cards_clicked():
 			check="four of a kind"
 			children_slots[0].combi="four of a kind"
 		elif suite==4 and signe ==4:#check pour Straight Flush
-			check ="straight" 
-			children_slots[0].combi="straight"
+			check ="straight flush" 
+			children_slots[0].combi="straight flush"
 			print("Straight Flush")
 		elif signe==4:#check Flush
 			check= "flush"
@@ -261,18 +296,24 @@ func _on_button_2_pressed() -> void:
 			card.position.y+=50
 			num_card_up-=1
 			card_clicked.erase(card)
+		children_slots[0].combi = children_slots_right[0].combi
+		children_slots[0].combi_value = children_slots_right[0].combi_value
+		children_slots[0].combi_form = children_slots_right[0].combi_form
+		children_slots[0].passing = 1 + children_slots_right[0].passing
 		emit_signal("card_played")
 
 
 
 func _on_card_manager_enemy_right_enemy() -> void:
 	await get_tree().create_timer(2.0).timeout
-	print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
+	#print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
 	played=false
 	for card in card_clicked.duplicate():
 		card.queue_free()
 		card_clicked.erase(card)
 	remove_card_in_slot() 
+	if children_slots_right[0].passing == 3:
+		children_slots_right[0].combi = null
 
 
 #test pour faire commencé celui qui a le 3 de diamonds
@@ -284,12 +325,13 @@ func check_other_cards():
 	var lst_card=card_clicked.duplicate()
 	lst_card.sort_custom(func(a, b): return a.value < b.value)
 	var check_combi=check_cards_clicked()
+
 	if children_slots_right[0].combi==null and check_combi!=null:
 		return true
-	
+	print(children_slots_right[0].combi, " and combi ",check_combi)
 	var combi_enemy
 	combi_enemy=children_slots_right[0].combi
-	if typeof(check_combi) == typeof(combi_enemy) and check_combi == combi_enemy and check_combi!=null:
+	if typeof(check_combi) == typeof(combi_enemy) and check_combi!=null:
 		if (check_combi == "1" or check_combi == "2" or check_combi =="3"):
 			if lst_card[0].value >children_slots_right[0].combi_value:
 				return true
@@ -300,18 +342,37 @@ func check_other_cards():
 			var val_a_check=lst_card[0]
 			if val_a_check!=lst_card[1]:
 				val_a_check=lst_card[1]
-			if val_a_check.value > children_slots_right[0].combi_value:
+			if (val_a_check.value > children_slots_right[0].combi_value) or (children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
+				return true
+		elif check_combi=="straight flush":
+			if (lst_card[4].value >children_slots_right[0].combi_value and lst_card[4].form >children_slots_right[0].combi_form) or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ) or (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
+				print ("straigth flush")
 				return true
 		elif check_combi=="straight":
 			if lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ):
 				return true
 		elif check_combi=="flush":
-			if lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ):
+			if (lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form )) or (children_slots_right[0].combi=="straight"):
 				return true
 		elif check_combi=="full house":
-			if brelan[0].value>children_slots_right[0].combi_value:
+			if brelan[0].value>children_slots_right[0].combi_value or (children_slots_right[0].combi=="straight" or children_slots_right[0].combi=="flush"):
 				return true
 	children_slots[0].combi=null
 	return false
-	
-	
+
+func move_card_up_or_down (card):
+	var current_pos=card.position
+	card.scale=card_base_scale
+	if current_pos.y==hand.HAND_Y_POSITION:
+		if num_card_up ==5:
+			print("to much card up")
+		else:
+			num_card_up +=1
+			current_pos.y=current_pos.y-50
+			card.position=current_pos
+			card_clicked.append(card)
+	else:
+		num_card_up-=1
+		current_pos.y=current_pos.y+50
+		card.position=current_pos
+		card_clicked.erase(card)

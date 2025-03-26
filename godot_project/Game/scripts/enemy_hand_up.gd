@@ -12,6 +12,7 @@ var card_scale=Vector2(0.5,0.5)
 @onready var lst_img=Global.card_images
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x=get_viewport().size.x/2

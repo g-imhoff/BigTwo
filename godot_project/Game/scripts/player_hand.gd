@@ -1,6 +1,6 @@
 extends Node2D
 
-const HAND_COUNT=9
+const HAND_COUNT=6
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 const CARD_WIDTH=80
 const HAND_Y_POSITION=870
@@ -13,16 +13,15 @@ var card_scale=Vector2(0.5,0.5)
 
 
 var lst_img=[
-	"res://assets/cards/card_spades_03.png",
-	"res://assets/cards/card_clubs_05.png",
-	"res://assets/cards/card_clubs_10.png",
-	"res://assets/cards/card_clubs_07.png",
+	"res://assets/cards/card_diamonds_05.png",
+	"res://assets/cards/card_hearts_05.png",
+	"res://assets/cards/card_spades_05.png",
 	"res://assets/cards/card_diamonds_10.png",
-	"res://assets/cards/card_spades_10.png",
-	"res://assets/cards/card_diamonds_07.png",
-	"res://assets/cards/card_clubs_08.png",
-	"res://assets/cards/card_clubs_02.png",
+	"res://assets/cards/card_clubs_05.png",
+	"res://assets/cards/card_clubs_06.png",
 	]
+
+
 
 
 # Called when the node enters the scene tree for the first time.

@@ -6,3 +6,4 @@ var card_form=null
 var combi=null
 var combi_value=null
 var combi_form=null
+var passing = 0
