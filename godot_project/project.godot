@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 Global="*res://global.gd"
 Notification="*res://sprite/notification.tscn"
+MusicPlayer="*res://GameStarter/MusicPlayer.tscn"
 
 [display]
 
