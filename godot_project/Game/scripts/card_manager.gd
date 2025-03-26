@@ -201,6 +201,8 @@ func check_cards_clicked():
 	if card_clicked.size()==1:
 		check="1"
 		children_slots[0].combi="1"
+		children_slots[0].combi_value = card_clicked[0].value
+		children_slots[0].combi_form = card_clicked[0].form
 
 	elif card_clicked.size()==2 and card_clicked[0].value ==  card_clicked[1].value:
 		check="2"
