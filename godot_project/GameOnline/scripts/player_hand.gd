@@ -6,9 +6,14 @@ var player_hand=[]
 const HAND_Y_POSITION=870
 const CARD_WIDTH=80
 var card_scale=Vector2(0.5,0.5)
+var first_player
+
+@onready var enemyUp = $"../EnemyHandUp"
+@onready var enemyRight = $"../EnemyHandRight"
+@onready var enemyLeft = $"../EnemyHandLeft"
+@onready var manager = $"../card_manager"
 
 func _card_hand_init(list_card, bool_first_player):
-	print("a")
 	center_screen_x=get_viewport().size.x/2
 	var card_scene=preload(CARD_SCENE_PATH)
 	for card in list_card: 
@@ -19,10 +24,20 @@ func _card_hand_init(list_card, bool_first_player):
 		var card_info = Global.get_card_info_from_texture(card)
 		new_card.value = card_info[1]
 		new_card.form = card_info[0]
+		new_card.file = card
 		new_card.name="Card"
+		new_card.scale=card_scale
 		sprite.texture=new_texture
 		$"../card_manager".add_child(new_card)
 		add_card_to_hand(new_card)
+	enemyUp.on_started()
+	enemyRight.on_started()
+	enemyLeft.on_started()
+	if bool_first_player == 1:
+		first_player = true
+		manager.played = false
+	else : 
+		first_player = false
 
 func add_card_to_hand(card):
 	if card not in player_hand:

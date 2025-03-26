@@ -3,10 +3,39 @@ extends Node2D
 var is_hovering_on_card
 var card_highlight_scale=Vector2(0.55,0.55)
 var card_base_scale=Vector2(0.5,0.5)
+var played=true
+var num_card_up=0
+var card_clicked=[]
+var first_play=true
 
 const COLLISION_MASK_CARD=1
 
 @onready var hand=$"../PlayerHand"
+@onready var connect = $".."
+
+func _input(event):
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var card=raycast_check_for_card()
+			if card and played == false:
+				move_card_up_or_down(card)
+
+func move_card_up_or_down (card):
+	var current_pos=card.position
+	card.scale=card_base_scale
+	if current_pos.y==hand.HAND_Y_POSITION:
+		if num_card_up ==5:
+			print("to much card up")
+		else:
+			num_card_up +=1
+			current_pos.y=current_pos.y-50
+			card.position=current_pos
+			card_clicked.append(card)
+	else:
+		num_card_up-=1
+		current_pos.y=current_pos.y+50
+		card.position=current_pos
+		card_clicked.erase(card)
 
 func connect_card_signals(card):
 	card.connect("hovered",on_hovered_over_card)
@@ -60,3 +89,31 @@ func get_card_with_hightest_z_index(card):
 		
 	# On renvoie la carte avec le plus grand z_index, celle qui est visuellement au-dessus des autres
 	return hightest_z_card
+
+
+func _on_play_pressed() -> void:
+	if first_play && hand.first_player: 
+		var valid = false
+		for card in hand.player_hand:
+			if card.value == 3 and card.form == 1:
+				valid = true
+				break
+		if valid == false: 
+			Notification.show_side("You need to play the three of diamond")
+			return 
+			
+	if card_clicked == []:
+		print("pas de carte clicked")
+	else:
+		var card_played = []
+		
+		for card in card_clicked:
+			card_played.append(card.file)
+		
+		var content = JSON.stringify({
+			"function": "play",
+			"card": card_played
+		})
+		
+		connect.socket.send_text(content)
+	 

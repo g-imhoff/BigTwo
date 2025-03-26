@@ -21,9 +21,6 @@ var lst_img=[
 	"res://assets/cards/card_clubs_06.png",
 	]
 
-
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x=get_viewport().size.x/2

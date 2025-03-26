@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn3olflapan7j"]
+[gd_scene load_steps=8 format=3 uid="uid://bn3olflapan7j"]
 
-[ext_resource type="Script" uid="uid://btq28qsetldab" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
-[ext_resource type="Script" uid="uid://bqvsk36nmwyjs" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
-[ext_resource type="Script" uid="uid://bx8wklebik2er" path="res://GameOnline/scripts/card_manager.gd" id="2_dxq6t"]
-[ext_resource type="Script" uid="uid://cr5yayl7wyxib" path="res://GameOnline/scripts/enemy_hand_up.gd" id="5_2b27f"]
+[ext_resource type="Script" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
+[ext_resource type="Script" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
+[ext_resource type="Script" path="res://GameOnline/scripts/card_manager.gd" id="2_dxq6t"]
+[ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_up.gd" id="5_2b27f"]
+[ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_right.gd" id="6_nswuf"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="7_5otmk"]
+[ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_left.gd" id="7_f6iy4"]
 
 [node name="ConnectServer" type="Node2D"]
 script = ExtResource("1_abxww")
@@ -22,7 +24,25 @@ script = ExtResource("2_c7fq1")
 script = ExtResource("5_2b27f")
 
 [node name="EnemyHandRight" type="Node2D" parent="."]
+script = ExtResource("6_nswuf")
 
 [node name="EnemyHandLeft" type="Node2D" parent="."]
+script = ExtResource("7_f6iy4")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 606.0
+offset_top = 1027.0
+offset_right = 764.0
+offset_bottom = 1075.0
+text = "PLAY"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 1081.0
+offset_top = 1027.0
+offset_right = 1239.0
+offset_bottom = 1075.0
+text = "PASS
+"
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="pressed" from="Button" to="card_manager" method="_on_play_pressed"]

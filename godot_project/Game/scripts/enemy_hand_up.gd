@@ -11,6 +11,8 @@ var card_scale=Vector2(0.5,0.5)
 
 @onready var lst_img=Global.card_images
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x=get_viewport().size.x/2
@@ -34,15 +36,7 @@ func _ready() -> void:
 
 func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
-	func calculate_card_position(index):
-	var total_with=(player_hand.size()-1)*CARD_WIDTH 
-	var x_offset=center_screen_x + index * CARD_WIDTH - total_with/2
-	return x_offset
 	
-	
-func animate_card_to_position(card,new_position):
-	var tween = get_tree().create_tween()
-	tween.tween_property(card,"position",new_position,0.1 )
 	if path.find("clubs")!=-1:
 		card_info[0]=2
 	elif path.find("diamonds")!=-1:
