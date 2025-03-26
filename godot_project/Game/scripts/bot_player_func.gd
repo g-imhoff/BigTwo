@@ -13,6 +13,7 @@ func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots
 			if tmp.size()>card_to_put.size():
 				card_to_put=tmp
 	if card_to_put!= null and card_to_put.size() > 0:
+		print("check combi")
 		children_slots[0].combi_value=card_to_put[0].value
 		children_slots[0].combi_form=card_to_put[0].form
 		if children_slots_right[0].combi != null and children_slots_right[0].combi.length() == 1:
@@ -204,7 +205,7 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 				children_slots[0].combi = combi_name
 				card_to_put = combi_dict[combi_name]
 				can_play = true
-		elif (check_for_straightflush(lst_card, children_slots)!=null and children_slots_right[0].combi==null) or (check_for_straightflush(lst_card, children_slots)!=null and children_slots_right[0].combi=="straight flush" and ((lst_card[4].value >children_slots_right[0].combi_value and lst_card[4].form >children_slots_right[0].combi_form) or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ))):
+		elif (check_for_straightflush(lst_card, children_slots)!=null and children_slots_right[0].combi==null):
 				children_slots[0].combi="straight flush"
 				print(children_slots[0].combi,"val",children_slots[0].combi_value,"signe",children_slots[0].combi_form)
 				card_to_put=check_for_straightflush(lst_card, children_slots)
@@ -241,18 +242,18 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
 				var check_size = children_slots_right[0].combi
 				if check_size.length() == 1:
-					while(lst_card.size()!=0 and card_to_put.size()!=int(check_size)):
-					#print("here")
-					#print(lst_card.size())
-					#print("here")
+					while(lst_card.size()!=0):
 						if card_to_put.size()>3:
 							card_to_put.erase(card_to_put[0])
+						if card_to_put.size()==int(check_size) :
+							print("put:",card_to_put[0])
+							print("children:",children_slots_right[0].combi_value)
+							if card_to_put[0].value>children_slots_right[0].combi_value:
+								break
 						for card in card_to_put:
 							lst_card.erase(card)
 						card_to_put=[]
 						card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
-					#for card in card_to_put:
-						#print(card.value)
 					if lst_card.size()!=0:
 						can_play = true
 		if can_play:

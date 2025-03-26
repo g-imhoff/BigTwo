@@ -205,10 +205,20 @@ func check_cards_clicked():
 	elif card_clicked.size()==2 and card_clicked[0].value ==  card_clicked[1].value:
 		check="2"
 		children_slots[0].combi="2"
+		children_slots[0].combi_value=card_clicked[0].value
+		var lst_tmp=[]
+		lst_tmp=card_clicked.duplicate()
+		lst_tmp.sort_custom(func(a, b): return a.form > b.form)
+		children_slots[0].combi_form=card_clicked[0].form
 
 	elif card_clicked.size()==3 and card_clicked[0].value == card_clicked[1].value and card_clicked[1].value == card_clicked[2].value:
 		check="3"
 		children_slots[0].combi="3"
+		children_slots[0].combi_value=card_clicked[0].value
+		var lst_tmp=[]
+		lst_tmp=card_clicked.duplicate()
+		lst_tmp.sort_custom(func(a, b): return a.form > b.form)
+		children_slots[0].combi_form=card_clicked[0].form
 		
 	elif card_clicked.size()==5:
 		card_clicked.sort_custom(func(a, b): return a.value < b.value)#trie les carte clique par leur valeur
@@ -225,12 +235,8 @@ func check_cards_clicked():
 				tmp_tab.append(card_clicked[i+1])
 			elif card_clicked[i].value!= card_clicked[i+1].value or i+1==card_clicked.size()-1:
 				val=tmp
-				for card in tmp_tab:
-					print("card tab:", card.value)
 				if tab_check_brelan.size()<2:
 					tab_check_brelan=tmp_tab.duplicate()
-				for card in tab_check_brelan:
-					print("card :", card.value)
 				tmp=0
 			if card_clicked[i].form==card_clicked[i+1].form:
 				signe+=1
@@ -239,16 +245,27 @@ func check_cards_clicked():
 		if val == 3:#check Four of a Kind
 			check="four of a kind"
 			children_slots[0].combi="four of a kind"
+			var val_tmp=card_clicked[0]
+			if card_clicked[0]!=card_clicked[1]:
+				val_tmp=card_clicked[1]
+			children_slots[0].combi_value=val_tmp.value
+			children_slots[0].combi_form=val_tmp.form
 		elif suite==4 and signe ==4:#check pour Straight Flush
 			check ="straight flush" 
 			children_slots[0].combi="straight flush"
 			print("Straight Flush")
+			children_slots[0].combi_value=card_clicked[4].value
+			children_slots[0].combi_form=card_clicked[4].form
 		elif signe==4:#check Flush
 			check= "flush"
 			children_slots[0].combi="flush"
+			children_slots[0].combi_value=card_clicked[4].value
+			children_slots[0].combi_form=card_clicked[4].form
 		elif suite==4:#check pour straight
 			check ="straight"
 			children_slots[0].combi="straight"
+			children_slots[0].combi_value=card_clicked[4].value
+			children_slots[0].combi_form=card_clicked[4].form
 		elif val == 1 or val == 2:  # check pour full house
 			var tab_val = card_clicked.duplicate()
 			for i in range(tab_check_brelan.size()):
@@ -258,6 +275,8 @@ func check_cards_clicked():
 				if tab_val[0].value == tab_val[1].value:
 					check = "full house"
 					children_slots[0].combi="full house"
+					children_slots[0].combi_value=brelan[0].value
+					children_slots[0].combi_form=brelan[0].form
 					print("full house")
 			
 			elif val == 1:
@@ -265,6 +284,8 @@ func check_cards_clicked():
 				if tab_val.size() == 3 and tab_val[0].value == tab_val[1].value:  # Assure que seulement 2 cartes restent
 					children_slots[0].combi="full house"
 					check = "full house"
+					children_slots[0].combi_value=tab_val[0].value
+					children_slots[0].combi_form=tab_val[0].form
 					print("full house")
 	return check
 
