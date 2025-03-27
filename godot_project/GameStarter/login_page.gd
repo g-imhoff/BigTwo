@@ -35,13 +35,6 @@ func _on_create_account_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/CreatePage.tscn")
 
 
-func _on_hide_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("leftclick"):
-		if password_line_edit.is_secret():
-			password_line_edit.set_secret(false)
-		else:
-			password_line_edit.set_secret(true)
-
 func _ready() -> void:
 	print("hello")
 	var err = socket.connect_to_url(Global.websocket_url)

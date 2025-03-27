@@ -1,16 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://fq8y23pl3rwf"]
+[gd_scene load_steps=14 format=3 uid="uid://fq8y23pl3rwf"]
 
-[ext_resource type="Script" path="res://GameStarter/create_page.gd" id="1_5iowa"]
+[ext_resource type="Script" uid="uid://djywd3u742s1r" path="res://GameStarter/create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_jap0u"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_vm0o5"]
 [ext_resource type="Texture2D" uid="uid://cp6gvl7q3kwp0" path="res://assets/ui/Text field.png" id="4_cwooc"]
-[ext_resource type="Texture2D" uid="uid://yuptm5fmlar0" path="res://assets/ui/hideicon.png" id="5_84oho"]
 [ext_resource type="Texture2D" uid="uid://ckmwq5fbp3g6e" path="res://assets/ui/Divider create page.png" id="5_subxe"]
+[ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="6_nlrc0"]
 [ext_resource type="Texture2D" uid="uid://wusfm5iffkwg" path="res://assets/ui/login google.png" id="6_uxr2r"]
+[ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="7_fy10r"]
+[ext_resource type="Script" uid="uid://cf35oj3sh0te1" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dx0t"]
 size = Vector2(66, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_av1ic"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_nlrc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fy10r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ej5m7"]
 bg_color = Color(0, 0, 0, 1)
@@ -145,9 +161,11 @@ text = "Hide"
 position = Vector2(5, 13)
 shape = SubResource("RectangleShape2D_0dx0t")
 
-[node name="Sprite2D" type="Sprite2D" parent="Password/LabelPassword/HideButton"]
+[node name="AnimatedSprite_hide" type="AnimatedSprite2D" parent="Password/LabelPassword/HideButton/Area2D"]
 position = Vector2(-15, 12)
-texture = ExtResource("5_84oho")
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_av1ic")
+script = ExtResource("8_nlrc0")
 
 [node name="CreateAccount" type="Button" parent="."]
 offset_left = 629.0
@@ -185,6 +203,6 @@ texture_normal = ExtResource("6_uxr2r")
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/backicon connection page" to="." method="_on_backicon_connection_page_pressed"]
-[connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="." method="_on_hide_button_input_event"]
+[connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="Password/LabelPassword/HideButton/Area2D/AnimatedSprite_hide" method="_on_area_2d_input_event_2"]
 [connection signal="pressed" from="CreateAccount" to="." method="_on_create_account_pressed"]
 [connection signal="pressed" from="GoogleLogin" to="." method="_on_google_login_pressed"]

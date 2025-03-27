@@ -35,12 +35,7 @@ func _on_login_pressed() -> void:
 func _on_google_login_pressed() -> void:
 	print("OAuthGoogleClicked")
 
-func _on_hide_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("leftclick"):
-		if password_line_edit.is_secret():
-			password_line_edit.set_secret(false)
-		else:
-			password_line_edit.set_secret(true)
+
 		
 
 func _on_tree_exited() -> void:
