@@ -75,6 +75,7 @@ func update_hand_position():
 		var new_position =Vector2(calculate_card_position(i),HAND_Y_POSITION)
 		var card=player_hand[i]
 		card.hand_position=new_position
+		card.z_index = i
 		animate_card_to_position(card,new_position)
 
 
