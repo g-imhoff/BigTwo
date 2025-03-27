@@ -59,13 +59,14 @@ func on_hovered_off_card(card):
 
 func highlight_card(card,hovered):
 	var current_pos=card.position
-	var current_z = card.z_index
+	if !card.has_meta("z_index"):
+		card.set_meta("z_index", card.z_index)
 	if hovered and current_pos.y==hand.HAND_Y_POSITION:
 		card.scale=card_highlight_scale
-		card.z_index = current_z +2
+		card.z_index = card.get_meta("z_index") + 2
 	else:
 		card.scale=card_base_scale
-		card.z_index = current_z -2
+		card.z_index = card.get_meta("z_index")
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state

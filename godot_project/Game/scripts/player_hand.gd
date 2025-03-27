@@ -76,6 +76,7 @@ func update_hand_position():
 		var card=player_hand[i]
 		card.hand_position=new_position
 		card.z_index = i
+		card.remove_meta("z_index")
 		animate_card_to_position(card,new_position)
 
 
