@@ -154,10 +154,11 @@ texture_normal = ExtResource("4_b1bmy")
 [node name="HSlider" type="HSlider" parent="."]
 offset_left = 1526.0
 offset_top = 955.0
-offset_right = 1681.0
+offset_right = 1616.0
 offset_bottom = 971.0
-min_value = -30.0
-max_value = 0.0
+min_value = -80.0
+max_value = -20.0
+value = -20.0
 
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
 [connection signal="input_event" from="InstagramButton/Area2D" to="." method="_on_instagram_button_input_event"]
