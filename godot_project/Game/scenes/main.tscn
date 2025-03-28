@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
 [ext_resource type="Script" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
 [ext_resource type="Script" path="res://Game/scripts/bot_player_func.gd" id="12_5o7ou"]
-[ext_resource type="Texture2D" uid="uid://dpbg520c7xbjy" path="res://assets/cards/card_clubs_A.png" id="13_gp7q8"]
-[ext_resource type="Texture2D" uid="uid://bx4b6y3vcnjck" path="res://assets/cards/card_hearts_A.png" id="14_rjcxb"]
+[ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="13_ee3kj"]
+[ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="14_td723"]
 
 [node name="Main" type="Node2D"]
 
@@ -147,18 +147,19 @@ script = ExtResource("1_8ka4x")
 script = ExtResource("12_5o7ou")
 
 [node name="sort_value" type="TextureButton" parent="."]
-offset_left = 187.0
-offset_top = 946.0
-offset_right = 270.0
-offset_bottom = 1029.0
-texture_normal = ExtResource("13_gp7q8")
+texture_filter = 1
+offset_left = 215.0
+offset_top = 954.0
+offset_right = 256.0
+offset_bottom = 1011.0
+texture_normal = ExtResource("13_ee3kj")
 
 [node name="sort_form" type="TextureButton" parent="."]
-offset_left = 299.0
-offset_top = 947.0
-offset_right = 382.0
-offset_bottom = 1030.0
-texture_normal = ExtResource("14_rjcxb")
+offset_left = 287.0
+offset_top = 954.0
+offset_right = 328.0
+offset_bottom = 1012.0
+texture_normal = ExtResource("14_td723")
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]
 [connection signal="enemy_right" from="card_manager_enemy" to="card_manager_enemy_right" method="_on_card_manager_enemy_enemy_right"]
