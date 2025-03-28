@@ -3,7 +3,18 @@
 [ext_resource type="Script" path="res://GameStarter/setting.gd" id="1_5qr03"]
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_l204h"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_aw5tj"]
-[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_rqrau"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6js73"]
+bg_color = Color(1, 0, 0.0156863, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Setting" type="Node2D"]
 script = ExtResource("1_5qr03")
@@ -15,10 +26,10 @@ texture = ExtResource("1_l204h")
 centered = false
 
 [node name="CheckButton_music" type="CheckButton" parent="PopupSettings"]
-offset_left = 556.077
-offset_top = 294.421
-offset_right = 600.077
-offset_bottom = 318.421
+offset_left = 634.527
+offset_top = 295.359
+offset_right = 678.527
+offset_bottom = 319.359
 scale = Vector2(3, 3)
 
 [node name="Title_button_sound" type="RichTextLabel" parent="PopupSettings"]
@@ -74,10 +85,10 @@ max_value = -20.0
 value = -20.0
 
 [node name="Title_setting" type="RichTextLabel" parent="PopupSettings"]
-offset_left = 341.59
-offset_top = 91.8894
-offset_right = 907.59
-offset_bottom = 243.889
+offset_left = 342.0
+offset_top = 92.0
+offset_right = 835.0
+offset_bottom = 189.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -87,23 +98,18 @@ theme_override_font_sizes/normal_font_size = 60
 text = "SETTINGS"
 
 [node name="CheckButton_button_sound" type="CheckButton" parent="PopupSettings"]
-offset_left = 556.077
-offset_top = 414.44
-offset_right = 600.077
-offset_bottom = 438.44
+offset_left = 633.534
+offset_top = 420.066
+offset_right = 677.534
+offset_bottom = 444.066
 scale = Vector2(3, 3)
 
 [node name="Button" type="Button" parent="PopupSettings"]
-offset_left = 468.694
-offset_top = 601.969
-offset_right = 722.694
-offset_bottom = 663.969
+offset_left = 501.465
+offset_top = 624.473
+offset_right = 755.465
+offset_bottom = 669.473
+theme_override_styles/normal = SubResource("StyleBoxFlat_6js73")
+text = "Exit to desktop"
 
-[node name="TextureButton" type="TextureButton" parent="."]
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 104.0
-offset_bottom = 104.0
-texture_normal = ExtResource("4_rqrau")
-
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="PopupSettings/Button" to="." method="_on_button_pressed"]

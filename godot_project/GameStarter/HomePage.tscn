@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c1gcdf31e2ljm" path="res://assets/ui/Send.png" id="8_fwkod"]
 [ext_resource type="Texture2D" uid="uid://bvkdl6114misq" path="res://assets/ui/sound off.png" id="8_j8861"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="9_18r8e"]
-[ext_resource type="Script" uid="uid://pxt4fg7r6tr" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
+[ext_resource type="Script" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
 
 [sub_resource type="GDScript" id="GDScript_ppnjs"]
 script/source = "extends Node2D
@@ -52,7 +52,7 @@ func _on_h_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"BGMusic\"), value)
 
 func _on_texture_button_pressed() -> void:
-	$Setting.make_visible(true)
+	$Setting.visible = not $Setting.visible
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upulg"]
