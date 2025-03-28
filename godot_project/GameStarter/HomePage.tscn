@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_q42id"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="5_hq1fw"]
-[ext_resource type="Texture2D" uid="uid://i2eyyfstmhsu" path="res://assets/ui/instagram social media logo.png" id="6_80co7"]
+[ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="6_dni38"]
 [ext_resource type="Texture2D" uid="uid://bn6mcmfehnnxb" path="res://assets/ui/sound on.png" id="7_7stl6"]
+[ext_resource type="Texture2D" uid="uid://c1gcdf31e2ljm" path="res://assets/ui/Send.png" id="8_fwkod"]
 [ext_resource type="Texture2D" uid="uid://bvkdl6114misq" path="res://assets/ui/sound off.png" id="8_j8861"]
 [ext_resource type="Script" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
 
@@ -65,10 +66,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ofba"]
-radius = 25.625
-height = 58.75
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_eyes3"]
 animations = [{
 "frames": [{
@@ -109,17 +106,6 @@ theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxFlat_upulg")
 text = "PLAY NOW"
 
-[node name="InstagramButton" type="Sprite2D" parent="."]
-position = Vector2(107, 990)
-scale = Vector2(1.6, 1.6)
-texture = ExtResource("6_80co7")
-
-[node name="Area2D" type="Area2D" parent="InstagramButton"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InstagramButton/Area2D"]
-position = Vector2(78.125, -18.75)
-shape = SubResource("CapsuleShape2D_0ofba")
-
 [node name="SoundButton" type="AnimatedSprite2D" parent="."]
 position = Vector2(1830, 950)
 sprite_frames = SubResource("SpriteFrames_eyes3")
@@ -134,6 +120,13 @@ shape = SubResource("RectangleShape2D_k18rn")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SoundButton/Area2D"]
 position = Vector2(0, -39)
 shape = SubResource("CircleShape2D_gae61")
+
+[node name="TextureButton" type="TextureButton" parent="SoundButton/Area2D"]
+offset_left = -187.0
+offset_top = -25.0
+offset_right = -107.0
+offset_bottom = 55.0
+texture_normal = ExtResource("6_dni38")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 offset_left = 82.0
@@ -154,13 +147,20 @@ texture_normal = ExtResource("4_b1bmy")
 [node name="HSlider" type="HSlider" parent="."]
 offset_left = 1526.0
 offset_top = 955.0
-offset_right = 1681.0
+offset_right = 1616.0
 offset_bottom = 971.0
-min_value = -30.0
-max_value = 0.0
+min_value = -80.0
+max_value = -20.0
+value = -20.0
+
+[node name="instagram" type="TextureButton" parent="."]
+offset_left = 99.0
+offset_top = 970.0
+offset_right = 179.0
+offset_bottom = 1050.0
+texture_normal = ExtResource("8_fwkod")
 
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
-[connection signal="input_event" from="InstagramButton/Area2D" to="." method="_on_instagram_button_input_event"]
 [connection signal="input_event" from="SoundButton/Area2D" to="SoundButton" method="_on_sound_button_input_event"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="TextureButton2" to="." method="_on_texture_button_2_pressed"]
