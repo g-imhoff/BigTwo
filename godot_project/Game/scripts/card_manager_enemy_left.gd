@@ -28,7 +28,6 @@ func _ready() -> void:
 func on_card_played():
 	await get_tree().create_timer(2.0).timeout
 	bot_player_func.on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot)
-	print(children_slots[0].combi)
 	emit_signal("enemy_up")
 
 func _on_card_manager_card_played() -> void:

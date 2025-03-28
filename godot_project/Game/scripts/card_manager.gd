@@ -18,10 +18,6 @@ var brelan=[]
 @onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
 @onready var children_slots=Cardslots.get_children()
-@onready var Cardslots_up=$"../Cardslots2"
-@onready var children_slots_up=Cardslots_up.get_children()
-@onready var Cardslots_left=$"../Cardslots3"
-@onready var children_slots_left=Cardslots_left.get_children()
 @onready var Cardslots_right=$"../Cardslots4"
 @onready var children_slots_right=Cardslots_right.get_children()
 
@@ -257,7 +253,7 @@ func check_cards_clicked():
 		elif suite==4 and signe ==4:#check pour Straight Flush
 			check ="straight flush" 
 			children_slots[0].combi="straight flush"
-			print("Straight Flush")
+			#print("Straight Flush")
 			children_slots[0].combi_value=card_clicked[4].value
 			children_slots[0].combi_form=card_clicked[4].form
 		elif signe==4:#check Flush
@@ -358,7 +354,6 @@ func check_other_cards():
 
 	if children_slots_right[0].combi==null and check_combi!=null:
 		return true
-	print(children_slots_right[0].combi, " and combi ",check_combi)
 	var combi_enemy
 	combi_enemy=children_slots_right[0].combi
 	if typeof(check_combi) == typeof(combi_enemy) and check_combi!=null:
@@ -376,7 +371,6 @@ func check_other_cards():
 				return true
 		elif check_combi=="straight flush":
 			if (lst_card[4].value >children_slots_right[0].combi_value and lst_card[4].form >children_slots_right[0].combi_form) or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ) or (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
-				print ("straigth flush")
 				return true
 		elif check_combi=="straight":
 			if lst_card[4].value >children_slots_right[0].combi_value or (lst_card[4].value==children_slots_right[0].combi_value and lst_card[4].form==children_slots_right[0].combi_form ):

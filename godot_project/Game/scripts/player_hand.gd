@@ -11,6 +11,14 @@ var card_scale=Vector2(0.5,0.5)
 
 @onready var lst_img=Global.card_images
 
+#var lst_img=[
+	#"res://assets/cards/card_diamonds_03.png",
+	#"res://assets/cards/card_clubs_04.png",
+	#"res://assets/cards/card_diamonds_05.png",
+	#"res://assets/cards/card_diamonds_10.png",
+	#"res://assets/cards/card_diamonds_06.png",
+	#"res://assets/cards/card_diamonds_07.png",
+	#]
 
 
 

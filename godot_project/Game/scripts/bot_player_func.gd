@@ -13,7 +13,6 @@ func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots
 			if tmp.size()>card_to_put.size():
 				card_to_put=tmp
 	if card_to_put!= null and card_to_put.size() > 0:
-		print("check combi")
 		children_slots[0].combi_value=card_to_put[0].value
 		children_slots[0].combi_form=card_to_put[0].form
 		if children_slots_right[0].combi != null and children_slots_right[0].combi.length() == 1:
@@ -24,15 +23,18 @@ func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots
 
 func check_for_straight(lst_card, children_slots,children_slots_right):
 	var tmp=[]
-	for i in range (lst_card.size()-1):
-		if lst_card[i] not in tmp:
+	var lst_card_dupli=[]
+	lst_card_dupli=lst_card.duplicate()
+	lst_card_dupli.sort_custom(func(a, b): return a.value < b.value)
+	for i in range (lst_card_dupli.size()-1):
+		if lst_card_dupli[i] not in tmp:
 			tmp.append(lst_card[i])
-		if (lst_card[i].value)+1 == lst_card[i+1].value:
-			tmp.append(lst_card[i+1])
+		if (lst_card_dupli[i].value)+1 == lst_card_dupli[i+1].value:
+			tmp.append(lst_card_dupli[i+1])
 		else:
 			tmp.clear()
 		if tmp.size()==5: 
-			if children_slots_right[0].combi==null or (tmp[4].value >children_slots_right[0].combi_value or (tmp[4].value==children_slots_right[0].combi_value and tmp[4].form==children_slots_right[0].combi_form )):
+			if children_slots_right[0].combi==null or (tmp[4].value >children_slots_right[0].combi_value or (tmp[4].value==children_slots_right[0].combi_value and tmp[4].form>children_slots_right[0].combi_form ) or (children_slots[0].combi=="straight flush")):
 				children_slots[0].combi_value=tmp[4].value
 				children_slots[0].combi_form=tmp[4].form
 				return tmp
@@ -51,10 +53,12 @@ func check_for_flush(lst_card, children_slots,children_slots_right):
 			for card in tmp2:
 				tmp.erase(card)
 		if tmp.size()==5: 
-			if children_slots_right[0].combi==null or (tmp[4].value >children_slots_right[0].combi_value or (tmp[4].value==children_slots_right[0].combi_value and tmp[4].form>children_slots_right[0].combi_form )or (children_slots_right[0].combi=="straight")):
+			print("here")
+			if children_slots_right[0].combi==null or (children_slots_right[0].combi=="straight") or (tmp[4].value >children_slots_right[0].combi_value or (tmp[4].value==children_slots_right[0].combi_value and tmp[4].form>children_slots_right[0].combi_form )):
 				tmp.sort_custom(func(a, b): return a.value < b.value)
 				children_slots[0].combi_value=tmp[4].value
 				children_slots[0].combi_form=tmp[4].form
+				print("check flush")
 				return tmp
 	return null
 
@@ -71,11 +75,12 @@ func check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_sl
 						if card1.value==card2.value:
 							tmp.append(card2)
 					if tmp.size()==2:
-						children_slots[0].combi_value=card_to_put[0].value
-						children_slots[0].combi_form=card_to_put[0].form
-						for card in tmp:
-							card_to_put.append(card)
-						return card_to_put
+						if children_slots_right[0].combi==null or (children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight") or (card_to_put[0].value >children_slots_right[0].combi_value or (card_to_put[0].value==children_slots_right[0].combi_value and card_to_put[0]>children_slots_right[0].combi_form )):
+							children_slots[0].combi_value=card_to_put[0].value
+							children_slots[0].combi_form=card_to_put[0].form
+							for card in tmp:
+								card_to_put.append(card)
+							return card_to_put
 	return null
 
 func check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right):
@@ -92,13 +97,14 @@ func check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_sl
 
 func check_for_straightflush(lst_card, children_slots,children_slots_right):
 	var lst=[]
+	children_slots[0].combi="straight flush"
 	lst=check_for_straight(lst_card,children_slots,children_slots_right)
 	if lst!=null :
 		for i in range (lst.size()-1):
 			if lst[i].form!=lst[i+1].form:
 				return null
 		if children_slots_right[0].combi!=null:
-			if (lst[4].value >children_slots_right[0].combi_value and lst[4].form >children_slots_right[0].combi_form) or (lst[4].value==children_slots_right[0].combi_value and lst[4].form==children_slots_right[0].combi_form ) or (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
+			if (lst[4].value >children_slots_right[0].combi_value ) or (lst[4].value==children_slots_right[0].combi_value and lst[4].form>children_slots_right[0].combi_form ) or (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
 				children_slots[0].combi_value=lst[4].value
 				children_slots[0].combi_form=lst[4].form
 				return lst
@@ -107,6 +113,7 @@ func check_for_straightflush(lst_card, children_slots,children_slots_right):
 			children_slots[0].combi_form=lst[4].form
 			return lst
 	else:
+		children_slots[0].combi=null
 		return null
 
 func put_cards(card_to_put, children_slots, cmpt_card_in_slot, hand, lst_card_in_slot):
@@ -196,6 +203,7 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 		var three_of_diamonds = null
 		var can_play = false
 		lst_card.sort_custom(func(a, b): return a.value < b.value)
+		print(children_slots_right[0].combi)
 		for card in lst_card:
 			if card.value == 3 and card.form == 1:
 				three_of_diamonds = card
@@ -210,8 +218,9 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 				children_slots[0].combi = combi_name
 				card_to_put = combi_dict[combi_name]
 				can_play = true
-		elif (check_for_straightflush(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi==null or (check_for_straightflush(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi=="straight flush")):
+		elif ((check_for_straightflush(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_straightflush(lst_card, children_slots,children_slots_right)!=null and (children_slots_right[0].combi=="straight flush" or children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"))):
 				children_slots[0].combi="straight flush"
+				print("here")
 				card_to_put=check_for_straightflush(lst_card, children_slots,children_slots_right)
 				can_play=true
 		elif (check_for_straight(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_straight(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi=="straight"):
@@ -219,17 +228,17 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 				children_slots[0].combi="straight"
 				card_to_put=check_for_straight(lst_card, children_slots,children_slots_right)
 				can_play = true
-		elif (check_for_flush(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_flush(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi=="flush") :
+		elif (check_for_flush(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_flush(lst_card, children_slots,children_slots_right)!=null and (children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight") ) :
 			#print("flush")
 			children_slots[0].combi="flush"
 			card_to_put=check_for_flush(lst_card, children_slots,children_slots_right)
 			can_play = true
-		elif (check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi=="four of a kind") :
+		elif (check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight")) :
 			#print("four of a kind")
 			children_slots[0].combi="four of a kind"
 			card_to_put=check_for_four_kind(card_to_put,lst_card, children_slots, hand, children_slots_right)
 			can_play = true
-		elif (check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi=="full house") :
+		elif (check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)!=null and (children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight")) :
 			#print("full house")
 			children_slots[0].combi="full house"
 			card_to_put=check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_slots_right)
