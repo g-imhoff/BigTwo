@@ -250,7 +250,7 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 						if card_to_put.size()>3:
 							card_to_put.erase(card_to_put[0])
 						if card_to_put.size()==int(check_size) :
-							if card_to_put[0].value>children_slots_right[0].combi_value:
+							if card_to_put[0].value>children_slots_right[0].combi_value or (card_to_put[0].value == children_slots_right[0].combi_value and card_to_put[0].form > children_slots_right[0].combi_form):
 								break
 						for card in card_to_put:
 							lst_card.erase(card)
