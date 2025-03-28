@@ -1,0 +1,109 @@
+[gd_scene load_steps=5 format=3 uid="uid://k4ebvk3lxk6r"]
+
+[ext_resource type="Script" uid="uid://cbogcr2eu72gs" path="res://GameStarter/setting.gd" id="1_5qr03"]
+[ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_l204h"]
+[ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_aw5tj"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_rqrau"]
+
+[node name="Setting" type="Node2D"]
+script = ExtResource("1_5qr03")
+
+[node name="PopupSettings" type="Sprite2D" parent="."]
+position = Vector2(0, 6.00001)
+scale = Vector2(1.00705, 1.0665)
+texture = ExtResource("1_l204h")
+centered = false
+
+[node name="CheckButton_music" type="CheckButton" parent="PopupSettings"]
+offset_left = 556.077
+offset_top = 294.421
+offset_right = 600.077
+offset_bottom = 318.421
+scale = Vector2(3, 3)
+
+[node name="Title_button_sound" type="RichTextLabel" parent="PopupSettings"]
+offset_left = 127.103
+offset_top = 421.941
+offset_right = 534.103
+offset_bottom = 614.941
+scale = Vector2(0.7, 0.7)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_aw5tj")
+theme_override_font_sizes/normal_font_size = 60
+text = "button sound"
+
+[node name="Title_music" type="RichTextLabel" parent="PopupSettings"]
+offset_left = 127.103
+offset_top = 301.922
+offset_right = 638.103
+offset_bottom = 410.922
+scale = Vector2(0.7, 0.7)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_aw5tj")
+theme_override_font_sizes/normal_font_size = 60
+text = "music"
+
+[node name="Title_volume" type="RichTextLabel" parent="PopupSettings"]
+offset_left = 128.096
+offset_top = 212.846
+offset_right = 639.096
+offset_bottom = 321.846
+scale = Vector2(0.7, 0.7)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_aw5tj")
+theme_override_font_sizes/normal_font_size = 60
+text = "volume"
+
+[node name="HSlider" type="HSlider" parent="PopupSettings"]
+offset_left = 579.909
+offset_top = 226.911
+offset_right = 829.909
+offset_bottom = 242.911
+scale = Vector2(1, 2)
+min_value = -80.0
+max_value = -20.0
+value = -20.0
+
+[node name="Title_setting" type="RichTextLabel" parent="PopupSettings"]
+offset_left = 341.59
+offset_top = 91.8894
+offset_right = 907.59
+offset_bottom = 243.889
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_aw5tj")
+theme_override_font_sizes/normal_font_size = 60
+text = "SETTINGS"
+
+[node name="CheckButton_button_sound" type="CheckButton" parent="PopupSettings"]
+offset_left = 556.077
+offset_top = 414.44
+offset_right = 600.077
+offset_bottom = 438.44
+scale = Vector2(3, 3)
+
+[node name="Button" type="Button" parent="PopupSettings"]
+offset_left = 468.694
+offset_top = 601.969
+offset_right = 722.694
+offset_bottom = 663.969
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 104.0
+offset_bottom = 104.0
+texture_normal = ExtResource("4_rqrau")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
