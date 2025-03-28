@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://fq8y23pl3rwf"]
 
-[ext_resource type="Script" uid="uid://djywd3u742s1r" path="res://GameStarter/create_page.gd" id="1_5iowa"]
+[ext_resource type="Script" path="res://GameStarter/create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_jap0u"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_vm0o5"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="6_nlrc0"]
 [ext_resource type="Texture2D" uid="uid://wusfm5iffkwg" path="res://assets/ui/login google.png" id="6_uxr2r"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="7_fy10r"]
-[ext_resource type="Script" uid="uid://cf35oj3sh0te1" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
+[ext_resource type="Script" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dx0t"]
 size = Vector2(66, 22)
