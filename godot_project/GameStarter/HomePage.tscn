@@ -117,10 +117,10 @@ max_value = -20.0
 value = -20.0
 
 [node name="Social media" type="TextureButton" parent="."]
-offset_left = 99.0
-offset_top = 970.0
-offset_right = 179.0
-offset_bottom = 1050.0
+offset_left = 101.0
+offset_top = 925.0
+offset_right = 181.0
+offset_bottom = 1005.0
 texture_normal = ExtResource("8_fwkod")
 
 [node name="Setting" parent="." instance=ExtResource("9_18r8e")]

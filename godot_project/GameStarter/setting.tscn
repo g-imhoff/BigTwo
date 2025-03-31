@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://k4ebvk3lxk6r"]
+[gd_scene load_steps=6 format=3 uid="uid://k4ebvk3lxk6r"]
 
 [ext_resource type="Script" path="res://GameStarter/setting.gd" id="1_5qr03"]
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_l204h"]
@@ -6,6 +6,18 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6js73"]
 bg_color = Color(1, 0, 0.0156863, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ni351"]
+bg_color = Color(0.14902, 0.509804, 0.14902, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -26,17 +38,17 @@ texture = ExtResource("1_l204h")
 centered = false
 
 [node name="CheckButton_music" type="CheckButton" parent="PopupSettings"]
-offset_left = 634.527
-offset_top = 295.359
-offset_right = 678.527
-offset_bottom = 319.359
+offset_left = 660.345
+offset_top = 348.805
+offset_right = 704.345
+offset_bottom = 372.805
 scale = Vector2(3, 3)
 
 [node name="Title_button_sound" type="RichTextLabel" parent="PopupSettings"]
-offset_left = 127.103
-offset_top = 421.941
-offset_right = 534.103
-offset_bottom = 614.941
+offset_left = 175.761
+offset_top = 458.509
+offset_right = 582.761
+offset_bottom = 651.509
 scale = Vector2(0.7, 0.7)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
@@ -47,10 +59,10 @@ theme_override_font_sizes/normal_font_size = 60
 text = "button sound"
 
 [node name="Title_music" type="RichTextLabel" parent="PopupSettings"]
-offset_left = 127.103
-offset_top = 301.922
-offset_right = 638.103
-offset_bottom = 410.922
+offset_left = 176.754
+offset_top = 357.243
+offset_right = 687.754
+offset_bottom = 466.243
 scale = Vector2(0.7, 0.7)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
@@ -61,10 +73,10 @@ theme_override_font_sizes/normal_font_size = 60
 text = "music"
 
 [node name="Title_volume" type="RichTextLabel" parent="PopupSettings"]
-offset_left = 128.096
-offset_top = 212.846
-offset_right = 639.096
-offset_bottom = 321.846
+offset_left = 169.803
+offset_top = 250.352
+offset_right = 680.803
+offset_bottom = 359.352
 scale = Vector2(0.7, 0.7)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
@@ -75,20 +87,21 @@ theme_override_font_sizes/normal_font_size = 60
 text = "volume"
 
 [node name="HSlider" type="HSlider" parent="PopupSettings"]
-offset_left = 579.909
-offset_top = 226.911
-offset_right = 829.909
-offset_bottom = 242.911
+modulate = Color(0.14902, 0.509804, 0.14902, 1)
+offset_left = 595.8
+offset_top = 269.105
+offset_right = 845.8
+offset_bottom = 285.105
 scale = Vector2(1, 2)
 min_value = -80.0
 max_value = -20.0
 value = -20.0
 
 [node name="Title_setting" type="RichTextLabel" parent="PopupSettings"]
-offset_left = 342.0
-offset_top = 92.0
-offset_right = 835.0
-offset_bottom = 189.0
+offset_left = 315.774
+offset_top = 75.9494
+offset_right = 808.774
+offset_bottom = 172.949
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -98,18 +111,29 @@ theme_override_font_sizes/normal_font_size = 60
 text = "SETTINGS"
 
 [node name="CheckButton_button_sound" type="CheckButton" parent="PopupSettings"]
-offset_left = 633.534
-offset_top = 420.066
-offset_right = 677.534
-offset_bottom = 444.066
+offset_left = 662.331
+offset_top = 481.95
+offset_right = 706.331
+offset_bottom = 505.95
 scale = Vector2(3, 3)
 
 [node name="Button" type="Button" parent="PopupSettings"]
-offset_left = 501.465
-offset_top = 624.473
-offset_right = 755.465
-offset_bottom = 669.473
+offset_left = 592.821
+offset_top = 707.923
+offset_right = 842.821
+offset_bottom = 767.923
+theme_override_font_sizes/font_size = 23
 theme_override_styles/normal = SubResource("StyleBoxFlat_6js73")
 text = "Exit to desktop"
 
+[node name="Button2" type="Button" parent="PopupSettings"]
+offset_left = 307.83
+offset_top = 707.923
+offset_right = 557.83
+offset_bottom = 767.923
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxFlat_ni351")
+text = "Exit to main menu"
+
 [connection signal="pressed" from="PopupSettings/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PopupSettings/Button2" to="." method="_on_button_pressed"]
