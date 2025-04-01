@@ -161,6 +161,14 @@ offset_right = 328.0
 offset_bottom = 1012.0
 texture_normal = ExtResource("14_td723")
 
+[node name="message" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+uppercase = true
+
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]
 [connection signal="enemy_right" from="card_manager_enemy" to="card_manager_enemy_right" method="_on_card_manager_enemy_enemy_right"]
 [connection signal="enemy" from="card_manager_enemy_right" to="card_manager" method="_on_card_manager_enemy_right_enemy"]
@@ -169,3 +177,4 @@ texture_normal = ExtResource("14_td723")
 [connection signal="pressed" from="Button2" to="card_manager" method="_on_button_2_pressed"]
 [connection signal="pressed" from="sort_value" to="card_manager" method="_on_sort_value_pressed"]
 [connection signal="pressed" from="sort_form" to="card_manager" method="_on_sort_form_pressed"]
+[connection signal="timeout" from="Timer" to="card_manager" method="_on_timer_timeout"]

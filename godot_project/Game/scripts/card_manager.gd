@@ -20,6 +20,8 @@ var brelan=[]
 @onready var children_slots=Cardslots.get_children()
 @onready var Cardslots_right=$"../Cardslots4"
 @onready var children_slots_right=Cardslots_right.get_children()
+@onready var message=$"../message"
+@onready var timer =$"../Timer"
 
 
 func _ready() -> void:
@@ -331,9 +333,10 @@ func _on_button_2_pressed() -> void:
 
 
 func _on_card_manager_enemy_right_enemy() -> void:
-	await get_tree().create_timer(2.0).timeout
+	#await get_tree().create_timer(2.0).timeout
 	#print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
 	played=false
+	show_message("Your turn")
 	for card in card_clicked.duplicate():
 		card.queue_free()
 		card_clicked.erase(card)
@@ -345,6 +348,7 @@ func _on_card_manager_enemy_right_enemy() -> void:
 #test pour faire commencé celui qui a le 3 de diamonds
 func on_card_played():
 	played = false
+	show_message("Your turn")
 
 
 func check_other_cards():
@@ -418,3 +422,14 @@ func _on_sort_value_pressed() -> void:
 		card_clicked.erase(card)
 	hand.update_hand_position()
 	num_card_up = 0
+
+func show_message(text: String, duration: float = 2.0):
+	message.text = text
+	message.visible = true
+	message.position.x= 900
+	message.position.y= 750
+	timer.start(duration)
+
+
+func _on_timer_timeout() -> void:
+	message.visible = false
