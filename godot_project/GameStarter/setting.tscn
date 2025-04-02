@@ -43,6 +43,7 @@ offset_top = 348.805
 offset_right = 704.345
 offset_bottom = 372.805
 scale = Vector2(3, 3)
+button_pressed = true
 
 [node name="Title_button_sound" type="RichTextLabel" parent="PopupSettings"]
 offset_left = 175.761
@@ -116,6 +117,7 @@ offset_top = 481.95
 offset_right = 706.331
 offset_bottom = 505.95
 scale = Vector2(3, 3)
+button_pressed = true
 
 [node name="Button" type="Button" parent="PopupSettings"]
 offset_left = 592.821
@@ -135,6 +137,8 @@ theme_override_font_sizes/font_size = 23
 theme_override_styles/normal = SubResource("StyleBoxFlat_ni351")
 text = "Exit to main menu"
 
+[connection signal="toggled" from="PopupSettings/CheckButton_music" to="." method="_on_check_button_music_toggled"]
 [connection signal="value_changed" from="PopupSettings/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="PopupSettings/CheckButton_button_sound" to="." method="_on_check_button_button_sound_toggled"]
 [connection signal="pressed" from="PopupSettings/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PopupSettings/Button2" to="." method="_on_button_2_pressed"]
