@@ -283,4 +283,5 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 
 func end_game():
 	print("tu a gagné")
+	await get_tree().create_timer(2.0).timeout
 	get_tree().quit()

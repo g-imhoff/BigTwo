@@ -423,11 +423,9 @@ func _on_sort_value_pressed() -> void:
 	hand.update_hand_position()
 	num_card_up = 0
 
-func show_message(text: String, duration: float = 5.0):
+func show_message(text: String, duration: float = 3.0):
 	message.text = text
 	message.visible = true
-	message.position.x= 900
-	message.position.y= 750
 	timer.start(duration)
 
 
