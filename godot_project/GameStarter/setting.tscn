@@ -94,7 +94,7 @@ offset_right = 845.8
 offset_bottom = 285.105
 scale = Vector2(1, 2)
 min_value = -80.0
-max_value = -20.0
+max_value = -10.0
 value = -20.0
 
 [node name="Title_setting" type="RichTextLabel" parent="PopupSettings"]
