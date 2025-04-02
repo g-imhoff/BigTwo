@@ -17,12 +17,6 @@ func _on_login_pressed() -> void:
 	var password = password_line_edit.text
 	var rememberme = rememberme_checkbox.is_pressed()
 
-	# Now you have the values, you can use them as needed
-	print("Profile Name: ", profile_name_email)
-	print("Password: ", password)
-	print("Remember me: ", rememberme)
-	print("LoginAccountClicked")
-	
 	var password_hash = HasH.hash_password(password) #Hashing 
 	
 	var content = JSON.stringify({

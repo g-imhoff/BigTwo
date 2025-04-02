@@ -23,13 +23,6 @@ func _on_create_account_pressed() -> void:
 	var profile_name = profile_name_line_edit.text
 	var email = email_line_edit.text
 	var password = password_line_edit.text
-
-	# Now you have the values, you can use them as needed
-	print("Profile Name: ", profile_name)
-	print("Email: ", email)
-	print("Password: ", password)
-	print("CreateAccountClicked")
-	
 	
 	var password_hash = HasH.hash_password(password) #hache le password 
 	

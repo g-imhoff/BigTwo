@@ -103,18 +103,25 @@ async def connect_handler(content, websocket):
         print("connection from", content["profile_name"])
 
         if nb_client == 4:
+            num = 2
             for client in connected_client:
                 list_hand, bool_first = random_hand()
                 starting_game_message = {
+                    "id" : 1 if bool_first else num,
                     "code": 1,
                     "message": "game starting",
                     "card_hand": list_hand,
                     "first_player": 1 if bool_first else 0
                 }
 
-                message = json.dumps(starting_game_message)
-                await connected_client[client].send(message)
+                if not bool_first:
+                    num += 1
+
+            message = json.dumps(starting_game_message)
+            await connected_client[client].send(message)
             placeholder_card_list = card_list.copy()
+    else : 
+        websocket.close(code=999, reason="server is full")
 
 
 async def handler(websocket):
