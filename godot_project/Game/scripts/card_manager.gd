@@ -102,9 +102,9 @@ func _on_button_pressed() -> void:
 			three_of_diamonds = card
 			break
 	if card_clicked == []:
-		print("pas de carte clicked")
+		show_message("pas de carte clicked")
 	elif check_other_cards()==false:
-		print("combinaison incorrect")
+		show_message("combinaison incorrect")
 	elif three_of_diamonds:
 		var check=false
 		for card in card_clicked:
@@ -115,9 +115,9 @@ func _on_button_pressed() -> void:
 			#if card and not played:  # Si une carte est cliquée et que le jeu n'a pas encore été joué
 				#move_card_up_or_down(card)  # Déclenche le déplacement avec une seule ligne
 		if check_other_cards()==false:
-			print("combinaison incorrect")
+			show_message("combinaison incorrect")
 		elif check!=true:
-			print("doit jouer 3 diamonds")
+			show_message("doit jouer 3 diamonds")
 		else:
 			for card in card_clicked:
 				if card_clicked.size() < 5:
@@ -393,7 +393,7 @@ func move_card_up_or_down (card):
 	card.scale=card_base_scale
 	if current_pos.y==hand.HAND_Y_POSITION:
 		if num_card_up ==5:
-			print("to much card up")
+			show_message("to much card up")
 		else:
 			num_card_up +=1
 			current_pos.y=current_pos.y-50
@@ -423,7 +423,7 @@ func _on_sort_value_pressed() -> void:
 	hand.update_hand_position()
 	num_card_up = 0
 
-func show_message(text: String, duration: float = 2.0):
+func show_message(text: String, duration: float = 5.0):
 	message.text = text
 	message.visible = true
 	message.position.x= 900
