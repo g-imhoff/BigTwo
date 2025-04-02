@@ -45,9 +45,6 @@ func _on_instagram_button_input_event(_viewport: Node, event: InputEvent, _shape
 func _on_texture_button_2_pressed() -> void:
 		get_tree().change_scene_to_file(\"res://GameStarter/RulesPage.tscn\") 
 
-func _on_h_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"BGMusic\"), value)
-
 func _on_texture_button_pressed() -> void:
 	$Setting.visible = not $Setting.visible
 "
@@ -107,15 +104,6 @@ offset_bottom = 184.0
 scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("4_b1bmy")
 
-[node name="HSlider" type="HSlider" parent="."]
-offset_left = 1526.0
-offset_top = 955.0
-offset_right = 1616.0
-offset_bottom = 971.0
-min_value = -80.0
-max_value = -20.0
-value = -20.0
-
 [node name="Social media" type="TextureButton" parent="."]
 offset_left = 101.0
 offset_top = 925.0
@@ -130,4 +118,3 @@ position = Vector2(424, 80)
 [connection signal="pressed" from="Settings Btn" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
 [connection signal="pressed" from="Rules Btn" to="." method="_on_texture_button_2_pressed"]
-[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
