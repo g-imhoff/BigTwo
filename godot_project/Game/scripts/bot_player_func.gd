@@ -152,7 +152,7 @@ func check_for_best_combi_with_card(lst_card, required_card, children_slots, han
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
 	if card in hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
-		hand.remove_card_from_hand(card)  # Supprime la carte de la main
+		hand.remove_card_from_hand()  # Supprime la carte de la main
 		var sprite=card.get_node("Sprite")
 		sprite.texture=card.img
 		hand.animate_card_to_position(card,slot.position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn3olflapan7j"]
+[gd_scene load_steps=9 format=3 uid="uid://bn3olflapan7j"]
 
 [ext_resource type="Script" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
 [ext_resource type="Script" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_right.gd" id="6_nswuf"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="7_5otmk"]
 [ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_left.gd" id="7_f6iy4"]
+[ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="8_x66yg"]
 
 [node name="ConnectServer" type="Node2D"]
 script = ExtResource("1_abxww")
@@ -43,6 +44,70 @@ offset_right = 1239.0
 offset_bottom = 1075.0
 text = "PASS
 "
+
+[node name="Cardslots2" type="Node2D" parent="."]
+z_index = -1
+
+[node name="cardslot" parent="Cardslots2" instance=ExtResource("8_x66yg")]
+position = Vector2(1000, 250)
+
+[node name="cardslot2" parent="Cardslots2" instance=ExtResource("8_x66yg")]
+position = Vector2(1100, 250)
+
+[node name="cardslot3" parent="Cardslots2" instance=ExtResource("8_x66yg")]
+position = Vector2(900, 250)
+
+[node name="cardslot4" parent="Cardslots2" instance=ExtResource("8_x66yg")]
+position = Vector2(800, 250)
+
+[node name="cardslot5" parent="Cardslots2" instance=ExtResource("8_x66yg")]
+position = Vector2(1200, 250)
+
+[node name="Cardslots3" type="Node2D" parent="."]
+z_index = -1
+
+[node name="cardslot" parent="Cardslots3" instance=ExtResource("8_x66yg")]
+position = Vector2(500, 500)
+rotation = 1.5708
+
+[node name="cardslot2" parent="Cardslots3" instance=ExtResource("8_x66yg")]
+position = Vector2(500, 600)
+rotation = 1.5708
+
+[node name="cardslot3" parent="Cardslots3" instance=ExtResource("8_x66yg")]
+position = Vector2(500, 400)
+rotation = 1.5708
+
+[node name="cardslot4" parent="Cardslots3" instance=ExtResource("8_x66yg")]
+position = Vector2(500, 300)
+rotation = 1.5708
+
+[node name="cardslot5" parent="Cardslots3" instance=ExtResource("8_x66yg")]
+position = Vector2(500, 700)
+rotation = 1.5708
+
+[node name="Cardslots4" type="Node2D" parent="."]
+z_index = -1
+
+[node name="cardslot" parent="Cardslots4" instance=ExtResource("8_x66yg")]
+position = Vector2(1500, 500)
+rotation = 1.5708
+
+[node name="cardslot2" parent="Cardslots4" instance=ExtResource("8_x66yg")]
+position = Vector2(1500, 600)
+rotation = 1.5708
+
+[node name="cardslot3" parent="Cardslots4" instance=ExtResource("8_x66yg")]
+position = Vector2(1500, 400)
+rotation = 1.5708
+
+[node name="cardslot4" parent="Cardslots4" instance=ExtResource("8_x66yg")]
+position = Vector2(1500, 300)
+rotation = 1.5708
+
+[node name="cardslot5" parent="Cardslots4" instance=ExtResource("8_x66yg")]
+position = Vector2(1500, 700)
+rotation = 1.5708
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Button" to="card_manager" method="_on_play_pressed"]

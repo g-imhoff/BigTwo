@@ -72,6 +72,18 @@ card_list = [
 
 placeholder_card_list = card_list.copy()
 
+'''
+All the function : 
+
+    - server : 
+        - connected : help to the client to know that the connection worked well
+        - starting : start the game with everything needed (like cards)
+        - played : send to all of the other user what the actual player just played
+    - client : 
+        - connect : client telling you that is connecting with the server
+          needed of later make the starting call and also store some data needed
+        - play : send the card played
+'''
 
 def random_hand():
     global placeholder_card_list
@@ -91,11 +103,11 @@ async def connect_handler(content, websocket):
     global connected_client
     global placeholder_card_list
     if nb_client < 4:
-        connected_client[content["profile_name"]] = websocket
+        connected_client[content["profile_name"]]["socket"] = websocket
         nb_client += 1
 
         result_message = {
-            "code": 0,
+            "function": "connected",
             "message": "Connection worked"
         }
 
@@ -108,21 +120,32 @@ async def connect_handler(content, websocket):
                 list_hand, bool_first = random_hand()
                 starting_game_message = {
                     "id" : 1 if bool_first else num,
-                    "code": 1,
+                    "function": "starting",
                     "message": "game starting",
                     "card_hand": list_hand,
                     "first_player": 1 if bool_first else 0
                 }
+                connected_client[client]["id"] = 1 if bool_first else num
 
                 if not bool_first:
                     num += 1
 
                 message = json.dumps(starting_game_message)
-                await connected_client[client].send(message)
+                await connected_client[client]["socket"].send(message)
             placeholder_card_list = card_list.copy()
     else : 
         websocket.close(code=999, reason="server is full")
 
+def broadcast_card(content, websocket):
+    global connected_client
+    message = {
+        "id": content["id"],
+        "function": "played",
+        "card": content["card"],
+    }
+    for client in connected_client:
+        if (connected_client[client]["id"] != content["id"]):
+            connected_client[client]["socket"].send(json.dumps(message))
 
 async def handler(websocket):
     global nb_client
@@ -130,10 +153,11 @@ async def handler(websocket):
 
     async for message in websocket:
         content = json.loads(message)
-        print(content)
         match content["function"]:
             case "connect":
                 await connect_handler(content, websocket)
+            case "play": 
+                broadcast_card(content, websocket)
 
 
 async def main():

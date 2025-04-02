@@ -6,6 +6,8 @@ const CARD_WIDTH=60 #60
 const HAND_X_POSITION=1860
 
 var player_hand=[]
+var lst_card_in_slot=[]
+
 var card_scale=Vector2(0.5,0.5)
 var center_screen_y
 
@@ -50,3 +52,7 @@ func calculate_card_position(index):
 func animate_card_to_position(card,new_position):
 	var tween = get_tree().create_tween()
 	tween.tween_property(card,"position",new_position,0.1 )
+
+func remove_card_from_hand(card):
+	if card in player_hand:
+		player_hand.remove_at(0)
