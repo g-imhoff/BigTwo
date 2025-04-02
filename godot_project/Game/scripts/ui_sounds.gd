@@ -1,5 +1,7 @@
 extends Node
 
+
+
 @onready var sounds = {
 	"UI_Hover": AudioStreamPlayer.new(),
 	"UI_Click": AudioStreamPlayer.new(),
@@ -26,5 +28,5 @@ func install_sounds(node: Node) -> void:
 		install_sounds(child)
 
 func ui_sfx_play(sound: String) -> void:
-	if sound in sounds:
+	if sound in sounds and Config.button_check==true:
 		sounds[sound].play()

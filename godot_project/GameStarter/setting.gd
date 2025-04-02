@@ -35,6 +35,6 @@ func _on_check_button_music_toggled(toggled_on: bool) -> void:
 
 func _on_check_button_button_sound_toggled(toggled_on: bool) -> void:
 	if toggled_on==false:
-		AudioServer.set_bus_mute(AudioServer.get_bus_index("Sfx"),true)
+		Config.button_check=false
 	else:
-		AudioServer.set_bus_mute(AudioServer.get_bus_index("Sfx"),false)
+		Config.button_check=true 
