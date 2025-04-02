@@ -117,8 +117,8 @@ async def connect_handler(content, websocket):
                 if not bool_first:
                     num += 1
 
-            message = json.dumps(starting_game_message)
-            await connected_client[client].send(message)
+                message = json.dumps(starting_game_message)
+                await connected_client[client].send(message)
             placeholder_card_list = card_list.copy()
     else : 
         websocket.close(code=999, reason="server is full")
