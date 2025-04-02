@@ -111,6 +111,7 @@ func _on_play_pressed() -> void:
 			card_played.append(card.file)
 		
 		var content = JSON.stringify({
+			"id": Global.online_game_id,
 			"function": "play",
 			"card": card_played
 		})

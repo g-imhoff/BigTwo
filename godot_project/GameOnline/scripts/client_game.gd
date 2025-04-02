@@ -41,7 +41,7 @@ func _data_received_handler(data):
 			# Connected to the server game
 			pass
 		1: 
-			hand._card_hand_init(data["card_hand"], data["first_player"])
+			hand._card_hand_init(data["id"], data["card_hand"], data["first_player"])
 
 func _server_handshake():
 	var content = JSON.stringify({

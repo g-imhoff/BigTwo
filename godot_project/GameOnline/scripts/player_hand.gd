@@ -13,7 +13,8 @@ var first_player
 @onready var enemyLeft = $"../EnemyHandLeft"
 @onready var manager = $"../card_manager"
 
-func _card_hand_init(list_card, bool_first_player):
+func _card_hand_init(id, list_card, bool_first_player):
+	Global.online_game_id = id
 	center_screen_x=get_viewport().size.x/2
 	var card_scene=preload(CARD_SCENE_PATH)
 	for card in list_card: 
