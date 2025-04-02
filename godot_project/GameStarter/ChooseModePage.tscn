@@ -33,6 +33,7 @@ offset_bottom = 367.0
 texture_normal = ExtResource("4_0sxgh")
 
 [node name="Label single" type="Label" parent="Background/Single BTN"]
+layout_mode = 0
 offset_left = -6.0
 offset_top = 223.0
 offset_right = 214.0
@@ -48,6 +49,7 @@ offset_bottom = 367.0
 texture_normal = ExtResource("5_pvoy8")
 
 [node name="Label" type="Label" parent="Background/TextureButton"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 223.0
 offset_right = 216.0

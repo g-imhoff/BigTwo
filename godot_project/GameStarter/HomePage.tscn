@@ -1,15 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://7mcc8557hsh8"]
+[gd_scene load_steps=10 format=3 uid="uid://7mcc8557hsh8"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_gu8ip"]
 [ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_q42id"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="5_hq1fw"]
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="6_dni38"]
-[ext_resource type="Texture2D" uid="uid://bn6mcmfehnnxb" path="res://assets/ui/sound on.png" id="7_7stl6"]
 [ext_resource type="Texture2D" uid="uid://c1gcdf31e2ljm" path="res://assets/ui/Send.png" id="8_fwkod"]
-[ext_resource type="Texture2D" uid="uid://bvkdl6114misq" path="res://assets/ui/sound off.png" id="8_j8861"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="9_18r8e"]
-[ext_resource type="Script" uid="uid://pxt4fg7r6tr" path="res://GameStarter/sound_button.gd" id="9_jkku6"]
 
 [sub_resource type="GDScript" id="GDScript_ppnjs"]
 script/source = "extends Node2D
@@ -52,7 +49,7 @@ func _on_h_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(\"BGMusic\"), value)
 
 func _on_texture_button_pressed() -> void:
-	$Setting.make_visible(true)
+	$Setting.visible = not $Setting.visible
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upulg"]
@@ -67,26 +64,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_eyes3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_7stl6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_j8861")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k18rn"]
-size = Vector2(106, 60.5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gae61"]
-radius = 56.0089
-
 [node name="Homepage" type="Node2D"]
 script = SubResource("GDScript_ppnjs")
 
@@ -98,6 +75,13 @@ texture = ExtResource("2_gu8ip")
 position = Vector2(960, 300)
 texture = ExtResource("5_hq1fw")
 
+[node name="Settings Btn" type="TextureButton" parent="."]
+offset_left = 1729.0
+offset_top = 923.0
+offset_right = 1809.0
+offset_bottom = 1003.0
+texture_normal = ExtResource("6_dni38")
+
 [node name="PlayNow" type="Button" parent="."]
 offset_left = 783.0
 offset_top = 800.0
@@ -107,29 +91,7 @@ theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxFlat_upulg")
 text = "PLAY NOW"
 
-[node name="SoundButton" type="AnimatedSprite2D" parent="."]
-position = Vector2(1830, 950)
-sprite_frames = SubResource("SpriteFrames_eyes3")
-script = ExtResource("9_jkku6")
-
-[node name="Area2D" type="Area2D" parent="SoundButton"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SoundButton/Area2D"]
-position = Vector2(1, 59.75)
-shape = SubResource("RectangleShape2D_k18rn")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="SoundButton/Area2D"]
-position = Vector2(0, -39)
-shape = SubResource("CircleShape2D_gae61")
-
-[node name="TextureButton" type="TextureButton" parent="SoundButton/Area2D"]
-offset_left = -187.0
-offset_top = -25.0
-offset_right = -107.0
-offset_bottom = 55.0
-texture_normal = ExtResource("6_dni38")
-
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="Profile Btn" type="TextureButton" parent="."]
 offset_left = 82.0
 offset_top = 60.0
 offset_right = 191.0
@@ -137,7 +99,7 @@ offset_bottom = 173.0
 scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("3_q42id")
 
-[node name="TextureButton2" type="TextureButton" parent="."]
+[node name="Rules Btn" type="TextureButton" parent="."]
 offset_left = 1686.0
 offset_top = 60.0
 offset_right = 1801.0
@@ -154,20 +116,18 @@ min_value = -80.0
 max_value = -20.0
 value = -20.0
 
+[node name="Social media" type="TextureButton" parent="."]
+offset_left = 101.0
+offset_top = 925.0
+offset_right = 181.0
+offset_bottom = 1005.0
+texture_normal = ExtResource("8_fwkod")
+
 [node name="Setting" parent="." instance=ExtResource("9_18r8e")]
 visible = false
 position = Vector2(424, 80)
 
-[node name="instagram" type="TextureButton" parent="."]
-offset_left = 99.0
-offset_top = 970.0
-offset_right = 179.0
-offset_bottom = 1050.0
-texture_normal = ExtResource("8_fwkod")
-
+[connection signal="pressed" from="Settings Btn" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
-[connection signal="input_event" from="SoundButton/Area2D" to="SoundButton" method="_on_sound_button_input_event"]
-[connection signal="pressed" from="SoundButton/Area2D/TextureButton" to="." method="_on_texture_button_pressed"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
-[connection signal="pressed" from="TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="Rules Btn" to="." method="_on_texture_button_2_pressed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
