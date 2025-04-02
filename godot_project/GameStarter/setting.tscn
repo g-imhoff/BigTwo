@@ -136,4 +136,4 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ni351")
 text = "Exit to main menu"
 
 [connection signal="pressed" from="PopupSettings/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="PopupSettings/Button2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PopupSettings/Button2" to="." method="_on_button_2_pressed"]

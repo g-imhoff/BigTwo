@@ -129,6 +129,5 @@ position = Vector2(424, 80)
 
 [connection signal="pressed" from="Settings Btn" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
-[connection signal="pressed" from="Profile Btn" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="Rules Btn" to="." method="_on_texture_button_2_pressed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
