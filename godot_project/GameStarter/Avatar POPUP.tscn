@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwot7sxv4k3c8"]
+
+[ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_7f2rg"]
+[ext_resource type="Texture2D" uid="uid://bmkvpmoxealao" path="res://assets/ui/10.png" id="2_3dw6w"]
+[ext_resource type="Texture2D" uid="uid://5amcrs3xt12g" path="res://assets/ui/18.png" id="3_ufc6x"]
+[ext_resource type="Texture2D" uid="uid://dpgwl5lc0osju" path="res://assets/ui/19.png" id="4_7c4ic"]
+[ext_resource type="Texture2D" uid="uid://ccqaofjk7p6m6" path="res://assets/ui/21.png" id="5_heigi"]
+[ext_resource type="Texture2D" uid="uid://c6g3an8iujrxo" path="res://assets/ui/23.png" id="6_dafjh"]
+[ext_resource type="Texture2D" uid="uid://lxwc26fvqd52" path="res://assets/ui/24.png" id="7_ijgm2"]
+
+[node name="AvatarPopup" type="Node2D"]
+
+[node name="PopupSettings" type="Sprite2D" parent="."]
+position = Vector2(572, 409)
+texture = ExtResource("1_7f2rg")
+
+[node name="TextureButton" type="TextureButton" parent="PopupSettings"]
+offset_left = -364.0
+offset_top = -226.0
+offset_right = -244.0
+offset_bottom = -106.0
+texture_normal = ExtResource("2_3dw6w")
+
+[node name="TextureButton2" type="TextureButton" parent="PopupSettings"]
+offset_left = -21.0
+offset_top = -226.0
+offset_right = 99.0
+offset_bottom = -106.0
+texture_normal = ExtResource("3_ufc6x")
+
+[node name="TextureButton3" type="TextureButton" parent="PopupSettings"]
+offset_left = 275.0
+offset_top = -227.0
+offset_right = 395.0
+offset_bottom = -107.0
+texture_normal = ExtResource("4_7c4ic")
+
+[node name="TextureButton4" type="TextureButton" parent="PopupSettings"]
+offset_left = -348.0
+offset_top = 38.0
+offset_right = -228.0
+offset_bottom = 158.0
+texture_normal = ExtResource("5_heigi")
+
+[node name="TextureButton5" type="TextureButton" parent="PopupSettings"]
+offset_left = -4.0
+offset_top = 34.0
+offset_right = 116.0
+offset_bottom = 154.0
+texture_normal = ExtResource("6_dafjh")
+
+[node name="TextureButton6" type="TextureButton" parent="PopupSettings"]
+offset_left = 282.0
+offset_top = 37.0
+offset_right = 402.0
+offset_bottom = 157.0
+texture_normal = ExtResource("7_ijgm2")
