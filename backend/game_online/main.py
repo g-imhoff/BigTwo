@@ -103,6 +103,9 @@ async def connect_handler(content, websocket):
     global connected_client
     global placeholder_card_list
     if nb_client < 4:
+        if content["profile_name"] not in connected_client:
+            connected_client[content["profile_name"]] = {}
+
         connected_client[content["profile_name"]]["socket"] = websocket
         nb_client += 1
 
@@ -134,9 +137,9 @@ async def connect_handler(content, websocket):
                 await connected_client[client]["socket"].send(message)
             placeholder_card_list = card_list.copy()
     else : 
-        websocket.close(code=999, reason="server is full")
+        await websocket.close(code=999, reason="server is full")
 
-def broadcast_card(content, websocket):
+async def broadcast_card(content, websocket):
     global connected_client
     message = {
         "id": content["id"],
@@ -145,7 +148,7 @@ def broadcast_card(content, websocket):
     }
     for client in connected_client:
         if (connected_client[client]["id"] != content["id"]):
-            connected_client[client]["socket"].send(json.dumps(message))
+            await connected_client[client]["socket"].send(json.dumps(message))
 
 async def handler(websocket):
     global nb_client
@@ -157,7 +160,7 @@ async def handler(websocket):
             case "connect":
                 await connect_handler(content, websocket)
             case "play": 
-                broadcast_card(content, websocket)
+                await broadcast_card(content, websocket)
 
 
 async def main():
