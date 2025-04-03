@@ -7,6 +7,7 @@ const HAND_Y_POSITION=870
 const CARD_WIDTH=80
 var card_scale=Vector2(0.5,0.5)
 var first_player
+var lst_card_in_slot=[]
 
 @onready var enemyUp = $"../EnemyHandUp"
 @onready var enemyRight = $"../EnemyHandRight"
@@ -53,7 +54,6 @@ func update_hand_position():
 		var card=player_hand[i]
 		card.hand_position=new_position
 		animate_card_to_position(card,new_position)
-
 
 func calculate_card_position(index):
 	var total_with=(player_hand.size()-1)*CARD_WIDTH 

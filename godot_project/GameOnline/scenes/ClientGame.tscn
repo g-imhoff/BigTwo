@@ -46,11 +46,29 @@ text = "PASS
 "
 
 [node name="Button2" type="Button" parent="Button2"]
+layout_mode = 0
 offset_left = 661.0
 offset_top = -990.0
 offset_right = 819.0
 offset_bottom = -942.0
 text = "Back"
+
+[node name="Cardslots" type="Node2D" parent="."]
+
+[node name="cardslot" parent="Cardslots" instance=ExtResource("8_x66yg")]
+position = Vector2(1000, 600)
+
+[node name="cardslot2" parent="Cardslots" instance=ExtResource("8_x66yg")]
+position = Vector2(1100, 600)
+
+[node name="cardslot3" parent="Cardslots" instance=ExtResource("8_x66yg")]
+position = Vector2(900, 600)
+
+[node name="cardslot4" parent="Cardslots" instance=ExtResource("8_x66yg")]
+position = Vector2(800, 600)
+
+[node name="cardslot5" parent="Cardslots" instance=ExtResource("8_x66yg")]
+position = Vector2(1200, 600)
 
 [node name="Cardslots2" type="Node2D" parent="."]
 z_index = -1

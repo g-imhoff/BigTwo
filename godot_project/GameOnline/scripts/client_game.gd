@@ -52,27 +52,31 @@ func _data_received_handler(data):
 		"starting": 
 			hand._card_hand_init(data["id"], data["card_hand"], data["first_player"])
 		"played": 
-			match (int(data["id"] - Global.online_game_id) % 4):
+			match (abs(int(data["id"] - Global.online_game_id) % 4)):
 				1: 
 					enemy_played(enemyhandleft, cardslotleft, data["card"], enemyhandleft.lst_card_in_slot)
 				2: 
-					enemy_played(enemyhandup, cardslotup, data["card"], enemyhandleft.lst_card_in_slot)
+					enemy_played(enemyhandup, cardslotup, data["card"], enemyhandup.lst_card_in_slot)
 				3:
-					enemy_played(enemyhandright, cardslotright, data["card"], enemyhandleft.lst_card_in_slot)
+					enemy_played(enemyhandright, cardslotright, data["card"], enemyhandright.lst_card_in_slot)
 
 func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
+	var card_scene=preload(CARD_SCENE_PATH)
+
 	for card in list_card:
-		var card_scene=preload(CARD_SCENE_PATH)
+		print(card)
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
-		var new_texture=load(card)
 		var card_info = Global.get_card_info_from_texture(card)
+		
 		new_card.value = card_info[1]
 		new_card.form = card_info[0]
 		new_card.file = card
 		new_card.name="Card"
 		new_card.scale= card_scale
-		new_card.img = new_texture
+		
+		sprite.texture=load(card)
+		
 		var children_slots = cardslot.get_children()
 		var children_slot = null
 		
@@ -84,17 +88,13 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 		move_card_to_slot(new_card, children_slot, hand, lst_card_in_slot)
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
-	if card in hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
-		hand.remove_card_from_hand()  # Supprime la carte de la main
-		var sprite=card.get_node("Sprite")
-		sprite.texture=card.img
-		hand.animate_card_to_position(card,slot.position)
-		slot.card_in_slot = true  # Marque le slot comme occupé
-		slot.card_value=card.value
-		slot.card_form=card.form
-		lst_card_in_slot.append(card)
-	else:
-		print("Erreur : la carte n'est pas dans la main du joueur.")
+	hand.remove_card_from_hand()  # Supprime la carte de la main
+	hand.animate_card_to_position(card,slot.position)
+	slot.card_in_slot = true  # Marque le slot comme occupé
+	slot.card_value=card.value
+	slot.card_form=card.form
+	lst_card_in_slot.append(card)
+
 
 func _server_handshake():
 	var content = JSON.stringify({
