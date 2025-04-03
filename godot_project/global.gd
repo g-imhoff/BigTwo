@@ -3,7 +3,7 @@ extends Node
 var websocket_url = "wss://185.155.93.105:18005"
 var server_url = "wss://185.155.93.105:18006" # turn into wss://185.155.93.105:18006
 var username = ""
-var online_game_id = -1 # no game
+var online_game_id = 1000 # no game
 
 func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]

@@ -45,14 +45,14 @@ func _process(_delta):
 
 func _data_received_handler(data):
 	print(data)
-	match int(data["code"]):
+	match data["function"]:
 		"connected":
 			# Connected to the server game
 			pass
 		"starting": 
 			hand._card_hand_init(data["id"], data["card_hand"], data["first_player"])
 		"played": 
-			match (data["id"] - Global.online_game_id % 4):
+			match (int(data["id"] - Global.online_game_id) % 4):
 				1: 
 					enemy_played(enemyhandleft, cardslotleft, data["card"], enemyhandleft.lst_card_in_slot)
 				2: 
@@ -71,7 +71,8 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 		new_card.form = card_info[0]
 		new_card.file = card
 		new_card.name="Card"
-		new_card.scale=card_scale
+		new_card.scale= card_scale
+		new_card.img = new_texture
 		var children_slots = cardslot.get_children()
 		var children_slot = null
 		
@@ -102,3 +103,7 @@ func _server_handshake():
 	})
 	
 	socket.send_text(content)
+
+
+func _on_button_2_pressed() -> void:
+	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
