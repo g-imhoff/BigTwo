@@ -1,6 +1,7 @@
 extends Node2D
 
-var childre
+@onready var popup=$"../popup"
+
 func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right):
 	for i in range (lst_card.size()):
 			var card1 = lst_card[i]
@@ -75,7 +76,7 @@ func check_for_fullhouse(card_to_put,lst_card, children_slots, hand, children_sl
 						if card1.value==card2.value:
 							tmp.append(card2)
 					if tmp.size()==2:
-						if children_slots_right[0].combi==null or (children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight") or (card_to_put[0].value >children_slots_right[0].combi_value or (card_to_put[0].value==children_slots_right[0].combi_value and card_to_put[0]>children_slots_right[0].combi_form )):
+						if children_slots_right[0].combi==null or (children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight") or (card_to_put[0].value >children_slots_right[0].combi_value or (card_to_put[0].value==children_slots_right[0].combi_value and card_to_put[0].form>children_slots_right[0].combi_form )):
 							children_slots[0].combi_value=card_to_put[0].value
 							children_slots[0].combi_form=card_to_put[0].form
 							for card in tmp:
@@ -283,5 +284,5 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 
 func end_game():
 	print("tu a gagné")
-	await get_tree().create_timer(2.0).timeout
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
+	

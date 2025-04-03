@@ -149,6 +149,7 @@ func _on_button_pressed() -> void:
 			hand.update_hand_position()  # Met à jour l'affichage de la main
 			if hand.player_hand.size()==0:
 				end_game()
+			message.visible = false
 			emit_signal("card_played")
 	else:
 		for card in card_clicked:
@@ -182,6 +183,7 @@ func _on_button_pressed() -> void:
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 		if hand.player_hand.size()==0:
 			end_game()
+		message.visible = false
 		emit_signal("card_played")
 
 
@@ -328,6 +330,7 @@ func _on_button_2_pressed() -> void:
 		children_slots[0].combi_value = children_slots_right[0].combi_value
 		children_slots[0].combi_form = children_slots_right[0].combi_form
 		children_slots[0].passing = 1 + children_slots_right[0].passing
+		message.visible = false
 		emit_signal("card_played")
 
 

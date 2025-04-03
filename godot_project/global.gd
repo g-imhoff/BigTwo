@@ -56,3 +56,5 @@ var card_images=[
 	"res://assets/cards/card_spades_K.png",
 	"res://assets/cards/card_spades_Q.png",
 ]
+
+var card_duplicate = card_images.duplicate()

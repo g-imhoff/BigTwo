@@ -19,14 +19,15 @@ var lst_card_in_slot=[]
 @onready var Cardslots_right=$"../Cardslots2"
 @onready var children_slots_right=Cardslots_right.get_children()
 @onready var bot_player_func=$"../bot_player_func"
-
+@onready var timer = $"../Timer"
 
 
 func _ready() -> void:
 	screen_size=get_viewport_rect().size
 
 func on_card_played():
-	await get_tree().create_timer(2.0).timeout
+	timer.start(2.0)
+	await timer.timeout
 	bot_player_func.on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot)
 	emit_signal("enemy")
 
