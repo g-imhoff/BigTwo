@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var popup=$"../popup"
+@onready var popup=$"res://Game/scripts/popup.gd"
 
 func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right):
 	for i in range (lst_card.size()):
