@@ -1,6 +1,5 @@
 extends Node
 
-var websocket_url = "ws://localhost:18014/"
 
 var card_images=[
 	"res://assets/cards/card_clubs_02.png",
@@ -58,3 +57,6 @@ var card_images=[
 ]
 
 var card_duplicate = card_images.duplicate()
+
+var websocket_url = "wss://185.155.93.105:18005"
+

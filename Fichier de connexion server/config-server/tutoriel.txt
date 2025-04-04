@@ -1,0 +1,52 @@
+Pour avoir accès aux machines virtuelles sur la plateforme Openstack de la 
+DNUM, vous devez suivre les instructions ci-dessous.
+
+Vous trouverez ci-joint un fichier "config" et un fichier "private.pem".
+Copiez le contenu de "config" dans votre ~/.ssh/config (s'il n'existe pas, 
+crée le). 
+Copiez ou déplacez le fichier "private.pem" dans votre home (le 
+répertoire ~). Assurez vous que ce fichier dispose des permissions 0x600
+(rw- --- ---).
+Vous pouvez désormais accéder aux machines via la commande ssh, les noms de
+vos VM correspondent aux lignes "Host" commençant par "vm" du fichier "config".
+La machine "bastionMATIERE" n'est pas une de vos VM.
+
+La commande sudo ne nécessitent pas de mot de passe (dans le cas contraire
+c'est que vous n'etes pas sur une de vos VM).
+Vos enseignants ont la possibilité de démarrer, éteindre, redémarrer et 
+supprimer (et recréer le cas échéant) une ou plusieurs de vos VM.
+Vos VM ont un adressage réseau privé (en 192.168.x.y), elles ne sont donc
+pas directement accessibles depuis l'Internet. Vous passez donc par un bastion
+qui possède une adresse IP publique et qui sert de relais pour accéder à ce
+réseau privé.
+Vous pouvez faire du ssh entre vos VM, la configuration est déjà en 
+place. Vos VM sont parametrés pour "connaitre" les autres, les commandes
+tels que "ssh nom_de_la_VM" ou "ping nom_de_la__VM" fonctionnent.
+
+Le bastion sert de reverse proxy pour les serveurs web que vous hébergeriez 
+sur vos VMs. Pour accéder à un serveur web qui écouterait sur le port 80 
+d'une VM, il faut accéder à l'url 
+https://mai-projet-integrateur.u-strasbg.fr/nom_de_la_vm/ (le https et les 
+/ sont nécessaires). Par exemple: 
+https://mai-projet-integrateur.u-strasbg.fr/vmProjetIntegrateurgrpX-Y/
+pour atteindre le serveur HTTP de la vmProjetIntegrateurgrpX-Y. 
+
+Des ports TCP et UDP du bastion  ont été redirigées pour vous permettre d'
+accéder à certains ports de vos VM depuis l'exterieur. Pour chaque VM, 8 
+ports sont accessibles par Internet, du port 10000 à 10007. Pour les utiliser,
+vous devez suivre la logique suivante:
+- votre groupe a un numero, le nombre indiqué dans le nom du dossier fourni
+par votre enseignant et qui suit directement "grp" dans le nom de vos 
+machines. Appelons ce numero G.
+- votre VM a un numero, le nombre qui suit directement "-" dans le nom de
+vos machines. Appelons ce numero T.
+Pour accéder au port 1000X de votre VM, vous devez passer par l'adresse IP 
+de la machine "bastion" et le port (10000 + 1000*G + 8*T + X). Par exemple:
+- groupe 1
+- VM numéro 3
+- port 10005
+=> 10000 + 1000*1 + 8*3 + 5
+=> port 11043 de la machine "bastion".
+Cela permettra par exemple d'heberger une application sur un de ces ports
+afin qu'elle soit utilisable depuis l'Internet.
+

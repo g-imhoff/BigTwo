@@ -1,0 +1,17 @@
+Host bastionProjetIntegrateur
+        Hostname 185.155.93.105
+        User student
+        IdentityFile ~/private.pem
+	StrictHostKeyChecking no
+Host vmProjetIntegrateurgrp8-0
+        Hostname 192.168.100.116
+        User ubuntu
+        ProxyJump bastionProjetIntegrateur
+        IdentityFile ~/private.pem
+	StrictHostKeyChecking no
+Host vmProjetIntegrateurgrp8-1
+        Hostname 192.168.100.117
+        User ubuntu
+        ProxyJump bastionProjetIntegrateur
+        IdentityFile ~/private.pem
+	StrictHostKeyChecking no

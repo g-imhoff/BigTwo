@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bg2v1sunut0tk"]
+[gd_scene load_steps=5 format=3 uid="uid://bg2v1sunut0tk"]
 
 [ext_resource type="Script" path="res://GameStarter/rules_page.gd" id="1_0hlb0"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_b84sh"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="2_56ugk"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_ndtx7"]
 
 [node name="RulesPage" type="Node2D"]
 script = ExtResource("1_0hlb0")
@@ -12,19 +13,51 @@ position = Vector2(960, 540)
 texture = ExtResource("1_b84sh")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 30.0
-offset_top = 400.0
-offset_right = 1890.0
-offset_bottom = 960.0
+offset_left = 44.0
+offset_top = 392.0
+offset_right = 1904.0
+offset_bottom = 952.0
 theme_override_font_sizes/normal_font_size = 33
-text = "- Chaque joueur reçoit 13 cartes.
-- Le joueur possédant le 3 de ♦ commence la partie.
-- À son tour, un joueur peut poser une carte ou une combinaison supérieure à la précédente ou passer.
-- Les joueurs peuvent passer leur tour, ce qui signifie qu'ils choisissent de ne pas jouer ou qu'ils n'ont pas les cartes pour jouer.
-- Lorsque tous les joueurs sauf un ont passé successivement, le tour est terminé et les cartes jouées restent dans la défausse, un nouveau tour commence avec tous les joueurs, initié par le dernier joueur à jouer.
-- Les combinaisons valides sont : carte simple, paire, brelan, suite de cinq cartes (comme au poker : suite, couleur, full, carré, quinte flush).
-- La manche se termine lorsqu’un joueur n’a plus de cartes.
-- Le jeu continue jusqu’à ce qu’un joueur atteigne un score défini (en fonction des cartes restantes des adversaires)."
+text = "Big Two 
+
+🃏 Objective
+Big Two is a strategic card game where the goal is to be the first to discard all your cards by playing stronger combinations than your opponents.
+
+🃏 Card Distribution
+Each player receives 13 cards from a standard 52-card deck without jokers.
+
+🃏  Game Flow
+	•	The player holding the 3♦ (Three of Diamonds) starts the game.
+	Players take turns in clockwise order.
+		On their turn, a player can:
+	       •	Play a stronger combination than the previous one.
+	       •	Pass if they cannot or do not wish to play.
+	•	If all players pass, the last player to have played a combination starts a new round.
+
+🃏  Number of Cards per Turn
+	•	The first combination played determines the number of cards required for the round.
+	•	Example: If a player plays a pair, the following players must play a stronger pair or pass.
+
+🃏  Valid Combinations
+	•	Single Card: (e.g., K♠)
+	•	Pair: (e.g., 7♦ 7♣)
+	•	Three-of-a-Kind: (e.g., 5♠ 5♦ 5♥)
+	•	Straight: Five consecutive cards (e.g., 5♣ 6♦ 7♠ 8♥ 9♣)
+	•	Flush: Five cards of the same suit (e.g., A♦ 8♦ 6♦ 5♦ 3♦)
+	•	Full House: A three-of-a-kind + a pair (e.g., 10♣ 10♦ 10♥ 7♠ 7♣)
+	•	Four-of-a-Kind: Four identical cards + one extra card (e.g., Q♣ Q♦ Q♥ Q♠ 5♦)
+	•	Straight Flush: A straight where all cards share the same suit (e.g., 6♦ 7♦ 8♦ 9♦ 10♦)
+
+🃏  End of the Game
+	•	The game ends as soon as a player has played all their cards.
+	•	That player is declared the winner!
+
+🃏  Card Rankings
+	•	Card Strength: 2♠ > A♠ > K♠ > Q♠ > J♠ > 10♠ > … > 3♠
+	•	Suit Order: ♠ (Spades) > ♥ (Hearts) > ♣ (Clubs) > ♦ (Diamonds)
+
+🃏  Tip: Use strategic combinations to trap your opponents and empty your hand faster than them! 🚀
+"
 
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(960, 130)
@@ -47,4 +80,12 @@ offset_bottom = 1043.0
 theme_override_font_sizes/font_size = 30
 text = "Let's Play !"
 
+[node name="Backicon rules" type="TextureButton" parent="."]
+offset_left = 50.0
+offset_top = 52.0
+offset_right = 90.0
+offset_bottom = 92.0
+texture_normal = ExtResource("4_ndtx7")
+
 [connection signal="pressed" from="Button" to="." method="_on_lets_play_pressed"]
+[connection signal="pressed" from="Backicon rules" to="." method="_on_backicon_rules_pressed"]
