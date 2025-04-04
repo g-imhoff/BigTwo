@@ -33,6 +33,9 @@ func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx
 # Function called when the \"Play Now\" button is pressed.
 func _on_play_now_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
+	
+func _on_profile_btn_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://GameStarter/Profile.tscn\")
 
 # Function called when an input event is detected on the Instagram button.
 # _viewport: The viewport node associated with the event.
@@ -117,4 +120,5 @@ position = Vector2(424, 80)
 
 [connection signal="pressed" from="Settings Btn" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
+[connection signal="pressed" from="Profile Btn" to="." method="_on_profile_btn_pressed"]
 [connection signal="pressed" from="Rules Btn" to="." method="_on_texture_button_2_pressed"]

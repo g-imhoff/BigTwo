@@ -1,9 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://20pkkhkt0f7u"]
+[gd_scene load_steps=9 format=3 uid="uid://20pkkhkt0f7u"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_58fyg"]
-[ext_resource type="Script" path="res://GameStarter/profile.gd" id="1_wj8vm"]
+[ext_resource type="PackedScene" uid="uid://dwot7sxv4k3c8" path="res://GameStarter/Avatar POPUP.tscn" id="3_bajs7"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_fdaiq"]
-[ext_resource type="FontFile" uid="uid://cmjhwlahgh8i6" path="res://assets/ui/porter-sans-inline-block-webfont.ttf" id="4_gnwbp"]
+[ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="3_vyuf8"]
+[ext_resource type="Texture2D" uid="uid://bwjon0ntfftja" path="res://assets/ui/25.png" id="4_05vi8"]
+[ext_resource type="Script" path="res://GameStarter/avatar_popup.gd" id="6_udx4q"]
+
+[sub_resource type="GDScript" id="GDScript_o0vsq"]
+script/source = "extends Node2D
+
+func _ready():
+	UISounds.install_sounds(self)
+
+func _on_texture_button_pressed() -> void:
+		get_tree().change_scene_to_file(\"res://GameStarter/HomePage.tscn\")
+
+
+func _on_button_pressed() -> void:
+	$AvatarPopup.visible = not $AvatarPopup.visible
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13uxv"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
@@ -18,47 +34,58 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="Profile" type="Node2D"]
-script = ExtResource("1_wj8vm")
+script = SubResource("GDScript_o0vsq")
 metadata/_edit_horizontal_guides_ = [-303.0]
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("1_58fyg")
 
-[node name="TextureButton" type="TextureButton" parent="Background"]
-offset_left = -860.0
-offset_top = -478.0
-offset_right = -786.0
-offset_bottom = -404.0
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 100.0
+offset_top = 62.0
+offset_right = 174.0
+offset_bottom = 136.0
 texture_normal = ExtResource("3_fdaiq")
 
-[node name="Button" type="Button" parent="Background"]
-offset_left = -701.0
-offset_top = 240.0
-offset_right = -446.0
-offset_bottom = 290.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_13uxv")
-text = "change my avatar"
+[node name="profil pic" type="Sprite2D" parent="."]
+position = Vector2(403.5, 464)
+scale = Vector2(1.0525, 1)
+texture = ExtResource("4_05vi8")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Games stat" type="RichTextLabel" parent="."]
 offset_left = 734.0
 offset_top = 274.0
 offset_right = 1134.0
 offset_bottom = 367.0
-theme_override_fonts/normal_font = ExtResource("4_gnwbp")
+theme_override_fonts/normal_font = ExtResource("3_vyuf8")
 theme_override_font_sizes/normal_font_size = 64
 text = "Games"
 tab_size = 5
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+[node name="wins stat" type="RichTextLabel" parent="."]
 offset_left = 1369.0
 offset_top = 268.0
 offset_right = 1636.0
 offset_bottom = 361.0
-theme_override_fonts/normal_font = ExtResource("4_gnwbp")
+theme_override_fonts/normal_font = ExtResource("3_vyuf8")
 theme_override_font_sizes/normal_font_size = 64
 text = "WINS"
 tab_size = 5
 
-[connection signal="pressed" from="Background/TextureButton" to="." method="_on_texture_button_pressed"]
+[node name="Button" type="Button" parent="."]
+offset_left = 259.0
+offset_top = 780.0
+offset_right = 550.0
+offset_bottom = 864.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_13uxv")
+text = "change my avatar"
+
+[node name="AvatarPopup" parent="." instance=ExtResource("3_bajs7")]
+visible = false
+position = Vector2(701, 126)
+script = ExtResource("6_udx4q")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
