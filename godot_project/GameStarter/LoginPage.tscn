@@ -1,41 +1,63 @@
-[gd_scene load_steps=10 format=3 uid="uid://dui1hqinflue4"]
+[gd_scene load_steps=14 format=3 uid="uid://dui1hqinflue4"]
 
-[ext_resource type="Script" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
+[ext_resource type="Script" uid="uid://bcocpoeix31jf" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
 [ext_resource type="Texture2D" uid="uid://wusfm5iffkwg" path="res://assets/ui/login google.png" id="3_nhusd"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_qpq5i"]
 [ext_resource type="Texture2D" uid="uid://ckmwq5fbp3g6e" path="res://assets/ui/Divider create page.png" id="4_3wjrt"]
 [ext_resource type="Texture2D" uid="uid://cp6gvl7q3kwp0" path="res://assets/ui/Text field.png" id="4_cl3p3"]
-[ext_resource type="Texture2D" uid="uid://yuptm5fmlar0" path="res://assets/ui/hideicon.png" id="6_b3rm8"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0fgs"]
-size = Vector2(668.496, 50)
+[ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="7_wdso3"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="8_i56jj"]
+[ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="8_uobxe"]
+[ext_resource type="Script" uid="uid://dxxgr84dsusln" path="res://GameStarter/animated_hide.gd" id="9_uobxe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb2qk"]
 size = Vector2(66, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c1d45"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wdso3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uobxe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg8a2"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="LoginPage" type="Node2D"]
 script = ExtResource("1_6t1k7")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(958, 534)
 texture = ExtResource("1_wx55c")
+
+[node name="BackButton login" type="TextureButton" parent="Background"]
+offset_left = -877.0
+offset_top = -489.0
+offset_right = -803.0
+offset_bottom = -415.0
+texture_normal = ExtResource("8_i56jj")
 
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(960, 130)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_qpq5i")
-
-[node name="OAuthGoogle" type="Sprite2D" parent="."]
-position = Vector2(962.75, 410)
-scale = Vector2(0.991779, 1)
-texture = ExtResource("3_nhusd")
-
-[node name="Area2D" type="Area2D" parent="OAuthGoogle"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OAuthGoogle/Area2D"]
-position = Vector2(-0.251648, 1)
-shape = SubResource("RectangleShape2D_b0fgs")
 
 [node name="LOG IN" type="Label" parent="."]
 offset_left = 875.0
@@ -77,7 +99,6 @@ offset_right = 665.0
 offset_bottom = 57.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-placeholder_text = "Enter your email address or username"
 alignment = 1
 flat = true
 
@@ -102,7 +123,6 @@ offset_right = 665.0
 offset_bottom = 57.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-placeholder_text = "Enter your password"
 alignment = 1
 flat = true
 secret = true
@@ -136,9 +156,11 @@ text = "Hide"
 position = Vector2(5, 13)
 shape = SubResource("RectangleShape2D_tb2qk")
 
-[node name="Sprite2D" type="Sprite2D" parent="Password/LabelPassword/HideButton"]
+[node name="AnimatedSprite2D_hide" type="AnimatedSprite2D" parent="Password/LabelPassword/HideButton/Area2D"]
 position = Vector2(-15, 12)
-texture = ExtResource("6_b3rm8")
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_c1d45")
+script = ExtResource("9_uobxe")
 
 [node name="LoginButton" type="Button" parent="."]
 offset_left = 629.0
@@ -146,36 +168,33 @@ offset_top = 850.0
 offset_right = 1294.0
 offset_bottom = 907.0
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_yg8a2")
 text = "Login"
 
-[node name="CreateAccount" type="Button" parent="."]
-offset_left = 629.0
-offset_top = 930.0
-offset_right = 1294.0
-offset_bottom = 987.0
-theme_override_font_sizes/font_size = 25
-text = "Create Account"
-
 [node name="RememberMe" type="CheckBox" parent="."]
-texture_filter = 1
-offset_left = 628.0
-offset_top = 787.0
-offset_right = 652.0
-offset_bottom = 811.0
-scale = Vector2(2, 2)
+offset_left = 644.0
+offset_top = 791.0
+offset_right = 670.0
+offset_bottom = 817.0
 
-[node name="Label" type="Label" parent="RememberMe"]
-texture_filter = 1
+[node name="Label2" type="Label" parent="RememberMe"]
 layout_mode = 0
-offset_left = 28.5
-offset_top = 5.0
-offset_right = 100.5
-offset_bottom = 19.0
-theme_override_font_sizes/font_size = 10
-text = "Remember me"
+offset_left = 34.0
+offset_top = 1.0
+offset_right = 149.0
+offset_bottom = 50.0
+text = "Remember me
+"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 623.0
+offset_top = 407.0
+offset_right = 1292.0
+offset_bottom = 458.0
+texture_normal = ExtResource("3_nhusd")
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
-[connection signal="input_event" from="OAuthGoogle/Area2D" to="." method="_on_oauth_google_input_event"]
-[connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="." method="_on_hide_input_event"]
+[connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]
+[connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="Password/LabelPassword/HideButton/Area2D/AnimatedSprite2D_hide" method="_on_area_2d_input_event"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
-[connection signal="pressed" from="CreateAccount" to="." method="_on_create_account_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

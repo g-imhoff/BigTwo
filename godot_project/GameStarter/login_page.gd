@@ -33,13 +33,6 @@ func _on_create_account_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/CreatePage.tscn")
 
 
-func _on_hide_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed("leftclick"):
-		if password_line_edit.is_secret():
-			password_line_edit.set_secret(false)
-		else:
-			password_line_edit.set_secret(true)
-
 func _ready() -> void:
 	var clientCAS = load("res://cert.crt")
 	var err = socket.connect_to_url(Global.websocket_url, TLSOptions.client_unsafe(clientCAS))
@@ -47,6 +40,8 @@ func _ready() -> void:
 		print("Unable to connect")
 		set_process(false)
 		
+	UISounds.install_sounds(self)
+
 func _process(_delta):
 	socket.poll()
 	var state = socket.get_ready_state()
@@ -72,3 +67,11 @@ func _data_received_handler(data):
 
 func _on_tree_exited() -> void:
 	socket.close()
+
+
+func _on_back_button_login_pressed() -> void:
+	get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")
+
+
+func _on_texture_button_pressed() -> void:
+		print("OAuthGoogleClicked")

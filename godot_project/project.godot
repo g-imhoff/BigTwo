@@ -13,11 +13,15 @@ config_version=5
 config/name="godot_project"
 run/main_scene="res://GameStarter/HomePage.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/autoload_on_startup=false
 
 [autoload]
 
 Global="*res://global.gd"
 Notification="*res://sprite/notification.tscn"
+UISounds="*res://Game/scripts/ui_sounds.gd"
+MusicPlayer="*res://GameStarter/MusicPlayer.tscn"
+Config="*res://GameStarter/Config.gd"
 
 [display]
 

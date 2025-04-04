@@ -1,6 +1,6 @@
 extends Node2D
 
-const HAND_COUNT=6
+const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 const CARD_WIDTH=80
 const HAND_Y_POSITION=870
@@ -9,22 +9,22 @@ var player_hand=[]
 var center_screen_x
 var card_scale=Vector2(0.5,0.5)
 
-#@onready var lst_img=Global.card_images
+@onready var lst_img = Global.card_duplicate
 
-
-var lst_img=[
-	"res://assets/cards/card_diamonds_05.png",
-	"res://assets/cards/card_hearts_05.png",
-	"res://assets/cards/card_spades_05.png",
-	"res://assets/cards/card_diamonds_10.png",
-	"res://assets/cards/card_clubs_05.png",
-	"res://assets/cards/card_clubs_06.png",
-	]
+#var lst_img=[
+	#"res://assets/cards/card_diamonds_03.png",
+	#"res://assets/cards/card_clubs_04.png",
+	#"res://assets/cards/card_diamonds_05.png",
+	#"res://assets/cards/card_diamonds_10.png",
+	#"res://assets/cards/card_diamonds_06.png",
+	#"res://assets/cards/card_diamonds_07.png",
+	#]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	center_screen_x=get_viewport().size.x/2
 	var card_scene=preload(CARD_SCENE_PATH)
+	print(Global.card_images.size())
 	for i in range(HAND_COUNT):
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
@@ -53,6 +53,8 @@ func update_hand_position():
 		var new_position =Vector2(calculate_card_position(i),HAND_Y_POSITION)
 		var card=player_hand[i]
 		card.hand_position=new_position
+		card.z_index = i + 1
+		card.remove_meta("z_index")
 		animate_card_to_position(card,new_position)
 
 

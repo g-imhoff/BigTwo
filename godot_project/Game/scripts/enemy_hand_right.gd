@@ -9,7 +9,7 @@ var player_hand=[]
 var card_scale=Vector2(0.5,0.5)
 var center_screen_y
 
-@onready var lst_img=Global.card_images
+@onready var lst_img=Global.card_duplicate
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +20,7 @@ func _ready() -> void:
 		var sprite=new_card.get_node("Sprite")
 		var selected_card=random_card()
 		
-		var new_texture=load("res://assets/cards/card_back.png") #montre juste le dos "res://assets/cards/card_back.png"
+		var new_texture=load(selected_card) #montre juste le dos "res://assets/cards/card_back.png"
 		 # Extraire la valeur et la couleur de la carte
 		var card_info =get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
