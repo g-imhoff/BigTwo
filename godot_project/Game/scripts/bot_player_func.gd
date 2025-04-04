@@ -1,7 +1,5 @@
 extends Node2D
 
-@onready var popup=$"../popup"
-
 func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right):
 	for i in range (lst_card.size()):
 			var card1 = lst_card[i]
@@ -171,7 +169,7 @@ func check_for_best_combi_with_card(lst_card, required_card, children_slots, han
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
 	if card in hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
-		hand.remove_card_from_hand()  # Supprime la carte de la main
+		hand.remove_card_from_hand(card)  # Supprime la carte de la main
 		var sprite=card.get_node("Sprite")
 		sprite.texture=card.img
 		hand.animate_card_to_position(card,slot.position)
@@ -281,8 +279,6 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			children_slots[0].passing = 1 + children_slots_right[0].passing
 		played = true
 
-
 func end_game():
 	print("tu a gagné")
 	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
-	

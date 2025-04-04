@@ -58,3 +58,4 @@ theme_override_font_sizes/font_size = 30
 text = "MULTI PLAYER"
 
 [connection signal="pressed" from="Background/backicon chooseMode page" to="." method="_on_backicon_choose_mode_page_pressed"]
+[connection signal="pressed" from="Background/Single BTN" to="." method="_on_single_btn_pressed"]
