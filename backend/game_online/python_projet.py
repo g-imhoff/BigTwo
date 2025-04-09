@@ -1,5 +1,3 @@
-
-
 class Combinaison:
     def __init__(self, combi, combi_value,combi_form):
         self.combi = combi

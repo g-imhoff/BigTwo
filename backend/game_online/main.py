@@ -4,6 +4,7 @@ import json
 from websockets.asyncio.server import serve
 import ssl
 from debut_jeu import get_list_card_info_from_texture
+from python_project import check_card_clicked
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
@@ -160,6 +161,9 @@ async def send_verification(verification, websocket, message) :
 
     await websocket.send(json.dumps(message))
 
+def verification(list_card): 
+
+
 async def handler(websocket):
     global nb_client
     global connected_client
@@ -172,8 +176,10 @@ async def handler(websocket):
             case "play": 
                 # TODO : Implement verification then broadcast and then tell him you can play
                 list_card = get_list_card_info_from_texture(content["card"])
+                combi = check_card_clicked(list_card)
+                print(combi)
 
-                verification, message = 1, ""  
+               verification, message = verification(list_card)
                 await broadcast_card(content, websocket)
                 await send_verification(verification, websocket, message)
 
