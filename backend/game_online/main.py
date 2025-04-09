@@ -172,7 +172,7 @@ async def handler(websocket):
             case "play": 
                 # TODO : Implement verification then broadcast and then tell him you can play
                 list_card = get_list_card_info_from_texture(content["card"])
-                print(list_card[0].value)
+
                 verification, message = 1, ""  
                 await broadcast_card(content, websocket)
                 await send_verification(verification, websocket, message)
