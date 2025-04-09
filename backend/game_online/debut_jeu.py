@@ -3,6 +3,16 @@ class Card:
         self.value = value
         self.form = form
 
+def get_list_card_info_from_texture(l): 
+    result = []
+    i = 0
+    for path in l:
+        form, value = get_card_info_from_texture(path)
+        card = Card(value, form)
+        result[i] = card
+        i += 1
+
+    return result
 
 def get_card_info_from_texture(path):
 	card_info=[]
