@@ -50,6 +50,10 @@ func _on_texture_button_2_pressed() -> void:
 
 func _on_texture_button_pressed() -> void:
 	$Setting.visible = not $Setting.visible
+
+
+func _on_social_media_pressed() -> void:
+	OS.shell_open(\"https://linktr.ee/bigtwo2\")
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upulg"]
@@ -122,3 +126,4 @@ position = Vector2(424, 80)
 [connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
 [connection signal="pressed" from="Profile Btn" to="." method="_on_profile_btn_pressed"]
 [connection signal="pressed" from="Rules Btn" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="Social media" to="." method="_on_social_media_pressed"]
