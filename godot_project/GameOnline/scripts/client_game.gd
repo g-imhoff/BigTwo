@@ -12,6 +12,7 @@ var card_scale=Vector2(0.5,0.5)
 @onready var cardslotleft = $Cardslots3
 @onready var cardslotup = $Cardslots2
 @onready var cardslotright = $Cardslots4
+@onready var manager = $card_manager
 
 func _on_tree_exited() -> void:
 	socket.close()
@@ -59,23 +60,29 @@ func _data_received_handler(data):
 					enemy_played(enemyhandup, cardslotup, data["card"], enemyhandup.lst_card_in_slot)
 				3:
 					enemy_played(enemyhandright, cardslotright, data["card"], enemyhandright.lst_card_in_slot)
+					manager.played = false
+		"verification": 
+			if data["result"] == 1: 
+				manager.played = true
+			else: 
+				Notification.show_side(data["message"])
 
 func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 	var card_scene=preload(CARD_SCENE_PATH)
 
 	for card in list_card:
 		print(card)
-		var new_card=card_scene.instantiate()
-		var sprite=new_card.get_node("Sprite")
+		var popped_card = hand.remove_card_from_hand()  # Supprime la carte de la main
+		var sprite= popped_card.get_node("Sprite")
 		var card_info = Global.get_card_info_from_texture(card)
 		
-		new_card.value = card_info[1]
-		new_card.form = card_info[0]
-		new_card.file = card
-		new_card.name="Card"
-		new_card.scale= card_scale
+		popped_card.value = card_info[1]
+		popped_card.form = card_info[0]
+		popped_card.file = card
+		popped_card.name="Card"
+		popped_card.scale= card_scale
 		
-		sprite.texture=load(card)
+		sprite.texture= load(popped_card.file)
 		
 		var children_slots = cardslot.get_children()
 		var children_slot = null
@@ -85,10 +92,12 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 				children_slot = children
 				break
 		
-		move_card_to_slot(new_card, children_slot, hand, lst_card_in_slot)
+		move_card_to_slot(popped_card, children_slot, hand, lst_card_in_slot)
+	
+	hand.update_hand_position()
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
-	hand.remove_card_from_hand()  # Supprime la carte de la main
+	print(slot.position.x, slot.position.y)
 	hand.animate_card_to_position(card,slot.position)
 	slot.card_in_slot = true  # Marque le slot comme occupé
 	slot.card_value=card.value

@@ -150,6 +150,15 @@ async def broadcast_card(content, websocket):
         if (connected_client[client]["id"] != content["id"]):
             await connected_client[client]["socket"].send(json.dumps(message))
 
+async def send_verification(verification, websocket, message) :
+    message = {
+        "function": "verification",
+        "result": 1 if verification else 0, 
+        "message": message
+    }
+
+    await websocket.send(json.dumps(message))
+
 async def handler(websocket):
     global nb_client
     global connected_client
@@ -160,7 +169,10 @@ async def handler(websocket):
             case "connect":
                 await connect_handler(content, websocket)
             case "play": 
+                # TODO : Implement verification then broadcast and then tell him you can play
+                verification, message = 1, ""  
                 await broadcast_card(content, websocket)
+                await send_verification(verification, websocket, message)
 
 
 async def main():
