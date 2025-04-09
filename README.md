@@ -10,6 +10,19 @@
 
 - [ ] [IHM - Big Two - répartition des tâches - CC3](https://docs.google.com/document/d/1BqXSZbJe98mKp0_2v2qZOjdxZKyy8at22f4KtoHm5xY/edit?usp=sharing)
 
+
+## Document link Spécification
+
+- [ ] [Spécification du jeu](https://docs.google.com/document/d/16dK9idrLsqIaKZnwfrsFBTqkz9WRccWG2lJpzLYXNPo/edit?usp=sharing)
+
+- [ ] [Cahier des charges version 1](https://docs.google.com/document/d/1Sz56qtAcEbLAoe62q1_LQB3uff1bZQEsKPienvkuipE/edit?usp=sharing)
+- [ ] [Cahier des charges version 2](https://docs.google.com/document/d/1dy-nstU-lWUUd4Eh0OMxNbfvvQbNMUIrZywqtnA1zao/edit?usp=sharing)
+- [ ] [Cahier des charges Big Two](https://docs.google.com/document/d/1F_gyKgck95wseiYwWiz2SGWMVEPGrqgXn3C2dWwvzI0/edit?usp=sharing)
+
+- [ ] [Stratégie marketing pour Big Two](https://docs.google.com/document/d/19KqT00znp7Pb1uboOLwAQXty23cpIadZpo1pfiS5gDU/edit?usp=sharing)
+
+- [ ] [Integrative project - Big two - Cahier des charges Final](https://docs.google.com/document/d/1F_gyKgck95wseiYwWiz2SGWMVEPGrqgXn3C2dWwvzI0/edit?usp=sharing)
+
 ## Document link report
 
 - [ ] [Rapport de la réunion du 5 février](https://docs.google.com/document/d/11jb0i9E6qgMx2kGWyEJkUGXuNtBYWi_8ye2jBXUAGRo/edit?usp=sharing)
@@ -27,19 +40,10 @@
 - [ ] [Rapport de la réunion du 26 mars](https://docs.google.com/document/d/1IWJDVP78VqasKsvXC9b3l4SeOYWqinddXz_cytsbqrU/edit?usp=sharing)
 - [ ] [Rapport d'activité du 1 avril](https://docs.google.com/document/d/1hbKNxrFlBQg6ZfaKIGHKjSRLchL_Do8XkN5Ey_byNT4/edit?usp=sharing)
 - [ ] [Rapport de la réunion du 2 avril](https://docs.google.com/document/d/1IWJDVP78VqasKsvXC9b3l4SeOYWqinddXz_cytsbqrU/edit?usp=sharing)
+- [ ] [Rapport de la réunion du 8 avril](https://docs.google.com/document/d/1vE5MEW9ctdFzmiI_895fXbYEkekejYm4xu3h1TS3Y7g/edit?usp=sharing)
 
 
-## Document link Spécification
 
-- [ ] [Spécification du jeu](https://docs.google.com/document/d/16dK9idrLsqIaKZnwfrsFBTqkz9WRccWG2lJpzLYXNPo/edit?usp=sharing)
-
-- [ ] [Cahier des charges version 1](https://docs.google.com/document/d/1Sz56qtAcEbLAoe62q1_LQB3uff1bZQEsKPienvkuipE/edit?usp=sharing)
-- [ ] [Cahier des charges version 2](https://docs.google.com/document/d/1dy-nstU-lWUUd4Eh0OMxNbfvvQbNMUIrZywqtnA1zao/edit?usp=sharing)
-- [ ] [Cahier des charges Big Two](https://docs.google.com/document/d/1F_gyKgck95wseiYwWiz2SGWMVEPGrqgXn3C2dWwvzI0/edit?usp=sharing)
-
-- [ ] [Stratégie marketing pour Big Two](https://docs.google.com/document/d/19KqT00znp7Pb1uboOLwAQXty23cpIadZpo1pfiS5gDU/edit?usp=sharing)
-
-- [ ] [Integrative project - Big two - Cahier des charges Final](https://docs.google.com/document/d/1F_gyKgck95wseiYwWiz2SGWMVEPGrqgXn3C2dWwvzI0/edit?usp=sharing)
 
 
 
