@@ -10,6 +10,7 @@ DB_PARAMS = {
 
 pattern_email = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 
+
 def create_account(profile_name, email, password):
     """
     Check if an account exists in the database, and create it if it doesn't.
@@ -18,24 +19,27 @@ def create_account(profile_name, email, password):
     :param username: username of the user
     :param password: password of the user
     """
-    
+
     if re.match(pattern_email, email):
-        try: 
+        try:
             conn = psycopg2.connect(**DB_PARAMS)
             cur = conn.cursor()
-            cur.execute("SELECT * FROM users WHERE username = %s", (profile_name,))
+            cur.execute("SELECT * FROM users WHERE username = %s",
+                        (profile_name,))
 
             if cur.fetchone():
-                return 1 # error : already exist
+                return 1  # error : already exist
 
-            cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (profile_name, email, password))
+            cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)",
+                        (profile_name, email, password))
             conn.commit()
-            return 0 # Worked
+            return 0  # Worked
         except psycopg2.Error as e:
             print("Database error : ", e)
-            return 2 #Error psycopg2
+            return 2  # Error psycopg2
     else:
-        return 3 #not a valid email
+        return 3  # not a valid email
+
 
 def login_account(profile_name_email, password):
     """
@@ -44,27 +48,25 @@ def login_account(profile_name_email, password):
     :param profile_name_email: profile_name or email of the user
     :param password: password of the user
     """
-    try: 
+    try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
-        cur.execute("SELECT * FROM users WHERE username = %s OR email = %s", (profile_name_email, profile_name_email))
+        cur.execute("SELECT * FROM users WHERE username = %s OR email = %s",
+                    (profile_name_email, profile_name_email))
 
         result = cur.fetchone()
         if result:
-            bdd_id, bdd_username, bdd_email, bdd_password = result 
+            bdd_id, bdd_username, bdd_email, bdd_password = result
 
-            if bdd_password == password: 
-               
-                  
-                return 0 #connection worked
-                
+            if bdd_password == password:
+                return 0, bdd_username  # connection worked
             else:
-                return 3 #wrong password
-        else: 
-            return 1 #account not found
+                return 3, ""  # wrong password
+        else:
+            return 1, ""  # account not found
     except psycopg2.Error as e:
         print("Database error : ", e)
-        return 2 #Error psycopg2
+        return 2, ""  # Error psycopg2
 
 
 def creer_table():
@@ -98,6 +100,7 @@ def creer_table():
         if conn:
             conn.close()
 
+
 def supp_table(nom_table):
     """ Supprime une table en vérifiant d'abord que le nom est valide """
     conn = None
@@ -109,7 +112,7 @@ def supp_table(nom_table):
 
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
-        
+
         sql = f"DROP TABLE IF EXISTS {nom_table} CASCADE;"
         cur.execute(sql)
         conn.commit()
@@ -123,6 +126,7 @@ def supp_table(nom_table):
             cur.close()
         if conn:
             conn.close()
+
 
 def inserer_user(nom, email, password):
     conn = None
@@ -143,7 +147,8 @@ def inserer_user(nom, email, password):
         # Afficher les résultats
         if result:
             user_id, username, email, password = result
-            print(f"Utilisateur inséré avec succès. ID : {user_id}, Username : {username}, Email : {email}")
+            print(
+                f"Utilisateur inséré avec succès. ID : {user_id}, Username : {username}, Email : {email}")
 
         conn.commit()
     except Exception as e:
@@ -155,7 +160,8 @@ def inserer_user(nom, email, password):
         if conn:
             conn.close()
 
-def select_user() : 
+
+def select_user():
     conn = None
     cur = None
     try:
@@ -163,7 +169,7 @@ def select_user() :
         cur = conn.cursor()
 
         cur.execute("SELECT * FROM users")
-    
+
         user_id = cur.fetchone()[0]
         conn.commit()
         print(f"Utilisateur inséré avec ID : {user_id}")
@@ -177,5 +183,6 @@ def select_user() :
         if conn:
             conn.close()
 
-if __name__ == "__main__": 
+
+if __name__ == "__main__":
     creer_table()

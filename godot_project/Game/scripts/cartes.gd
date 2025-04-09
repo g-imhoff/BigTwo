@@ -6,6 +6,7 @@ signal hovered_off
 var hand_position
 var value
 var form
+var file
 
 func _ready() -> void:
 	#chaque carte doit être un enfant de card_manager sinon erreur

@@ -6,7 +6,6 @@ extends Node2D
 var socket = WebSocketPeer.new()
 
 var HasH = load("res://hashage.gd")
-	
 
 func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
@@ -18,14 +17,7 @@ func _on_login_pressed() -> void:
 	var password = password_line_edit.text
 	var rememberme = rememberme_checkbox.is_pressed()
 
-	# Now you have the values, you can use them as needed
-	print("Profile Name: ", profile_name_email)
-	print("Password: ", password)
-	print("Remember me: ", rememberme)
-	print("LoginAccountClicked")
-	
 	var password_hash = HasH.hash_password(password) #Hashing 
-	
 	
 	var content = JSON.stringify({
 	"function": "login",
@@ -35,8 +27,6 @@ func _on_login_pressed() -> void:
 	}})
 		
 	socket.send_text(content)
-	# This is to delete when we will add the login method
-	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 
 func _on_create_account_pressed() -> void: 
@@ -44,8 +34,8 @@ func _on_create_account_pressed() -> void:
 
 
 func _ready() -> void:
-	print("hello")
-	var err = socket.connect_to_url(Global.websocket_url)
+	var clientCAS = load("res://cert.crt")
+	var err = socket.connect_to_url(Global.websocket_url, TLSOptions.client_unsafe(clientCAS))
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)
@@ -55,9 +45,9 @@ func _ready() -> void:
 func _process(_delta):
 	socket.poll()
 	var state = socket.get_ready_state()
-	if state == WebSocketPeer.STATE_OPEN:
+	if state == WebSocketPeer.STATE_OPEN: 
 		while socket.get_available_packet_count():
-			print("Packet: ", socket.get_packet())
+			_data_received_handler(JSON.parse_string(socket.get_packet().get_string_from_utf8()))
 	elif state == WebSocketPeer.STATE_CLOSING:
 		# Keep polling to achieve proper close.
 		pass
@@ -67,6 +57,13 @@ func _process(_delta):
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
 
+func _data_received_handler(data):
+	if (data["code"] == 0):
+		# Needs to setup a token of connection
+		Global.username = data["username"]
+		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+	else :
+		Notification.show_side(data["message"])
 
 func _on_tree_exited() -> void:
 	socket.close()
