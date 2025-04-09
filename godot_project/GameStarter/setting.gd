@@ -46,3 +46,7 @@ func _on_check_button_button_sound_toggled(toggled_on: bool) -> void:
 		Config.button_check=false
 	else:
 		Config.button_check=true 
+
+
+func _on_texture_button_pressed() -> void:
+	$".".visible = not $".".visible
