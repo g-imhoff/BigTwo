@@ -65,17 +65,17 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 
 	for card in list_card:
 		print(card)
-		var new_card=card_scene.instantiate()
-		var sprite=new_card.get_node("Sprite")
+		var popped_card = hand.remove_card_from_hand()  # Supprime la carte de la main
+		var sprite= popped_card.get_node("Sprite")
 		var card_info = Global.get_card_info_from_texture(card)
 		
-		new_card.value = card_info[1]
-		new_card.form = card_info[0]
-		new_card.file = card
-		new_card.name="Card"
-		new_card.scale= card_scale
+		popped_card.value = card_info[1]
+		popped_card.form = card_info[0]
+		popped_card.file = card
+		popped_card.name="Card"
+		popped_card.scale= card_scale
 		
-		sprite.texture=load(card)
+		sprite.texture= load(popped_card.file)
 		
 		var children_slots = cardslot.get_children()
 		var children_slot = null
@@ -85,10 +85,12 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 				children_slot = children
 				break
 		
-		move_card_to_slot(new_card, children_slot, hand, lst_card_in_slot)
+		move_card_to_slot(popped_card, children_slot, hand, lst_card_in_slot)
+	
+	hand.update_hand_position()
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
-	hand.remove_card_from_hand()  # Supprime la carte de la main
+	print(slot.position.x, slot.position.y)
 	hand.animate_card_to_position(card,slot.position)
 	slot.card_in_slot = true  # Marque le slot comme occupé
 	slot.card_value=card.value

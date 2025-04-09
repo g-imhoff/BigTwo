@@ -5,6 +5,7 @@ signal hovered_off
 
 var hand_position
 var value
+var file
 var form
 var img
 

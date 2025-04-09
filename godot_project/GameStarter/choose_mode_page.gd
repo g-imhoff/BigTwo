@@ -20,3 +20,8 @@ func _on_backicon_choose_mode_page_pressed() -> void:
 
 func _on_single_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://Game/scenes/main.tscn")
+
+
+func _on_texture_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://GameOnline/scenes/ClientGame.tscn")
+	pass # Replace with function body.

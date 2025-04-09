@@ -53,4 +53,4 @@ func animate_card_to_position(card,new_position):
 	tween.tween_property(card,"position",new_position,0.1 )
 
 func remove_card_from_hand():
-	player_hand.remove_at(0)
+	return player_hand.pop_front()
