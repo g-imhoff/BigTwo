@@ -1,6 +1,5 @@
 [gd_scene load_steps=10 format=3 uid="uid://7mcc8557hsh8"]
 
-[ext_resource type="Script" uid="uid://iwanh675f7xo" path="res://GameStarter/home_page.gd" id="1_ed3xu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_gu8ip"]
 [ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_q42id"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
