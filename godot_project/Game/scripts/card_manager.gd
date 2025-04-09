@@ -242,6 +242,8 @@ func check_cards_clicked():
 				if tab_check_brelan.size()<2:
 					tab_check_brelan=tmp_tab.duplicate()
 				tmp=0
+			if i == card_clicked.size()-2 and card_clicked[0].value!=card_clicked[card_clicked.size()-1].value and card_clicked[card_clicked.size()-1].value == card_clicked[card_clicked.size()-2].value:
+				val = tmp
 			if card_clicked[i].form==card_clicked[i+1].form:
 				signe+=1
 			if card_clicked[i+1].value== card_clicked[i].value+1:
@@ -315,7 +317,7 @@ func remove_card_in_slot():
 
 func end_game():
 	print("tu a gagné")
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
 
 
 func _on_button_2_pressed() -> void:

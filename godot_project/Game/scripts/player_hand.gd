@@ -9,7 +9,7 @@ var player_hand=[]
 var center_screen_x
 var card_scale=Vector2(0.5,0.5)
 
-@onready var lst_img = Global.card_duplicate
+@onready var card_l = $".."
 
 #var lst_img=[
 	#"res://assets/cards/card_diamonds_03.png",
@@ -24,11 +24,10 @@ var card_scale=Vector2(0.5,0.5)
 func _ready() -> void:
 	center_screen_x=get_viewport().size.x/2
 	var card_scene=preload(CARD_SCENE_PATH)
-	print(Global.card_images.size())
 	for i in range(HAND_COUNT):
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
-		var selected_card=random_card()
+		var selected_card=card_l.random_card()
 		
 		var new_texture=load(selected_card)
 		 # Extraire la valeur et la couleur de la carte
@@ -72,12 +71,3 @@ func animate_card_to_position(card,new_position):
 func remove_card_from_hand(card):
 	if card in player_hand:
 		player_hand.erase(card)
-
-func random_card():
-	if lst_img.size()>0:
-		var pos_carte_random=randi()%lst_img.size()
-		var selected_card=lst_img[pos_carte_random]
-		lst_img.remove_at(pos_carte_random)
-		return selected_card
-	else:
-		return null

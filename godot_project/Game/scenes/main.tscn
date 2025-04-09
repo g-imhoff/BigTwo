@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=16 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
 [ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
+[ext_resource type="Script" path="res://Game/scripts/global_card_img.gd" id="1_uxgxk"]
 [ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
 [ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
 [ext_resource type="Script" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
@@ -16,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="14_td723"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_uxgxk")
 
 [node name="card_manager" type="Node2D" parent="."]
 texture_filter = 1
