@@ -98,6 +98,8 @@ func _on_play_pressed() -> void:
 		for card in hand.player_hand:
 			if card.value == 3 and card.form == 1:
 				valid = true
+				first_play = false
+				hand.first_player = false
 				break
 		if valid == false: 
 			Notification.show_side("You need to play the three of diamond")

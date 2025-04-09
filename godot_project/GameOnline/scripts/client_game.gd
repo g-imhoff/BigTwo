@@ -9,6 +9,7 @@ var card_scale=Vector2(0.5,0.5)
 @onready var enemyhandleft = $EnemyHandLeft
 @onready var enemyhandup = $EnemyHandUp
 @onready var enemyhandright = $EnemyHandRight
+@onready var mycardslot = $Cardslots
 @onready var cardslotleft = $Cardslots3
 @onready var cardslotup = $Cardslots2
 @onready var cardslotright = $Cardslots4
@@ -53,19 +54,41 @@ func _data_received_handler(data):
 		"starting": 
 			hand._card_hand_init(data["id"], data["card_hand"], data["first_player"])
 		"played": 
-			match (abs(int(data["id"] - Global.online_game_id) % 4)):
+			match (int((data["id"] - Global.online_game_id + 4)) % 4):
 				1: 
+					remove_card_in_slot(enemyhandleft, cardslotleft)
 					enemy_played(enemyhandleft, cardslotleft, data["card"], enemyhandleft.lst_card_in_slot)
 				2: 
+					remove_card_in_slot(enemyhandup, cardslotup)
 					enemy_played(enemyhandup, cardslotup, data["card"], enemyhandup.lst_card_in_slot)
 				3:
+					remove_card_in_slot(enemyhandright, cardslotright)
 					enemy_played(enemyhandright, cardslotright, data["card"], enemyhandright.lst_card_in_slot)
 					manager.played = false
+					remove_card_in_slot(hand, mycardslot)
 		"verification": 
 			if data["result"] == 1: 
 				manager.played = true
 			else: 
 				Notification.show_side(data["message"])
+
+func remove_card_in_slot(hand, cardslot):
+	if hand.lst_card_in_slot.size() != 0:
+		# Crée une copie de la liste pour éviter la modification pendant l'itération
+		var cards_to_remove = hand.lst_card_in_slot.duplicate()
+		var i = 0
+		
+		for card in cards_to_remove:
+			card.queue_free()  # Marque la carte pour suppression
+			hand.lst_card_in_slot.erase(card)  # Retire la carte de la liste
+			var children_slots = cardslot.get_children()
+			children_slots[i].card_in_slot=false
+			children_slots[i].card_value=null
+			children_slots[i].card_form=null
+			children_slots[i].combi=null
+			children_slots[i].combi_value=null
+			children_slots[i].combi_form=null
+			i += 1
 
 func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 	var card_scene=preload(CARD_SCENE_PATH)
