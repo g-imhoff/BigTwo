@@ -6,7 +6,9 @@
 [node name="Rules_Popup" type="Node2D"]
 
 [node name="PopupSettings" type="Sprite2D" parent="."]
-position = Vector2(567, 399)
+z_index = 1000
+position = Vector2(568, 404.25)
+scale = Vector2(1.00176, 1.01317)
 texture = ExtResource("1_sa5fu")
 
 [node name="RichTextLabel2" type="Label" parent="PopupSettings"]

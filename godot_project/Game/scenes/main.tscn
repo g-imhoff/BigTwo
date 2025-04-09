@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=20 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
 [ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
+[ext_resource type="Script" path="res://Game/scenes/main.gd" id="1_gouob"]
 [ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
 [ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
 [ext_resource type="Script" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
@@ -20,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_gouob")
 
 [node name="card_manager" type="Node2D" parent="."]
 texture_filter = 1
@@ -190,8 +192,10 @@ texture_normal = ExtResource("16_7vdtg")
 
 [node name="Rules_Popup" parent="." instance=ExtResource("17_x7aqy")]
 visible = false
+position = Vector2(409, 89)
 
 [node name="TextureButton" type="TextureButton" parent="."]
+z_index = 2000
 offset_left = 1794.0
 offset_top = 9.0
 offset_right = 1909.0
@@ -208,4 +212,5 @@ texture_normal = ExtResource("18_e7axl")
 [connection signal="pressed" from="sort_value" to="card_manager" method="_on_sort_value_pressed"]
 [connection signal="pressed" from="sort_form" to="card_manager" method="_on_sort_form_pressed"]
 [connection signal="timeout" from="Timer" to="card_manager" method="_on_timer_timeout"]
-[connection signal="pressed" from="Settings_btn" to="card_manager" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Settings_btn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

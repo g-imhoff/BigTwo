@@ -435,6 +435,4 @@ func show_message(text: String, duration: float = 3.0):
 func _on_timer_timeout() -> void:
 	message.visible = false
 
-
-func _on_texture_button_pressed() -> void:
-	$"../Setting".visible = not $"../Setting".visible 
+ 
