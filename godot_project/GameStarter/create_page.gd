@@ -23,13 +23,6 @@ func _on_create_account_pressed() -> void:
 	var profile_name = profile_name_line_edit.text
 	var email = email_line_edit.text
 	var password = password_line_edit.text
-
-	# Now you have the values, you can use them as needed
-	print("Profile Name: ", profile_name)
-	print("Email: ", email)
-	print("Password: ", password)
-	print("CreateAccountClicked")
-	
 	
 	var password_hash = HasH.hash_password(password) #hache le password 
 	
@@ -82,7 +75,7 @@ func _process(_delta):
 func _data_received_handler(data):
 	if (data["code"] == 0):
 		# Needs to setup a token of connection
-		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+		get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
 	else :
 		Notification.show_side(data["message"])
 

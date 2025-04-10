@@ -1,7 +1,5 @@
 extends Node2D
 
-@onready var popup=$"res://Game/scripts/popup.gd"
-
 func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right):
 	for i in range (lst_card.size()):
 			var card1 = lst_card[i]
@@ -281,8 +279,6 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			children_slots[0].passing = 1 + children_slots_right[0].passing
 		played = true
 
-
 func end_game():
 	print("tu a gagné")
 	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
-	
