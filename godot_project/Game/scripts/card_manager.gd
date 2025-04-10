@@ -22,6 +22,7 @@ var brelan=[]
 @onready var children_slots_right=Cardslots_right.get_children()
 @onready var message=$"../message"
 @onready var timer =$"../Timer"
+@onready var endslot=$"../cardendslot"
 
 
 func _ready() -> void:
@@ -283,7 +284,7 @@ func check_cards_clicked():
 					children_slots[0].combi="full house"
 					children_slots[0].combi_value=brelan[0].value
 					children_slots[0].combi_form=brelan[0].form
-					print("full house")
+					#print("full house")
 			
 			elif val == 1:
 				brelan=tab_val.duplicate()
@@ -292,7 +293,7 @@ func check_cards_clicked():
 					check = "full house"
 					children_slots[0].combi_value=tab_val[0].value
 					children_slots[0].combi_form=tab_val[0].form
-					print("full house")
+					#print("full house")
 	return check
 
 
@@ -300,13 +301,17 @@ func check_cards_clicked():
 
 
 func remove_card_in_slot():
+
 	if lst_card_in_slot.size() != 0:
 		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
 		
 		for card in cards_to_remove:
-			card.queue_free()  # Marque la carte pour suppression
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
+			endslot.position.x+=Global.endcardpos
+			var sprite=card.get_node("Sprite")
+			sprite.texture=preload("res://assets/cards/card_back.png")
+			hand.animate_card_to_position(card,endslot.position)
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
 			children_slots[cmpt_card_in_slot-1].card_value=null
 			children_slots[cmpt_card_in_slot-1].card_form=null
@@ -314,6 +319,8 @@ func remove_card_in_slot():
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
+		Global.index+=1
+		Global.endcardpos+=0.2
 
 func end_game():
 	print("tu a gagné")
@@ -343,7 +350,7 @@ func _on_card_manager_enemy_right_enemy() -> void:
 	played=false
 	show_message("Your turn")
 	for card in card_clicked.duplicate():
-		card.queue_free()
+		#card.queue_free()
 		card_clicked.erase(card)
 	remove_card_in_slot() 
 	if children_slots_right[0].passing == 3:
