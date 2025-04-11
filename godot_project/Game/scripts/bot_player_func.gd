@@ -193,7 +193,7 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 				sprite.rotation_degrees-=90
 			if sprite.rotation_degrees == -90:
 				sprite.rotation_degrees+=90
-			card.z_index=1
+			card.z_index=Global.index
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
 			sprite.texture=preload("res://assets/cards/card_back.png")
 			hand.animate_card_to_position(card,endslot.position)

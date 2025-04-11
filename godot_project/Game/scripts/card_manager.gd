@@ -311,6 +311,7 @@ func remove_card_in_slot():
 			endslot.position.x+=Global.endcardpos
 			var sprite=card.get_node("Sprite")
 			sprite.texture=preload("res://assets/cards/card_back.png")
+			card.z_index = Global.index
 			hand.animate_card_to_position(card,endslot.position)
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
 			children_slots[cmpt_card_in_slot-1].card_value=null
