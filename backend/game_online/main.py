@@ -197,6 +197,7 @@ async def handler(websocket):
                 await send_verification(verification, websocket, message)
 
 
+
 async def main():
     async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
         await server.serve_forever()
