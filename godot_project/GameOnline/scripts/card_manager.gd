@@ -13,6 +13,8 @@ const COLLISION_MASK_CARD=1
 @onready var hand=$"../PlayerHand"
 @onready var connect = $".."
 @onready var cardslot = $"../Cardslots"
+@onready var playersprite = $"../PlayerUsername/PlayerSprite"
+@onready var enemyleftsprite = $"../EnemyUsernameLeft/EnemyLeftSprite"
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
@@ -164,6 +166,8 @@ func _on_button_2_pressed() -> void:
 			})
 			
 			connect.socket.send_text(content)
+			playersprite.visible = false
+			enemyleftsprite.visible = true
 
 
 func _on_sort_form_pressed() -> void:

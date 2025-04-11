@@ -20,6 +20,10 @@ signal verification_worked
 @onready var enemyusernametop = $EnemyUsernameTop
 @onready var enemyusernameleft = $EnemyUsernameLeft
 @onready var enemyusernameright = $EnemyUsernameRight
+@onready var playersprite = $PlayerUsername/PlayerSprite
+@onready var enemytopsprite = $EnemyUsernameTop/EnemyTopSprit
+@onready var enemyleftsprite = $EnemyUsernameLeft/EnemyLeftSprite
+@onready var enemyrightsprite = $EnemyUsernameRight/EnemyRightSprite
 
 func _on_tree_exited() -> void:
 	socket.close()
@@ -66,47 +70,68 @@ func _data_received_handler(data):
 				1: 
 					remove_card_in_slot(enemyhandleft, cardslotleft)
 					enemy_played(enemyhandleft, cardslotleft, data["card"], enemyhandleft.lst_card_in_slot)
+					enemyleftsprite.visible = false
+					enemytopsprite.visible = true
 				2: 
 					remove_card_in_slot(enemyhandup, cardslotup)
 					enemy_played(enemyhandup, cardslotup, data["card"], enemyhandup.lst_card_in_slot)
+					enemytopsprite.visible = false
+					enemyrightsprite.visible = true
 				3:
 					remove_card_in_slot(enemyhandright, cardslotright)
 					enemy_played(enemyhandright, cardslotright, data["card"], enemyhandright.lst_card_in_slot)
 					manager.played = false
 					remove_card_in_slot(hand, mycardslot)
+					enemyrightsprite.visible = false
+					playersprite.visible = true
 		"passed":
 			match (int((data["id"] - Global.online_game_id + 4)) % 4):
 				1: 
 					remove_card_in_slot(enemyhandleft, cardslotleft)
+					enemyleftsprite.visible = false
+					enemytopsprite.visible = true
 				2: 
 					remove_card_in_slot(enemyhandup, cardslotup)
+					enemytopsprite.visible = false
+					enemyrightsprite.visible = true
 				3:
 					remove_card_in_slot(enemyhandright, cardslotright)
 					manager.played = false
 					remove_card_in_slot(hand, mycardslot)
+					enemyrightsprite.visible = false
+					playersprite.visible = true
 		"verification": 
 			if data["result"] == 1: 
 				manager.played = true
 				emit_signal("verification_worked")
+				playersprite.visible = false
+				enemyleftsprite.visible = true
 			else: 
 				Notification.show_side(data["message"])
 
-func _display_all_username(list_id: Dictionary):
-	list_id.erase(Global.username)
-	
+func _display_all_username(list_id: Dictionary):	
 	for username in list_id:
 		_display_username(username, list_id[username])
-	pass
 
+			 
 func _display_username(username, id):
 	print(username)
 	match (int((id - Global.online_game_id + 4)) % 4):
+		0: 
+			if id == 1:
+				playersprite.visible = true
 		1: 
 			enemyusernameleft.text = username
+			if id == 1:
+				enemyleftsprite.visible = true
 		2: 
 			enemyusernametop.text = username
+			if id == 1:
+				enemytopsprite.visible = true
 		3:
 			enemyusernameright.text = username
+			if id == 1:
+				enemyrightsprite.visible = true
 
 func remove_card_in_slot(hand, cardslot):
 	if hand.lst_card_in_slot.size() != 0:

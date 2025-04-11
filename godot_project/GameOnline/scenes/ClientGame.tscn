@@ -147,7 +147,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="PlayerUsername"]
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerUsername"]
 visible = false
 position = Vector2(-30, 18)
 scale = Vector2(0.03, 0.03)
@@ -171,7 +171,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="EnemyUsernameTop"]
+[node name="EnemyTopSprit" type="Sprite2D" parent="EnemyUsernameTop"]
 visible = false
 position = Vector2(-30, 17)
 scale = Vector2(0.03, 0.03)
@@ -196,7 +196,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="EnemyUsernameLeft"]
+[node name="EnemyLeftSprite" type="Sprite2D" parent="EnemyUsernameLeft"]
 visible = false
 position = Vector2(-30, 21)
 scale = Vector2(0.03, 0.03)
@@ -221,7 +221,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="EnemyUsernameRight"]
+[node name="EnemyRightSprite" type="Sprite2D" parent="EnemyUsernameRight"]
 visible = false
 position = Vector2(-30, 21)
 scale = Vector2(0.03, 0.03)
