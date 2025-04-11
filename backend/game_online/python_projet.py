@@ -10,6 +10,8 @@ class Combinaison:
 # 7: four of a kind
 # 8: Straight flush
 def check_higher_than_previous(previous_combi, new_combi):
+    print(previous_combi.combi, previous_combi.combi_value, previous_combi.combi_form)
+    print(new_combi.combi, new_combi.combi_value, new_combi.combi_form)
     if (previous_combi.combi <= 3):
         if (previous_combi.combi == new_combi.combi):
             if (new_combi.combi_value > previous_combi.combi_value): 

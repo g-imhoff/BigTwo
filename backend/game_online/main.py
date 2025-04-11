@@ -4,7 +4,7 @@ import json
 from websockets.asyncio.server import serve
 import ssl
 from debut_jeu import get_list_card_info_from_texture
-from python_project import check_card_clicked, Combinaison
+from python_projet import check_card_clicked, Combinaison, check_higher_than_previous
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
@@ -177,6 +177,7 @@ def verification(combi):
 async def handler(websocket):
     global nb_client
     global connected_client
+    global last_combi
 
     async for message in websocket:
         content = json.loads(message)
@@ -188,9 +189,9 @@ async def handler(websocket):
                 list_card = get_list_card_info_from_texture(content["card"])
                 combi = check_card_clicked(list_card)
 
-                verification, message = verification(combi)
+                boolean, message = verification(combi)
 
-                if verification: 
+                if boolean: 
                     await broadcast_card(content, websocket)
                     last_combi = combi
 
