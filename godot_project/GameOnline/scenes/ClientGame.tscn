@@ -49,84 +49,84 @@ text = "PASS
 "
 
 [node name="Cardslots" type="Node2D" parent="."]
-position = Vector2(715.9, 655.05)
 
 [node name="cardslot" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(200, 0)
+position = Vector2(915.9, 655.05)
 
 [node name="cardslot2" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(300, 0)
+position = Vector2(1015.9, 655.05)
 
 [node name="cardslot3" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(100, 0)
+position = Vector2(815.9, 655.05)
 
 [node name="cardslot4" parent="Cardslots" instance=ExtResource("8_x66yg")]
+position = Vector2(715.9, 655.05)
 
 [node name="cardslot5" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(400, 0)
+position = Vector2(1115.9, 655.05)
 
 [node name="Cardslots2" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(715.9, 295.05)
 
 [node name="cardslot" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(200, 0)
+position = Vector2(915.9, 295.05)
 
 [node name="cardslot2" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(300, 0)
+position = Vector2(1015.9, 295.05)
 
 [node name="cardslot3" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(100, 0)
+position = Vector2(815.9, 295.05)
 
 [node name="cardslot4" parent="Cardslots2" instance=ExtResource("8_x66yg")]
+position = Vector2(715.9, 295.05)
 
 [node name="cardslot5" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(400, 0)
+position = Vector2(1115.9, 295.05)
 
 [node name="Cardslots3" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(640.95, 295.9)
 
 [node name="cardslot" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 200)
+position = Vector2(640.95, 495.9)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 300)
+position = Vector2(640.95, 595.9)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 100)
+position = Vector2(640.95, 395.9)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots3" instance=ExtResource("8_x66yg")]
+position = Vector2(640.95, 295.9)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 400)
+position = Vector2(640.95, 695.9)
 rotation = 1.5708
 
 [node name="Cardslots4" type="Node2D" parent="."]
 z_index = -1
-position = Vector2(1408.95, 295.9)
 
 [node name="cardslot" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 200)
+position = Vector2(1408.95, 495.9)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 300)
+position = Vector2(1408.95, 595.9)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 100)
+position = Vector2(1408.95, 395.9)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots4" instance=ExtResource("8_x66yg")]
+position = Vector2(1408.95, 295.9)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(0, 400)
+position = Vector2(1408.95, 695.9)
 rotation = 1.5708
 
 [node name="PlayerUsername" type="Label" parent="."]
