@@ -116,6 +116,7 @@ func _on_play_pressed() -> void:
 		var content = JSON.stringify({
 			"id": Global.online_game_id,
 			"function": "play",
+			"profile_name": Global.username,
 			"card": card_played
 		})
 		
@@ -151,14 +152,13 @@ func _on_connect_server_verification_worked() -> void:
 
 
 func _on_button_2_pressed() -> void:
-	if first_play && hand.first_player: 
-		Notification.show_side("You need to play the first move")
-	else : 
-		var content = JSON.stringify({
-			"id": Global.online_game_id,
-			"profile_name": Global.username,
-			"function": "pass",
-		})
-		
-		connect.socket.send_text(content)
-	pass # Replace with function body.
+	if not played : 
+		if first_play && hand.first_player: 
+			Notification.show_side("You need to play the first move")
+		else : 
+			var content = JSON.stringify({
+				"id": Global.online_game_id,
+				"function": "pass",
+			})
+			
+			connect.socket.send_text(content)
