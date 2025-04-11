@@ -1,6 +1,7 @@
 import asyncio
 import random
 import json
+import websockets
 from websockets.asyncio.server import serve
 import ssl
 from debut_jeu import get_list_card_info_from_texture
@@ -210,7 +211,7 @@ def verification(combi):
     else : 
         return False, "This is not a valid combinaison"
 
-def reset_server(reason):
+async def reset_server(reason):
     global connected_client
 
     print("Server is making a reset ...")
@@ -261,9 +262,9 @@ async def handler(websocket):
                     if (nb_pass_in_a_row == 4):  
                         last_combi = None
                     await broadcast_pass(content, websocket)
-    except ConnectionClosed as e:
-        connected_client.remove(websocket)
-        reset_server("A player left the game")
+    except websockets.exceptions.ConnectionClosed as e:
+        del connected_client[websocket]
+        await reset_server("A player left the game")
 
 async def main():
     async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
