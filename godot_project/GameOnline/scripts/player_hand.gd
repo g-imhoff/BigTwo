@@ -6,7 +6,6 @@ var player_hand=[]
 const HAND_Y_POSITION=870
 const CARD_WIDTH=80
 var card_scale=Vector2(0.5,0.5)
-var first_player
 var lst_card_in_slot=[]
 
 @onready var enemyUp = $"../EnemyHandUp"
@@ -36,10 +35,7 @@ func _card_hand_init(id, list_card, bool_first_player):
 	enemyRight.on_started()
 	enemyLeft.on_started()
 	if bool_first_player == 1:
-		first_player = true
 		manager.played = false
-	else : 
-		first_player = false
 
 func add_card_to_hand(card):
 	if card not in player_hand:

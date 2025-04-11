@@ -6,7 +6,6 @@ var card_base_scale=Vector2(0.5,0.5)
 var played=true
 var num_card_up=0
 var card_clicked=[]
-var first_play=true
 
 const COLLISION_MASK_CARD=1
 
@@ -97,18 +96,6 @@ func get_card_with_hightest_z_index(card):
 
 
 func _on_play_pressed() -> void:
-	if first_play && hand.first_player: 
-		var valid = false
-		for card in hand.player_hand:
-			if card.value == 3 and card.form == 1:
-				valid = true
-				first_play = false
-				hand.first_player = false
-				break
-		if valid == false: 
-			Notification.show_side("You need to play the three of diamond")
-			return 
-			
 	if card_clicked == []:
 		print("pas de carte clicked")
 	else:
@@ -157,17 +144,12 @@ func _on_connect_server_verification_worked() -> void:
 
 func _on_button_2_pressed() -> void:
 	if not played : 
-		if first_play && hand.first_player: 
-			Notification.show_side("You need to play the first move")
-		else : 
-			var content = JSON.stringify({
-				"id": Global.online_game_id,
-				"function": "pass",
-			})
-			
-			connect.socket.send_text(content)
-			playersprite.visible = false
-			enemyleftsprite.visible = true
+		var content = JSON.stringify({
+			"id": Global.online_game_id,
+			"function": "pass",
+		})
+		
+		connect.socket.send_text(content)
 
 
 func _on_sort_form_pressed() -> void:
