@@ -148,3 +148,17 @@ func _on_connect_server_verification_worked() -> void:
 	
 	card_clicked.clear()
 	hand.update_hand_position()
+
+
+func _on_button_2_pressed() -> void:
+	if first_play && hand.first_player: 
+		Notification.show_side("You need to play the first move")
+	else : 
+		var content = JSON.stringify({
+			"id": Global.online_game_id,
+			"profile_name": Global.username,
+			"function": "pass",
+		})
+		
+		connect.socket.send_text(content)
+	pass # Replace with function body.

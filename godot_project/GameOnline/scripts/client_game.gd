@@ -68,6 +68,16 @@ func _data_received_handler(data):
 					enemy_played(enemyhandright, cardslotright, data["card"], enemyhandright.lst_card_in_slot)
 					manager.played = false
 					remove_card_in_slot(hand, mycardslot)
+		"passed":
+			match (int((data["id"] - Global.online_game_id + 4)) % 4):
+				1: 
+					remove_card_in_slot(enemyhandleft, cardslotleft)
+				2: 
+					remove_card_in_slot(enemyhandup, cardslotup)
+				3:
+					remove_card_in_slot(enemyhandright, cardslotright)
+					manager.played = false
+					remove_card_in_slot(hand, mycardslot)
 		"verification": 
 			if data["result"] == 1: 
 				manager.played = true
