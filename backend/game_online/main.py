@@ -19,6 +19,8 @@ nb_client = 0
 
 last_combi = None 
 
+nb_pass_in_a_row = 0
+
 card_list = [
         "res://assets/cards/card_clubs_02.png",
         "res://assets/cards/card_clubs_03.png",
@@ -191,6 +193,7 @@ async def handler(websocket):
     global nb_client
     global connected_client
     global last_combi
+    global nb_pass_in
 
     async for message in websocket:
         content = json.loads(message)
@@ -208,11 +211,14 @@ async def handler(websocket):
                     await broadcast_card(content, websocket)
                     last_combi = combi
                     connected_client[content["profile_name"]]["card"] -= len(list_card)
-                    if (list_card <= 0) :
+                    if (connected_client[content["profile_name"]]["card"] <= 0) :
                         print(content["profile_name"], "won")
 
                 await send_verification(verification, websocket, message)
             case "pass": 
+                nb_pass_in_a_row += 1
+                if (nb_pass_in_a_row == 4) 
+                    last_combi = None
                 await broadcast_pass(content, websocket)
 
 
