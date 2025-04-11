@@ -16,11 +16,16 @@ signal verification_worked
 @onready var cardslotup = $Cardslots2
 @onready var cardslotright = $Cardslots4
 @onready var manager = $card_manager
+@onready var playerusername = $PlayerUsername
+@onready var enemyusernametop = $EnemyUsernameTop
+@onready var enemyusernameleft = $EnemyUsernameLeft
+@onready var enemyusernameright = $EnemyUsernameRight
 
 func _on_tree_exited() -> void:
 	socket.close()
 
 func _ready() -> void:
+	playerusername.text = Global.username
 	var clientCAS = load("res://cert.crt")
 	var err = socket.connect_to_url(Global.server_url, TLSOptions.client_unsafe(clientCAS))
 	if err != OK:
@@ -55,6 +60,7 @@ func _data_received_handler(data):
 			pass
 		"starting": 
 			hand._card_hand_init(data["id"], data["card_hand"], data["first_player"])
+			_display_all_username(data["list_id"])
 		"played": 
 			match (int((data["id"] - Global.online_game_id + 4)) % 4):
 				1: 
@@ -84,6 +90,22 @@ func _data_received_handler(data):
 				emit_signal("verification_worked")
 			else: 
 				Notification.show_side(data["message"])
+
+func _display_all_username(list_id:Array):
+	list_id.erase(Global.username)
+	
+	for username in list_id:
+		_display_username(username, list_id[username])
+	pass
+
+func _display_username(username, id):
+	match (int((id - Global.online_game_id + 4)) % 4):
+		1: 
+			enemyhandleft.text = username
+		2: 
+			enemyhandup.text = username
+		3:
+			enemyhandright.text = username
 
 func remove_card_in_slot(hand, cardslot):
 	if hand.lst_card_in_slot.size() != 0:
