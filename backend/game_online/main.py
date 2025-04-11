@@ -154,10 +154,10 @@ async def broadcast_card(content, websocket):
         if (connected_client[client]["id"] != content["id"]):
             await connected_client[client]["socket"].send(json.dumps(message))
 
-async def send_verification(verification, websocket, message) :
+async def send_verification(boolean, websocket, message) :
     message = {
         "function": "verification",
-        "result": 1 if verification else 0, 
+        "result": 1 if boolean else 0, 
         "message": message
     }
 
