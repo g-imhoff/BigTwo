@@ -168,6 +168,7 @@ def verification(combi):
     if (combi is not None) :
         if (last_combi is not None) : 
             result, message = check_higher_than_previous(last_combi, combi)
+            print(result, message)
             return result, message
         else : 
             return True, ""
