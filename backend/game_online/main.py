@@ -111,6 +111,7 @@ async def connect_handler(content, websocket):
             connected_client[content["profile_name"]] = {}
 
         connected_client[content["profile_name"]]["socket"] = websocket
+        connected_client[content["profile_name"]]["card"] = 13 
         nb_client += 1
 
         result_message = {
@@ -149,6 +150,17 @@ async def broadcast_card(content, websocket):
         "id": content["id"],
         "function": "played",
         "card": content["card"],
+    }
+
+    for client in connected_client:
+        if (connected_client[client]["id"] != content["id"]):
+            await connected_client[client]["socket"].send(json.dumps(message))
+
+async def broadcast_pass(content, websocket):
+    global connected_client
+    message = {
+        "id": content["id"],
+        "function": "passed",
     }
     for client in connected_client:
         if (connected_client[client]["id"] != content["id"]):
@@ -195,8 +207,13 @@ async def handler(websocket):
                 if boolean: 
                     await broadcast_card(content, websocket)
                     last_combi = combi
+                    connected_client[content["profile_name"]]["card"] -= len(list_card)
+                    if (list_card <= 0) :
+                        print(content["profile_name"], "won")
 
                 await send_verification(verification, websocket, message)
+            case "pass": 
+                await broadcast_pass(content, websocket)
 
 
 
