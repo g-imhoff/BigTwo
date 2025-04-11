@@ -67,7 +67,7 @@ def check_card_clicked(card_clicked):
                 tmp_tab.append(card_clicked[i+1])
             elif card_clicked[i].value!= card_clicked[i+1].value or i+1==len(card_clicked)-1:
                 val=tmp
-                if tab_check_brelan.size()<2:
+                if len(tab_check_brelan)<2:
                     tab_check_brelan=tmp_tab.copy()
                 tmp=0
             if card_clicked[i].form==card_clicked[i+1].form:
