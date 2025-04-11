@@ -195,7 +195,7 @@ async def handler(websocket):
                     await broadcast_card(content, websocket)
                     last_combi = combi
 
-                await send_verification(verification, websocket, message)
+                await send_verification(boolean, websocket, message)
 
 
 
