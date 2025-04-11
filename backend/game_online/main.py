@@ -4,7 +4,7 @@ import json
 from websockets.asyncio.server import serve
 import ssl
 from debut_jeu import get_list_card_info_from_texture
-from python_project import check_card_clicked
+from python_project import check_card_clicked, Combinaison
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
@@ -16,6 +16,8 @@ WEBSOCKETS_PORT = 10006
 
 connected_client = {}
 nb_client = 0
+
+last_combi = None 
 
 card_list = [
         "res://assets/cards/card_clubs_02.png",
@@ -161,8 +163,16 @@ async def send_verification(verification, websocket, message) :
 
     await websocket.send(json.dumps(message))
 
-def verification(list_card): 
-
+def verification(combi): 
+    global last_combi
+    if (combi is not None) :
+        if (last_combi is not None) : 
+            result, message = check_higher_than_previous(last_combi, combi)
+            return result, message
+        else : 
+            return True, ""
+    else : 
+        return False, "This is not a valid combinaison"
 
 async def handler(websocket):
     global nb_client
@@ -177,10 +187,13 @@ async def handler(websocket):
                 # TODO : Implement verification then broadcast and then tell him you can play
                 list_card = get_list_card_info_from_texture(content["card"])
                 combi = check_card_clicked(list_card)
-                print(combi)
 
-               verification, message = verification(list_card)
-                await broadcast_card(content, websocket)
+                verification, message = verification(combi)
+
+                if verification: 
+                    await broadcast_card(content, websocket)
+                    last_combi = combi
+
                 await send_verification(verification, websocket, message)
 
 
