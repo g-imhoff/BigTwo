@@ -131,7 +131,7 @@ def generate_all_id():
     list_id = {}
 
     for client in connected_client:
-        list_id[client] = list_id[client]["id"]
+        list_id[client] = connected_client[client]["id"]
 
     return list_id
 
@@ -161,7 +161,7 @@ async def connect_handler(content, websocket):
             
             for client in connected_client:
                 list_message[client]["list_id"] = list_id
-                connected_client[client]["socket"].send(json.dumps(list_message[client]))
+                await connected_client[client]["socket"].send(json.dumps(list_message[client]))
 
             placeholder_card_list = card_list.copy()
     else : 
@@ -249,14 +249,4 @@ async def main():
         await server.serve_forever()
 
 if __name__ == "__main__":
-    test_client = {}
-    test_client["name"] = {}
-    test_client["name"]["id"] = 1
-    result = {}
-
-    for name in test_client :
-        result[name] = test_client[name]["id"]
-
-    print(result)
-
-    #asyncio.run(main())
+    asyncio.run(main())
