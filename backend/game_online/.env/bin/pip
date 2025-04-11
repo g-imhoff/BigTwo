@@ -1,4 +1,4 @@
-#!/home/ubuntu/game_server_devfolder/projet_chor_dai_di/backend/game_online/.env/bin/python3
+#!/home/g-imhoff/projet_chor_dai_di/backend/game_online/.env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
