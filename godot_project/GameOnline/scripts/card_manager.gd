@@ -57,12 +57,14 @@ func on_hovered_off_card(card):
 
 func highlight_card(card,hovered):
 	var current_pos=card.position
+	if !card.has_meta("z_index"):
+		card.set_meta("z_index", card.z_index)
 	if hovered and current_pos.y==hand.HAND_Y_POSITION:
 		card.scale=card_highlight_scale
-		card.z_index=2
+		card.z_index = card.get_meta("z_index") + 2
 	else:
 		card.scale=card_base_scale
-		card.z_index=1
+		card.z_index = card.get_meta("z_index")
 		
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
@@ -162,3 +164,21 @@ func _on_button_2_pressed() -> void:
 			})
 			
 			connect.socket.send_text(content)
+
+
+func _on_sort_form_pressed() -> void:
+	hand.player_hand.sort_custom(func(a, b): return a.form < b.form)
+	var card_erase = card_clicked.duplicate()
+	for card in card_erase:
+		card_clicked.erase(card)
+	hand.update_hand_position()
+	num_card_up = 0
+
+
+func _on_sort_value_pressed() -> void:
+	hand.player_hand.sort_custom(func(a, b): return a.value < b.value)
+	var card_erase = card_clicked.duplicate()
+	for card in card_erase:
+		card_clicked.erase(card)
+	hand.update_hand_position()
+	num_card_up = 0
