@@ -103,6 +103,37 @@ def random_hand():
         result_list.append(t)
     return result_list, bool_first
 
+def generate_all_hand():
+    global connected_client
+    num = 2
+    list_message = {}
+    for client in connected_client:
+        list_hand, bool_first = random_hand()
+        starting_game_message = {
+            "id" : 1 if bool_first else num,
+            "function": "starting",
+            "message": "game starting",
+            "card_hand": list_hand,
+            "first_player": 1 if bool_first else 0,
+            "list_id": {}
+        }
+        connected_client[client]["id"] = 1 if bool_first else num
+
+        if not bool_first:
+            num += 1
+
+        list_message[client] = starting_game_message
+
+    return list_message
+
+def generate_all_id():
+    global connected_client
+    list_id = {}
+
+    for client in connected_client:
+        list_id[client] = list_id[client]["id"]
+
+    return list_id
 
 async def connect_handler(content, websocket):
     global nb_client
@@ -125,23 +156,13 @@ async def connect_handler(content, websocket):
         print("connection from", content["profile_name"])
 
         if nb_client == 4:
-            num = 2
+            list_message = generate_all_hand() 
+            list_id = generate_all_id()
+            
             for client in connected_client:
-                list_hand, bool_first = random_hand()
-                starting_game_message = {
-                    "id" : 1 if bool_first else num,
-                    "function": "starting",
-                    "message": "game starting",
-                    "card_hand": list_hand,
-                    "first_player": 1 if bool_first else 0
-                }
-                connected_client[client]["id"] = 1 if bool_first else num
+                list_message[client]["list_id"] = list_id
+                connected_client[client]["socket"].send(json.dumps(list_message[client]))
 
-                if not bool_first:
-                    num += 1
-
-                message = json.dumps(starting_game_message)
-                await connected_client[client]["socket"].send(message)
             placeholder_card_list = card_list.copy()
     else : 
         await websocket.close(code=999, reason="server is full")
@@ -228,4 +249,14 @@ async def main():
         await server.serve_forever()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    test_client = {}
+    test_client["name"] = {}
+    test_client["name"]["id"] = 1
+    result = {}
+
+    for name in test_client :
+        result[name] = test_client[name]["id"]
+
+    print(result)
+
+    #asyncio.run(main())
