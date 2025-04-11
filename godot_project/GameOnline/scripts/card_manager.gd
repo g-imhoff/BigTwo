@@ -110,21 +110,8 @@ func _on_play_pressed() -> void:
 	else:
 		var card_played = []
 		
-		for card in card_clicked:
+		for card in card_clicked: 
 			card_played.append(card.file)
-			
-			var children_slots = cardslot.get_children()
-			var children_slot = null
-			
-			for children in children_slots :
-				if children.card_in_slot == false : 
-					children_slot = children
-					break
-			
-			move_card_to_slot(card, children_slot)
-		
-		card_clicked.clear()
-		hand.update_hand_position()
 		
 		var content = JSON.stringify({
 			"id": Global.online_game_id,
@@ -138,9 +125,26 @@ func move_card_to_slot(card, slot):
 	if card in hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
 		hand.remove_card_from_hand(card)  # Supprime la carte de la main
 		hand.animate_card_to_position(card,slot.position)
-		slot.card_in_slot = true  # Marque le slot comme occupé
+		slot.card_in_slot = true  # Marque e slot comme occupé
 		slot.card_value=card.value
 		slot.card_form=card.form
 		hand.lst_card_in_slot.append(card)
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
+
+
+func _on_connect_server_verification_worked() -> void:
+	for card in card_clicked:
+		
+		var children_slots = cardslot.get_children()
+		var children_slot = null
+		
+		for children in children_slots :
+			if children.card_in_slot == false : 
+				children_slot = children
+				break
+		
+		move_card_to_slot(card, children_slot)
+	
+	card_clicked.clear()
+	hand.update_hand_position()

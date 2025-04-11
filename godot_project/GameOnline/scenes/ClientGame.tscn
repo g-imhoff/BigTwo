@@ -135,5 +135,6 @@ position = Vector2(1500, 700)
 rotation = 1.5708
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="verification_worked" from="." to="card_manager" method="_on_connect_server_verification_worked"]
 [connection signal="pressed" from="Button" to="card_manager" method="_on_play_pressed"]
 [connection signal="pressed" from="Button2/Button2" to="." method="_on_button_2_pressed"]

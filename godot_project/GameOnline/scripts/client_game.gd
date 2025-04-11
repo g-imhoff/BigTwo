@@ -5,6 +5,8 @@ var socket = WebSocketPeer.new()
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 var card_scale=Vector2(0.5,0.5)
 
+signal verification_worked
+
 @onready var hand = $PlayerHand
 @onready var enemyhandleft = $EnemyHandLeft
 @onready var enemyhandup = $EnemyHandUp
@@ -69,6 +71,7 @@ func _data_received_handler(data):
 		"verification": 
 			if data["result"] == 1: 
 				manager.played = true
+				emit_signal("verification_worked")
 			else: 
 				Notification.show_side(data["message"])
 
