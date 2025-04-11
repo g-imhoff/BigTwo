@@ -235,10 +235,10 @@ async def handler(websocket):
                     if (connected_client[content["profile_name"]]["card"] <= 0) :
                         print(content["profile_name"], "won")
 
-                await send_verification(verification, websocket, message)
+                await send_verification(boolean, websocket, message)
             case "pass": 
                 nb_pass_in_a_row += 1
-                if (nb_pass_in_a_row == 4) :  
+                if (nb_pass_in_a_row == 4):  
                     last_combi = None
                 await broadcast_pass(content, websocket)
 
