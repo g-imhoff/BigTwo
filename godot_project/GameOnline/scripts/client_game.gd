@@ -59,6 +59,8 @@ func _process(_delta):
 func _data_received_handler(data):
 	print(data)
 	match data["function"]:
+		"server_close": 
+			get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 		"connected":
 			# Connected to the server game
 			pass

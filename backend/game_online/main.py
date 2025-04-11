@@ -210,39 +210,60 @@ def verification(combi):
     else : 
         return False, "This is not a valid combinaison"
 
+def reset_server(reason):
+    global connected_client
+
+    print("Server is making a reset ...")
+    for client in connected_client: 
+        message = {
+            "function": "server_close",
+            "reason": reason
+        } 
+        
+        await connected_client[client]["socket"].send(json.dumps(message))
+        await connected_client[client]["socket"].close()
+
+    connected_client = {}
+    nb_client = 0
+    last_combi = None 
+    nb_pass_in_a_row = 0
+
 async def handler(websocket):
     global nb_client
     global connected_client
     global last_combi
     global nb_pass_in_a_row
 
-    async for message in websocket:
-        content = json.loads(message)
-        match content["function"]:
-            case "connect":
-                await connect_handler(content, websocket)
-            case "play": 
-                # TODO : Implement verification then broadcast and then tell him you can play
-                list_card = get_list_card_info_from_texture(content["card"])
-                combi = check_card_clicked(list_card)
+    try: 
+        async for message in websocket:
+            content = json.loads(message)
+            match content["function"]:
+                case "connect":
+                    await connect_handler(content, websocket)
+                case "play": 
+                    list_card = get_list_card_info_from_texture(content["card"])
+                    combi = check_card_clicked(list_card)
 
-                boolean, message = verification(combi)
+                    boolean, message = verification(combi)
 
-                if boolean: 
-                    await broadcast_card(content, websocket)
-                    last_combi = combi
-                    connected_client[content["profile_name"]]["card"] -= len(list_card)
-                    if (connected_client[content["profile_name"]]["card"] <= 0) :
-                        print(content["profile_name"], "won")
+                    nb_pass_in_a_row = 0 
 
-                await send_verification(boolean, websocket, message)
-            case "pass": 
-                nb_pass_in_a_row += 1
-                if (nb_pass_in_a_row == 4):  
-                    last_combi = None
-                await broadcast_pass(content, websocket)
+                    if boolean: 
+                        await broadcast_card(content, websocket)
+                        last_combi = combi
+                        connected_client[content["profile_name"]]["card"] -= len(list_card)
+                        if (connected_client[content["profile_name"]]["card"] <= 0) :
+                            print(content["profile_name"], "won")
 
-
+                    await send_verification(boolean, websocket, message)
+                case "pass": 
+                    nb_pass_in_a_row += 1
+                    if (nb_pass_in_a_row == 4):  
+                        last_combi = None
+                    await broadcast_pass(content, websocket)
+    except ConnectionClosed as e:
+        connected_client.remove(websocket)
+        reset_server("A player left the game")
 
 async def main():
     async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:

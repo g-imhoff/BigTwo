@@ -34,99 +34,99 @@ script = ExtResource("6_nswuf")
 script = ExtResource("7_f6iy4")
 
 [node name="Button" type="Button" parent="."]
-offset_left = 606.0
-offset_top = 1027.0
-offset_right = 764.0
-offset_bottom = 1075.0
+offset_left = 561.0
+offset_top = 1032.0
+offset_right = 719.0
+offset_bottom = 1080.0
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1081.0
+offset_left = 1201.0
 offset_top = 1027.0
-offset_right = 1239.0
+offset_right = 1359.0
 offset_bottom = 1075.0
 text = "PASS
 "
 
 [node name="Cardslots" type="Node2D" parent="."]
+position = Vector2(715.9, 655.05)
 
 [node name="cardslot" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(1000, 600)
+position = Vector2(200, 0)
 
 [node name="cardslot2" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(1100, 600)
+position = Vector2(300, 0)
 
 [node name="cardslot3" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(900, 600)
+position = Vector2(100, 0)
 
 [node name="cardslot4" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(800, 600)
 
 [node name="cardslot5" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(1200, 600)
+position = Vector2(400, 0)
 
 [node name="Cardslots2" type="Node2D" parent="."]
 z_index = -1
+position = Vector2(715.9, 295.05)
 
 [node name="cardslot" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(1000, 250)
+position = Vector2(200, 0)
 
 [node name="cardslot2" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(1100, 250)
+position = Vector2(300, 0)
 
 [node name="cardslot3" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(900, 250)
+position = Vector2(100, 0)
 
 [node name="cardslot4" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(800, 250)
 
 [node name="cardslot5" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(1200, 250)
+position = Vector2(400, 0)
 
 [node name="Cardslots3" type="Node2D" parent="."]
 z_index = -1
+position = Vector2(640.95, 295.9)
 
 [node name="cardslot" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 500)
+position = Vector2(0, 200)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 600)
+position = Vector2(0, 300)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 400)
+position = Vector2(0, 100)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 300)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 700)
+position = Vector2(0, 400)
 rotation = 1.5708
 
 [node name="Cardslots4" type="Node2D" parent="."]
 z_index = -1
+position = Vector2(1408.95, 295.9)
 
 [node name="cardslot" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 500)
+position = Vector2(0, 200)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 600)
+position = Vector2(0, 300)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 400)
+position = Vector2(0, 100)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 300)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 700)
+position = Vector2(0, 400)
 rotation = 1.5708
 
 [node name="PlayerUsername" type="Label" parent="."]
@@ -142,7 +142,6 @@ offset_bottom = 1065.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 22
-text = "test"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -166,7 +165,6 @@ offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 22
-text = "test"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -191,7 +189,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 1.5708
 theme_override_font_sizes/font_size = 26
-text = "test"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -216,7 +213,6 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5708
 theme_override_font_sizes/font_size = 26
-text = "test"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -229,17 +225,17 @@ texture = ExtResource("9_xk7ip")
 
 [node name="sort_value" type="TextureButton" parent="."]
 texture_filter = 1
-offset_left = 215.0
-offset_top = 954.0
-offset_right = 256.0
-offset_bottom = 1011.0
+offset_left = 20.0
+offset_top = 1003.0
+offset_right = 61.0
+offset_bottom = 1060.0
 texture_normal = ExtResource("9_n0mij")
 
 [node name="sort_form" type="TextureButton" parent="."]
-offset_left = 287.0
-offset_top = 954.0
-offset_right = 328.0
-offset_bottom = 1012.0
+offset_left = 92.0
+offset_top = 1003.0
+offset_right = 133.0
+offset_bottom = 1061.0
 texture_normal = ExtResource("10_fsp72")
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
