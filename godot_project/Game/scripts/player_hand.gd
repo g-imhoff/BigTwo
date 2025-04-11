@@ -1,5 +1,9 @@
 extends Node2D
 
+
+signal send_card_left
+signal finished_distribution
+
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 const CARD_WIDTH=80
@@ -10,6 +14,7 @@ var center_screen_x
 var card_scale=Vector2(0.5,0.5)
 
 @onready var card_l = $".."
+@onready var hand_right=$"../EnemyHandRight"
 
 #var lst_img=[
 	#"res://assets/cards/card_diamonds_03.png",
@@ -25,12 +30,13 @@ func _ready() -> void:
 	center_screen_x=get_viewport().size.x/2
 	var card_scene=preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
+		await hand_right.send_card_player
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
 		var selected_card=card_l.random_card()
-		
+			
 		var new_texture=load(selected_card)
-		 # Extraire la valeur et la couleur de la carte
+		# Extraire la valeur et la couleur de la carte
 		var card_info = Global.get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
 		new_card.form = card_info[0]
@@ -39,11 +45,21 @@ func _ready() -> void:
 		new_card.scale=card_scale
 		new_card.name="Card"
 		add_card_to_hand(new_card)
+		await get_tree().create_timer(0.1).timeout
+		emit_signal("send_card_left")
+	emit_signal("finished_distribution")
 
+
+
+
+	
+	
+	
 func add_card_to_hand(card):
 	if card not in player_hand:
 		player_hand.append(card)
 		update_hand_position()
+		animate_card_to_position(card,card.hand_position)
 	else:
 		animate_card_to_position(card,card.hand_position)
 

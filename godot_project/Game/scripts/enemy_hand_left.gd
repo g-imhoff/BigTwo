@@ -1,5 +1,8 @@
 extends Node2D
 
+signal send_card_up
+var start = true
+
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
 const CARD_WIDTH=60 #60
@@ -9,6 +12,7 @@ var player_hand=[]
 var center_screen_y
 var card_scale=Vector2(0.5,0.5)
 
+@onready var hand_player=$"../PlayerHand"
 @onready var card_l = $".."
 
 
@@ -17,22 +21,31 @@ func _ready() -> void:
 	center_screen_y=get_viewport().size.y/2
 	var card_scene=preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
+		if start==true:
+			start=false
+		else:
+			await hand_player.send_card_left
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
 		var selected_card=card_l.random_card()
 		
-		var new_texture=load("res://assets/cards/card_back.png") #montre juste le dos "res://assets/cards/card_back.png"
+		var new_texture=load("res://assets/cards/card_back.png")
 		 # Extraire la valeur et la couleur de la carte
-		var card_info =get_card_info_from_texture(selected_card)
+		var card_info = Global.get_card_info_from_texture(selected_card)
 		new_card.value = card_info[1]
 		new_card.form = card_info[0]
 		new_card.img=load(selected_card)
-		new_card.scale=card_scale
 		sprite.texture=new_texture
+		sprite.rotate(deg_to_rad(90))
 		$"../card_manager".add_child(new_card)
+		new_card.scale=card_scale
 		new_card.name="Card"
-		sprite.rotate(deg_to_rad(90))  # Rotation de 90 degrés dans le sens horaire
 		add_card_to_hand(new_card)
+		await get_tree().create_timer(0.1).timeout
+		emit_signal("send_card_up")
+	
+
+	
 
 func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
