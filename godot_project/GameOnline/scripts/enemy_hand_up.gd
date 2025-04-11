@@ -3,7 +3,7 @@ extends Node2D
 const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
 const HAND_COUNT=13
 const CARD_WIDTH=80 #80
-const HAND_Y_POSITION=50
+const HAND_Y_POSITION=120
 
 var card_scale=Vector2(0.5,0.5)
 var player_hand=[]

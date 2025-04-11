@@ -91,7 +91,7 @@ func _data_received_handler(data):
 			else: 
 				Notification.show_side(data["message"])
 
-func _display_all_username(list_id:Array):
+func _display_all_username(list_id: Dictionary):
 	list_id.erase(Global.username)
 	
 	for username in list_id:
@@ -99,13 +99,14 @@ func _display_all_username(list_id:Array):
 	pass
 
 func _display_username(username, id):
+	print(username)
 	match (int((id - Global.online_game_id + 4)) % 4):
 		1: 
-			enemyhandleft.text = username
+			enemyusernameleft.text = username
 		2: 
-			enemyhandup.text = username
+			enemyusernametop.text = username
 		3:
-			enemyhandright.text = username
+			enemyusernameright.text = username
 
 func remove_card_in_slot(hand, cardslot):
 	if hand.lst_card_in_slot.size() != 0:
@@ -155,7 +156,6 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 	hand.update_hand_position()
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
-	print(slot.position.x, slot.position.y)
 	hand.animate_card_to_position(card,slot.position)
 	slot.card_in_slot = true  # Marque le slot comme occupé
 	slot.card_value=card.value
