@@ -71,6 +71,7 @@ func _process(_delta):
 		var reason = socket.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
+		get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")
 
 func _data_received_handler(data):
 	if (data["code"] == 0):
