@@ -4,6 +4,13 @@ class Combinaison:
         self.combi_value = combi_value
         self.combi_form = combi_form
 
+    def __eq__ (self, other): 
+        return (
+            self.combi == other.combi and
+            self.combi_value == other.combi_value and 
+            self.combi_form == other.combi_form
+        )
+
 # 4: Straight
 # 5: flush
 # 6: full house
@@ -98,7 +105,7 @@ def check_card_clicked(card_clicked):
             for i in range(len(tab_check_brelan)):
                 tab_val.remove(tab_check_brelan[i])
             if val == 2:
-                brelan=tab_check_brelan.duplicate()
+                brelan=tab_check_brelan.copy()
                 if tab_val[0].value == tab_val[1].value:
                     combi.combi=6
                     combi.combi_value=brelan[0].value
