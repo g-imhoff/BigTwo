@@ -24,6 +24,7 @@ signal verification_worked
 @onready var enemytopsprite = $EnemyUsernameTop/EnemyTopSprit
 @onready var enemyleftsprite = $EnemyUsernameLeft/EnemyLeftSprite
 @onready var enemyrightsprite = $EnemyUsernameRight/EnemyRightSprite
+@onready var endgamepopup = $EndGame
 
 func _on_tree_exited() -> void:
 	socket.close()
@@ -60,6 +61,10 @@ func _process(_delta):
 func _data_received_handler(data):
 	print(data)
 	match data["function"]:
+		"game_won": 
+			endgamepopup.show_popup(data["winner"])
+			endgamepopup.visible = true
+			manager.played = true
 		"connected":
 			# Connected to the server game
 			pass

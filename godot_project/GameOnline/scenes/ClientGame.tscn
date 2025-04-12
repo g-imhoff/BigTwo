@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn3olflapan7j"]
+[gd_scene load_steps=13 format=3 uid="uid://bn3olflapan7j"]
 
 [ext_resource type="Script" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
 [ext_resource type="Script" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="9_n0mij"]
 [ext_resource type="Texture2D" uid="uid://c32fa2jolwtki" path="res://assets/ui/circle.png" id="9_xk7ip"]
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="10_fsp72"]
+[ext_resource type="PackedScene" uid="uid://x4s413s07jg2" path="res://GameOnline/scenes/end_game.tscn" id="12_xw44o"]
 
 [node name="ConnectServer" type="Node2D"]
 script = ExtResource("1_abxww")
@@ -237,6 +238,11 @@ offset_top = 1003.0
 offset_right = 133.0
 offset_bottom = 1061.0
 texture_normal = ExtResource("10_fsp72")
+
+[node name="EndGame" parent="." instance=ExtResource("12_xw44o")]
+visible = false
+z_index = 4096
+position = Vector2(486, 287)
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="verification_worked" from="." to="card_manager" method="_on_connect_server_verification_worked"]
