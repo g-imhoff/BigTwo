@@ -109,7 +109,11 @@ func _data_received_handler(data):
 		"verification": 
 			if data["result"] == 1: 
 				manager.played = true
-				emit_signal("verification_worked")
+				if (data["passed"] == 1): 
+					for card in manager.card_clicked: 
+						manager.move_card_up_or_down(card)
+				else : 
+					emit_signal("verification_worked")
 				playersprite.visible = false
 				enemyleftsprite.visible = true
 			else: 
