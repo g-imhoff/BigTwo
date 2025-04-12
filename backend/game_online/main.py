@@ -189,11 +189,12 @@ async def broadcast_pass(content, websocket):
         if (connected_client[client]["id"] != content["id"]):
             await connected_client[client]["socket"].send(json.dumps(message))
 
-async def send_verification(boolean, websocket, message) :
+async def send_verification(boolean, websocket, message, passed) :
     message = {
         "function": "verification",
         "result": 1 if boolean else 0, 
-        "message": message
+        "message": message,
+        "passed" : 1 if passed else 0, 
     }
 
     await websocket.send(json.dumps(message))
@@ -225,7 +226,7 @@ async def reset_server(reason):
     nb_pass_in_a_row = 0
     first_play = True
 
-def game_won(winner_username):
+async def game_won(winner_username):
     global connected_client
 
     message = {
@@ -274,20 +275,20 @@ async def handler(websocket):
                             last_combi = combi
                             connected_client[content["profile_name"]]["card"] -= len(list_card)
                             if (connected_client[content["profile_name"]]["card"] <= 0) :
-                                game_won(content["profile_name"])
+                                await game_won(content["profile_name"])
 
-                        await send_verification(boolean, websocket, message)
+                        await send_verification(boolean, websocket, message, False)
                     else : 
-                        await send_verification(False, websocket, "You need to play the 3 of diamond")
+                        await send_verification(False, websocket, "You need to play the 3 of diamond", False)
                 case "pass": 
                     if first_play : 
-                        await send_verification(False, websocket, "You can't pass for the first move")
+                        await send_verification(False, websocket, "You can't pass for the first move", True)
                     else :
                         nb_pass_in_a_row += 1
                         if (nb_pass_in_a_row == 4):  
                             last_combi = None
                         await broadcast_pass(content, websocket)
-                        await send_verification(True, websocket, "") 
+                        await send_verification(True, websocket, "", True) 
     except websockets.exceptions.ConnectionClosed as e:
         for username, data in list(connected_client.items()): 
             if data["socket"] == websocket : 

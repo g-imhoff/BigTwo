@@ -83,23 +83,20 @@ def check_card_clicked(card_clicked):
                 suite+=1
         if val == 3:#check Four of a Kind
             combi.combi=7
-            val_tmp=card_clicked[0]
-            if card_clicked[0]!=card_clicked[1]:
-                val_tmp=card_clicked[1]
-            combi.combi_value=val_tmp.value
-            combi.combi_form=val_tmp.form
+            combi.combi_value=card_clicked[0].value
+            combi.combi_form=card_clicked[0].form
         elif suite==4 and signe ==4:#check pour Straight Flush
             combi.combi=8
-            combi.combi_value=card_clicked[4].value
-            combi.combi_form=card_clicked[4].form
+            combi.combi_value=card_clicked[0].value
+            combi.combi_form=card_clicked[0].form
         elif signe==4:#check Flush
             combi.combi=5
-            combi.combi_value=card_clicked[4].value
-            combi.combi_form=card_clicked[4].form
+            combi.combi_value=card_clicked[0].value
+            combi.combi_form=card_clicked[0].form
         elif suite==4:#check pour straight
             combi.combi=4
-            combi.combi_value=card_clicked[4].value
-            combi.combi_form=card_clicked[4].form
+            combi.combi_value=card_clicked[0].value
+            combi.combi_form=card_clicked[0].form
         elif val == 1 or val == 2:  # check pour full house
             tab_val = card_clicked.copy()
             for i in range(len(tab_check_brelan)):
