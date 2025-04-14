@@ -1,3 +1,7 @@
+from debut_jeu import Card
+
+
+
 class Combinaison:
     def __init__(self, combi, combi_value,combi_form):
         self.combi = combi
@@ -43,6 +47,23 @@ def check_higher_than_previous(previous_combi, new_combi):
                     return False, "Your combinaison is not higher than the previous one"
         else : 
             return False, "Your combinaison is not higher than the previous one"
+
+def combi_detection(card_clicked): 
+    combi = Combinaison(None, None, None)
+    card_clicked.sort(key=lambda card: card.value)
+    card_clicked.reverse()
+    len = len(card_clicked)
+
+    match len: 
+        case 1 :
+            combi.combi=1
+            combi.combi_value=card_clicked[0].value
+            combi.combi_form=card_clicked[0].form 
+        case 2 and card_clicked[0].value==card_clicked[1].value: 
+            combi.combi=2
+            combi.combi_value=card_clicked[0].value
+            combi.combi_form=card_clicked[0].form 
+
 
 def check_card_clicked(card_clicked):
     combi=Combinaison(None, None, None)
@@ -114,3 +135,7 @@ def check_card_clicked(card_clicked):
                     combi.combi_value=tab_val[0].value
                     combi.combi_form=tab_val[0].form
     return combi 
+
+if __name__ == "__main__":
+    list_card = [Card(7, 3), Card(8, 4), Card(10, 4)]
+    combi_detection(list_card)
