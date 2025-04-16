@@ -3,6 +3,12 @@ class Card:
         self.value = value
         self.form = form
 
+    def __eq__ (self, other): 
+        return (
+            self.value == other.value and
+            self.form == other.form 
+        )
+
 def get_list_card_info_from_texture(l): 
     result = []
     i = 0

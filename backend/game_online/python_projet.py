@@ -1,7 +1,5 @@
 from debut_jeu import Card
 
-
-
 class Combinaison:
     def __init__(self, combi, combi_value,combi_form):
         self.combi = combi
@@ -15,11 +13,7 @@ class Combinaison:
             self.combi_form == other.combi_form
         )
 
-# 4: Straight
-# 5: flush
-# 6: full house
-# 7: four of a kind
-# 8: Straight flush
+
 def check_higher_than_previous(previous_combi, new_combi):
     print(previous_combi.combi, previous_combi.combi_value, previous_combi.combi_form)
     print(new_combi.combi, new_combi.combi_value, new_combi.combi_form)
@@ -48,13 +42,20 @@ def check_higher_than_previous(previous_combi, new_combi):
         else : 
             return False, "Your combinaison is not higher than the previous one"
 
+# 1 : highest card
+# 2 : pair
+# 3 : Three of a kind
+# 4 : Straight
+# 5 : Flush
+# 6 : Full house 
+# 7 : Four of a kind
+# 8 : Straight flush
 def combi_detection(card_clicked): 
     combi = Combinaison(None, None, None)
     card_clicked.sort(key=lambda card: card.value)
     card_clicked.reverse()
-    len = len(card_clicked)
 
-    match len: 
+    match len(card_clicked): 
         case 1 :
             combi.combi=1
             combi.combi_value=card_clicked[0].value
@@ -71,12 +72,35 @@ def combi_detection(card_clicked):
                 combi.combi_form=card_clicked[0].form
         case 5 :
             value_list, form_list, suite = get_info(card_clicked)
+            if suite == 5: 
+                if 5 in form_list: 
+                    combi.combi = 8
+                    combi.combi_value=card_clicked[0].value
+                    combi.combi_form=card_clicked[0].form
+                else : 
+                    combi.combi = 4
+                    combi.combi_value=card_clicked[0].value
+                    combi.combi_form=card_clicked[0].form
+            elif 5 in form_list:
+                combi.combi = 5
+                combi.combi_value=card_clicked[0].value
+                combi.combi_form=card_clicked[0].form
+            elif 2 in value_list and 3 in value_list:
+                combi.combi = 6
+                combi.combi_value=card_clicked[0].value
+                combi.combi_form=card_clicked[0].form
+            elif 4 in value_list: 
+                combi.combi = 7
+                combi.combi_value=card_clicked[0].value
+                combi.combi_form=card_clicked[0].form
+    return combi
 
 def get_info(card_clicked_sort): 
-    value_list = []
-    form_list = []
-    suite = 0
-    suite_placeholder = 0
+    value_list = {}
+    form_list = {}
+    suite = 1
+    suite_placeholder = 1
+    previous_card = Card(None, None)
 
     for card in card_clicked_sort: 
         if card.value in value_list:
@@ -88,68 +112,24 @@ def get_info(card_clicked_sort):
             form_list[card.form] += 1
         else : 
             form_list[card.form] = 1
+
+        if previous_card != Card(None, None):
+            if previous_card.value - 1 == card.value: 
+                suite_placeholder += 1
+            else : 
+                if suite_placeholder > suite:
+                    suite = suite_placeholder
+                suite_placeholder = 1
+
+        previous_card = card
+
+    if suite_placeholder > suite:
+        suite = suite_placeholder
     
-    return value_list, form_list, suite
+    return list(value_list.values()), list(form_list.values()), suite
 
-def check_card_clicked(card_clicked):
-    combi=Combinaison(None, None, None)
-    card_clicked.sort(key=lambda card: card.value)
-
-    elif len(card_clicked)==5:
-        val=0
-        signe=0
-        suite=0
-        tab_check_brelan=[]
-        tmp=0
-        tmp_tab=tab_check_brelan.copy()
-        tmp_tab.append(card_clicked[0])
-        for i in range(len(card_clicked)-1):
-            if card_clicked[i].value== card_clicked[i+1].value:
-                tmp+=1
-                tmp_tab.append(card_clicked[i+1])
-            elif card_clicked[i].value!= card_clicked[i+1].value or i+1==len(card_clicked)-1:
-                val=tmp
-                if len(tab_check_brelan)<2:
-                    tab_check_brelan=tmp_tab.copy()
-                tmp=0
-            if card_clicked[i].form==card_clicked[i+1].form:
-                signe+=1
-            if card_clicked[i+1].value== card_clicked[i].value+1:
-                suite+=1
-        if val == 3:#check Four of a Kind
-            combi.combi=7
-            combi.combi_value=card_clicked[0].value
-            combi.combi_form=card_clicked[0].form
-        elif suite==4 and signe ==4:#check pour Straight Flush
-            combi.combi=8
-            combi.combi_value=card_clicked[0].value
-            combi.combi_form=card_clicked[0].form
-        elif signe==4:#check Flush
-            combi.combi=5
-            combi.combi_value=card_clicked[0].value
-            combi.combi_form=card_clicked[0].form
-        elif suite==4:#check pour straight
-            combi.combi=4
-            combi.combi_value=card_clicked[0].value
-            combi.combi_form=card_clicked[0].form
-        elif val == 1 or val == 2:  # check pour full house
-            tab_val = card_clicked.copy()
-            for i in range(len(tab_check_brelan)):
-                tab_val.remove(tab_check_brelan[i])
-            if val == 2:
-                brelan=tab_check_brelan.copy()
-                if tab_val[0].value == tab_val[1].value:
-                    combi.combi=6
-                    combi.combi_value=brelan[0].value
-                    combi.combi_form=brelan[0].form		
-            elif val == 1:
-                brelan=tab_val.copy()
-                if len(tab_val) == 3 and tab_val[0].value == tab_val[1].value:  # Assure que seulement 2 cartes restent
-                    combi.combi=6
-                    combi.combi_value=tab_val[0].value
-                    combi.combi_form=tab_val[0].form
-    return combi 
 
 if __name__ == "__main__":
-    list_card = [Card(7, 3), Card(8, 4), Card(10, 4)]
-    combi_detection(list_card)
+    list_card = [Card(2, 2), Card(3, 2), Card(4, 2), Card(5, 2), Card(6, 2)]
+    combi_detected = combi_detection(list_card)
+    print(combi_detected.combi, combi_detected.combi_value, combi_detected.combi_form)
