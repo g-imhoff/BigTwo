@@ -217,6 +217,7 @@ async def reset_server(reason):
     global nb_pass_in_a_row
     global first_play
 
+    await asyncio.sleep(2)
     print("Server is making a reset ...")
     for client in connected_client: 
         await connected_client[client]["socket"].close()
@@ -276,6 +277,7 @@ async def handler(websocket):
                             connected_client[content["profile_name"]]["card"] -= len(list_card)
                             if (connected_client[content["profile_name"]]["card"] <= 0) :
                                 await game_won(content["profile_name"])
+                                await reset_server("The game is finished")
 
                         await send_verification(boolean, websocket, message, False)
                     else : 
@@ -286,9 +288,12 @@ async def handler(websocket):
                     else :
                         nb_pass_in_a_row += 1
                         if (nb_pass_in_a_row == 4):  
-                            last_combi = None
+                            last_combi = Combinaison(None, None, None) 
                         await broadcast_pass(content, websocket)
                         await send_verification(True, websocket, "", True) 
+                case "leaving":
+                    del connected_client[content["profile_name"]]
+                    await reset_server("A player left the game")
     except websockets.exceptions.ConnectionClosed as e:
         for username, data in list(connected_client.items()): 
             if data["socket"] == websocket : 
