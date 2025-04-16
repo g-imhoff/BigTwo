@@ -238,7 +238,7 @@ async def game_won(winner_username):
     for client in connected_client:
         await connected_client[client]["socket"].send(json.dumps(message))
 
-    reset_server("Game finished")
+    await reset_server("Game finished")
 
 async def handler(websocket):
     global connected_client
@@ -277,7 +277,6 @@ async def handler(websocket):
                             connected_client[content["profile_name"]]["card"] -= len(list_card)
                             if (connected_client[content["profile_name"]]["card"] <= 0) :
                                 await game_won(content["profile_name"])
-                                await reset_server("The game is finished")
 
                         await send_verification(boolean, websocket, message, False)
                     else : 
