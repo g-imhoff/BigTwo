@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://db0d4jn5sok86"]
+
+[ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_sa5fu"]
+[ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_vunle"]
+
+[node name="Rules_Popup" type="Node2D"]
+
+[node name="PopupSettings" type="Sprite2D" parent="."]
+z_index = 1000
+position = Vector2(568, 404.25)
+scale = Vector2(1.00176, 1.01317)
+texture = ExtResource("1_sa5fu")
+
+[node name="RichTextLabel2" type="Label" parent="PopupSettings"]
+offset_left = -149.0
+offset_top = -316.0
+offset_right = 183.0
+offset_bottom = -224.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_vunle")
+theme_override_font_sizes/font_size = 60
+text = "RULES"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PopupSettings"]
+offset_left = -460.0
+offset_top = -209.0
+offset_right = 504.0
+offset_bottom = 301.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "🃏 Big Two – Quick Rules
+Objective
+Be the first to play all your cards by beating your opponents' combos.
+
+Card Deal
+Each player gets 13 cards from a 52-card deck (no jokers).
+
+How to Play
+
+The player with the 3♦ starts.
+
+Turns go clockwise.
+
+On your turn, play a stronger combo or pass.
+
+If everyone passes, the last player who played starts a new round.
+
+Cards per Turn
+
+The first play decides how many cards must be played that round.
+
+Example: If a pair is played, only stronger pairs can follow.
+
+Valid Combos
+
+Single (e.g. K♠)
+
+Pair (e.g. 7♦ 7♣)
+
+Three-of-a-kind (e.g. 5♠ 5♦ 5♥)
+
+Straight (5 cards in a row)
+
+Flush (5 cards, same suit)
+
+Full House (3 of a kind + a pair)
+
+Four-of-a-kind + 1 extra
+
+Straight Flush (5 in a row, same suit)
+
+Winning
+The first player to play all their cards wins!
+
+Card Strength
+
+Card Rank: 2 > A > K > Q > J > 10 > ... > 3
+
+Suit Order: ♠ > ♥ > ♣ > ♦
+
+Tip
+Play smart combos to block others and empty your hand faster! 🚀"

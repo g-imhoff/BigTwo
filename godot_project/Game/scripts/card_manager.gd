@@ -434,3 +434,5 @@ func show_message(text: String, duration: float = 3.0):
 
 func _on_timer_timeout() -> void:
 	message.visible = false
+
+ 
