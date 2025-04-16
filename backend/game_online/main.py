@@ -16,6 +16,7 @@ WEBSOCKETS_URL = "0.0.0.0"  # for the moment, turn to 0.0.0.0 after
 WEBSOCKETS_PORT = 10006
 
 connected_client = {}
+connection_allowed = True
 
 last_combi = Combinaison(None, None, None) 
 
@@ -140,7 +141,9 @@ def generate_all_id():
 async def connect_handler(content, websocket):
     global connected_client
     global placeholder_card_list
-    if len(connected_client) < 4:
+    global connection_allowed
+
+    if len(connected_client) < 4 and connection_allowed:
         if content["profile_name"] not in connected_client:
             connected_client[content["profile_name"]] = {}
 
@@ -158,14 +161,14 @@ async def connect_handler(content, websocket):
         if len(connected_client) == 4:
             list_message = generate_all_hand() 
             list_id = generate_all_id()
-            
+            connection_allowed = False
             for client in connected_client:
                 list_message[client]["list_id"] = list_id
                 await connected_client[client]["socket"].send(json.dumps(list_message[client]))
 
             placeholder_card_list = card_list.copy()
     else : 
-        await websocket.close(code=999, reason="server is full")
+        await websocket.close(code=999, reason="server is full or not available")
 
 async def broadcast_card(content, websocket):
     global connected_client
@@ -216,6 +219,7 @@ async def reset_server(reason):
     global last_combi
     global nb_pass_in_a_row
     global first_play
+    global connection_allowed
 
     await asyncio.sleep(2)
     print("Server is making a reset ...")
@@ -226,6 +230,7 @@ async def reset_server(reason):
     last_combi = Combinaison(None, None, None)  
     nb_pass_in_a_row = 0
     first_play = True
+    connection_allowed = True
 
 async def game_won(winner_username):
     global connected_client
