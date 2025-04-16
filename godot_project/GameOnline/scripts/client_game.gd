@@ -7,6 +7,8 @@ var card_scale=Vector2(0.5,0.5)
 
 signal verification_worked
 
+var game_won = false
+
 @onready var hand = $PlayerHand
 @onready var enemyhandleft = $EnemyHandLeft
 @onready var enemyhandup = $EnemyHandUp
@@ -27,7 +29,15 @@ signal verification_worked
 @onready var endgamepopup = $EndGame
 
 func _on_tree_exited() -> void:
-	socket.close()
+	if not game_won: 
+		var content = JSON.stringify({
+			"function": "leaving",
+			"profile_name": Global.username
+		})
+		
+		socket.send_text(content)
+	
+		socket.close()
 
 func _ready() -> void:
 	playerusername.text = Global.username
@@ -56,7 +66,8 @@ func _process(_delta):
 		var reason = socket.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
-		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+		if not game_won : 
+			get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 func _data_received_handler(data):
 	print(data)
@@ -65,6 +76,7 @@ func _data_received_handler(data):
 			endgamepopup.show_popup(data["winner"])
 			endgamepopup.visible = true
 			manager.played = true
+			game_won = true 
 		"connected":
 			# Connected to the server game
 			pass
@@ -123,7 +135,6 @@ func _display_all_username(list_id: Dictionary):
 	for username in list_id:
 		_display_username(username, list_id[username])
 
-			 
 func _display_username(username, id):
 	print(username)
 	match (int((id - Global.online_game_id + 4)) % 4):
@@ -209,3 +220,10 @@ func _server_handshake():
 
 func _on_button_2_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+
+
+func _on_settings_btn_pressed() -> void:
+	$Setting.visible = not $Setting.visible
+
+func _on_texture_button_pressed() -> void:
+	$Rules_Popup.visible = not $Rules_Popup.visible

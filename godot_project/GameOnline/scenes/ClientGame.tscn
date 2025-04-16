@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn3olflapan7j"]
+[gd_scene load_steps=17 format=3 uid="uid://bn3olflapan7j"]
 
 [ext_resource type="Script" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
 [ext_resource type="Script" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://c32fa2jolwtki" path="res://assets/ui/circle.png" id="9_xk7ip"]
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="10_fsp72"]
 [ext_resource type="PackedScene" uid="uid://x4s413s07jg2" path="res://GameOnline/scenes/end_game.tscn" id="12_xw44o"]
+[ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="13_7kpjg"]
+[ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="14_y18d6"]
+[ext_resource type="PackedScene" path="res://GameStarter/rules_popup.tscn" id="15_kkcok"]
+[ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="16_8njk5"]
 
 [node name="ConnectServer" type="Node2D"]
 script = ExtResource("1_abxww")
@@ -244,9 +248,36 @@ visible = false
 z_index = 4096
 position = Vector2(486, 287)
 
+[node name="Setting" parent="." instance=ExtResource("13_7kpjg")]
+visible = false
+position = Vector2(401, 114)
+
+[node name="Settings_btn" type="TextureButton" parent="."]
+offset_left = 25.0
+offset_top = 19.0
+offset_right = 105.0
+offset_bottom = 99.0
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("14_y18d6")
+
+[node name="Rules_Popup" parent="." instance=ExtResource("15_kkcok")]
+visible = false
+position = Vector2(409, 89)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+z_index = 2000
+offset_left = 1794.0
+offset_top = 9.0
+offset_right = 1909.0
+offset_bottom = 133.0
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("16_8njk5")
+
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="verification_worked" from="." to="card_manager" method="_on_connect_server_verification_worked"]
 [connection signal="pressed" from="Button" to="card_manager" method="_on_play_pressed"]
 [connection signal="pressed" from="Button2" to="card_manager" method="_on_button_2_pressed"]
 [connection signal="pressed" from="sort_value" to="card_manager" method="_on_sort_value_pressed"]
 [connection signal="pressed" from="sort_form" to="card_manager" method="_on_sort_form_pressed"]
+[connection signal="pressed" from="Settings_btn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

@@ -1,7 +1,6 @@
 extends Node2D
 
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
-var center_screen_x
 var player_hand=[]
 const HAND_Y_POSITION=870
 const CARD_WIDTH=80
@@ -15,7 +14,7 @@ var lst_card_in_slot=[]
 
 func _card_hand_init(id, list_card, bool_first_player):
 	Global.online_game_id = id
-	center_screen_x=get_viewport().size.x/2
+	var center_screen_x=DisplayServer.window_get_size().x/2
 	var card_scene=preload(CARD_SCENE_PATH)
 	for card in list_card: 
 		var new_card=card_scene.instantiate()
@@ -54,8 +53,10 @@ func update_hand_position():
 		animate_card_to_position(card,new_position)
 
 func calculate_card_position(index):
-	var total_with=(player_hand.size()-1)*CARD_WIDTH 
-	var x_offset=center_screen_x + index * CARD_WIDTH - total_with/2
+	var real_card_width = (CARD_WIDTH) * (float(DisplayServer.window_get_size().x) / 1920.0)
+	var total_width=(player_hand.size()-1) * (real_card_width)
+	var center_screen_x = DisplayServer.window_get_size().x/2
+	var x_offset=center_screen_x + (index * real_card_width) + total_width/2
 	return x_offset
 	
 func animate_card_to_position(card,new_position):
