@@ -59,28 +59,42 @@ def combi_detection(card_clicked):
             combi.combi=1
             combi.combi_value=card_clicked[0].value
             combi.combi_form=card_clicked[0].form 
-        case 2 and card_clicked[0].value==card_clicked[1].value: 
-            combi.combi=2
-            combi.combi_value=card_clicked[0].value
-            combi.combi_form=card_clicked[0].form 
+        case 2 :
+            if card_clicked[0].value==card_clicked[1].value:
+                combi.combi=2
+                combi.combi_form=card_clicked[0].form 
+                combi.combi_value=card_clicked[0].value
+        case 3 :
+            if len(card_clicked) == 3 and card_clicked[0].value == card_clicked[1].value and card_clicked[1].value == card_clicked[2].value:
+                combi.combi=3
+                combi.combi_value=card_clicked[0].value
+                combi.combi_form=card_clicked[0].form
+        case 5 :
+            value_list, form_list, suite = get_info(card_clicked)
 
+def get_info(card_clicked_sort): 
+    value_list = []
+    form_list = []
+    suite = 0
+    suite_placeholder = 0
+
+    for card in card_clicked_sort: 
+        if card.value in value_list:
+            value_list[card.value] += 1
+        else : 
+            value_list[card.value] = 1
+
+        if card.form in form_list:
+            form_list[card.form] += 1
+        else : 
+            form_list[card.form] = 1
+    
+    return value_list, form_list, suite
 
 def check_card_clicked(card_clicked):
     combi=Combinaison(None, None, None)
     card_clicked.sort(key=lambda card: card.value)
 
-    if len(card_clicked) == 1:
-        combi.combi=1
-        combi.combi_value=card_clicked[0].value
-        combi.combi_form=card_clicked[0].form 
-    elif len(card_clicked) == 2 and card_clicked[0].value==card_clicked[1].value:
-        combi.combi=2
-        combi.combi_value=card_clicked[0].value
-        combi.combi_form=card_clicked[0].form
-    elif len(card_clicked) == 3 and card_clicked[0].value == card_clicked[1].value and card_clicked[1].value == card_clicked[2].value:
-        combi.combi=3
-        combi.combi_value=card_clicked[0].value
-        combi.combi_form=card_clicked[0].form
     elif len(card_clicked)==5:
         val=0
         signe=0
