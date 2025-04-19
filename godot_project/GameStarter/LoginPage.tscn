@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dui1hqinflue4"]
+[gd_scene load_steps=16 format=3 uid="uid://dui1hqinflue4"]
 
-[ext_resource type="Script" uid="uid://bcocpoeix31jf" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
+[ext_resource type="Script" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
 [ext_resource type="Texture2D" uid="uid://wusfm5iffkwg" path="res://assets/ui/login google.png" id="3_nhusd"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_qpq5i"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="7_wdso3"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="8_i56jj"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="8_uobxe"]
-[ext_resource type="Script" uid="uid://dxxgr84dsusln" path="res://GameStarter/animated_hide.gd" id="9_uobxe"]
+[ext_resource type="Script" path="res://GameStarter/animated_hide.gd" id="9_uobxe"]
+[ext_resource type="Texture2D" uid="uid://ihgdbahsymcd" path="res://assets/ui/reset2.png" id="11_6wy6k"]
+[ext_resource type="PackedScene" uid="uid://c5ptrro73l43e" path="res://GameStarter/Forgot_Password_Popup.tscn" id="12_6qrxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb2qk"]
 size = Vector2(66, 22)
@@ -44,7 +46,7 @@ corner_radius_bottom_left = 10
 script = ExtResource("1_6t1k7")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(958, 534)
+position = Vector2(949, 540)
 texture = ExtResource("1_wx55c")
 
 [node name="BackButton login" type="TextureButton" parent="Background"]
@@ -53,6 +55,14 @@ offset_top = -489.0
 offset_right = -803.0
 offset_bottom = -415.0
 texture_normal = ExtResource("8_i56jj")
+
+[node name="forgot_pass" type="TextureButton" parent="Background"]
+offset_left = 313.0
+offset_top = 251.0
+offset_right = 569.0
+offset_bottom = 507.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("11_6wy6k")
 
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(960, 130)
@@ -95,8 +105,10 @@ texture = ExtResource("4_cl3p3")
 
 [node name="LabelEmail" type="LineEdit" parent="Email"]
 layout_mode = 0
-offset_right = 665.0
-offset_bottom = 57.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 667.0
+offset_bottom = 56.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 alignment = 1
@@ -104,9 +116,9 @@ flat = true
 
 [node name="Label" type="Label" parent="Email/LabelEmail"]
 layout_mode = 0
-offset_top = -36.0
-offset_right = 241.0
-offset_bottom = -8.0
+offset_top = -37.0
+offset_right = 264.0
+offset_bottom = -9.0
 theme_override_font_sizes/font_size = 20
 text = "Email address or username"
 
@@ -186,6 +198,19 @@ offset_bottom = 50.0
 text = "Remember me
 "
 
+[node name="Label3" type="Label" parent="RememberMe"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 17.096
+anchor_top = 0.5
+anchor_right = 17.096
+anchor_bottom = 0.5
+offset_left = 20.504
+offset_top = -13.0
+offset_right = 161.504
+offset_bottom = 36.0
+text = "Forgot password ?"
+
 [node name="TextureButton" type="TextureButton" parent="."]
 offset_left = 623.0
 offset_top = 407.0
@@ -193,8 +218,13 @@ offset_right = 1292.0
 offset_bottom = 458.0
 texture_normal = ExtResource("3_nhusd")
 
+[node name="ForgotPasswordPopup" parent="." instance=ExtResource("12_6qrxc")]
+visible = false
+position = Vector2(409, 138)
+
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]
+[connection signal="pressed" from="Background/forgot_pass" to="." method="_on_forgot_pass_pressed"]
 [connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="Password/LabelPassword/HideButton/Area2D/AnimatedSprite2D_hide" method="_on_area_2d_input_event"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
