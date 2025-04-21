@@ -15,7 +15,7 @@
 position = Vector2(572, 409)
 texture = ExtResource("1_7f2rg")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PopupSettings"]
+[node name="Title" type="RichTextLabel" parent="PopupSettings"]
 offset_left = -197.0
 offset_top = -330.0
 offset_right = 238.0
