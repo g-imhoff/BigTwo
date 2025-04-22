@@ -14,7 +14,7 @@ bg_color = Color(1, 0, 0, 1)
 script = ExtResource("1_361u7")
 
 [node name="LobbyPopUp" type="Sprite2D" parent="."]
-position = Vector2(520, 289)
+position = Vector2(512, 274)
 texture = ExtResource("1_utvtk")
 
 [node name="Title" type="Label" parent="LobbyPopUp"]
