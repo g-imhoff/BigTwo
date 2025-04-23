@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="8_i56jj"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="8_uobxe"]
 [ext_resource type="Script" path="res://GameStarter/animated_hide.gd" id="9_uobxe"]
-[ext_resource type="PackedScene" uid="uid://c5ptrro73l43e" path="res://GameStarter/Forgot_Password_Popup.tscn" id="12_6qrxc"]
+[ext_resource type="PackedScene" path="res://GameStarter/Forgot_Password_Popup.tscn" id="12_6qrxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb2qk"]
 size = Vector2(66, 22)

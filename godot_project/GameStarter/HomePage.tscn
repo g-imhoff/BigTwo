@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="5_hq1fw"]
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="6_dni38"]
-[ext_resource type="Texture2D" uid="uid://c32fa2jolwtki" path="res://assets/ui/Circle.png" id="6_w6ksr"]
+[ext_resource type="Texture2D" uid="uid://c32fa2jolwtki" path="res://assets/ui/circle.png" id="6_w6ksr"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="9_18r8e"]
 
 [sub_resource type="GDScript" id="GDScript_ppnjs"]

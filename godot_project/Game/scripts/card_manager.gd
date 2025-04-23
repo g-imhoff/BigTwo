@@ -298,7 +298,7 @@ func check_other_cards():
 	var lst_card=card_clicked.duplicate()
 	lst_card.sort_custom(func(a, b): return a.value < b.value)
 	var check_combi=check_cards_clicked()
-
+	print(check_combi)
 	if children_slots_right[0].combi==null and check_combi!=null:
 		return true
 	var combi_enemy
@@ -393,6 +393,8 @@ func check_for_simple_combi(lst_card, children_slots, children_slots_right):
 		children_slots[0].combi = str(card_to_put.size())
 	else :
 		card_to_put = null
+	if card_to_put.size()==3:
+		brelan=card_to_put.duplicate()
 	return [card_to_put.size(), children_slots[0].combi, card_to_put]
 
 func check_for_straight(lst_card, children_slots,children_slots_right):

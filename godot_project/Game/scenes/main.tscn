@@ -17,9 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="14_td723"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="15_1d6tm"]
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="16_7vdtg"]
-[ext_resource type="PackedScene" uid="uid://db0d4jn5sok86" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
+[ext_resource type="PackedScene" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
-[ext_resource type="PackedScene" uid="uid://p7n3ewamh80a" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
+[ext_resource type="PackedScene" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gouob")
