@@ -1,9 +1,7 @@
-
-[gd_scene load_steps=16 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=21 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
 [ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
-[ext_resource type="Script" path="res://Game/scripts/global_card_img.gd" id="1_uxgxk"]
 [ext_resource type="Script" path="res://Game/scenes/main.gd" id="1_gouob"]
 [ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
 [ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
@@ -19,14 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="14_td723"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="15_1d6tm"]
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="16_7vdtg"]
-[ext_resource type="PackedScene" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
+[ext_resource type="PackedScene" uid="uid://db0d4jn5sok86" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
+[ext_resource type="PackedScene" uid="uid://p7n3ewamh80a" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
 
 [node name="Main" type="Node2D"]
-
-script = ExtResource("1_uxgxk")
-
 script = ExtResource("1_gouob")
+
 [node name="card_manager" type="Node2D" parent="."]
 texture_filter = 1
 script = ExtResource("1_4ysun")
@@ -182,6 +179,8 @@ uppercase = true
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="cardendslot" parent="." instance=ExtResource("5_dlrfd")]
+position = Vector2(1000, 425)
 
 [node name="Setting" parent="." instance=ExtResource("15_1d6tm")]
 visible = false
@@ -207,6 +206,9 @@ offset_right = 1909.0
 offset_bottom = 133.0
 scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("18_e7axl")
+
+[node name="EndGame" parent="." instance=ExtResource("20_rng3j")]
+visible = false
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]
 [connection signal="enemy_right" from="card_manager_enemy" to="card_manager_enemy_right" method="_on_card_manager_enemy_enemy_right"]
