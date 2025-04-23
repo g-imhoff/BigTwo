@@ -270,6 +270,25 @@ async def create_room(websocket, host_name, room_name, password):
 
     await websocket.send(json.dumps(message))
 
+def get_room(nb): 
+    result = []
+    for room in room_holder:
+        result.append(room)
+        nb -= 1
+        if nb <= 0: 
+            return result
+
+    return result
+
+async def send_room(websocket, nb): 
+    list_room = get_room(nb)
+
+    message = {
+        "function": "send_room",
+        "list_room": list_room
+    }
+
+    await websocket.send(json.dumps(message))
 
 async def handler(websocket):
     global connected_client
@@ -326,6 +345,8 @@ async def handler(websocket):
                     await reset_server("A player left the game")
                 case "create_room": 
                     await create_room(content["host_name"], content["room_name"], content["password"])
+                case "get_room": 
+                    await send_room(5)
     except websockets.exceptions.ConnectionClosed as e:
         for username, data in list(connected_client.items()): 
             if data["socket"] == websocket : 
