@@ -84,10 +84,10 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_qpq5i")
 
 [node name="LOG IN" type="Label" parent="."]
-offset_left = 791.0
-offset_top = 291.0
-offset_right = 1139.0
-offset_bottom = 384.0
+offset_left = 780.0
+offset_top = 297.0
+offset_right = 1128.0
+offset_bottom = 390.0
 theme_override_fonts/font = ExtResource("5_ymmrh")
 theme_override_font_sizes/font_size = 64
 text = "LOG IN
