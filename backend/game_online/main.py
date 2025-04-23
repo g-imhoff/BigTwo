@@ -273,7 +273,7 @@ async def create_room(websocket, host_name, room_name, password):
 def get_room(nb): 
     result = []
     for room in room_holder:
-        result.append(room)
+        result.append(room_holder[room])
         nb -= 1
         if nb <= 0: 
             return result
@@ -376,9 +376,9 @@ async def handler(websocket):
                     del connected_client[content["profile_name"]]
                     await reset_server("A player left the game")
                 case "create_room": 
-                    await create_room(content["host_name"], content["room_name"], content["password"])
+                    await create_room(websocket, content["host_name"], content["room_name"], content["password"])
                 case "get_room": 
-                    await send_room(5)
+                    await send_room(websocket, 5)
                 case "join_room": 
                     await join_room(websocket, content["room_name"], content["username"])
     except websockets.exceptions.ConnectionClosed as e:
