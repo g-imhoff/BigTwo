@@ -26,22 +26,6 @@ var game_won = false
 @onready var enemyrightsprite = $EnemyUsernameRight/EnemyRightSprite
 @onready var endgamepopup = $EndGame
 
-func _on_tree_exited() -> void:
-	if not game_won: 
-		var content = JSON.stringify({
-			"function": "leaving",
-			"profile_name": Global.username
-		})
-		
-		SocketOnline.socket.send_text(content)
-	
-		SocketOnline.socket.close()
-
-func _ready() -> void:
-	playerusername.text = Global.username
-	var clientCAS = load("res://cert.crt")
-	_server_handshake()
-
 func _process(_delta):
 	SocketOnline.socket.poll()
 	var state = SocketOnline.socket.get_ready_state()
@@ -120,6 +104,22 @@ func _data_received_handler(data):
 				enemyleftsprite.visible = true
 			else: 
 				Notification.show_side(data["message"])
+
+func _on_tree_exited() -> void:
+	if not game_won: 
+		var content = JSON.stringify({
+			"function": "leaving",
+			"profile_name": Global.username
+		})
+		
+		SocketOnline.socket.send_text(content)
+	
+		SocketOnline.socket.close()
+
+func _ready() -> void:
+	playerusername.text = Global.username
+	var clientCAS = load("res://cert.crt")
+	_server_handshake()
 
 func _display_all_username(list_id: Dictionary):	
 	for username in list_id:
