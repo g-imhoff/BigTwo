@@ -39,43 +39,45 @@ position = Vector2(962, 571)
 scale = Vector2(3.12418, 3.2549)
 texture = ExtResource("3_f727l")
 
-[node name="Welcome" type="Label" parent="."]
-offset_left = 679.0
-offset_top = 298.0
-offset_right = 1232.0
-offset_bottom = 391.0
+[node name="Welcome" type="Label" parent="Pokerboard"]
+offset_left = -82.0
+offset_top = -85.0
+offset_right = 91.0
+offset_bottom = -55.0
 theme_override_fonts/font = ExtResource("4_nio05")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 20
 text = "HEY, USer"
 
-[node name="Create room btn" type="Button" parent="."]
-offset_left = 459.0
-offset_top = 567.0
-offset_right = 859.0
-offset_bottom = 632.0
+[node name="Create room btn" type="Button" parent="Pokerboard"]
+offset_left = -155.561
+offset_top = -17.5121
+offset_right = -24.5607
+offset_bottom = 14.4879
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ddch8")
 text = "Create Room"
 
-[node name="Join room btn" type="Button" parent="."]
-offset_left = 1070.0
-offset_top = 567.0
-offset_right = 1467.0
-offset_bottom = 632.0
+[node name="Join room btn" type="Button" parent="Pokerboard"]
+offset_left = 31.0481
+offset_top = -17.5121
+offset_right = 162.048
+offset_bottom = 14.4879
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ddch8")
 text = "Join Room"
 
-[node name="Createroompop" parent="." instance=ExtResource("6_ns74r")]
+[node name="Createroompop" parent="Pokerboard" instance=ExtResource("6_ns74r")]
 visible = false
-position = Vector2(456, 291)
+position = Vector2(-159.402, -83.5663)
+scale = Vector2(0.320084, 0.307229)
 
-[node name="Joinroompop" parent="." instance=ExtResource("7_r0qeh")]
+[node name="Joinroompop" parent="Pokerboard" instance=ExtResource("7_r0qeh")]
 visible = false
-position = Vector2(442, 275)
+position = Vector2(-160.682, -84.1808)
+scale = Vector2(0.320084, 0.307229)
 
 [connection signal="pressed" from="Back Btn" to="." method="_on_back_btn_pressed"]
-[connection signal="pressed" from="Create room btn" to="." method="_on_create_room_btn_pressed"]
-[connection signal="pressed" from="Join room btn" to="." method="_on_join_room_btn_pressed"]
+[connection signal="pressed" from="Pokerboard/Create room btn" to="." method="_on_create_room_btn_pressed"]
+[connection signal="pressed" from="Pokerboard/Join room btn" to="." method="_on_join_room_btn_pressed"]
