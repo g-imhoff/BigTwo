@@ -35,7 +35,11 @@ func _data_received_handler(data):
 			SocketOnline.room_name = data["room_name"]
 			get_tree().change_scene_to_file("res://GameOnline/scenes/Waitingroom.tscn")
 		"send_room":
-pr			join_room.display_room(data["list_room"])
+			join_room.display_room(data["list_room"])
+		"room_connected": 
+			SocketOnline.room_name = data["room_name"]
+			SocketOnline.players_name = data["players"]
+			get_tree().change_scene_to_file("res://GameOnline/scenes/Waitingroom.tscn")
 
 func _on_back_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")

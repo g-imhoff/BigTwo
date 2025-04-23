@@ -260,7 +260,7 @@ async def create_room(websocket, host_name, room_name, password):
         "host_name": host_name,
         "room_name": room_name,
         "password": password,
-        "players": [host_name]
+        "players": [(host_name, websocket)]
     }
 
     message = {
@@ -289,6 +289,38 @@ async def send_room(websocket, nb):
     }
 
     await websocket.send(json.dumps(message))
+
+async def join_room(websocket, room_name, username): 
+    global room_holder
+
+    room_holder[room_name][players].append((websocket, username))
+    
+    await accept_new_connection(websocket, room_name)
+    await broadcast_new_connection(username, room_name)
+
+async def accept_new_connection(websocket, room_name): 
+    global room_holder
+    players_name = [value for _, value in room_holder[room_name]["players"]]
+
+    message = {
+        "function": "room_connected",
+        "room_name": room_name,
+        "players": players_name 
+    }
+
+    await websocket.send(json.dumps(message))
+
+async def accept_new_connection(new_username, room_name):
+    global room_holder
+    message = json.dumps({
+        "function": "new_connection",
+        "username": new_username
+    })
+
+    for (websocket, username) in room_holder[room_name]["players"]: 
+        if username != new_username: 
+            websocket.send(message)
+
 
 async def handler(websocket):
     global connected_client
@@ -347,6 +379,8 @@ async def handler(websocket):
                     await create_room(content["host_name"], content["room_name"], content["password"])
                 case "get_room": 
                     await send_room(5)
+                case "join_room": 
+                    await join_room(websocket, content["room_name"], content["username"])
     except websockets.exceptions.ConnectionClosed as e:
         for username, data in list(connected_client.items()): 
             if data["socket"] == websocket : 
