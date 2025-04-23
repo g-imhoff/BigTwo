@@ -262,7 +262,7 @@ async def game_won(winner_username):
 async def create_room(websocket, host_name, room_name, password): 
     global room_holder
 
-    room: Room = Room(host_name, room_name, password, [(websocket, host_name)], 1)
+    room: Room = Room(host_name, room_name, password, websocket, 1)
 
     room_holder[room_name] = room
 
