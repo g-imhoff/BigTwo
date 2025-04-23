@@ -260,20 +260,21 @@ async def create_room(websocket, host_name, room_name, password):
         "host_name": host_name,
         "room_name": room_name,
         "password": password,
-        "players": [(host_name, websocket)]
+        "players": [(websocket, host_name)]
     }
 
-    message = {
-        "function" : "room_created",
-        "room_name": room_name
-    }
-
-    await websocket.send(json.dumps(message))
+    await accept_new_connection(websocket, room_name)
 
 def get_room(nb): 
     result = []
     for room in room_holder:
-        result.append(room_holder[room])
+        message = {
+            "room_name": room_holder[room]["room_name"], 
+            "players": len(room_holder[room]["players"])
+        }
+
+        result.append(message)
+
         nb -= 1
         if nb <= 0: 
             return result
@@ -293,7 +294,7 @@ async def send_room(websocket, nb):
 async def join_room(websocket, room_name, username): 
     global room_holder
 
-    room_holder[room_name][players].append((websocket, username))
+    room_holder[room_name]["players"].append((websocket, username))
     
     await accept_new_connection(websocket, room_name)
     await broadcast_new_connection(username, room_name)
@@ -305,12 +306,13 @@ async def accept_new_connection(websocket, room_name):
     message = {
         "function": "room_connected",
         "room_name": room_name,
+        "host_name": room_holder[room_name]["host_name"],
         "players": players_name 
     }
 
     await websocket.send(json.dumps(message))
 
-async def accept_new_connection(new_username, room_name):
+async def broadcast_new_connection(new_username, room_name):
     global room_holder
 
     players_name = [value for _, value in room_holder[room_name]["players"]]
@@ -322,7 +324,7 @@ async def accept_new_connection(new_username, room_name):
 
     for (websocket, username) in room_holder[room_name]["players"]: 
         if username != new_username: 
-            websocket.send(message)
+            await websocket.send(message)
 
 
 async def handler(websocket):
