@@ -198,6 +198,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ej5m7")
 text = "Create Account"
 
 [node name="Accverificationpop" parent="." instance=ExtResource("10_hnp6v")]
+visible = false
 position = Vector2(435, 363)
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
