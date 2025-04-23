@@ -32,6 +32,7 @@ offset_left = 101.0
 offset_top = 188.0
 offset_right = 237.0
 offset_bottom = 217.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_x7d20")
 text = "Join
 "
@@ -41,5 +42,6 @@ offset_left = -214.0
 offset_top = 185.0
 offset_right = -78.0
 offset_bottom = 214.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu5wy")
 text = "Cancel"

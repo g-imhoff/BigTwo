@@ -41,6 +41,7 @@ offset_left = 101.0
 offset_top = 188.0
 offset_right = 237.0
 offset_bottom = 217.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_yafnm")
 text = "Create
 "
@@ -50,6 +51,7 @@ offset_left = -214.0
 offset_top = 185.0
 offset_right = -78.0
 offset_bottom = 214.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_08x2o")
 text = "Cancel"
 
@@ -68,6 +70,9 @@ offset_left = -427.0
 offset_top = -43.0
 offset_right = -352.0
 offset_bottom = -20.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ik73d")
+theme_override_font_sizes/font_size = 25
 text = "Password"
 
 [node name="Num of ply" type="Label" parent="LobbyPopUp"]
@@ -75,21 +80,24 @@ offset_left = -423.0
 offset_top = 16.0
 offset_right = -278.0
 offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ik73d")
+theme_override_font_sizes/font_size = 25
 text = "Number of players"
 
 [node name="OptionButton" type="OptionButton" parent="LobbyPopUp"]
-offset_left = -230.0
-offset_top = 16.0
-offset_right = -164.0
-offset_bottom = 47.0
+offset_left = 65.0
+offset_top = 20.0
+offset_right = 171.0
+offset_bottom = 51.0
 selected = 0
 fit_to_longest_item = false
 item_count = 4
-popup/item_0/text = "Choose"
+popup/item_0/text = "  Choose  "
 popup/item_0/disabled = true
+popup/item_0/separator = true
 popup/item_1/text = "2"
 popup/item_1/id = 1
-popup/item_1/disabled = true
 popup/item_2/text = "3"
 popup/item_2/id = 4
 popup/item_3/text = "4"
