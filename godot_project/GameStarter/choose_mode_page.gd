@@ -20,3 +20,6 @@ func _on_backicon_choose_mode_page_pressed() -> void:
 
 func _on_single_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://Game/scenes/main.tscn")
+
+func _on_mult_i_btn_pressed() -> void:
+	get_tree().change_scene_to_file("res://GameStarter/Lobby.tscn")

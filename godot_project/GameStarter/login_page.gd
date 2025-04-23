@@ -56,6 +56,7 @@ func _process(_delta):
 		var reason = socket.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
+		get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")
 
 func _data_received_handler(data):
 	if (data["code"] == 0):
@@ -75,3 +76,6 @@ func _on_back_button_login_pressed() -> void:
 
 func _on_texture_button_pressed() -> void:
 		print("OAuthGoogleClicked")
+
+func _on_reset_pass_btn_pressed() -> void:
+	$ForgotPasswordPopup.visible = not $ForgotPasswordPopup.visible

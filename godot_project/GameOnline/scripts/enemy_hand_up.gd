@@ -3,7 +3,7 @@ extends Node2D
 const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
 const HAND_COUNT=13
 const CARD_WIDTH=80 #80
-const HAND_Y_POSITION=50
+const HAND_Y_POSITION=120
 
 var card_scale=Vector2(0.5,0.5)
 var player_hand=[]
@@ -51,4 +51,4 @@ func animate_card_to_position(card,new_position):
 	tween.tween_property(card,"position",new_position,0.1 )
 
 func remove_card_from_hand():
-	player_hand.remove_at(0)
+	return player_hand.pop_front()

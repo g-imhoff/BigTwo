@@ -375,7 +375,6 @@ func show_message(text: String, duration: float = 3.0):
 func _on_timer_timeout() -> void:
 	message.visible = false
 
-
 func check_for_simple_combi(lst_card, children_slots, children_slots_right):
 	var card_to_put = []
 	for i in range (lst_card.size()):

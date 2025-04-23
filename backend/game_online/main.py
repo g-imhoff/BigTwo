@@ -1,8 +1,11 @@
 import asyncio
 import random
 import json
+import websockets
 from websockets.asyncio.server import serve
 import ssl
+from debut_jeu import get_list_card_info_from_texture
+from python_projet import combi_detection, Combinaison, check_higher_than_previous
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
@@ -13,7 +16,13 @@ WEBSOCKETS_URL = "0.0.0.0"  # for the moment, turn to 0.0.0.0 after
 WEBSOCKETS_PORT = 10006
 
 connected_client = {}
-nb_client = 0
+connection_allowed = True
+
+last_combi = Combinaison(None, None, None) 
+
+nb_pass_in_a_row = 0
+
+first_play = True
 
 card_list = [
         "res://assets/cards/card_clubs_02.png",
@@ -97,17 +106,49 @@ def random_hand():
         result_list.append(t)
     return result_list, bool_first
 
+def generate_all_hand():
+    global connected_client
+    num = 2
+    list_message = {}
+    for client in connected_client:
+        list_hand, bool_first = random_hand()
+        starting_game_message = {
+            "id" : 1 if bool_first else num,
+            "function": "starting",
+            "message": "game starting",
+            "card_hand": list_hand,
+            "first_player": 1 if bool_first else 0,
+            "list_id": {}
+        }
+        connected_client[client]["id"] = 1 if bool_first else num
+
+        if not bool_first:
+            num += 1
+
+        list_message[client] = starting_game_message
+
+    return list_message
+
+def generate_all_id():
+    global connected_client
+    list_id = {}
+
+    for client in connected_client:
+        list_id[client] = connected_client[client]["id"]
+
+    return list_id
 
 async def connect_handler(content, websocket):
-    global nb_client
     global connected_client
     global placeholder_card_list
-    if nb_client < 4:
+    global connection_allowed
+
+    if len(connected_client) < 4 and connection_allowed:
         if content["profile_name"] not in connected_client:
             connected_client[content["profile_name"]] = {}
 
         connected_client[content["profile_name"]]["socket"] = websocket
-        nb_client += 1
+        connected_client[content["profile_name"]]["card"] = 13 
 
         result_message = {
             "function": "connected",
@@ -117,27 +158,17 @@ async def connect_handler(content, websocket):
         await websocket.send(json.dumps(result_message))
         print("connection from", content["profile_name"])
 
-        if nb_client == 4:
-            num = 2
+        if len(connected_client) == 4:
+            list_message = generate_all_hand() 
+            list_id = generate_all_id()
+            connection_allowed = False
             for client in connected_client:
-                list_hand, bool_first = random_hand()
-                starting_game_message = {
-                    "id" : 1 if bool_first else num,
-                    "function": "starting",
-                    "message": "game starting",
-                    "card_hand": list_hand,
-                    "first_player": 1 if bool_first else 0
-                }
-                connected_client[client]["id"] = 1 if bool_first else num
+                list_message[client]["list_id"] = list_id
+                await connected_client[client]["socket"].send(json.dumps(list_message[client]))
 
-                if not bool_first:
-                    num += 1
-
-                message = json.dumps(starting_game_message)
-                await connected_client[client]["socket"].send(message)
             placeholder_card_list = card_list.copy()
     else : 
-        await websocket.close(code=999, reason="server is full")
+        await websocket.close(code=999, reason="server is full or not available")
 
 async def broadcast_card(content, websocket):
     global connected_client
@@ -146,22 +177,132 @@ async def broadcast_card(content, websocket):
         "function": "played",
         "card": content["card"],
     }
+
     for client in connected_client:
         if (connected_client[client]["id"] != content["id"]):
             await connected_client[client]["socket"].send(json.dumps(message))
 
-async def handler(websocket):
-    global nb_client
+async def broadcast_pass(content, websocket):
+    global connected_client
+    message = {
+        "id": content["id"],
+        "function": "passed",
+    }
+    for client in connected_client:
+        if (connected_client[client]["id"] != content["id"]):
+            await connected_client[client]["socket"].send(json.dumps(message))
+
+async def send_verification(boolean, websocket, message, passed) :
+    message = {
+        "function": "verification",
+        "result": 1 if boolean else 0, 
+        "message": message,
+        "passed" : 1 if passed else 0, 
+    }
+
+    await websocket.send(json.dumps(message))
+
+def verification(combi): 
+    global last_combi
+    if (combi != Combinaison(None, None, None)) :
+        if (last_combi != Combinaison(None, None, None)) : 
+            result, message = check_higher_than_previous(last_combi, combi)
+            print(result, message)
+            return result, message
+        else : 
+            return True, ""
+    else : 
+        return False, "This is not a valid combinaison"
+
+async def reset_server(reason):
+    global connected_client
+    global last_combi
+    global nb_pass_in_a_row
+    global first_play
+    global connection_allowed
+
+    await asyncio.sleep(2)
+    print("Server is making a reset ...")
+    for client in connected_client: 
+        await connected_client[client]["socket"].close()
+
+    connected_client = {}
+    last_combi = Combinaison(None, None, None)  
+    nb_pass_in_a_row = 0
+    first_play = True
+    connection_allowed = True
+
+async def game_won(winner_username):
     global connected_client
 
-    async for message in websocket:
-        content = json.loads(message)
-        match content["function"]:
-            case "connect":
-                await connect_handler(content, websocket)
-            case "play": 
-                await broadcast_card(content, websocket)
+    message = {
+        "function" : "game_won",
+        "winner" : winner_username
+    }
 
+    for client in connected_client:
+        await connected_client[client]["socket"].send(json.dumps(message))
+
+    await reset_server("Game finished")
+
+async def handler(websocket):
+    global connected_client
+    global last_combi
+    global nb_pass_in_a_row
+    global first_play
+
+    try: 
+        async for message in websocket:
+            content = json.loads(message)
+            match content["function"]:
+                case "connect":
+                    await connect_handler(content, websocket)
+                case "play": 
+                    list_card = get_list_card_info_from_texture(content["card"])
+
+                    bool_first_play = False
+                    if first_play:
+                        for card in list_card: 
+                            if card.value == 3 and card.form == 1: 
+                                bool_first_play = True
+                                first_play = False
+                    else : 
+                        bool_first_play = True
+
+                    if bool_first_play : 
+                        combi = combi_detection(list_card)
+
+                        boolean, message = verification(combi)
+
+                        nb_pass_in_a_row = 0 
+
+                        if boolean: 
+                            await broadcast_card(content, websocket)
+                            last_combi = combi
+                            connected_client[content["profile_name"]]["card"] -= len(list_card)
+                            if (connected_client[content["profile_name"]]["card"] <= 0) :
+                                await game_won(content["profile_name"])
+
+                        await send_verification(boolean, websocket, message, False)
+                    else : 
+                        await send_verification(False, websocket, "You need to play the 3 of diamond", False)
+                case "pass": 
+                    if first_play : 
+                        await send_verification(False, websocket, "You can't pass for the first move", True)
+                    else :
+                        nb_pass_in_a_row += 1
+                        if (nb_pass_in_a_row >= 3):  
+                            last_combi = Combinaison(None, None, None) 
+                        await broadcast_pass(content, websocket)
+                        await send_verification(True, websocket, "", True) 
+                case "leaving":
+                    del connected_client[content["profile_name"]]
+                    await reset_server("A player left the game")
+    except websockets.exceptions.ConnectionClosed as e:
+        for username, data in list(connected_client.items()): 
+            if data["socket"] == websocket : 
+                del connected_client[username] 
+        await reset_server("A player left the game")
 
 async def main():
     async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
