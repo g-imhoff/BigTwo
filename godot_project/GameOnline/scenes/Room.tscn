@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://drtjs7y5th6lh"]
+
+[ext_resource type="Script" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_a8nc6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1016.0
+offset_bottom = 100.0
+color = Color(0, 0, 0, 1)
+
+[node name="RoomName" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="NbOfUsers" type="Label" parent="."]
+offset_left = 616.0
+offset_top = 54.0
+offset_right = 656.0
+offset_bottom = 77.0
