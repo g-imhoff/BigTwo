@@ -178,12 +178,12 @@ text = "Resend Code"
 [node name="Timer" type="Timer" parent="."]
 
 [node name="CooldownLabel" type="Label" parent="."]
-offset_left = 766.0
-offset_top = 591.0
-offset_right = 818.0
-offset_bottom = 622.0
+offset_left = 765.0
+offset_top = 583.0
+offset_right = 817.0
+offset_bottom = 618.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 
 [node name="change mail" type="Button" parent="."]
 offset_left = 457.0
