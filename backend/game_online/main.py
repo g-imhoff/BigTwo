@@ -312,9 +312,12 @@ async def accept_new_connection(websocket, room_name):
 
 async def accept_new_connection(new_username, room_name):
     global room_holder
+
+    players_name = [value for _, value in room_holder[room_name]["players"]]
+
     message = json.dumps({
         "function": "new_connection",
-        "username": new_username
+        "players":  players_name
     })
 
     for (websocket, username) in room_holder[room_name]["players"]: 

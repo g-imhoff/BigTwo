@@ -76,3 +76,12 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_rn7b1")
 text = "Cancel
 "
+
+[node name="HScrollBar" type="HScrollBar" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HScrollBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
