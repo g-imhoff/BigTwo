@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://6wqgrvrccnso"]
+[gd_scene load_steps=18 format=3 uid="uid://6wqgrvrccnso"]
 
 [ext_resource type="Script" path="res://GameStarter/connection_page.gd" id="1_euxgu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_ynr6k"]
@@ -6,29 +6,92 @@
 [ext_resource type="Texture2D" uid="uid://d01s88i8stsj" path="res://assets/ui/connection page divider.png" id="4_n7tl5"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="5_f65x8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lktj4"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00hvi"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ijjx"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkp7v"]
+bg_color = Color(0, 0.633106, 0.966394, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_braay"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lmyen"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlr3"]
 bg_color = Color(0.156863, 0.654902, 0.270588, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yruav"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7f3o"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ypav"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1s3n"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6cay"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
 
 [node name="ConnectionPage" type="Node2D"]
 script = ExtResource("1_euxgu")
@@ -38,51 +101,63 @@ position = Vector2(960, 540)
 texture = ExtResource("1_ynr6k")
 
 [node name="Logo" type="Sprite2D" parent="."]
-position = Vector2(960, 250)
+light_mask = 0
+visibility_layer = 13
+position = Vector2(956, 288)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_a85sy")
 
 [node name="LoginButton" type="Button" parent="."]
-offset_left = 254.0
-offset_top = 601.0
-offset_right = 825.0
-offset_bottom = 712.0
+offset_left = 187.0
+offset_top = 653.0
+offset_right = 778.0
+offset_bottom = 764.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_lktj4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_00hvi")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_1ijjx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qkp7v")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_braay")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lmyen")
 theme_override_styles/normal = SubResource("StyleBoxFlat_orlr3")
 text = "Login with an existing account"
 
 [node name="RegisterButton" type="Button" parent="."]
-offset_left = 1103.0
-offset_top = 601.0
-offset_right = 1674.0
-offset_bottom = 712.0
+offset_left = 1142.0
+offset_top = 653.0
+offset_right = 1713.0
+offset_bottom = 764.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_yruav")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_o7f3o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ypav")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w1s3n")
 theme_override_styles/normal = SubResource("StyleBoxFlat_y6cay")
 text = "Create a new account"
 
 [node name="Or" type="Label" parent="."]
-offset_left = 936.0
-offset_top = 628.0
-offset_right = 993.0
-offset_bottom = 683.0
+offset_left = 932.0
+offset_top = 674.0
+offset_right = 989.0
+offset_bottom = 729.0
 theme_override_font_sizes/font_size = 40
 text = "OR"
 
 [node name="RightDivider" type="Sprite2D" parent="."]
-position = Vector2(887, 656)
+position = Vector2(883, 702)
 texture = ExtResource("4_n7tl5")
 
 [node name="LeftDivider" type="Sprite2D" parent="."]
-position = Vector2(1041, 656)
+position = Vector2(1037, 702)
 texture = ExtResource("4_n7tl5")
 
 [node name="backicon connection page" type="TextureButton" parent="."]
-offset_left = 93.0
-offset_top = 66.0
-offset_right = 167.0
-offset_bottom = 140.0
+offset_left = 105.0
+offset_top = 80.0
+offset_right = 179.0
+offset_bottom = 154.0
 texture_normal = ExtResource("5_f65x8")
 
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_button_pressed"]
