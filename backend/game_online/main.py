@@ -24,6 +24,14 @@ nb_pass_in_a_row = 0
 
 first_play = True
 
+class Room(): 
+    def __init__(self, host_name, room_name, hashed_password): 
+        self.host_name = host_name
+        self.room_name = room_name
+        self.hashed_password = hashed_password
+
+room_holder = {}
+
 card_list = [
         "res://assets/cards/card_clubs_02.png",
         "res://assets/cards/card_clubs_03.png",
@@ -245,6 +253,16 @@ async def game_won(winner_username):
 
     await reset_server("Game finished")
 
+def create_room(host_name, room_name, password): 
+    global room_holder
+
+    room_holder[room_name] = {
+        "host_name": host_name,
+        "password": password
+    }
+
+    print(room_holder)
+
 async def handler(websocket):
     global connected_client
     global last_combi
@@ -298,6 +316,8 @@ async def handler(websocket):
                 case "leaving":
                     del connected_client[content["profile_name"]]
                     await reset_server("A player left the game")
+                case "create_room": 
+                    create_room(content["host_name"], content["room_name"], content["password"])
     except websockets.exceptions.ConnectionClosed as e:
         for username, data in list(connected_client.items()): 
             if data["socket"] == websocket : 
