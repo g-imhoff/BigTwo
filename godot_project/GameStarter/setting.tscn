@@ -7,27 +7,27 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6js73"]
 bg_color = Color(1, 0, 0.0156863, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ni351"]
 bg_color = Color(0.14902, 0.509804, 0.14902, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="Setting" type="Node2D"]
 z_index = 999
@@ -122,28 +122,28 @@ scale = Vector2(3, 3)
 button_pressed = true
 
 [node name="Exit Desk btn" type="Button" parent="PopupSettings"]
-offset_left = 592.821
-offset_top = 707.923
-offset_right = 842.821
-offset_bottom = 767.923
+offset_left = 615.66
+offset_top = 687.295
+offset_right = 865.66
+offset_bottom = 747.295
 theme_override_font_sizes/font_size = 23
 theme_override_styles/normal = SubResource("StyleBoxFlat_6js73")
 text = "Exit to desktop"
 
 [node name="Exit menu btn" type="Button" parent="PopupSettings"]
 offset_left = 307.83
-offset_top = 707.923
+offset_top = 688.233
 offset_right = 557.83
-offset_bottom = 767.923
+offset_bottom = 748.233
 theme_override_font_sizes/font_size = 23
 theme_override_styles/normal = SubResource("StyleBoxFlat_ni351")
 text = "Exit to main menu"
 
 [node name="TextureButton" type="TextureButton" parent="."]
-offset_left = 68.0
-offset_top = 88.0
-offset_right = 108.0
-offset_bottom = 128.0
+offset_left = 98.0
+offset_top = 95.0
+offset_right = 172.0
+offset_bottom = 169.0
 texture_normal = ExtResource("4_4hd25")
 
 [connection signal="value_changed" from="PopupSettings/vol bar" to="." method="_on_h_slider_value_changed"]

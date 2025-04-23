@@ -46,11 +46,6 @@ corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ej5m7"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -76,10 +71,10 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_vm0o5")
 
 [node name="CREATE AN ACCOUNT" type="Label" parent="."]
-offset_left = 495.0
-offset_top = 300.0
-offset_right = 1488.0
-offset_bottom = 393.0
+offset_left = 489.0
+offset_top = 292.0
+offset_right = 1482.0
+offset_bottom = 385.0
 theme_override_fonts/font = ExtResource("5_5ruod")
 theme_override_font_sizes/font_size = 55
 text = "CREATE AN ACCOUNT"
@@ -108,7 +103,7 @@ offset_top = -36.0
 offset_right = 241.0
 offset_bottom = -8.0
 theme_override_font_sizes/font_size = 20
-text = "How should we call you ?"
+text = "What's your name ?"
 
 [node name="Email" type="TextureRect" parent="."]
 offset_left = 578.0
