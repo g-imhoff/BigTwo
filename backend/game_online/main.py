@@ -291,7 +291,7 @@ async def handler(websocket):
                         await send_verification(False, websocket, "You can't pass for the first move", True)
                     else :
                         nb_pass_in_a_row += 1
-                        if (nb_pass_in_a_row == 4):  
+                        if (nb_pass_in_a_row >= 3):  
                             last_combi = Combinaison(None, None, None) 
                         await broadcast_pass(content, websocket)
                         await send_verification(True, websocket, "", True) 
