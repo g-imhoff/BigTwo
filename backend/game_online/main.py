@@ -325,7 +325,7 @@ async def handler(websocket):
                     del connected_client[content["profile_name"]]
                     await reset_server("A player left the game")
                 case "create_room": 
-                    await create_room(content["host_name"], content["room_name"], content["password"])
+                    await create_room(websocket, content["host_name"], content["room_name"], content["password"])
     except websockets.exceptions.ConnectionClosed as e:
         for username, data in list(connected_client.items()): 
             if data["socket"] == websocket : 
