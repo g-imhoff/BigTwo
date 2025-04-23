@@ -6,6 +6,8 @@ from websockets.asyncio.server import serve
 import ssl
 from debut_jeu import get_list_card_info_from_texture
 from python_projet import combi_detection, Combinaison, check_higher_than_previous
+from typing import List, Tuple
+from websockets.legacy.server import WebSocketServerProtocol
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
@@ -24,11 +26,15 @@ nb_pass_in_a_row = 0
 
 first_play = True
 
-class Room(): 
-    def __init__(self, host_name, room_name, hashed_password): 
-        self.host_name = host_name
-        self.room_name = room_name
-        self.hashed_password = hashed_password
+class Room:
+    def __init__(self, host_name: str, room_name: str, 
+                 password: str, websocket: WebSocketServerProtocol,
+                 nb_players: int):
+        self.host_name: str = host_name
+        self.room_name: str = room_name
+        self.password: str = password
+        self.players: List[Tuple[WebSocketServerProtocol, str]] = [(websocket, host_name)]
+        self.nb_players: int = nb_players
 
 room_holder = {}
 
@@ -256,28 +262,26 @@ async def game_won(winner_username):
 async def create_room(websocket, host_name, room_name, password): 
     global room_holder
 
-    room_holder[room_name] = {
-        "host_name": host_name,
-        "room_name": room_name,
-        "password": password,
-        "players": [(websocket, host_name)]
-    }
+    room: Room = Room(host_name, room_name, password, [(websocket, host_name)], 1)
+
+    room_holder[room_name] = room
 
     await accept_new_connection(websocket, room_name)
 
 def get_room(nb): 
     result = []
     for room in room_holder:
-        message = {
-            "room_name": room_holder[room]["room_name"], 
-            "players": len(room_holder[room]["players"])
-        }
+        if room_holder[room].nb_players < 4: 
+            message = {
+                "room_name": room_holder[room].room_name, 
+                "players": len(room_holder[room].players)
+            }
 
-        result.append(message)
+            result.append(message)
 
-        nb -= 1
-        if nb <= 0: 
-            return result
+            nb -= 1
+            if nb <= 0: 
+                return result
 
     return result
 
@@ -291,22 +295,36 @@ async def send_room(websocket, nb):
 
     await websocket.send(json.dumps(message))
 
-async def join_room(websocket, room_name, username): 
+async def join_room(websocket, room_name, username, password): 
     global room_holder
 
-    room_holder[room_name]["players"].append((websocket, username))
-    
-    await accept_new_connection(websocket, room_name)
-    await broadcast_new_connection(username, room_name)
+    if room_holder[room_name].nb_players >= 4: 
+        await failed_new_connection(websocket, "The server is full")
+    elif room_holder[room_name].password != password:
+        await failed_new_connection(websocket, "The password is wrong")
+    else : 
+        room_holder[room_name].players.append((websocket, username))
+        room_holder[room_name].nb_players += 1
+        
+        await accept_new_connection(websocket, room_name)
+        await broadcast_new_connection(username, room_name)
+
+async def failed_new_connection(websocket, reason): 
+    message = {
+        "function": "room_connection_failed",
+        "reason": reason
+    }
+
+    await websocket.send(json.dumps(message))
 
 async def accept_new_connection(websocket, room_name): 
     global room_holder
-    players_name = [value for _, value in room_holder[room_name]["players"]]
+    players_name = [value for _, value in room_holder[room_name].players]
 
     message = {
         "function": "room_connected",
         "room_name": room_name,
-        "host_name": room_holder[room_name]["host_name"],
+        "host_name": room_holder[room_name].host_name,
         "players": players_name 
     }
 
@@ -315,14 +333,14 @@ async def accept_new_connection(websocket, room_name):
 async def broadcast_new_connection(new_username, room_name):
     global room_holder
 
-    players_name = [value for _, value in room_holder[room_name]["players"]]
+    players_name = [value for _, value in room_holder[room_name].players]
 
     message = json.dumps({
         "function": "new_connection",
         "players":  players_name
     })
 
-    for (websocket, username) in room_holder[room_name]["players"]: 
+    for (websocket, username) in room_holder[room_name].players: 
         if username != new_username: 
             await websocket.send(message)
 
@@ -385,7 +403,7 @@ async def handler(websocket):
                 case "get_room": 
                     await send_room(websocket, 5)
                 case "join_room": 
-                    await join_room(websocket, content["room_name"], content["username"])
+                    await join_room(websocket, content["room_name"], content["username"], content["password"])
     except websockets.exceptions.ConnectionClosed as e:
         for username, data in list(connected_client.items()): 
             if data["socket"] == websocket : 

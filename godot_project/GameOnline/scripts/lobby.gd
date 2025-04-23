@@ -33,6 +33,8 @@ func _data_received_handler(data):
 	match data["function"]:
 		"send_room":
 			join_room.display_room(data["list_room"])
+		"room_connection_failed": 
+			Notification.show_side(data["reason"])
 		"room_connected": 
 			SocketOnline.room_name = data["room_name"]
 			SocketOnline.players_name = data["players"]
