@@ -3,7 +3,7 @@ extends Node2D
 @onready var room_name_label = $"Room name"
 @onready var scroll_bar = $HBoxContainer
 @onready var cancel_btn = $"Cancel Btn"
-@onready var create_btn = $"Create Btn"
+@onready var create_btn = $"Start Btn"
 
 func _ready() -> void:
 	room_name_label.text = SocketOnline.room_name
@@ -43,4 +43,20 @@ func _data_received_handler(data):
 		"new_connection": 
 			SocketOnline.players_name = data["players"]
 			_update_players_connected()
-			
+		"starting": 
+			SocketOnline.id = data["id"]
+			SocketOnline.card_hand = data["card_hand"]
+			SocketOnline.first_player = data["first_player"]
+			SocketOnline.list_id = data["list_id"]
+			get_tree().change_scene_to_file("res://GameOnline/scenes/ClientGame.tscn")
+
+func _on_start_btn_pressed() -> void:
+	if SocketOnline.players_name.size() == 4: 
+		var message = JSON.stringify({
+			"function": "start_game",
+			"room_name": SocketOnline.room_name
+		})
+		
+		SocketOnline.socket.send_text(message)
+	else: 
+		Notification.show_side("Wait for the server to be full!")

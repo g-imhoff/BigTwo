@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_left.gd" id="7_f6iy4"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="8_x66yg"]
 [ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="9_n0mij"]
-[ext_resource type="Texture2D" uid="uid://c32fa2jolwtki" path="res://assets/ui/circle.png" id="9_xk7ip"]
+[ext_resource type="Texture2D" uid="uid://bsg83v8lb2rnv" path="res://assets/ui/circle.png" id="9_xk7ip"]
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="10_fsp72"]
 [ext_resource type="PackedScene" uid="uid://x4s413s07jg2" path="res://GameOnline/scenes/end_game.tscn" id="12_xw44o"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="13_7kpjg"]

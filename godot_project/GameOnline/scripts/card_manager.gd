@@ -107,6 +107,7 @@ func _on_play_pressed() -> void:
 		var content = JSON.stringify({
 			"id": Global.online_game_id,
 			"function": "play",
+			"room_name": SocketOnline.room_name,
 			"profile_name": Global.username,
 			"card": card_played
 		})

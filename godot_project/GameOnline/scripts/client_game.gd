@@ -54,9 +54,6 @@ func _data_received_handler(data):
 		"connected":
 			# Connected to the server game
 			pass
-		"starting": 
-			hand._card_hand_init(data["id"], data["card_hand"], data["first_player"])
-			_display_all_username(data["list_id"])
 		"played": 
 			match (int((data["id"] - Global.online_game_id + 4)) % 4):
 				1: 
@@ -109,7 +106,8 @@ func _on_tree_exited() -> void:
 	if not game_won: 
 		var content = JSON.stringify({
 			"function": "leaving",
-			"profile_name": Global.username
+			"profile_name": Global.username,
+			"room_name": SocketOnline.room_name
 		})
 		
 		SocketOnline.socket.send_text(content)
@@ -119,7 +117,8 @@ func _on_tree_exited() -> void:
 func _ready() -> void:
 	playerusername.text = Global.username
 	var clientCAS = load("res://cert.crt")
-	_server_handshake()
+	hand._card_hand_init(SocketOnline.id, SocketOnline.card_hand, SocketOnline.first_player)
+	_display_all_username(SocketOnline.list_id)
 
 func _display_all_username(list_id: Dictionary):	
 	for username in list_id:
@@ -198,19 +197,8 @@ func move_card_to_slot(card, slot, hand, lst_card_in_slot):
 	slot.card_form=card.form
 	lst_card_in_slot.append(card)
 
-
-func _server_handshake():
-	var content = JSON.stringify({
-		"function": "connect",
-		"profile_name": Global.username
-	})
-	
-	SocketOnline.socket.send_text(content)
-
-
 func _on_button_2_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
-
 
 func _on_settings_btn_pressed() -> void:
 	$Setting.visible = not $Setting.visible
