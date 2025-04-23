@@ -150,6 +150,10 @@ func _on_button_2_pressed() -> void:
 		})
 		
 		connect.socket.send_text(content)
+		
+		for card in card_clicked: 
+			move_card_up_or_down(card)
+			card_clicked.erase(card)
 
 
 func _on_sort_form_pressed() -> void:
