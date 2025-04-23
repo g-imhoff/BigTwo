@@ -35,15 +35,11 @@ func _on_create_account_pressed() -> void:
 		}})
 		
 	socket.send_text(content)
-
-func _on_login_pressed() -> void:
-	get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
 	
-func _on_google_login_pressed() -> void:
-	print("OAuthGoogleClicked")
+	var Accverification = $Accverificationpop
+	if Accverification:
+		Accverification.visible = true
 
-
-		
 
 func _on_tree_exited() -> void:
 	socket.close()

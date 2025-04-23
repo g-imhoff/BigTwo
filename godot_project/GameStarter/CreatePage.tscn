@@ -199,7 +199,7 @@ text = "Create Account"
 
 [node name="Accverificationpop" parent="." instance=ExtResource("10_hnp6v")]
 visible = false
-position = Vector2(435, 363)
+position = Vector2(411, 289)
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/backicon connection page" to="." method="_on_backicon_connection_page_pressed"]

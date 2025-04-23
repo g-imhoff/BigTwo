@@ -10,8 +10,11 @@ extends Node2D
 ]
 
 @onready var submit_button = $SubmitBtn
+@onready var resend_button = $"resend code"
+@onready var cooldown_timer = $Timer
+@onready var cooldown_label = $CooldownLabel
 
-
+var remaining_seconds := 60
 
 func _ready():
 	for i in range(code_fields.size()):
@@ -19,6 +22,10 @@ func _ready():
 		field.max_length = 1
 		field.connect("text_changed", Callable(self, "_on_code_input").bind(i))
 	_check_code_filled()
+
+	# Start cooldown on popup ready
+	start_cooldown()
+
 func _on_code_input(new_text: String, index: int):
 	if new_text.length() == 1 and !new_text.is_valid_int():
 		code_fields[index].text = ""
@@ -35,7 +42,25 @@ func _check_code_filled():
 	_set_submit_button_state(true)
 
 func _set_submit_button_state(enabled: bool):
-	if enabled:
-		submit_button.set_disabled(false)
+	submit_button.disabled = !enabled
+
+func start_cooldown():
+	remaining_seconds = 60
+	resend_button.disabled = true
+	cooldown_label.visible = true
+	cooldown_label.text = str(remaining_seconds) + "s"
+	cooldown_timer.wait_time = 1
+	cooldown_timer.start()
+
+func _on_timer_timeout() -> void:
+	remaining_seconds -= 1
+	if remaining_seconds > 0:
+		cooldown_label.text = str(remaining_seconds) + "s"
 	else:
-		submit_button.set_disabled(true)
+		cooldown_timer.stop()
+		resend_button.disabled = false
+		cooldown_label.visible = false
+
+func _on_resend_code_pressed() -> void:
+	# Your resend code logic here (e.g., socket.send_text or API call)
+	start_cooldown()

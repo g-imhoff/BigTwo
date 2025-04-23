@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcblllx72cd53"]
+[gd_scene load_steps=14 format=3 uid="uid://dcblllx72cd53"]
 
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_ha4bm"]
 [ext_resource type="Script" path="res://GameStarter/accverificationpop.gd" id="1_nbojv"]
@@ -57,15 +57,26 @@ corner_radius_bottom_left = 65
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_heius"]
 draw_center = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vh46"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5bim"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0.215686, 0.729412, 0, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
 
 [node name="Accverificationpop" type="Node2D"]
 script = ExtResource("1_nbojv")
 
-[node name="PopupSettings" type="Sprite2D" parent="."]
-position = Vector2(569, 318)
-scale = Vector2(1, 0.782309)
+[node name="PopupAccverification" type="Sprite2D" parent="."]
+position = Vector2(569, 329.125)
+scale = Vector2(1, 0.810226)
 texture = ExtResource("1_ha4bm")
 
 [node name="Label" type="Label" parent="."]
@@ -153,11 +164,36 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_v4hek")
 text = "Submit"
 
 [node name="resend code" type="Button" parent="."]
-offset_left = 533.0
-offset_top = 514.0
-offset_right = 641.0
-offset_bottom = 545.0
+offset_left = 619.0
+offset_top = 579.0
+offset_right = 752.0
+offset_bottom = 624.0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_heius")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1vh46")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d5bim")
+text = "Resend Code"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CooldownLabel" type="Label" parent="."]
+offset_left = 766.0
+offset_top = 591.0
+offset_right = 818.0
+offset_bottom = 622.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="change mail" type="Button" parent="."]
+offset_left = 457.0
+offset_top = 589.0
+offset_right = 565.0
+offset_bottom = 620.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_heius")
 theme_override_styles/normal = SubResource("StyleBoxFlat_d5bim")
-text = "Resend Code"
+text = "change mail"
+
+[connection signal="pressed" from="resend code" to="." method="_on_resend_code_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
