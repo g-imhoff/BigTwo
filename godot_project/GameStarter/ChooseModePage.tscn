@@ -41,14 +41,14 @@ offset_bottom = 265.0
 theme_override_font_sizes/font_size = 30
 text = "SINGLE PLAYER"
 
-[node name="TextureButton" type="TextureButton" parent="Background"]
+[node name="MultI BTN" type="TextureButton" parent="Background"]
 offset_left = 128.0
 offset_top = 157.0
 offset_right = 347.0
 offset_bottom = 367.0
 texture_normal = ExtResource("5_pvoy8")
 
-[node name="Label" type="Label" parent="Background/TextureButton"]
+[node name="Label" type="Label" parent="Background/MultI BTN"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 223.0
@@ -59,4 +59,4 @@ text = "MULTI PLAYER"
 
 [connection signal="pressed" from="Background/backicon chooseMode page" to="." method="_on_backicon_choose_mode_page_pressed"]
 [connection signal="pressed" from="Background/Single BTN" to="." method="_on_single_btn_pressed"]
-[connection signal="pressed" from="Background/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Background/MultI BTN" to="." method="_on_mult_i_btn_pressed"]

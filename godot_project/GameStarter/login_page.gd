@@ -76,3 +76,6 @@ func _on_back_button_login_pressed() -> void:
 
 func _on_texture_button_pressed() -> void:
 		print("OAuthGoogleClicked")
+
+func _on_reset_pass_btn_pressed() -> void:
+	$ForgotPasswordPopup.visible = not $ForgotPasswordPopup.visible
