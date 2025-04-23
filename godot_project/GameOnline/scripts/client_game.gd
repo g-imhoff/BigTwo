@@ -1,7 +1,5 @@
 extends Node2D
 
-var socket = WebSocketPeer.new()
-
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 var card_scale=Vector2(0.5,0.5)
 
@@ -35,35 +33,27 @@ func _on_tree_exited() -> void:
 			"profile_name": Global.username
 		})
 		
-		socket.send_text(content)
+		SocketOnline.socket.send_text(content)
 	
-		socket.close()
+		SocketOnline.socket.close()
 
 func _ready() -> void:
 	playerusername.text = Global.username
 	var clientCAS = load("res://cert.crt")
-	var err = socket.connect_to_url(Global.server_url, TLSOptions.client_unsafe(clientCAS))
-	if err != OK:
-		print("Unable to connect")
-		set_process(false)
-	else:
-		while socket.get_ready_state() != WebSocketPeer.STATE_OPEN:
-			socket.poll()
-			await get_tree().create_timer(0.1).timeout # Small delay to prevent CPU overload
-		_server_handshake()
+	_server_handshake()
 
 func _process(_delta):
-	socket.poll()
-	var state = socket.get_ready_state()
+	SocketOnline.socket.poll()
+	var state = SocketOnline.socket.get_ready_state()
 	if state == WebSocketPeer.STATE_OPEN: 
-		while socket.get_available_packet_count():
-			_data_received_handler(JSON.parse_string(socket.get_packet().get_string_from_utf8()))
+		while SocketOnline.socket.get_available_packet_count():
+			_data_received_handler(JSON.parse_string(SocketOnline.socket.get_packet().get_string_from_utf8()))
 	elif state == WebSocketPeer.STATE_CLOSING:
 		# Keep polling to achieve proper close.
 		pass
 	elif state == WebSocketPeer.STATE_CLOSED:
-		var code = socket.get_close_code()
-		var reason = socket.get_close_reason()
+		var code = SocketOnline.socket.get_close_code()
+		var reason = SocketOnline.socket.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
 		if not game_won : 
@@ -215,7 +205,7 @@ func _server_handshake():
 		"profile_name": Global.username
 	})
 	
-	socket.send_text(content)
+	SocketOnline.socket.send_text(content)
 
 
 func _on_button_2_pressed() -> void:

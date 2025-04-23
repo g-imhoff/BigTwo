@@ -9,15 +9,6 @@ var socket = WebSocketPeer.new()
 
 var HasH = load("res://hashage.gd")
 
-#func hash_password(password: String) -> String:
-#	var context = HashingContext.new()
-#	context.start(HashingContext.HASH_SHA256) 
-#	context.update(password.to_utf8_buffer())
-#	var hash = context.finish()
-#	return hash.hex_encode()#
-
-
-
 func _on_create_account_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
 	var profile_name = profile_name_line_edit.text
