@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fq8y23pl3rwf"]
+[gd_scene load_steps=17 format=3 uid="uid://fq8y23pl3rwf"]
 
 [ext_resource type="Script" path="res://GameStarter/create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="6_nlrc0"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="7_fy10r"]
 [ext_resource type="Script" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
+[ext_resource type="PackedScene" uid="uid://dcblllx72cd53" path="res://GameStarter/accverificationpop.tscn" id="10_hnp6v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_45qsa"]
 font_size = 55
@@ -195,6 +196,9 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_ercrd")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yrh6b")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ej5m7")
 text = "Create Account"
+
+[node name="Accverificationpop" parent="." instance=ExtResource("10_hnp6v")]
+position = Vector2(435, 363)
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/backicon connection page" to="." method="_on_backicon_connection_page_pressed"]
