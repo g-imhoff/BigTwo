@@ -1,14 +1,22 @@
 extends Node2D
 
 @onready var room_name_label = $"Room name"
-@onready var scroll_bar = $HScrollBar/HBoxContainer
+@onready var scroll_bar = $HBoxContainer
+@onready var cancel_btn = $"Cancel Btn"
+@onready var create_btn = $"Create Btn"
 
 func _ready() -> void:
 	room_name_label.text = SocketOnline.room_name
 	_update_players_connected()
-
+	
+	if (Global.username == SocketOnline.host_name): 
+		cancel_btn.visible = true
+		create_btn.visible = true
 
 func _update_players_connected(): 
+	for child in scroll_bar.get_children():
+		child.queue_free()
+	
 	for players in SocketOnline.players_name: 
 		var label = Label.new()
 		label.text = players

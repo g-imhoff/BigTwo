@@ -46,12 +46,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu5wy")
 text = "Cancel"
 
-[node name="HScrollBar" type="ScrollContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_top = 200.0
-offset_right = 1016.0
-offset_bottom = 400.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HScrollBar"]
-layout_mode = 2
+offset_bottom = 200.0
 
 [connection signal="pressed" from="Cancel Btn" to="." method="_on_cancel_btn_pressed"]

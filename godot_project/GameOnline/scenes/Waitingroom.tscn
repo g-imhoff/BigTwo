@@ -42,9 +42,9 @@ theme_override_font_sizes/font_size = 80
 text = "Waiting Room"
 
 [node name="Room name" type="Label" parent="."]
-offset_top = 318.0
+offset_top = 180.0
 offset_right = 1920.0
-offset_bottom = 447.0
+offset_bottom = 309.0
 theme_override_fonts/font = ExtResource("2_xaltb")
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
@@ -52,6 +52,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Create Btn" type="Button" parent="."]
+visible = false
 offset_left = 1046.0
 offset_top = 778.0
 offset_right = 1269.0
@@ -63,6 +64,7 @@ text = "Start Game
 "
 
 [node name="Cancel Btn" type="Button" parent="."]
+visible = false
 anchors_preset = -1
 anchor_left = -2.969
 anchor_top = -10.625
@@ -77,11 +79,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_rn7b1")
 text = "Cancel
 "
 
-[node name="HScrollBar" type="HScrollBar" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HScrollBar"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 100.0
+offset_top = 300.0
+offset_right = 1820.0
+offset_bottom = 700.0
