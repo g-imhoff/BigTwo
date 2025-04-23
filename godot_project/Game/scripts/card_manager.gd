@@ -232,7 +232,6 @@ func check_cards_clicked():
 
 
 func remove_card_in_slot():
-
 	if lst_card_in_slot.size() != 0:
 		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
