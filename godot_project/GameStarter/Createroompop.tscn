@@ -103,4 +103,4 @@ popup/item_2/id = 4
 popup/item_3/text = "4"
 popup/item_3/id = 3
 
-[connection signal="pressed" from="LobbyPopUp/Create Btn" to="." method="_on_create_btn_pressed"]
+[connection signal="pressed" from="LobbyPopUp/Cancel Btn" to="." method="_on_cancel_btn_pressed"]

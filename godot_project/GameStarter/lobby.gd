@@ -6,8 +6,8 @@ func _on_back_btn_pressed() -> void:
 
 
 func _on_create_room_btn_pressed() -> void:
-	$Createroompop.visible = not $Createroompop.visible
+	$Pokerboard/Createroompop.visible = not $Pokerboard/Createroompop.visible
 
 
 func _on_join_room_btn_pressed() -> void:
-	$Joinroompop.visible = not $Joinroompop.visible
+	$Pokerboard/Joinroompop.visible = not $Pokerboard/Joinroompop.visible
