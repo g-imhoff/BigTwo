@@ -148,7 +148,7 @@ class Room:
             for card in list_card: 
                 if card.value == 3 and card.form == 1: 
                     bool_first_play = True
-                    first_play = False
+                    self.first_play = False
         else : 
             bool_first_play = True
 
