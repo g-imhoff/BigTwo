@@ -125,7 +125,7 @@ class Room:
         list_id = {}
 
         for player in self.players: 
-            list_id[player] = player.id 
+            list_id[player.username] = player.id 
 
         return list_id
 
