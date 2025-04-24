@@ -6,7 +6,7 @@ from websockets.asyncio.server import serve
 import ssl
 from debut_jeu import get_list_card_info_from_texture
 from python_projet import card_list, combi_detection, Combinaison, check_higher_than_previous
-from typing import List, Tuple
+from typing import Dict
 from websockets.legacy.server import WebSocketServerProtocol
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -33,7 +33,7 @@ class Room:
         self.host_name: str = host_name
         self.room_name: str = room_name
         self.password: str = password
-        self.players: List[Player] = [Player(websocket, host_name, 0)]
+        self.players: Dict[str, Player] = {host_name: Player(websocket, host_name, 0)}
         self.nb_players: int = nb_players
         self.nb_pass_in_a_row: int = 0
         self.first_play: bool = True
@@ -46,7 +46,7 @@ class Room:
         elif self.password != password: 
             await Room.failed_new_connection(websocket, "The password is wrong")
         else : 
-            self.players.append(Player(websocket, username, 0))
+            self.players[username] = Player(websocket, username, 0)
             self.nb_players += 1
 
         await self.accept_new_connection(websocket)
@@ -56,7 +56,7 @@ class Room:
         players_name = []
         
         for player in self.players:
-            players_name.append(player.username)
+            players_name.append(self.players[player].username)
 
         message = {
             "function": "room_connected",
@@ -71,7 +71,7 @@ class Room:
         players_name = []
         
         for player in self.players:
-            players_name.append(player.username)
+            players_name.append(self.players[player].username)
 
         message = json.dumps({
             "function": "new_connection",
@@ -79,8 +79,8 @@ class Room:
         })
 
         for player in self.players: 
-            if player.username != new_username: 
-                await player.websocket.send(message)
+            if self.players[player].username != new_username: 
+                await self.players[player].websocket.send(message)
 
     @staticmethod
     async def failed_new_connection(websocket, reason): 
@@ -96,7 +96,7 @@ class Room:
         list_id = self.generate_all_id()
         for player in self.players:
             list_message[player]["list_id"] = list_id
-            await player.websocket.send(json.dumps(list_message[player]))
+            await self.players[player].websocket.send(json.dumps(list_message[player]))
 
     def generate_all_hand(self):
         num = 2
@@ -112,7 +112,7 @@ class Room:
                 "list_id": {}
             }
 
-            player.id = 1 if bool_first else num
+            self.players[player].id = 1 if bool_first else num
 
             if not bool_first:
                 num += 1
@@ -125,7 +125,7 @@ class Room:
         list_id = {}
 
         for player in self.players: 
-            list_id[player.username] = player.id 
+            list_id[self.players[player].username] = self.players[player].id 
 
         return list_id
 
@@ -140,7 +140,7 @@ class Room:
             result_list.append(t)
         return result_list, bool_first
 
-    async def play_card(self, room_name, username, card_list): 
+    async def play_card(self, id, room_name, username, websocket, card_list): 
         list_card = get_list_card_info_from_texture(card_list)
 
         bool_first_play = False
@@ -160,11 +160,11 @@ class Room:
             self.nb_pass_in_a_row = 0 
 
             if boolean: 
-                await self.broadcast_card(content["id"], content["card"], websocket)
+                await self.broadcast_card(id, card_list, websocket)
                 self.last_combi = combi
-                self.players[content["profile_name"]].card -= len(list_card)
-                if (connected_client[content["profile_name"]]["card"] <= 0) :
-                    await self.game_won(content["profile_name"])
+                self.players[username].card -= len(list_card)
+                if (self.players[username].card <= 0) :
+                    await self.game_won(username)
 
             await Room.send_verification(boolean, websocket, message, False)
         else : 
@@ -189,8 +189,8 @@ class Room:
         }
 
         for player in self.players:
-            if (player.id != id):
-                await player.websocket.send(json.dumps(message))
+            if (self.players[player].id != id):
+                await self.players[player].websocket.send(json.dumps(message))
 
     async def play_pass(self, id, websocket): 
         if self.first_play : 
@@ -220,12 +220,12 @@ class Room:
         }
 
         for player in self.players:
-            if (player.id != id):
-                await player.websocket.send(json.dumps(message))
+            if (self.players[player].id != id):
+                await self.players[player].websocket.send(json.dumps(message))
 
     async def exit_game(self): 
         for player in self.players:
-            player.websocket.close()
+            self.players[player].websocket.close()
 
     async def game_won(self, winner_username):
         message = json.dumps({
@@ -234,7 +234,7 @@ class Room:
         })
 
         for player in self.players:
-            await player.websocket.send(message)
+            await self.players[player].websocket.send(message)
 
         exit(self)
 
@@ -288,7 +288,7 @@ async def handler(websocket):
             content = json.loads(message)
             match content["function"]:
                 case "play": 
-                    await room_holder[content["room_name"]].play_card(content["room_name"], content["profile_name"], content["card"])
+                    await room_holder[content["room_name"]].play_card(content["id"], content["room_name"], content["profile_name"], websocket, content["card"])
                 case "pass": 
                     await room_holder[content["room_name"]].play_pass(content["id"], websocket)
                 case "leaving":
