@@ -304,8 +304,8 @@ async def handler(websocket):
     except websockets.exceptions.ConnectionClosed as e:
         for room in room_holder: 
             for player in room_holder[room].players:
-                if player.websocket == websocket: 
-                    room_holder[room].players.remove(player)
+                if room_holder[room].players[player].websocket == websocket: 
+                    del room_holder[room].players[player]
                     await exit(room_holder[room])
 
 async def main():
