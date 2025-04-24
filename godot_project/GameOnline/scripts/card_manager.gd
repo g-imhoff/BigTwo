@@ -147,6 +147,7 @@ func _on_button_2_pressed() -> void:
 	if not played : 
 		var content = JSON.stringify({
 			"id": Global.online_game_id,
+			"room_name": SocketOnline.room_name,
 			"function": "pass",
 		})
 		

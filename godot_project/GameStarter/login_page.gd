@@ -5,7 +5,7 @@ extends Node2D
 @onready var rememberme_checkbox = $RememberMe
 var socket = WebSocketPeer.new()
 
-var HasH = load("res://hashage.gd")
+var Hash = load("res://hashage.gd")
 
 func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
@@ -16,8 +16,10 @@ func _on_login_pressed() -> void:
 	var profile_name_email = profile_name_email_line_edit.text
 	var password = password_line_edit.text
 	var rememberme = rememberme_checkbox.is_pressed()
-
-	var password_hash = HasH.hash_password(password) #Hashing 
+	var password_hash = ""
+	
+	if password != "":
+		password_hash = Hash.hash_password(password)
 	
 	var content = JSON.stringify({
 	"function": "login",
