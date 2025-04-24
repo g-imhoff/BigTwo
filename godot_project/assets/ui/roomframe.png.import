@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhhu3jli2g3fu"
-path="res://.godot/imported/circle-white.png-0135d8102fee7cea64f762ad0674f49f.ctex"
+uid="uid://tf6uk0k44kxk"
+path="res://.godot/imported/roomframe.png-0e7dc63d8d4a611d3f30a41cb499661c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/circle-white.png"
-dest_files=["res://.godot/imported/circle-white.png-0135d8102fee7cea64f762ad0674f49f.ctex"]
+source_file="res://assets/ui/roomframe.png"
+dest_files=["res://.godot/imported/roomframe.png-0e7dc63d8d4a611d3f30a41cb499661c.ctex"]
 
 [params]
 

@@ -1,40 +1,86 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfx80wmptn24i"]
+[gd_scene load_steps=9 format=3 uid="uid://bfx80wmptn24i"]
 
 [ext_resource type="Script" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
+[ext_resource type="Texture2D" uid="uid://tf6uk0k44kxk" path="res://assets/ui/roomframe.png" id="2_25qoi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wolkb"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdww5"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv6a1"]
+bg_color = Color(0.0784314, 0.682353, 0.360784, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2w8y6"]
+bg_color = Color(0.0784314, 0.682353, 0.360784, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3u5s"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtrv5"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_a8nc6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 292.0
-offset_bottom = 184.0
-color = Color(0.205117, 0.205117, 0.205117, 1)
+[node name="Roomframe" type="Sprite2D" parent="."]
+position = Vector2(150, 110)
+scale = Vector2(0.289551, 0.281006)
+texture = ExtResource("2_25qoi")
 
 [node name="RoomName" type="Label" parent="."]
-offset_left = 13.0
-offset_top = 12.0
-offset_right = 105.0
-offset_bottom = 35.0
+offset_left = 58.0
+offset_top = 69.0
+offset_right = 150.0
+offset_bottom = 92.0
 
 [node name="NbOfUsers" type="Label" parent="."]
-offset_left = 237.0
-offset_top = 12.0
-offset_right = 277.0
-offset_bottom = 35.0
+offset_left = 214.0
+offset_top = 72.0
+offset_right = 254.0
+offset_bottom = 95.0
 
 [node name="Join" type="Button" parent="."]
-offset_left = 69.0
-offset_top = 137.0
-offset_right = 230.0
-offset_bottom = 168.0
+offset_left = 97.0
+offset_top = 177.0
+offset_right = 214.0
+offset_bottom = 208.0
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_wolkb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mdww5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kv6a1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2w8y6")
 text = "Join"
 
 [node name="Password" type="LineEdit" parent="."]
-offset_left = 26.0
-offset_top = 97.0
-offset_right = 261.0
-offset_bottom = 128.0
-placeholder_text = "password"
+offset_left = 91.0
+offset_top = 123.0
+offset_right = 221.0
+offset_bottom = 154.0
+theme_override_colors/font_placeholder_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_u3u5s")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qtrv5")
+placeholder_text = "Password"
 alignment = 1
 secret = true
 
