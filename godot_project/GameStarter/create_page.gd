@@ -7,16 +7,18 @@ extends Node2D
 
 var socket = WebSocketPeer.new()
 
-var HasH = load("res://hashage.gd")
+var Hash = load("res://hashage.gd")
 
 func _on_create_account_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
 	var profile_name = profile_name_line_edit.text
 	var email = email_line_edit.text
 	var password = password_line_edit.text
+	var password_hash = ""
 	
-	var password_hash = HasH.hash_password(password) #hache le password 
-	
+	if password != "":
+		password_hash = Hash.hash_password(password)	
+		
 	var content = JSON.stringify({
 		"function": "create_account",
 		"data": {
