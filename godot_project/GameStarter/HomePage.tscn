@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="5_hq1fw"]
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="6_dni38"]
-[ext_resource type="Texture2D" uid="uid://br0exvbf6f8sd" path="res://assets/ui/Circle.png" id="6_w6ksr"]
+[ext_resource type="Texture2D" uid="uid://bsg83v8lb2rnv" path="res://assets/ui/Circle.png" id="6_w6ksr"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="9_18r8e"]
 
 [sub_resource type="GDScript" id="GDScript_ppnjs"]
@@ -13,14 +13,6 @@ script/source = "extends Node2D
 
 func _ready():
 	UISounds.install_sounds(self)
-
-# Function called when an input event (e.g., mouse click) is detected on the user button.
-# _viewport: The viewport node associated with the event.
-# event: The detected input event (e.g., mouse click).
-# _shape_idx: The shape index in the case of a collision shape node.
-func _on_user_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event.is_action_pressed(\"leftclick\"):
-		print(\"UserButtonClicked\")
 
 # Function called when an input event is detected on the rules button.
 # _viewport: The viewport node associated with the event.
@@ -32,7 +24,10 @@ func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx
 
 # Function called when the \"Play Now\" button is pressed.
 func _on_play_now_pressed() -> void:
-	get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
+	if (Global.username != \"\"):
+		get_tree().change_scene_to_file(\"res://GameStarter/ChooseModePage.tscn\")
+	else:
+		get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
 	
 func _on_profile_btn_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://GameStarter/Profile.tscn\")

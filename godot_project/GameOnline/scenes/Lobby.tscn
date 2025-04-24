@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://44gfaxbm8iqt"]
+
+[ext_resource type="Script" path="res://GameOnline/scripts/lobby.gd" id="1_lgl66"]
+[ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_4kbjn"]
+[ext_resource type="Texture2D" uid="uid://by85xnwxgoq7o" path="res://assets/ui/pokerboard.png" id="3_f727l"]
+[ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="4_nio05"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="5_geggd"]
+[ext_resource type="PackedScene" uid="uid://doe8bwwuydqex" path="res://GameOnline/scenes/Createroompop.tscn" id="6_ns74r"]
+[ext_resource type="PackedScene" uid="uid://b1jq8d0fre7vu" path="res://GameOnline/scenes/Joinroompop.tscn" id="7_r0qeh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddch8"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Lobby" type="Node2D"]
+script = ExtResource("1_lgl66")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(964, 542)
+texture = ExtResource("2_4kbjn")
+
+[node name="Back Btn" type="TextureButton" parent="."]
+offset_left = 76.0001
+offset_top = 77.0
+offset_right = 150.0
+offset_bottom = 151.0
+texture_normal = ExtResource("5_geggd")
+
+[node name="Pokerboard" type="Sprite2D" parent="."]
+position = Vector2(962, 571)
+scale = Vector2(3.12418, 3.2549)
+texture = ExtResource("3_f727l")
+
+[node name="Welcome" type="Label" parent="Pokerboard"]
+offset_left = -82.0
+offset_top = -85.0
+offset_right = 91.0
+offset_bottom = -55.0
+theme_override_fonts/font = ExtResource("4_nio05")
+theme_override_font_sizes/font_size = 20
+text = "HEY, USer"
+
+[node name="Create room btn" type="Button" parent="Pokerboard"]
+offset_left = -155.561
+offset_top = -17.5121
+offset_right = -24.5607
+offset_bottom = 14.4879
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ddch8")
+text = "Create Room"
+
+[node name="Join room btn" type="Button" parent="Pokerboard"]
+offset_left = 31.0481
+offset_top = -17.5121
+offset_right = 162.048
+offset_bottom = 14.4879
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ddch8")
+text = "Join Room"
+
+[node name="Createroompop" parent="Pokerboard" instance=ExtResource("6_ns74r")]
+visible = false
+position = Vector2(-159.402, -83.5663)
+scale = Vector2(0.320084, 0.307229)
+
+[node name="Joinroompop" parent="Pokerboard" instance=ExtResource("7_r0qeh")]
+visible = false
+position = Vector2(-160.682, -84.1808)
+scale = Vector2(0.320084, 0.307229)
+
+[connection signal="pressed" from="Back Btn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="Pokerboard/Create room btn" to="." method="_on_create_room_btn_pressed"]
+[connection signal="pressed" from="Pokerboard/Join room btn" to="." method="_on_join_room_btn_pressed"]

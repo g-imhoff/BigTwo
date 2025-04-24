@@ -9,15 +9,6 @@ var socket = WebSocketPeer.new()
 
 var HasH = load("res://hashage.gd")
 
-#func hash_password(password: String) -> String:
-#	var context = HashingContext.new()
-#	context.start(HashingContext.HASH_SHA256) 
-#	context.update(password.to_utf8_buffer())
-#	var hash = context.finish()
-#	return hash.hex_encode()#
-
-
-
 func _on_create_account_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
 	var profile_name = profile_name_line_edit.text
@@ -67,6 +58,7 @@ func _process(_delta):
 		var reason = socket.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
+		get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")
 
 func _data_received_handler(data):
 	if (data["code"] == 0):

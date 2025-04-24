@@ -23,6 +23,7 @@ UISounds="*res://Game/scripts/ui_sounds.gd"
 MusicPlayer="*res://GameStarter/MusicPlayer.tscn"
 Config="*res://GameStarter/Config.gd"
 GlobalAvatar="*res://Game/scripts/Global_avatar.gd"
+SocketOnline="*res://GameOnline/socket_online.gd"
 
 [display]
 

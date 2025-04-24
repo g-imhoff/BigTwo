@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1jq8d0fre7vu"]
+
+[ext_resource type="Script" path="res://GameOnline/scripts/joinroompop.gd" id="1_361u7"]
+[ext_resource type="Texture2D" uid="uid://cyd656ov8b6ty" path="res://assets/ui/lobbyPopUp.png" id="1_utvtk"]
+[ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="3_p7w81"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7d20"]
+bg_color = Color(0.0784314, 0.682353, 0.360784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu5wy"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Joinroompop" type="Node2D"]
+script = ExtResource("1_361u7")
+
+[node name="LobbyPopUp" type="Sprite2D" parent="."]
+position = Vector2(508, 268)
+texture = ExtResource("1_utvtk")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 297.0
+offset_top = 46.0
+offset_right = 730.0
+offset_bottom = 116.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_p7w81")
+theme_override_font_sizes/font_size = 48
+text = "Join Room"
+
+[node name="Join Btn" type="Button" parent="."]
+offset_left = 613.0
+offset_top = 462.0
+offset_right = 749.0
+offset_bottom = 491.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_x7d20")
+text = "Join
+"
+
+[node name="Cancel Btn" type="Button" parent="."]
+offset_left = 298.0
+offset_top = 459.0
+offset_right = 434.0
+offset_bottom = 488.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_nu5wy")
+text = "Cancel"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_top = 200.0
+offset_bottom = 200.0
+
+[connection signal="pressed" from="Cancel Btn" to="." method="_on_cancel_btn_pressed"]

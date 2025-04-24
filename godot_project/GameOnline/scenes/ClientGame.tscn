@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bn3olflapan7j"]
+[gd_scene load_steps=17 format=3 uid="uid://bn3olflapan7j"]
 
 [ext_resource type="Script" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
 [ext_resource type="Script" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
@@ -8,6 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="7_5otmk"]
 [ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_left.gd" id="7_f6iy4"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="8_x66yg"]
+[ext_resource type="Texture2D" uid="uid://dhhu3jli2g3fu" path="res://assets/circle-white.png" id="9_bkudl"]
+[ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="9_n0mij"]
+[ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="10_fsp72"]
+[ext_resource type="PackedScene" uid="uid://x4s413s07jg2" path="res://GameOnline/scenes/end_game.tscn" id="12_xw44o"]
+[ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="13_7kpjg"]
+[ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="14_y18d6"]
+[ext_resource type="PackedScene" path="res://GameStarter/rules_popup.tscn" id="15_kkcok"]
+[ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="16_8njk5"]
 
 [node name="ConnectServer" type="Node2D"]
 script = ExtResource("1_abxww")
@@ -31,109 +39,245 @@ script = ExtResource("6_nswuf")
 script = ExtResource("7_f6iy4")
 
 [node name="Button" type="Button" parent="."]
-offset_left = 606.0
-offset_top = 1027.0
-offset_right = 764.0
-offset_bottom = 1075.0
+offset_left = 561.0
+offset_top = 1032.0
+offset_right = 719.0
+offset_bottom = 1080.0
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1081.0
+offset_left = 1201.0
 offset_top = 1027.0
-offset_right = 1239.0
+offset_right = 1359.0
 offset_bottom = 1075.0
 text = "PASS
 "
 
-[node name="Button2" type="Button" parent="Button2"]
-layout_mode = 0
-offset_left = 661.0
-offset_top = -990.0
-offset_right = 819.0
-offset_bottom = -942.0
-text = "Back"
-
 [node name="Cardslots" type="Node2D" parent="."]
 
 [node name="cardslot" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(1000, 600)
+position = Vector2(915.9, 655.05)
 
 [node name="cardslot2" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(1100, 600)
+position = Vector2(1015.9, 655.05)
 
 [node name="cardslot3" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(900, 600)
+position = Vector2(815.9, 655.05)
 
 [node name="cardslot4" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(800, 600)
+position = Vector2(715.9, 655.05)
 
 [node name="cardslot5" parent="Cardslots" instance=ExtResource("8_x66yg")]
-position = Vector2(1200, 600)
+position = Vector2(1115.9, 655.05)
 
 [node name="Cardslots2" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(1000, 250)
+position = Vector2(915.9, 295.05)
 
 [node name="cardslot2" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(1100, 250)
+position = Vector2(1015.9, 295.05)
 
 [node name="cardslot3" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(900, 250)
+position = Vector2(815.9, 295.05)
 
 [node name="cardslot4" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(800, 250)
+position = Vector2(715.9, 295.05)
 
 [node name="cardslot5" parent="Cardslots2" instance=ExtResource("8_x66yg")]
-position = Vector2(1200, 250)
+position = Vector2(1115.9, 295.05)
 
 [node name="Cardslots3" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 500)
+position = Vector2(640.95, 495.9)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 600)
+position = Vector2(640.95, 595.9)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 400)
+position = Vector2(640.95, 395.9)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 300)
+position = Vector2(640.95, 295.9)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots3" instance=ExtResource("8_x66yg")]
-position = Vector2(500, 700)
+position = Vector2(640.95, 695.9)
 rotation = 1.5708
 
 [node name="Cardslots4" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 500)
+position = Vector2(1408.95, 495.9)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 600)
+position = Vector2(1408.95, 595.9)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 400)
+position = Vector2(1408.95, 395.9)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 300)
+position = Vector2(1408.95, 295.9)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots4" instance=ExtResource("8_x66yg")]
-position = Vector2(1500, 700)
+position = Vector2(1408.95, 695.9)
 rotation = 1.5708
 
+[node name="PlayerUsername" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 940.0
+offset_top = 1029.0
+offset_right = 980.0
+offset_bottom = 1065.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerUsername"]
+visible = false
+position = Vector2(-30, 18)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("9_bkudl")
+
+[node name="EnemyUsernameTop" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 940.0
+offset_top = 15.0
+offset_right = 980.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemyTopSprit" type="Sprite2D" parent="EnemyUsernameTop"]
+visible = false
+position = Vector2(-30, 17)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("9_bkudl")
+
+[node name="EnemyUsernameLeft" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 55.0
+offset_top = 522.0
+offset_right = 95.0
+offset_bottom = 558.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemyLeftSprite" type="Sprite2D" parent="EnemyUsernameLeft"]
+visible = false
+position = Vector2(-30, 21)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("9_bkudl")
+
+[node name="EnemyUsernameRight" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1865.0
+offset_top = 558.0
+offset_right = 1905.0
+offset_bottom = 594.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="EnemyRightSprite" type="Sprite2D" parent="EnemyUsernameRight"]
+visible = false
+position = Vector2(-30, 21)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("9_bkudl")
+
+[node name="sort_value" type="TextureButton" parent="."]
+texture_filter = 1
+offset_left = 20.0
+offset_top = 1003.0
+offset_right = 61.0
+offset_bottom = 1060.0
+texture_normal = ExtResource("9_n0mij")
+
+[node name="sort_form" type="TextureButton" parent="."]
+offset_left = 92.0
+offset_top = 1003.0
+offset_right = 133.0
+offset_bottom = 1061.0
+texture_normal = ExtResource("10_fsp72")
+
+[node name="EndGame" parent="." instance=ExtResource("12_xw44o")]
+visible = false
+z_index = 4096
+position = Vector2(486, 287)
+
+[node name="Setting" parent="." instance=ExtResource("13_7kpjg")]
+visible = false
+position = Vector2(401, 114)
+
+[node name="Settings_btn" type="TextureButton" parent="."]
+offset_left = 25.0
+offset_top = 19.0
+offset_right = 105.0
+offset_bottom = 99.0
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("14_y18d6")
+
+[node name="Rules_Popup" parent="." instance=ExtResource("15_kkcok")]
+visible = false
+position = Vector2(409, 89)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+z_index = 2000
+offset_left = 1794.0
+offset_top = 9.0
+offset_right = 1909.0
+offset_bottom = 133.0
+scale = Vector2(0.9, 0.9)
+texture_normal = ExtResource("16_8njk5")
+
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="verification_worked" from="." to="card_manager" method="_on_connect_server_verification_worked"]
 [connection signal="pressed" from="Button" to="card_manager" method="_on_play_pressed"]
-[connection signal="pressed" from="Button2/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button2" to="card_manager" method="_on_button_2_pressed"]
+[connection signal="pressed" from="sort_value" to="card_manager" method="_on_sort_value_pressed"]
+[connection signal="pressed" from="sort_form" to="card_manager" method="_on_sort_form_pressed"]
+[connection signal="pressed" from="Settings_btn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

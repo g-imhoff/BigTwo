@@ -1,6 +1,7 @@
 import asyncio
 import json
 import ssl
+import websockets
 
 from websockets.asyncio.server import serve
 
@@ -31,40 +32,43 @@ login_account_error = [
 
 async def handler(websocket):
     async for message in websocket:
-        content = json.loads(message)
-        match content["function"]:
-            case "create_account":
-                profile_name = content["data"]["profile_name"]
-                email = content["data"]["email"]
-                password = content["data"]["password"]
+        try :
+            content = json.loads(message)
+            match content["function"]:
+                case "create_account":
+                    profile_name = content["data"]["profile_name"]
+                    email = content["data"]["email"]
+                    password = content["data"]["password"]
 
-                print("Trying a register from", profile_name, email, password)
-                result = create_account(profile_name, email, password)
-                print(create_account_error[result],
-                      profile_name, email, password)
+                    print("Trying a register from", profile_name, email, password)
+                    result = create_account(profile_name, email, password)
+                    print(create_account_error[result],
+                        profile_name, email, password)
 
-                result_message = {
-                    "code": result,
-                    "message": create_account_error[result]
-                }
+                    result_message = {
+                        "code": result,
+                        "message": create_account_error[result]
+                    }
 
-                await websocket.send(json.dumps(result_message))
-            case "login":
-                profile_name_email = content["data"]["profile_name_email"]
-                password = content["data"]["password"]
+                    await websocket.send(json.dumps(result_message))
+                case "login":
+                    profile_name_email = content["data"]["profile_name_email"]
+                    password = content["data"]["password"]
 
-                print("Trying a login from", profile_name_email, password)
-                result, username = login_account(profile_name_email, password)
-                print(login_account_error[result],
-                      profile_name_email, password)
+                    print("Trying a login from", profile_name_email, password)
+                    result, username = login_account(profile_name_email, password)
+                    print(login_account_error[result],
+                        profile_name_email, password)
 
-                result_message = {
-                    "code": result,
-                    "message": login_account_error[result],
-                    "username": username
-                }
+                    result_message = {
+                        "code": result,
+                        "message": login_account_error[result],
+                        "username": username
+                    }
 
-                await websocket.send(json.dumps(result_message))
+                    await websocket.send(json.dumps(result_message))
+        except websockets.exceptions.ConnectionClosed as e: 
+            pass
 
 
 async def main():
