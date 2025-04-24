@@ -33,7 +33,7 @@ class Room:
         self.host_name: str = host_name
         self.room_name: str = room_name
         self.password: str = password
-        self.players: List[Player] = [Player(websocket, username, 0)]
+        self.players: List[Player] = [Player(websocket, host_name, 0)]
         self.nb_players: int = nb_players
         self.nb_pass_in_a_row: int = 0
         self.first_play: bool = True
@@ -96,13 +96,13 @@ class Room:
         list_id = self.generate_all_id()
         for player in self.players:
             list_message[player]["list_id"] = list_id
-            await self.players[player].websocket.send(json.dumps(list_message[player]))
+            await player.websocket.send(json.dumps(list_message[player]))
 
     def generate_all_hand(self):
         num = 2
         list_message = {}
         for player in self.players:
-            list_hand, bool_first = random_hand()
+            list_hand, bool_first = self.random_hand()
             starting_game_message = {
                 "id" : 1 if bool_first else num,
                 "function": "starting",
@@ -112,7 +112,7 @@ class Room:
                 "list_id": {}
             }
 
-            self.players[player].id = 1 if bool_first else num
+            player.id = 1 if bool_first else num
 
             if not bool_first:
                 num += 1
@@ -125,7 +125,7 @@ class Room:
         list_id = {}
 
         for player in self.players: 
-            list_id[player] = self.players[player].id 
+            list_id[player] = player.id 
 
         return list_id
 
@@ -189,10 +189,10 @@ class Room:
         }
 
         for player in self.players:
-            if (self.players[player].id != id):
-                await self.players[player].websocket.send(json.dumps(message))
+            if (player.id != id):
+                await player.websocket.send(json.dumps(message))
 
-    async def pass(self, id, websocket): 
+    async def play_pass(self, id, websocket): 
         if self.first_play : 
             await Room.send_verification(False, websocket, "You can't pass for the first move", True)
         else :
@@ -220,12 +220,12 @@ class Room:
         }
 
         for player in self.players:
-            if (self.players[player].id != id):
-                await self.players[player].websocket.send(json.dumps(message))
+            if (player.id != id):
+                await player.websocket.send(json.dumps(message))
 
     async def exit_game(self): 
         for player in self.players:
-            self.players[player].websocket.close()
+            player.websocket.close()
 
     async def game_won(self, winner_username):
         message = json.dumps({
@@ -234,7 +234,7 @@ class Room:
         })
 
         for player in self.players:
-            await self.players[player].websocket.send(message)
+            await player.websocket.send(message)
 
         exit(self)
 
@@ -245,7 +245,7 @@ async def create_room(websocket, host_name, room_name, password):
 
     room_holder[room_name] = room
 
-    await accept_new_connection(websocket, room_name)
+    await room.accept_new_connection(websocket)
 
 def get_room(nb): 
     result = []
@@ -290,7 +290,7 @@ async def handler(websocket):
                 case "play": 
                     await room_holder[content["room_name"]].play_card(content["room_name"], content["profile_name"], content["card"])
                 case "pass": 
-                    await room_holder[content["room_name"]].pass(content["id"], websocket)
+                    await room_holder[content["room_name"]].play_pass(content["id"], websocket)
                 case "leaving":
                     await exit(room_holder[content["room_name"]])
                 case "create_room": 
