@@ -47,7 +47,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nu5wy")
 text = "Cancel"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_top = 200.0
-offset_bottom = 200.0
+offset_left = 52.0
+offset_top = 114.0
+offset_right = 120.0
+offset_bottom = 154.0
 
 [connection signal="pressed" from="Cancel Btn" to="." method="_on_cancel_btn_pressed"]

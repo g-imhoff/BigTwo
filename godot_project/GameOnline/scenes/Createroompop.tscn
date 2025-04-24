@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://doe8bwwuydqex"]
+[gd_scene load_steps=8 format=3 uid="uid://doe8bwwuydqex"]
 
 [ext_resource type="Texture2D" uid="uid://cyd656ov8b6ty" path="res://assets/ui/lobbyPopUp.png" id="1_75slp"]
 [ext_resource type="Script" path="res://GameOnline/scripts/createroompop.gd" id="1_ip36j"]
@@ -19,6 +19,20 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p74fe"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_he3kb"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
+
 [node name="Createroompop" type="Node2D"]
 script = ExtResource("1_ip36j")
 
@@ -37,8 +51,8 @@ theme_override_font_sizes/font_size = 48
 text = "Create Room"
 
 [node name="Create Btn" type="Button" parent="LobbyPopUp"]
-offset_left = 101.0
-offset_top = 188.0
+offset_left = 90.0
+offset_top = 181.0
 offset_right = 237.0
 offset_bottom = 217.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -47,8 +61,8 @@ text = "Create
 "
 
 [node name="Cancel Btn" type="Button" parent="LobbyPopUp"]
-offset_left = -214.0
-offset_top = 185.0
+offset_left = -226.0
+offset_top = 180.0
 offset_right = -78.0
 offset_bottom = 214.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -56,36 +70,44 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_08x2o")
 text = "Cancel"
 
 [node name="Room name" type="Label" parent="LobbyPopUp"]
-offset_left = -426.0
-offset_top = -106.0
-offset_right = -336.0
-offset_bottom = -83.0
+offset_left = -430.0
+offset_top = -51.0
+offset_right = -164.0
+offset_bottom = -14.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ik73d")
 theme_override_font_sizes/font_size = 25
-text = "room name"
+text = "room name :"
 
 [node name="Room Password" type="Label" parent="LobbyPopUp"]
-offset_left = -427.0
-offset_top = -43.0
-offset_right = -352.0
-offset_bottom = -20.0
+offset_left = -425.0
+offset_top = 47.0
+offset_right = -160.0
+offset_bottom = 84.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ik73d")
 theme_override_font_sizes/font_size = 25
-text = "Password"
+text = "Password  :
+"
 
 [node name="Password" type="LineEdit" parent="LobbyPopUp"]
-offset_left = -169.0
-offset_top = -35.0
-offset_right = -101.938
-offset_bottom = -4.0
+offset_left = -137.0
+offset_top = -45.0
+offset_right = 94.0
+offset_bottom = -9.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_p74fe")
+alignment = 1
+secret = true
 
 [node name="RoomName" type="LineEdit" parent="LobbyPopUp"]
-offset_left = -147.0
-offset_top = -108.0
-offset_right = -79.9375
-offset_bottom = -77.0
+offset_left = -140.0
+offset_top = 53.0
+offset_right = 99.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_he3kb")
+alignment = 1
 
 [connection signal="pressed" from="LobbyPopUp/Create Btn" to="." method="_on_create_btn_pressed"]
 [connection signal="pressed" from="LobbyPopUp/Cancel Btn" to="." method="_on_cancel_btn_pressed"]
