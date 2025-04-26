@@ -1,9 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://k4ebvk3lxk6r"]
+[gd_scene load_steps=15 format=3 uid="uid://k4ebvk3lxk6r"]
 
 [ext_resource type="Script" path="res://GameStarter/setting.gd" id="1_5qr03"]
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_l204h"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_aw5tj"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_4hd25"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blmgq"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3q03j"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h48cw"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6js73"]
 bg_color = Color(1, 0, 0.0156863, 1)
@@ -12,6 +48,51 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptc3u"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1sc3t"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ae04"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02k1m"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmj4t"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -127,6 +208,9 @@ offset_top = 687.295
 offset_right = 865.66
 offset_bottom = 747.295
 theme_override_font_sizes/font_size = 23
+theme_override_styles/focus = SubResource("StyleBoxFlat_blmgq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3q03j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h48cw")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6js73")
 text = "Exit to desktop"
 
@@ -136,6 +220,11 @@ offset_top = 688.233
 offset_right = 557.83
 offset_bottom = 748.233
 theme_override_font_sizes/font_size = 23
+theme_override_styles/focus = SubResource("StyleBoxFlat_ptc3u")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_1sc3t")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0ae04")
+theme_override_styles/hover = SubResource("StyleBoxFlat_02k1m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pmj4t")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ni351")
 text = "Exit to main menu"
 

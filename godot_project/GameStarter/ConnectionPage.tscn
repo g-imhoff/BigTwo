@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://6wqgrvrccnso"]
+[gd_scene load_steps=19 format=3 uid="uid://6wqgrvrccnso"]
 
 [ext_resource type="Script" path="res://GameStarter/connection_page.gd" id="1_euxgu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_ynr6k"]
@@ -52,6 +52,13 @@ anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlr3"]
 bg_color = Color(0.156863, 0.654902, 0.270588, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ej0c"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
 corner_radius_top_left = 60
 corner_radius_top_right = 60
 corner_radius_bottom_right = 60
@@ -130,6 +137,7 @@ offset_right = 1713.0
 offset_bottom = 764.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_0ej0c")
 theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_yruav")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_o7f3o")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4ypav")
