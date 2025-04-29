@@ -2,6 +2,12 @@ extends Node2D
 
 @onready var endslot=$"../cardendslot"
 @onready var hand=$"../PlayerHand"
+@onready var message_left=$"../message_left"
+@onready var message_right=$"../message_right"
+@onready var message_top=$"../message_top"
+@onready var timer=$"../Timer"
+
+var message
 
 func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right):
 	for i in range (lst_card.size()):
@@ -206,7 +212,7 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 		Global.index+=1
 		Global.endcardpos+=0.2
 
-func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot):
+func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot,player):
 	if played==false:
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
@@ -282,6 +288,13 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			if hand.player_hand.size() == 0:
 				end_game()
 		else :
+			if (player=="left"):
+				message=message_left
+			elif(player=="right"):
+				message=message_right
+			else:
+				message=message_top
+			show_message("player has passed")
 			children_slots[0].combi = children_slots_right[0].combi
 			children_slots[0].combi_value = children_slots_right[0].combi_value
 			children_slots[0].combi_form = children_slots_right[0].combi_form
@@ -291,3 +304,22 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 func end_game():
 	print("tu a gagné")
 	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
+
+
+func show_message(text: String, duration: float = 2.0):
+	
+	message.text = text
+	message.visible = true
+	message.add_theme_font_size_override("font_size", 24)
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.4)  # R, G, B, A → noir, 50% opaque 
+	style.set_content_margin_all(15)
+
+	message.add_theme_stylebox_override("normal", style)
+	hide_message_after_delay(duration)
+
+
+func hide_message_after_delay(duration: float) -> void:
+	await get_tree().create_timer(duration).timeout
+	message.visible = false
+	

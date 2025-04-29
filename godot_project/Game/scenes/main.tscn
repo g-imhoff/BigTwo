@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="16_7vdtg"]
 [ext_resource type="PackedScene" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
-[ext_resource type="PackedScene" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
+[ext_resource type="PackedScene" uid="uid://p7n3ewamh80a" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gouob")
@@ -169,11 +169,34 @@ offset_bottom = 1012.0
 texture_normal = ExtResource("14_td723")
 
 [node name="message" type="Label" parent="."]
-visible = false
 offset_left = 900.0
 offset_top = 750.0
 offset_right = 940.0
 offset_bottom = 773.0
+horizontal_alignment = 1
+uppercase = true
+
+[node name="message_left" type="Label" parent="."]
+offset_left = 330.0
+offset_top = 450.0
+offset_right = 370.0
+offset_bottom = 473.0
+horizontal_alignment = 1
+uppercase = true
+
+[node name="message_right" type="Label" parent="."]
+offset_left = 1500.0
+offset_top = 450.0
+offset_right = 1540.0
+offset_bottom = 473.0
+horizontal_alignment = 1
+uppercase = true
+
+[node name="message_top" type="Label" parent="."]
+offset_left = 900.0
+offset_top = 206.0
+offset_right = 940.0
+offset_bottom = 229.0
 horizontal_alignment = 1
 uppercase = true
 

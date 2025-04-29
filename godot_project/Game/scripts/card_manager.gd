@@ -14,6 +14,7 @@ var lst_card_in_slot=[]
 var card_base_scale=Vector2(0.5,0.5)
 var card_highlight_scale=Vector2(0.55,0.55)
 var brelan=[]
+var straightForFlush=[]
 
 @onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
@@ -366,9 +367,15 @@ func _on_sort_value_pressed() -> void:
 	hand.update_hand_position()
 	num_card_up = 0
 
-func show_message(text: String, duration: float = 3.0):
+func show_message(text: String, duration: float = 2.0):
 	message.text = text
 	message.visible = true
+	message.add_theme_font_size_override("font_size", 24)
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.4)  # R, G, B, A → noir, 50% opaque 
+	style.set_content_margin_all(15)
+
+	message.add_theme_stylebox_override("normal", style)
 	timer.start(duration)
 
 
@@ -412,6 +419,7 @@ func check_for_straight(lst_card, children_slots,children_slots_right):
 		if tmp.size()==5: 
 			children_slots[0].combi_value=tmp[4].value
 			children_slots[0].combi_form=tmp[4].form
+			straightForFlush=tmp.duplicate()
 			return "straight"
 	return null
 
@@ -470,17 +478,17 @@ func check_for_straightflush(lst_card, children_slots,children_slots_right):
 	children_slots[0].combi="straight flush"
 	lst=check_for_straight(lst_card,children_slots,children_slots_right)
 	if lst!=null :
-		for i in range (lst.size()-1):
-			if lst[i].form!=lst[i+1].form:
+		for i in range (straightForFlush.size()-1):
+			if straightForFlush[i].form!=straightForFlush[i+1].form:
 				return null
 		if children_slots_right[0].combi!=null:
-			if (lst[4].value >children_slots_right[0].combi_value ) or (lst[4].value==children_slots_right[0].combi_value and lst[4].form>children_slots_right[0].combi_form ) or (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
-				children_slots[0].combi_value=lst[4].value
-				children_slots[0].combi_form=lst[4].form
+			if (straightForFlush[4].value >children_slots_right[0].combi_value ) or (straightForFlush[4].value==children_slots_right[0].combi_value and straightForFlush[4].form>children_slots_right[0].combi_form ) or (children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"):
+				children_slots[0].combi_value=straightForFlush[4].value
+				children_slots[0].combi_form=straightForFlush[4].form
 				return children_slots[0].combi
 		else:
-			children_slots[0].combi_value=lst[4].value
-			children_slots[0].combi_form=lst[4].form
+			children_slots[0].combi_value=straightForFlush[4].value
+			children_slots[0].combi_form=straightForFlush[4].form
 			return children_slots[0].combi
 	else:
 		children_slots[0].combi=null
