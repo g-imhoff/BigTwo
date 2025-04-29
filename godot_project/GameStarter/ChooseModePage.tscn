@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_c5bal"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_u0mlp"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_vsw86"]
-[ext_resource type="Texture2D" uid="uid://i5ox7230nmuu" path="res://assets/ui/singlet_player.png" id="5_ia4b4"]
-[ext_resource type="Texture2D" uid="uid://cm4iglhrkhblc" path="res://assets/ui/multi_cards.png" id="6_6w7y4"]
+[ext_resource type="Texture2D" uid="uid://c3om5rajny0pm" path="res://assets/ui/single_yellow-removebg-preview (1).png" id="5_8ee8k"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="6_gb7kl"]
+[ext_resource type="Texture2D" uid="uid://k6tuw8xnxql3" path="res://assets/ui/multi_yellow.png" id="7_bg5e0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ai54j"]
 font = ExtResource("6_gb7kl")
@@ -35,41 +35,39 @@ offset_bottom = -391.0
 texture_normal = ExtResource("3_u0mlp")
 
 [node name="Single BTN" type="TextureButton" parent="Background"]
-offset_left = -331.0
-offset_top = 117.0
-offset_right = -16.0
-offset_bottom = 510.0
-scale = Vector2(0.7, 0.7)
-texture_normal = ExtResource("5_ia4b4")
+offset_left = -381.0
+offset_top = 134.0
+offset_right = 119.0
+offset_bottom = 634.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("5_8ee8k")
 
 [node name="Label single" type="Label" parent="Background/Single BTN"]
 layout_mode = 0
-offset_left = 14.2857
-offset_top = 328.571
-offset_right = 303.286
-offset_bottom = 463.571
+offset_left = -44.0
+offset_top = 508.0
+offset_right = 655.0
+offset_bottom = 643.0
 theme_override_font_sizes/font_size = 30
-text = "SINGLE
-PLAYER"
+text = "SINGLE PLAYER"
 label_settings = SubResource("LabelSettings_ai54j")
 
 [node name="MultI BTN" type="TextureButton" parent="Background"]
-offset_left = 55.0
-offset_top = 123.0
-offset_right = 685.0
-offset_bottom = 519.0
-scale = Vector2(0.6, 0.6)
-texture_normal = ExtResource("6_6w7y4")
+offset_left = 109.0
+offset_top = 137.0
+offset_right = 739.0
+offset_bottom = 637.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_bg5e0")
 
 [node name="Label" type="Label" parent="Background/MultI BTN"]
 layout_mode = 0
-offset_left = 180.0
-offset_top = 393.333
-offset_right = 469.0
-offset_bottom = 528.333
+offset_left = 5.99992
+offset_top = 514.0
+offset_right = 532.0
+offset_bottom = 649.0
 theme_override_font_sizes/font_size = 30
-text = " MULTI 
-PLAYER"
+text = "MULTI PLAYER"
 label_settings = SubResource("LabelSettings_3bpsu")
 
 [connection signal="pressed" from="Background/backicon chooseMode page" to="." method="_on_backicon_choose_mode_page_pressed"]
