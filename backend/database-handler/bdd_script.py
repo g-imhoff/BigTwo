@@ -62,9 +62,12 @@ def login_account(profile_name_email, password):
                 if bdd_connected:
                     return 4, ""  # Somebody is already connected
                 else:
-                    cur.execute(
-                        "UPDATE users SET connected = 1 WHERE username = %s", (bdd_username))
+                    cur.execute("""
+                            UPDATE users 
+                            SET connected = TRUE 
+                            WHERE username = %s""", (bdd_username,))
 
+                    conn.commit()
                     return 0, bdd_username  # connection worked
             else:
                 return 3, ""  # wrong password
@@ -79,8 +82,11 @@ def logout(username: str) -> None:
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
-        cur.execute(
-            "UPDATE users SET connected = 0 WHERE username = %s", username)
+        cur.execute("""
+                UPDATE users 
+                SET connected = FALSE 
+                WHERE username = %s""", (username, ))
+        conn.commit()
     except psycopg2.Error as e:
         print("Database error : ", e)
 
