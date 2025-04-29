@@ -59,11 +59,11 @@ def login_account(profile_name_email, password):
             bdd_id, bdd_username, bdd_email, bdd_password, bdd_connected = result
 
             if bdd_password == password:
-                if bdd_connected: 
-                    return 4, "" # Somebody is already connected
-                else : 
+                if bdd_connected:
+                    return 4, ""  # Somebody is already connected
+                else:
                     cur.execute(
-                        "UPDATE users SET connected = 1 WHERE username = %s", bdd_username)
+                        "UPDATE users SET connected = 1 WHERE username = %s", (bdd_username))
 
                     return 0, bdd_username  # connection worked
             else:
