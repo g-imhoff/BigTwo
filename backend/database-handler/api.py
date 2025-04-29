@@ -15,7 +15,8 @@ login_account_error = [
     "The connection worked well",
     "This account doesn't exist",
     "There is an error with psycopg2",
-    "This is the wrong password"
+    "This is the wrong password",
+    "Somebody is already logged on this account"
 ]
 
 

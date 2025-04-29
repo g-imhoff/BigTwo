@@ -56,13 +56,16 @@ def login_account(profile_name_email, password):
 
         result = cur.fetchone()
         if result:
-            bdd_id, bdd_username, bdd_email, bdd_password = result
+            bdd_id, bdd_username, bdd_email, bdd_password, bdd_connected = result
 
             if bdd_password == password:
-                cur.execute(
-                    "UPDATE users SET connected = 1 WHERE username = %s", bdd_username)
+                if bdd_connected: 
+                    return 4, "" # Somebody is already connected
+                else : 
+                    cur.execute(
+                        "UPDATE users SET connected = 1 WHERE username = %s", bdd_username)
 
-                return 0, bdd_username  # connection worked
+                    return 0, bdd_username  # connection worked
             else:
                 return 3, ""  # wrong password
         else:
