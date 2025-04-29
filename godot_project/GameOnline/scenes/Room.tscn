@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://drtjs7y5th6lh"]
 
-[ext_resource type="Script" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
+[ext_resource type="Script" uid="uid://dgnxwhm60j1vf" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_a8nc6")

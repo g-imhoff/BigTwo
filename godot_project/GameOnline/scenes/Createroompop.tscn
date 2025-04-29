@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://doe8bwwuydqex"]
 
 [ext_resource type="Texture2D" uid="uid://cyd656ov8b6ty" path="res://assets/ui/lobbyPopUp.png" id="1_75slp"]
-[ext_resource type="Script" path="res://GameOnline/scripts/createroompop.gd" id="1_ip36j"]
+[ext_resource type="Script" uid="uid://dxwyg4igrt63l" path="res://GameOnline/scripts/createroompop.gd" id="1_ip36j"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_ik73d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yafnm"]
