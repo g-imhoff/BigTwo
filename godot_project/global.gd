@@ -87,3 +87,21 @@ var card_images=[
 ]
 
 var card_duplicate = card_images.duplicate()
+
+var close_dialog: ConfirmationDialog
+
+func _ready():
+	get_viewport().get_window().close_requested.connect(_on_close_requested)
+
+func _on_close_requested():
+	if username != "":
+		var http_request = HTTPRequest.new()
+		add_child(http_request)
+		
+		var content = JSON.stringify({
+			"username": username,
+		})
+		
+		var error = http_request.request(Global.api_url + "/auth/logout", [], HTTPClient.METHOD_POST, content)
+		if error != OK:
+			push_error("An error occurred in the HTTP request.")
