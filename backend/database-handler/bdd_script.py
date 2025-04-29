@@ -59,6 +59,9 @@ def login_account(profile_name_email, password):
             bdd_id, bdd_username, bdd_email, bdd_password = result
 
             if bdd_password == password:
+                cur.execute(
+                    "UPDATE users SET connected = 1 WHERE username = %s", bdd_username)
+
                 return 0, bdd_username  # connection worked
             else:
                 return 3, ""  # wrong password
@@ -67,6 +70,16 @@ def login_account(profile_name_email, password):
     except psycopg2.Error as e:
         print("Database error : ", e)
         return 2, ""  # Error psycopg2
+
+
+def logout(username: str) -> None:
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute(
+            "UPDATE users SET connected = 0 WHERE username = %s", username)
+    except psycopg2.Error as e:
+        print("Database error : ", e)
 
 
 def creer_table():
@@ -79,10 +92,10 @@ def creer_table():
         print("Connected!\n")
 
         # Création de la table avec une meilleure gestion des types
-        creation = """ 
+        creation = """
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL, 
+            username VARCHAR(50) UNIQUE NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
             password TEXT NOT NULL
         );
@@ -135,8 +148,8 @@ def inserer_user(nom, email, password):
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
 
-        insertion = """ 
-        INSERT INTO users (username, email, password)  
+        insertion = """
+        INSERT INTO users (username, email, password)
         VALUES (%s, %s, %s)
         RETURNING id;
         """

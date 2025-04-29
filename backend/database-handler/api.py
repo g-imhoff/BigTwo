@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Body
 import uvicorn
-from bdd_script import create_account, login_account
+from bdd_script import logout, create_account, login_account
 
 app = FastAPI()
 
@@ -45,5 +45,14 @@ def register(data: dict = Body(...)):
 
     return {"code": result, "message": create_account_error[result]}
 
+
+@app.post("/auth/logout")
+def register(data: dict = Body(...)):
+    username = data.get("username")
+
+    print("Logout from", username)
+    logout(username)
+
+
 if __name__ == "main":
-    uvicord.run(app, host="0.0.0.0", port=10005)
+    uvicorn.run(app, host="0.0.0.0", port=10005)
