@@ -90,18 +90,23 @@ var card_duplicate = card_images.duplicate()
 
 var close_dialog: ConfirmationDialog
 
-func _ready():
-	get_viewport().get_window().close_requested.connect(_on_close_requested)
+func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
 
-func _on_close_requested():
-	if username != "":
-		var http_request = HTTPRequest.new()
-		add_child(http_request)
-		
-		var content = JSON.stringify({
-			"username": username,
-		})
-		
-		var error = http_request.request(Global.api_url + "/auth/logout", [], HTTPClient.METHOD_POST, content)
-		if error != OK:
-			push_error("An error occurred in the HTTP request.")
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if username != "":
+			print(username)
+			var http_request = HTTPRequest.new()
+			get_tree().root.add_child(http_request)
+			
+			var content = JSON.stringify({
+				"username": username,
+			})
+			
+			var error = http_request.request(Global.api_url + "/auth/logout", [], HTTPClient.METHOD_POST, content)
+			if error != OK:
+				push_error("An error occurred in the HTTP request.")
+				
+			await http_request.request_completed  # Wait for the request to finish
+			get_tree().quit() # default behavior
