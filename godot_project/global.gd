@@ -96,7 +96,6 @@ func _ready() -> void:
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if username != "":
-			print(username)
 			var http_request = HTTPRequest.new()
 			get_tree().root.add_child(http_request)
 			
@@ -109,4 +108,4 @@ func _notification(what):
 				push_error("An error occurred in the HTTP request.")
 				
 			await http_request.request_completed  # Wait for the request to finish
-			get_tree().quit() # default behavior
+		get_tree().quit() # default behavior
