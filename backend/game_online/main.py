@@ -13,11 +13,6 @@ from typing import Any, Dict, List, Tuple, TypedDict
 from debut_jeu import get_list_card_info_from_texture, Card
 from python_projet import card_list, combi_detection, Combinaison, check_higher_than_previous
 
-ssl_context: ssl.SSLContext = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
-ssl_context.load_cert_chain(
-    certfile="../certs/cert.pem", keyfile="../certs/key.pem")
-
 WEBSOCKETS_URL: str = "0.0.0.0"  # for the moment, turn to 0.0.0.0 after
 WEBSOCKETS_PORT: int = 10006
 
@@ -340,7 +335,7 @@ async def handler(websocket: ServerConnection):
 
 
 async def main():
-    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
+    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT) as server:
         await server.serve_forever()
 
 if __name__ == "__main__":
