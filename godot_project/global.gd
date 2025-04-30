@@ -4,6 +4,8 @@ var api_url = "http://185.155.93.105:18005"
 var server_url = "ws://185.155.93.105:18006" # turn into wss://185.155.93.105:18006
 var username = ""
 var online_game_id = 1000 # no game
+var index=1
+var endcardpos=0
 
 func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
@@ -16,7 +18,6 @@ func get_card_info_from_texture(path:String)->Array:
 		card_info[0]=3
 	elif path.find("spades")!=-1:
 		card_info[0]=4
-	
 	var value_str=path.split("_")[2].split(".")[0]
 	
 	if value_str=="A":
@@ -27,6 +28,8 @@ func get_card_info_from_texture(path:String)->Array:
 		card_info[1]=12
 	elif value_str=="J":
 		card_info[1]=11
+	elif value_str=="02":
+		card_info[1]=15
 	elif value_str.is_valid_float():
 		card_info[1] = int(value_str)
 	return card_info

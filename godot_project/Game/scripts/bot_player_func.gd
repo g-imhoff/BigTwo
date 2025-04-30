@@ -1,5 +1,14 @@
 extends Node2D
 
+@onready var endslot=$"../cardendslot"
+@onready var hand=$"../PlayerHand"
+@onready var message_left=$"../message_left"
+@onready var message_right=$"../message_right"
+@onready var message_top=$"../message_top"
+@onready var timer=$"../Timer"
+
+var message
+
 func check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right):
 	for i in range (lst_card.size()):
 			var card1 = lst_card[i]
@@ -52,12 +61,10 @@ func check_for_flush(lst_card, children_slots,children_slots_right):
 			for card in tmp2:
 				tmp.erase(card)
 		if tmp.size()==5: 
-			print("here")
 			if children_slots_right[0].combi==null or (children_slots_right[0].combi=="straight") or (tmp[4].value >children_slots_right[0].combi_value or (tmp[4].value==children_slots_right[0].combi_value and tmp[4].form>children_slots_right[0].combi_form )):
 				tmp.sort_custom(func(a, b): return a.value < b.value)
 				children_slots[0].combi_value=tmp[4].value
 				children_slots[0].combi_form=tmp[4].form
-				print("check flush")
 				return tmp
 	return null
 
@@ -186,23 +193,32 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 		var cards_to_remove = lst_card_in_slot.duplicate()
 		children_slots[0].combi=null
 		for card in cards_to_remove:
-			card.queue_free()  # Marque la carte pour suppression
+			endslot.position.x+=Global.endcardpos
+			var sprite=card.get_node("Sprite")
+			if sprite.rotation_degrees == 90:
+				sprite.rotation_degrees-=90
+			if sprite.rotation_degrees == -90:
+				sprite.rotation_degrees+=90
+			card.z_index=Global.index
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
+			sprite.texture=preload("res://assets/cards/card_back.png")
+			hand.animate_card_to_position(card,endslot.position)
 			children_slots[cmpt_card_in_slot-1].card_in_slot=false
 			children_slots[cmpt_card_in_slot-1].card_value=null
 			children_slots[cmpt_card_in_slot-1].card_form=null
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
-			
-func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot):
+		Global.index+=1
+		Global.endcardpos+=0.2
+
+func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot,player):
 	if played==false:
 		var lst_card=hand.player_hand.duplicate()
 		var card_to_put=[]
 		var three_of_diamonds = null
 		var can_play = false
 		lst_card.sort_custom(func(a, b): return a.value < b.value)
-		print(children_slots_right[0].combi)
 		for card in lst_card:
 			if card.value == 3 and card.form == 1:
 				three_of_diamonds = card
@@ -219,7 +235,6 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 				can_play = true
 		elif ((check_for_straightflush(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_straightflush(lst_card, children_slots,children_slots_right)!=null and (children_slots_right[0].combi=="straight flush" or children_slots_right[0].combi=="four of a kind" or children_slots_right[0].combi=="full house" or children_slots_right[0].combi=="flush" or children_slots_right[0].combi=="straight"))):
 				children_slots[0].combi="straight flush"
-				print("here")
 				card_to_put=check_for_straightflush(lst_card, children_slots,children_slots_right)
 				can_play=true
 		elif (check_for_straight(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi==null) or (check_for_straight(lst_card, children_slots,children_slots_right)!=null and children_slots_right[0].combi=="straight"):
@@ -273,6 +288,13 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 			if hand.player_hand.size() == 0:
 				end_game()
 		else :
+			if (player=="left"):
+				message=message_left
+			elif(player=="right"):
+				message=message_right
+			else:
+				message=message_top
+			show_message("player has passed")
 			children_slots[0].combi = children_slots_right[0].combi
 			children_slots[0].combi_value = children_slots_right[0].combi_value
 			children_slots[0].combi_form = children_slots_right[0].combi_form
@@ -282,3 +304,22 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 func end_game():
 	print("tu a gagné")
 	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
+
+
+func show_message(text: String, duration: float = 2.0):
+	
+	message.text = text
+	message.visible = true
+	message.add_theme_font_size_override("font_size", 24)
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.4)  # R, G, B, A → noir, 50% opaque 
+	style.set_content_margin_all(15)
+
+	message.add_theme_stylebox_override("normal", style)
+	hide_message_after_delay(duration)
+
+
+func hide_message_after_delay(duration: float) -> void:
+	await get_tree().create_timer(duration).timeout
+	message.visible = false
+	
