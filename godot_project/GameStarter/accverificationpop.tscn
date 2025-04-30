@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dcblllx72cd53"]
 
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_ha4bm"]
-[ext_resource type="Script" path="res://GameStarter/accverificationpop.gd" id="1_nbojv"]
+[ext_resource type="Script" uid="uid://dhtdkd38k55dp" path="res://GameStarter/accverificationpop.gd" id="1_nbojv"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_auh1l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhert"]
@@ -195,5 +195,6 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_heius")
 theme_override_styles/normal = SubResource("StyleBoxFlat_d5bim")
 text = "change mail"
 
+[connection signal="pressed" from="SubmitBtn" to="." method="_on_submit_btn_pressed"]
 [connection signal="pressed" from="resend code" to="." method="_on_resend_code_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

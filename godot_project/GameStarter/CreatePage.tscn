@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="5_5ruod"]
 [ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="6_nlrc0"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="7_fy10r"]
-[ext_resource type="Script" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
+[ext_resource type="Script" uid="uid://cf35oj3sh0te1" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
 [ext_resource type="PackedScene" uid="uid://dcblllx72cd53" path="res://GameStarter/accverificationpop.tscn" id="10_hnp6v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_45qsa"]

@@ -4,6 +4,7 @@ extends Node2D
 @onready var profile_name_line_edit = $ProfileName/LabelProfileName
 @onready var email_line_edit = $Email/LabelEmail
 @onready var password_line_edit = $Password/LabelPassword
+@onready var accverifi_popup = $Accverificationpop
 
 var Hash = load("res://hashage.gd")
 
@@ -47,7 +48,7 @@ func _http_request_completed(result, response_code, headers, body):
 	var response = json.get_data()
 	
 	if(response["code"] == 0):
-		get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
+		accverifi_popup.visible = true
 	else :
 		Notification.show_side(response["message"])
 

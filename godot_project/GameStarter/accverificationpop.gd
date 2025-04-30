@@ -45,7 +45,6 @@ func _check_code_filled():
 			return false
 	return true
 
-
 func _set_submit_button_state(enabled: bool):
 	submit_button.disabled = !enabled
 
@@ -70,10 +69,12 @@ func _on_resend_code_pressed() -> void:
 	# Your resend code logic here (e.g., socket.send_text or API call)
 	start_cooldown()
 
-func check_code_correct(test_code : String, data):
+func _on_submit_btn_pressed() -> void:
+	var value = 0;
+	var mult = 1;
+	
 	for field in code_fields:
-		test_code += field.text
-	if (test_code == data[0]):
-		return true
-	else:
-		return false
+		value += int(field.text) * mult
+		mult *= 10
+		
+	print(value)
