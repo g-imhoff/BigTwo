@@ -58,9 +58,8 @@ class Room:
         else:
             self.players[username] = Player(websocket, username, 0)
             self.nb_players += 1
-
-        await self.accept_new_connection(websocket)
-        await self.broadcast_new_connection(username)
+            await self.accept_new_connection(websocket)
+            await self.broadcast_new_connection(username)
 
     async def accept_new_connection(self, websocket: ServerConnection) -> None:
         players_name: List[str] = []
@@ -174,7 +173,7 @@ class Room:
             self.nb_pass_in_a_row = 0
 
             if result_verif[0]:
-                await self.broadcast_card(id, card_list)
+                await self.broadcast_card(id, list_card_path)
                 self.last_combi = combi
                 self.players[username].card -= len(list_card)
                 if (self.players[username].card <= 0):
@@ -212,6 +211,7 @@ class Room:
             await Room.send_verification(False, websocket, "You can't pass for the first move", True)
         else:
             self.nb_pass_in_a_row += 1
+            print(self.nb_pass_in_a_row)
             if (self.nb_pass_in_a_row >= 3):
                 self.last_combi = Combinaison(None, None, None)
             await self.broadcast_pass(id)
@@ -311,6 +311,7 @@ async def handler(websocket: ServerConnection):
     try:
         async for message in websocket:
             content: Dict[str, Any] = json.loads(message)
+            print(content)
             match content["function"]:
                 case "play":
                     await room_holder[content["room_name"]].play_card(content["id"], content["profile_name"], websocket, content["card"])
