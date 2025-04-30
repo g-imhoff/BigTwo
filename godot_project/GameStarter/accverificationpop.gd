@@ -17,12 +17,17 @@ extends Node2D
 var remaining_seconds := 60
 
 func _ready():
+	var file = FileAccess.open("res://data.json", FileAccess.READ)
+	var json_string = file.get_as_text()
+	file.close()
+	var data = JSON.parse_string(json_string)
+	
 	for i in range(code_fields.size()):
 		var field = code_fields[i]
 		field.max_length = 1
 		field.connect("text_changed", Callable(self, "_on_code_input").bind(i))
 	_check_code_filled()
-
+	
 	# Start cooldown on popup ready
 	start_cooldown()
 
@@ -32,14 +37,19 @@ func _on_code_input(new_text: String, index: int):
 	elif new_text.length() == 1:
 		if index < code_fields.size() - 1:
 			code_fields[index + 1].grab_focus()
-	_check_code_filled()
+	var code := ""
+	if (_check_code_filled()):
+		for field in code_fields:
+			code += field.text
+		_set_submit_button_state(true)
+	_set_submit_button_state(false)
 
 func _check_code_filled():
 	for field in code_fields:
 		if field.text.length() != 1 or !field.text.is_valid_int():
-			_set_submit_button_state(false)
-			return
-	_set_submit_button_state(true)
+			return false
+	return true
+
 
 func _set_submit_button_state(enabled: bool):
 	submit_button.disabled = !enabled
@@ -64,3 +74,11 @@ func _on_timer_timeout() -> void:
 func _on_resend_code_pressed() -> void:
 	# Your resend code logic here (e.g., socket.send_text or API call)
 	start_cooldown()
+
+func check_code_correct(test_code : String, data):
+	for field in code_fields:
+		test_code += field.text
+	if (test_code == data[0]):
+		return true
+	else:
+		return false
