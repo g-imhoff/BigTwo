@@ -1,7 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://db0d4jn5sok86"]
+[gd_scene load_steps=13 format=3 uid="uid://db0d4jn5sok86"]
 
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_sa5fu"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_vunle"]
+[ext_resource type="Texture2D" uid="uid://xffi1m7heqmm" path="res://assets/ui/straight.png" id="3_jco7a"]
+[ext_resource type="Texture2D" uid="uid://da7ec752ffbfq" path="res://assets/ui/flush.png" id="4_6fqa6"]
+[ext_resource type="Texture2D" uid="uid://c23ebphx0kkj4" path="res://assets/ui/fourOfAKind.png" id="5_5rib8"]
+[ext_resource type="Texture2D" uid="uid://be6sknuwq6gn7" path="res://assets/ui/fullHouse.png" id="6_buuth"]
+[ext_resource type="Texture2D" uid="uid://b16x6atxr4pgl" path="res://assets/ui/straightFlush.png" id="7_7csc6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q7lpf"]
+font = ExtResource("2_vunle")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_52ol0"]
+font = ExtResource("2_vunle")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_xwa54"]
+font = ExtResource("2_vunle")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_fqs8e"]
+font = ExtResource("2_vunle")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_k3n54"]
+font = ExtResource("2_vunle")
+font_size = 20
 
 [node name="Rules_Popup" type="Node2D"]
 
@@ -12,71 +37,77 @@ scale = Vector2(1.00176, 1.01317)
 texture = ExtResource("1_sa5fu")
 
 [node name="RichTextLabel2" type="Label" parent="PopupSettings"]
-offset_left = -149.0
-offset_top = -316.0
-offset_right = 183.0
-offset_bottom = -224.0
+offset_left = -172.696
+offset_top = -352.606
+offset_right = 159.304
+offset_bottom = -260.606
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_vunle")
 theme_override_font_sizes/font_size = 60
 text = "RULES"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PopupSettings"]
-offset_left = -460.0
-offset_top = -209.0
-offset_right = 504.0
-offset_bottom = 301.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "🃏 Big Two – Quick Rules
-Objective
-Be the first to play all your cards by beating your opponents' combos.
+[node name="Straight" type="Sprite2D" parent="."]
+z_index = 1500
+position = Vector2(293, 257)
+texture = ExtResource("3_jco7a")
 
-Card Deal
-Each player gets 13 cards from a 52-card deck (no jokers).
+[node name="Label" type="Label" parent="Straight"]
+offset_left = -86.0
+offset_top = 54.0
+offset_right = 82.0
+offset_bottom = 84.0
+text = "STRAIGHT"
+label_settings = SubResource("LabelSettings_q7lpf")
 
-How to Play
+[node name="Flush" type="Sprite2D" parent="."]
+z_index = 1500
+position = Vector2(825, 257)
+texture = ExtResource("4_6fqa6")
 
-The player with the 3♦ starts.
+[node name="Label" type="Label" parent="Flush"]
+offset_left = -49.0
+offset_top = 54.0
+offset_right = 59.0
+offset_bottom = 84.0
+text = "FLUSH"
+label_settings = SubResource("LabelSettings_52ol0")
 
-Turns go clockwise.
+[node name="FourOfAKind" type="Sprite2D" parent="."]
+z_index = 1500
+position = Vector2(289, 479)
+texture = ExtResource("5_5rib8")
 
-On your turn, play a stronger combo or pass.
+[node name="Label" type="Label" parent="FourOfAKind"]
+offset_left = -134.0
+offset_top = 50.0
+offset_right = 140.0
+offset_bottom = 80.0
+text = "FOUR OF A KIND"
+label_settings = SubResource("LabelSettings_xwa54")
 
-If everyone passes, the last player who played starts a new round.
+[node name="FullHouse" type="Sprite2D" parent="."]
+z_index = 1500
+position = Vector2(826, 475)
+texture = ExtResource("6_buuth")
 
-Cards per Turn
+[node name="Label" type="Label" parent="FullHouse"]
+offset_left = -99.0
+offset_top = 58.0
+offset_right = 112.0
+offset_bottom = 88.0
+text = "FULL HOUSE"
+label_settings = SubResource("LabelSettings_fqs8e")
 
-The first play decides how many cards must be played that round.
+[node name="StraightFlush" type="Sprite2D" parent="."]
+z_index = 1500
+position = Vector2(291, 686)
+texture = ExtResource("7_7csc6")
 
-Example: If a pair is played, only stronger pairs can follow.
-
-Valid Combos
-
-Single (e.g. K♠)
-
-Pair (e.g. 7♦ 7♣)
-
-Three-of-a-kind (e.g. 5♠ 5♦ 5♥)
-
-Straight (5 cards in a row)
-
-Flush (5 cards, same suit)
-
-Full House (3 of a kind + a pair)
-
-Four-of-a-kind + 1 extra
-
-Straight Flush (5 in a row, same suit)
-
-Winning
-The first player to play all their cards wins!
-
-Card Strength
-
-Card Rank: 2 > A > K > Q > J > 10 > ... > 3
-
-Suit Order: ♠ > ♥ > ♣ > ♦
-
-Tip
-Play smart combos to block others and empty your hand faster! 🚀"
+[node name="Label" type="Label" parent="StraightFlush"]
+offset_left = -142.0
+offset_top = 45.0
+offset_right = 146.0
+offset_bottom = 75.0
+text = "STRAIGHT FLUSH"
+label_settings = SubResource("LabelSettings_k3n54")
