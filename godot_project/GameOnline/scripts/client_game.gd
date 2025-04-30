@@ -1,7 +1,5 @@
 extends Node2D
 
-var socket = WebSocketPeer.new()
-
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 var card_scale=Vector2(0.5,0.5)
 
@@ -28,42 +26,18 @@ var game_won = false
 @onready var enemyrightsprite = $EnemyUsernameRight/EnemyRightSprite
 @onready var endgamepopup = $EndGame
 
-func _on_tree_exited() -> void:
-	if not game_won: 
-		var content = JSON.stringify({
-			"function": "leaving",
-			"profile_name": Global.username
-		})
-		
-		socket.send_text(content)
-	
-		socket.close()
-
-func _ready() -> void:
-	playerusername.text = Global.username
-	var clientCAS = load("res://cert.crt")
-	var err = socket.connect_to_url(Global.server_url, TLSOptions.client_unsafe(clientCAS))
-	if err != OK:
-		print("Unable to connect")
-		set_process(false)
-	else:
-		while socket.get_ready_state() != WebSocketPeer.STATE_OPEN:
-			socket.poll()
-			await get_tree().create_timer(0.1).timeout # Small delay to prevent CPU overload
-		_server_handshake()
-
 func _process(_delta):
-	socket.poll()
-	var state = socket.get_ready_state()
+	SocketOnline.socket.poll()
+	var state = SocketOnline.socket.get_ready_state()
 	if state == WebSocketPeer.STATE_OPEN: 
-		while socket.get_available_packet_count():
-			_data_received_handler(JSON.parse_string(socket.get_packet().get_string_from_utf8()))
+		while SocketOnline.socket.get_available_packet_count():
+			_data_received_handler(JSON.parse_string(SocketOnline.socket.get_packet().get_string_from_utf8()))
 	elif state == WebSocketPeer.STATE_CLOSING:
 		# Keep polling to achieve proper close.
 		pass
 	elif state == WebSocketPeer.STATE_CLOSED:
-		var code = socket.get_close_code()
-		var reason = socket.get_close_reason()
+		var code = SocketOnline.socket.get_close_code()
+		var reason = SocketOnline.socket.get_close_reason()
 		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
 		set_process(false) # Stop processing.
 		if not game_won : 
@@ -80,9 +54,6 @@ func _data_received_handler(data):
 		"connected":
 			# Connected to the server game
 			pass
-		"starting": 
-			hand._card_hand_init(data["id"], data["card_hand"], data["first_player"])
-			_display_all_username(data["list_id"])
 		"played": 
 			match (int((data["id"] - Global.online_game_id + 4)) % 4):
 				1: 
@@ -130,6 +101,23 @@ func _data_received_handler(data):
 				enemyleftsprite.visible = true
 			else: 
 				Notification.show_side(data["message"])
+
+func _on_tree_exited() -> void:
+	if not game_won: 
+		var content = JSON.stringify({
+			"function": "leaving",
+			"profile_name": Global.username,
+			"room_name": SocketOnline.room_name
+		})
+		
+		SocketOnline.socket.send_text(content)
+	
+		SocketOnline.socket.close()
+
+func _ready() -> void:
+	playerusername.text = Global.username
+	hand._card_hand_init(SocketOnline.id, SocketOnline.card_hand, SocketOnline.first_player)
+	_display_all_username(SocketOnline.list_id)
 
 func _display_all_username(list_id: Dictionary):	
 	for username in list_id:
@@ -202,25 +190,14 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 	hand.update_hand_position()
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
-	hand.animate_card_to_position(card,slot.position)
+	hand.animate_card_to_position(card, slot.position)
 	slot.card_in_slot = true  # Marque le slot comme occupé
 	slot.card_value=card.value
 	slot.card_form=card.form
 	lst_card_in_slot.append(card)
 
-
-func _server_handshake():
-	var content = JSON.stringify({
-		"function": "connect",
-		"profile_name": Global.username
-	})
-	
-	socket.send_text(content)
-
-
 func _on_button_2_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
-
 
 func _on_settings_btn_pressed() -> void:
 	$Setting.visible = not $Setting.visible

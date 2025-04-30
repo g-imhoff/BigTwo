@@ -107,11 +107,12 @@ func _on_play_pressed() -> void:
 		var content = JSON.stringify({
 			"id": Global.online_game_id,
 			"function": "play",
+			"room_name": SocketOnline.room_name,
 			"profile_name": Global.username,
 			"card": card_played
 		})
 		
-		connect.socket.send_text(content)
+		SocketOnline.socket.send_text(content)
 	 
 func move_card_to_slot(card, slot):
 	if card in hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
@@ -146,10 +147,11 @@ func _on_button_2_pressed() -> void:
 	if not played : 
 		var content = JSON.stringify({
 			"id": Global.online_game_id,
+			"room_name": SocketOnline.room_name,
 			"function": "pass",
 		})
 		
-		connect.socket.send_text(content)
+		SocketOnline.socket.send_text(content)
 		
 		for card in card_clicked: 
 			move_card_up_or_down(card)

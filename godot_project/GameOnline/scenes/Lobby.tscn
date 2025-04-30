@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://44gfaxbm8iqt"]
 
-[ext_resource type="Script" path="res://GameStarter/lobby.gd" id="1_lgl66"]
+[ext_resource type="Script" uid="uid://cxu8y7xb0ppef" path="res://GameOnline/scripts/lobby.gd" id="1_lgl66"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_4kbjn"]
 [ext_resource type="Texture2D" uid="uid://by85xnwxgoq7o" path="res://assets/ui/pokerboard.png" id="3_f727l"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="4_nio05"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="5_geggd"]
-[ext_resource type="PackedScene" uid="uid://doe8bwwuydqex" path="res://GameStarter/Createroompop.tscn" id="6_ns74r"]
-[ext_resource type="PackedScene" uid="uid://b1jq8d0fre7vu" path="res://GameStarter/Joinroompop.tscn" id="7_r0qeh"]
+[ext_resource type="PackedScene" uid="uid://doe8bwwuydqex" path="res://GameOnline/scenes/Createroompop.tscn" id="6_ns74r"]
+[ext_resource type="PackedScene" uid="uid://b1jq8d0fre7vu" path="res://GameOnline/scenes/Joinroompop.tscn" id="7_r0qeh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddch8"]
 bg_color = Color(1, 0.756863, 0.027451, 1)

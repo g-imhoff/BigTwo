@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://doe8bwwuydqex"]
 
 [ext_resource type="Texture2D" uid="uid://cyd656ov8b6ty" path="res://assets/ui/lobbyPopUp.png" id="1_75slp"]
-[ext_resource type="Script" path="res://GameStarter/createroompop.gd" id="1_ip36j"]
+[ext_resource type="Script" uid="uid://dxwyg4igrt63l" path="res://GameOnline/scripts/createroompop.gd" id="1_ip36j"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_ik73d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yafnm"]
@@ -75,32 +75,17 @@ theme_override_fonts/font = ExtResource("2_ik73d")
 theme_override_font_sizes/font_size = 25
 text = "Password"
 
-[node name="Num of ply" type="Label" parent="LobbyPopUp"]
-offset_left = -423.0
-offset_top = 16.0
-offset_right = -278.0
-offset_bottom = 39.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_ik73d")
-theme_override_font_sizes/font_size = 25
-text = "Number of players"
+[node name="Password" type="LineEdit" parent="LobbyPopUp"]
+offset_left = -169.0
+offset_top = -35.0
+offset_right = -101.938
+offset_bottom = -4.0
 
-[node name="OptionButton" type="OptionButton" parent="LobbyPopUp"]
-offset_left = 65.0
-offset_top = 20.0
-offset_right = 171.0
-offset_bottom = 51.0
-selected = 0
-fit_to_longest_item = false
-item_count = 4
-popup/item_0/text = "  Choose  "
-popup/item_0/disabled = true
-popup/item_0/separator = true
-popup/item_1/text = "2"
-popup/item_1/id = 1
-popup/item_2/text = "3"
-popup/item_2/id = 4
-popup/item_3/text = "4"
-popup/item_3/id = 3
+[node name="RoomName" type="LineEdit" parent="LobbyPopUp"]
+offset_left = -147.0
+offset_top = -108.0
+offset_right = -79.9375
+offset_bottom = -77.0
 
+[connection signal="pressed" from="LobbyPopUp/Create Btn" to="." method="_on_create_btn_pressed"]
 [connection signal="pressed" from="LobbyPopUp/Cancel Btn" to="." method="_on_cancel_btn_pressed"]

@@ -32,7 +32,7 @@ login_account_error = [
 
 async def handler(websocket):
     async for message in websocket:
-        try :
+        try:
             content = json.loads(message)
             match content["function"]:
                 case "create_account":
@@ -40,10 +40,11 @@ async def handler(websocket):
                     email = content["data"]["email"]
                     password = content["data"]["password"]
 
-                    print("Trying a register from", profile_name, email, password)
+                    print("Trying a register from",
+                          profile_name, email, password)
                     result = create_account(profile_name, email, password)
                     print(create_account_error[result],
-                        profile_name, email, password)
+                          profile_name, email, password)
 
                     result_message = {
                         "code": result,
@@ -56,9 +57,10 @@ async def handler(websocket):
                     password = content["data"]["password"]
 
                     print("Trying a login from", profile_name_email, password)
-                    result, username = login_account(profile_name_email, password)
-                    print(login_account_error[result],
+                    result, username = login_account(
                         profile_name_email, password)
+                    print(login_account_error[result],
+                          profile_name_email, password)
 
                     result_message = {
                         "code": result,
@@ -67,7 +69,7 @@ async def handler(websocket):
                     }
 
                     await websocket.send(json.dumps(result_message))
-        except websockets.exceptions.ConnectionClosed as e: 
+        except websockets.exceptions.ConnectionClosed as e:
             pass
 
 
