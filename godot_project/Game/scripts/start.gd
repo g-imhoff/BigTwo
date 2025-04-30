@@ -10,10 +10,10 @@ extends Node2D
 @onready var enemy_hand_left_script = $"../card_manager_enemy_left"
 @onready var enemy_hand_up_script = $"../card_manager_enemy"
 @onready var enemy_hand_right_script = $"../card_manager_enemy_right"
-
+@onready var hand_player=$"../PlayerHand"
 
 func _ready() -> void:
-	print(type_string(typeof(null)))
+	await hand_player.finished_distribution
 	var card_found = check_for_card(3, 1, hand.player_hand, player_hand_script)
 	if not card_found:
 		card_found = check_for_card(3, 1, hand_left.player_hand, enemy_hand_left_script)

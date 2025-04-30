@@ -20,7 +20,7 @@ var lst_card_in_slot=[]
 @onready var children_slots_right=Cardslots_right.get_children()
 @onready var bot_player_func=$"../bot_player_func"
 @onready var timer = $"../Timer"
-
+var player="right"
 
 func _ready() -> void:
 	screen_size=get_viewport_rect().size
@@ -28,7 +28,9 @@ func _ready() -> void:
 func on_card_played():
 	timer.start(2.0)
 	await timer.timeout
-	bot_player_func.on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot)
+	bot_player_func.on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot,player)
+	timer.start(2.0)
+	await timer.timeout
 	emit_signal("enemy")
 
 

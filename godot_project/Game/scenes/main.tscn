@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=21 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" uid="uid://boxikanrw7nlg" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
 [ext_resource type="Script" uid="uid://pqjsg5seivy0" path="res://Game/scripts/start.gd" id="1_8ka4x"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="16_7vdtg"]
 [ext_resource type="PackedScene" uid="uid://db0d4jn5sok86" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
+[ext_resource type="PackedScene" uid="uid://p7n3ewamh80a" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gouob")
@@ -68,37 +69,37 @@ text = "PASS
 [node name="Cardslots" type="Node2D" parent="."]
 
 [node name="cardslot" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(1000, 600)
+position = Vector2(1000, 620)
 
 [node name="cardslot2" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(1100, 600)
+position = Vector2(1100, 620)
 
 [node name="cardslot3" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(900, 600)
+position = Vector2(900, 620)
 
 [node name="cardslot4" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(800, 600)
+position = Vector2(800, 620)
 
 [node name="cardslot5" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(1200, 600)
+position = Vector2(1200, 620)
 
 [node name="Cardslots2" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(1000, 250)
+position = Vector2(1000, 230)
 
 [node name="cardslot2" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(1100, 250)
+position = Vector2(1100, 230)
 
 [node name="cardslot3" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(900, 250)
+position = Vector2(900, 230)
 
 [node name="cardslot4" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(800, 250)
+position = Vector2(800, 230)
 
 [node name="cardslot5" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(1200, 250)
+position = Vector2(1200, 230)
 
 [node name="Cardslots3" type="Node2D" parent="."]
 z_index = -1
@@ -168,7 +169,6 @@ offset_bottom = 1012.0
 texture_normal = ExtResource("14_td723")
 
 [node name="message" type="Label" parent="."]
-visible = false
 offset_left = 900.0
 offset_top = 750.0
 offset_right = 940.0
@@ -176,7 +176,34 @@ offset_bottom = 773.0
 horizontal_alignment = 1
 uppercase = true
 
+[node name="message_left" type="Label" parent="."]
+offset_left = 330.0
+offset_top = 450.0
+offset_right = 370.0
+offset_bottom = 473.0
+horizontal_alignment = 1
+uppercase = true
+
+[node name="message_right" type="Label" parent="."]
+offset_left = 1500.0
+offset_top = 450.0
+offset_right = 1540.0
+offset_bottom = 473.0
+horizontal_alignment = 1
+uppercase = true
+
+[node name="message_top" type="Label" parent="."]
+offset_left = 900.0
+offset_top = 206.0
+offset_right = 940.0
+offset_bottom = 229.0
+horizontal_alignment = 1
+uppercase = true
+
 [node name="Timer" type="Timer" parent="."]
+
+[node name="cardendslot" parent="." instance=ExtResource("5_dlrfd")]
+position = Vector2(1000, 425)
 
 [node name="Setting" parent="." instance=ExtResource("15_1d6tm")]
 visible = false
@@ -202,6 +229,9 @@ offset_right = 1909.0
 offset_bottom = 133.0
 scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("18_e7axl")
+
+[node name="EndGame" parent="." instance=ExtResource("20_rng3j")]
+visible = false
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]
 [connection signal="enemy_right" from="card_manager_enemy" to="card_manager_enemy_right" method="_on_card_manager_enemy_enemy_right"]
