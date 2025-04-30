@@ -41,6 +41,38 @@ def create_account(profile_name, email, password):
         return 3  # not a valid email
 
 
+def set_verification_code(code: int, email: str) -> None:
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute("UPDATE users SET verification_code = %s WHERE email = %s",
+                    (code, email))
+        conn.commit()
+
+    except psycopg2.Error as e:
+        print("Database error : ", e)
+
+
+def verify_code(code: int, email: str) -> bool:
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute("""
+        SELECT verification_code 
+        FROM users 
+        WHERE email = %s""",
+                    (code, email))
+
+        verification_code = cur.fetchone()
+
+        if verification_code == code:
+            return True
+        else:
+            return False
+    except psycopg2.Error as e:
+        print("Database error : ", e)
+
+
 def login_account(profile_name_email, password):
     """
     Check if an account exists in the database, and create it if it doesn't.

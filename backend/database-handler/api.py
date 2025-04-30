@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Body
 import uvicorn
-from bdd_script import logout, create_account, login_account
+from bdd_script import logout, login_account, create_account
+from verification import send_email
+from bdd_script import set_verification_code, verify_code
 
 app = FastAPI()
 
@@ -35,16 +37,31 @@ def login(data: dict = Body(...)):
 
 @app.post("/auth/register")
 def register(data: dict = Body(...)):
-    username = data.get("username")
     email = data.get("email")
-    password = data.get("password")
 
-    print("Trying a register from", username, email, password)
-    result = create_account(username, email, password)
-    print(create_account_error[result],
-          username, email, password)
+    verification_code: int = send_email(email)
+    set_verification_code(verification_code, email)
+    return {"code": 0, "message": "Await verification_code"}
 
-    return {"code": result, "message": create_account_error[result]}
+
+@app.post("/auth/confirm_register")
+def confirm_register(data: dict = Body(...)):
+    username: str = data.get("username")
+    email: str = data.get("email")
+    password: str = data.get("password")
+    verification_code: int = data.get("verification_code")
+
+    result: bool = verify_code(verification_code, email)
+
+    if result:
+        print("Trying a register from", username, email, password)
+        result = create_account(username, email, password)
+
+        print(create_account_error[result],
+              username, email, password)
+        return {"code": 0, "message": "connection success"}
+    else:
+        return {"code": 1, "message": "wrong verification code"}
 
 
 @app.post("/auth/logout")
