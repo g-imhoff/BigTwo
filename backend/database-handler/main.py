@@ -1,16 +1,10 @@
 import asyncio
 import json
-import ssl
 import websockets
 
 from websockets.asyncio.server import serve
 
 from bdd_script import create_account, login_account
-
-ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
-ssl_context.load_cert_chain(
-    certfile="../certs/cert.pem", keyfile="../certs/key.pem")
 
 WEBSOCKETS_URL = "0.0.0.0"
 WEBSOCKETS_PORT = 10005
@@ -74,7 +68,7 @@ async def handler(websocket):
 
 
 async def main():
-    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT, ssl=ssl_context) as server:
+    async with serve(handler, WEBSOCKETS_URL, WEBSOCKETS_PORT) as server:
         await server.serve_forever()
 
 if __name__ == "__main__":
