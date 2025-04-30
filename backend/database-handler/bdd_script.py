@@ -110,7 +110,7 @@ def login_account(profile_name_email, password):
         return 2, ""  # Error psycopg2
 
 
-def logout(username: str) -> None:
+def bdd_logout(username: str) -> None:
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
