@@ -90,7 +90,7 @@ theme_override_font_sizes/font_size = 25
 text = "Password  :
 "
 
-[node name="Password" type="LineEdit" parent="LobbyPopUp"]
+[node name="RoomName" type="LineEdit" parent="LobbyPopUp"]
 offset_left = -137.0
 offset_top = -45.0
 offset_right = 94.0
@@ -98,9 +98,8 @@ offset_bottom = -9.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_p74fe")
 alignment = 1
-secret = true
 
-[node name="RoomName" type="LineEdit" parent="LobbyPopUp"]
+[node name="Password" type="LineEdit" parent="LobbyPopUp"]
 offset_left = -140.0
 offset_top = 53.0
 offset_right = 99.0
