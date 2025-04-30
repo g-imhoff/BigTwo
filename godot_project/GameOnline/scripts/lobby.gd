@@ -38,7 +38,6 @@ func _data_received_handler(data):
 			SocketOnline.room_name = data["room_name"]
 			SocketOnline.players_name = data["players"]
 			SocketOnline.host_name = data["host_name"]
-			SocketOnline.password_hash = data["password_hash"]
 			get_tree().change_scene_to_file("res://GameOnline/scenes/Waitingroom.tscn")
 
 func _on_back_btn_pressed() -> void:
