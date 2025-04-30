@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bn3olflapan7j"]
+[gd_scene load_steps=16 format=3 uid="uid://bn3olflapan7j"]
 
 [ext_resource type="Script" uid="uid://btq28qsetldab" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
 [ext_resource type="Script" uid="uid://bqvsk36nmwyjs" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="7_5otmk"]
 [ext_resource type="Script" uid="uid://d1wa2bw073dn2" path="res://GameOnline/scripts/enemy_hand_left.gd" id="7_f6iy4"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="8_x66yg"]
-[ext_resource type="Texture2D" uid="uid://dhhu3jli2g3fu" path="res://assets/circle-white.png" id="9_bkudl"]
 [ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="9_n0mij"]
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="10_fsp72"]
 [ext_resource type="PackedScene" uid="uid://x4s413s07jg2" path="res://GameOnline/scenes/end_game.tscn" id="12_xw44o"]
@@ -155,7 +154,6 @@ autowrap_mode = 2
 visible = false
 position = Vector2(-30, 18)
 scale = Vector2(0.03, 0.03)
-texture = ExtResource("9_bkudl")
 
 [node name="EnemyUsernameTop" type="Label" parent="."]
 anchors_preset = 8
@@ -178,7 +176,6 @@ autowrap_mode = 2
 visible = false
 position = Vector2(-30, 17)
 scale = Vector2(0.03, 0.03)
-texture = ExtResource("9_bkudl")
 
 [node name="EnemyUsernameLeft" type="Label" parent="."]
 anchors_preset = 8
@@ -202,7 +199,6 @@ autowrap_mode = 2
 visible = false
 position = Vector2(-30, 21)
 scale = Vector2(0.03, 0.03)
-texture = ExtResource("9_bkudl")
 
 [node name="EnemyUsernameRight" type="Label" parent="."]
 anchors_preset = 8
@@ -226,7 +222,6 @@ autowrap_mode = 2
 visible = false
 position = Vector2(-30, 21)
 scale = Vector2(0.03, 0.03)
-texture = ExtResource("9_bkudl")
 
 [node name="sort_value" type="TextureButton" parent="."]
 texture_filter = 1
