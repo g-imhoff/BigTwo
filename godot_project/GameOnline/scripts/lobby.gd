@@ -3,8 +3,7 @@ extends Node2D
 @onready var join_room = $Pokerboard/Joinroompop
 
 func _ready() -> void:
-	var clientCAS = load("res://cert.crt")
-	var err = SocketOnline.socket.connect_to_url(Global.server_url, TLSOptions.client_unsafe(clientCAS))
+	var err = SocketOnline.socket.connect_to_url(Global.server_url)
 	if err != OK:
 		print("Unable to connect")
 		set_process(false)

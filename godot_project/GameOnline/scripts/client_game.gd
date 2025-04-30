@@ -116,7 +116,6 @@ func _on_tree_exited() -> void:
 
 func _ready() -> void:
 	playerusername.text = Global.username
-	var clientCAS = load("res://cert.crt")
 	hand._card_hand_init(SocketOnline.id, SocketOnline.card_hand, SocketOnline.first_player)
 	_display_all_username(SocketOnline.list_id)
 
