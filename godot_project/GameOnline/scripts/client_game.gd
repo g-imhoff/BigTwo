@@ -190,7 +190,7 @@ func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 	hand.update_hand_position()
 
 func move_card_to_slot(card, slot, hand, lst_card_in_slot):
-	hand.animate_card_to_position(card,slot.position)
+	hand.animate_card_to_position(card, slot.position)
 	slot.card_in_slot = true  # Marque le slot comme occupé
 	slot.card_value=card.value
 	slot.card_form=card.form
