@@ -1,7 +1,7 @@
 extends Node
 
-var websocket_url = "wss://185.155.93.105:18005"
-var server_url = "wss://185.155.93.105:18006" # turn into wss://185.155.93.105:18006
+var api_url = "http://185.155.93.105:18005" 
+var server_url = "ws://185.155.93.105:18006" # turn into wss://185.155.93.105:18006
 var username = ""
 var online_game_id = 1000 # no game
 
@@ -87,3 +87,25 @@ var card_images=[
 ]
 
 var card_duplicate = card_images.duplicate()
+
+var close_dialog: ConfirmationDialog
+
+func _ready() -> void:
+	get_tree().set_auto_accept_quit(false)
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if username != "":
+			var http_request = HTTPRequest.new()
+			get_tree().root.add_child(http_request)
+			
+			var content = JSON.stringify({
+				"username": username,
+			})
+			
+			var error = http_request.request(Global.api_url + "/auth/logout", [], HTTPClient.METHOD_POST, content)
+			if error != OK:
+				push_error("An error occurred in the HTTP request.")
+				
+			await http_request.request_completed  # Wait for the request to finish
+		get_tree().quit() # default behavior

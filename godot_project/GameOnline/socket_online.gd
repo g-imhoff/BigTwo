@@ -9,3 +9,4 @@ var id = 0
 var list_id = []
 var card_hand = []
 var first_player = false
+var password_hash = ""
