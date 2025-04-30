@@ -56,10 +56,19 @@ def login_account(profile_name_email, password):
 
         result = cur.fetchone()
         if result:
-            bdd_id, bdd_username, bdd_email, bdd_password = result
+            bdd_id, bdd_username, bdd_email, bdd_password, bdd_connected = result
 
             if bdd_password == password:
-                return 0, bdd_username  # connection worked
+                if bdd_connected:
+                    return 4, ""  # Somebody is already connected
+                else:
+                    cur.execute("""
+                            UPDATE users 
+                            SET connected = TRUE 
+                            WHERE username = %s""", (bdd_username,))
+
+                    conn.commit()
+                    return 0, bdd_username  # connection worked
             else:
                 return 3, ""  # wrong password
         else:
@@ -67,6 +76,19 @@ def login_account(profile_name_email, password):
     except psycopg2.Error as e:
         print("Database error : ", e)
         return 2, ""  # Error psycopg2
+
+
+def logout(username: str) -> None:
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute("""
+                UPDATE users 
+                SET connected = FALSE 
+                WHERE username = %s""", (username, ))
+        conn.commit()
+    except psycopg2.Error as e:
+        print("Database error : ", e)
 
 
 def creer_table():
@@ -79,10 +101,10 @@ def creer_table():
         print("Connected!\n")
 
         # Création de la table avec une meilleure gestion des types
-        creation = """ 
+        creation = """
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL, 
+            username VARCHAR(50) UNIQUE NOT NULL,
             email VARCHAR(100) UNIQUE NOT NULL,
             password TEXT NOT NULL
         );
@@ -135,8 +157,8 @@ def inserer_user(nom, email, password):
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
 
-        insertion = """ 
-        INSERT INTO users (username, email, password)  
+        insertion = """
+        INSERT INTO users (username, email, password)
         VALUES (%s, %s, %s)
         RETURNING id;
         """

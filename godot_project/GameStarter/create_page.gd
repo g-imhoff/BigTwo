@@ -5,36 +5,31 @@ extends Node2D
 @onready var email_line_edit = $Email/LabelEmail
 @onready var password_line_edit = $Password/LabelPassword
 
-var socket = WebSocketPeer.new()
-
-var HasH = load("res://hashage.gd")
-
-#func hash_password(password: String) -> String:
-#	var context = HashingContext.new()
-#	context.start(HashingContext.HASH_SHA256) 
-#	context.update(password.to_utf8_buffer())
-#	var hash = context.finish()
-#	return hash.hex_encode()#
-
-
+var Hash = load("res://hashage.gd")
 
 func _on_create_account_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(_http_request_completed)
+	
 	var profile_name = profile_name_line_edit.text
 	var email = email_line_edit.text
 	var password = password_line_edit.text
+	var password_hash = ""
 	
-	var password_hash = HasH.hash_password(password) #hache le password 
-	
-	var content = JSON.stringify({
-		"function": "create_account",
-		"data": {
-			"profile_name": profile_name,
-			"email": email,
-			"password": password_hash
-		}})
+	if password != "":
+		password_hash = Hash.hash_password(password)	
 		
-	socket.send_text(content)
+	var content = JSON.stringify({
+		"username": profile_name,
+		"email": email,
+		"password": password_hash
+	})
+		
+	var error = http_request.request(Global.api_url + "/auth/register", [], HTTPClient.METHOD_POST, content)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
 
 func _on_login_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
@@ -42,43 +37,18 @@ func _on_login_pressed() -> void:
 func _on_google_login_pressed() -> void:
 	print("OAuthGoogleClicked")
 
-
-		
-
-func _on_tree_exited() -> void:
-	socket.close()
-
 func _ready() -> void:
-	var clientCAS = load("res://cert.crt")
-	var err = socket.connect_to_url(Global.websocket_url, TLSOptions.client_unsafe(clientCAS))
-	if err != OK:
-		print("Unable to connect")
-		set_process(false)
 	UISounds.install_sounds(self)
 
-
-func _process(_delta):
-	socket.poll()
-	var state = socket.get_ready_state()
-	if state == WebSocketPeer.STATE_OPEN: 
-		while socket.get_available_packet_count():
-			_data_received_handler(JSON.parse_string(socket.get_packet().get_string_from_utf8()))
-	elif state == WebSocketPeer.STATE_CLOSING:
-		# Keep polling to achieve proper close.
-		pass
-	elif state == WebSocketPeer.STATE_CLOSED:
-		var code = socket.get_close_code()
-		var reason = socket.get_close_reason()
-		print("WebSocket closed with code: %d, reason %s. Clean: %s" % [code, reason, code != -1])
-		set_process(false) # Stop processing.
-
-func _data_received_handler(data):
-	if (data["code"] == 0):
-		# Needs to setup a token of connection
+func _http_request_completed(result, response_code, headers, body): 
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	
+	if(response["code"] == 0):
 		get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
 	else :
-		Notification.show_side(data["message"])
-
+		Notification.show_side(response["message"])
 
 func _on_backicon_connection_page_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ConnectionPage.tscn")

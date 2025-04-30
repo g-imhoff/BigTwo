@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://k4ebvk3lxk6r"]
+[gd_scene load_steps=7 format=3 uid="uid://k4ebvk3lxk6r"]
 
-[ext_resource type="Script" path="res://GameStarter/setting.gd" id="1_5qr03"]
+[ext_resource type="Script" uid="uid://cbogcr2eu72gs" path="res://GameStarter/setting.gd" id="1_5qr03"]
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_l204h"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_aw5tj"]
+[ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_4hd25"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6js73"]
 bg_color = Color(1, 0, 0.0156863, 1)
@@ -29,6 +30,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="Setting" type="Node2D"]
+z_index = 999
 script = ExtResource("1_5qr03")
 
 [node name="PopupSettings" type="Sprite2D" parent="."]
@@ -137,8 +139,16 @@ theme_override_font_sizes/font_size = 23
 theme_override_styles/normal = SubResource("StyleBoxFlat_ni351")
 text = "Exit to main menu"
 
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 68.0
+offset_top = 88.0
+offset_right = 108.0
+offset_bottom = 128.0
+texture_normal = ExtResource("4_4hd25")
+
 [connection signal="value_changed" from="PopupSettings/vol bar" to="." method="_on_h_slider_value_changed"]
 [connection signal="toggled" from="PopupSettings/music btn" to="." method="_on_check_button_music_toggled"]
 [connection signal="toggled" from="PopupSettings/sound btn" to="." method="_on_check_button_button_sound_toggled"]
 [connection signal="pressed" from="PopupSettings/Exit Desk btn" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PopupSettings/Exit menu btn" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

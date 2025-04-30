@@ -6,13 +6,14 @@ var card_base_scale=Vector2(0.5,0.5)
 var played=true
 var num_card_up=0
 var card_clicked=[]
-var first_play=true
 
 const COLLISION_MASK_CARD=1
 
 @onready var hand=$"../PlayerHand"
 @onready var connect = $".."
 @onready var cardslot = $"../Cardslots"
+@onready var playersprite = $"../PlayerUsername/PlayerSprite"
+@onready var enemyleftsprite = $"../EnemyUsernameLeft/EnemyLeftSprite"
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
@@ -57,12 +58,14 @@ func on_hovered_off_card(card):
 
 func highlight_card(card,hovered):
 	var current_pos=card.position
+	if !card.has_meta("z_index"):
+		card.set_meta("z_index", card.z_index)
 	if hovered and current_pos.y==hand.HAND_Y_POSITION:
 		card.scale=card_highlight_scale
-		card.z_index=2
+		card.z_index = card.get_meta("z_index") + 2
 	else:
 		card.scale=card_base_scale
-		card.z_index=1
+		card.z_index = card.get_meta("z_index")
 		
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
@@ -93,52 +96,81 @@ func get_card_with_hightest_z_index(card):
 
 
 func _on_play_pressed() -> void:
-	if first_play && hand.first_player: 
-		var valid = false
-		for card in hand.player_hand:
-			if card.value == 3 and card.form == 1:
-				valid = true
-				break
-		if valid == false: 
-			Notification.show_side("You need to play the three of diamond")
-			return 
-			
 	if card_clicked == []:
 		print("pas de carte clicked")
 	else:
 		var card_played = []
 		
-		for card in card_clicked:
+		for card in card_clicked: 
 			card_played.append(card.file)
-			
-			var children_slots = cardslot.get_children()
-			var children_slot = null
-			
-			for children in children_slots :
-				if children.card_in_slot == false : 
-					children_slot = children
-					break
-			
-			move_card_to_slot(card, children_slot)
-		
-		card_clicked.clear()
-		hand.update_hand_position()
 		
 		var content = JSON.stringify({
 			"id": Global.online_game_id,
 			"function": "play",
+			"room_name": SocketOnline.room_name,
+			"profile_name": Global.username,
 			"card": card_played
 		})
 		
-		connect.socket.send_text(content)
+		SocketOnline.socket.send_text(content)
 	 
 func move_card_to_slot(card, slot):
 	if card in hand.player_hand:  # Vérifie que la carte est bien dans la main du joueur
 		hand.remove_card_from_hand(card)  # Supprime la carte de la main
 		hand.animate_card_to_position(card,slot.position)
-		slot.card_in_slot = true  # Marque le slot comme occupé
+		slot.card_in_slot = true  # Marque e slot comme occupé
 		slot.card_value=card.value
 		slot.card_form=card.form
 		hand.lst_card_in_slot.append(card)
 	else:
 		print("Erreur : la carte n'est pas dans la main du joueur.")
+
+
+func _on_connect_server_verification_worked() -> void:
+	for card in card_clicked:
+		
+		var children_slots = cardslot.get_children()
+		var children_slot = null
+		
+		for children in children_slots :
+			if children.card_in_slot == false : 
+				children_slot = children
+				break
+		
+		move_card_to_slot(card, children_slot)
+	
+	card_clicked.clear()
+	hand.update_hand_position()
+
+
+func _on_button_2_pressed() -> void:
+	if not played : 
+		var content = JSON.stringify({
+			"id": Global.online_game_id,
+			"room_name": SocketOnline.room_name,
+			"function": "pass",
+		})
+		
+		SocketOnline.socket.send_text(content)
+		
+		for card in card_clicked: 
+			move_card_up_or_down(card)
+			card_clicked.erase(card)
+
+
+func _on_sort_form_pressed() -> void:
+	hand.player_hand.sort_custom(func(a, b): return a.form < b.form)
+	var card_erase = card_clicked.duplicate()
+	for card in card_erase:
+		card_clicked.erase(card)
+	hand.update_hand_position()
+	num_card_up = 0
+
+
+func _on_sort_value_pressed() -> void:
+	hand.player_hand.sort_custom(func(a, b): return a.value < b.value)
+	var card_erase = card_clicked.duplicate()
+	for card in card_erase:
+		card_clicked.erase(card)
+	hand.update_hand_position()
+	num_card_up = 0

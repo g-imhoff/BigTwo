@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dui1hqinflue4"]
+[gd_scene load_steps=16 format=3 uid="uid://dui1hqinflue4"]
 
-[ext_resource type="Script" uid="uid://bcocpoeix31jf" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
+[ext_resource type="Script" uid="uid://c5juqf70v43tr" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
 [ext_resource type="Texture2D" uid="uid://wusfm5iffkwg" path="res://assets/ui/login google.png" id="3_nhusd"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_qpq5i"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="8_i56jj"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="8_uobxe"]
 [ext_resource type="Script" uid="uid://dxxgr84dsusln" path="res://GameStarter/animated_hide.gd" id="9_uobxe"]
+[ext_resource type="PackedScene" uid="uid://c5ptrro73l43e" path="res://GameStarter/Forgot_Password_Popup.tscn" id="12_6qrxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb2qk"]
 size = Vector2(66, 22)
@@ -40,11 +41,14 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy3od"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="LoginPage" type="Node2D"]
 script = ExtResource("1_6t1k7")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(958, 534)
+position = Vector2(962, 542)
 texture = ExtResource("1_wx55c")
 
 [node name="BackButton login" type="TextureButton" parent="Background"]
@@ -95,8 +99,10 @@ texture = ExtResource("4_cl3p3")
 
 [node name="LabelEmail" type="LineEdit" parent="Email"]
 layout_mode = 0
-offset_right = 665.0
-offset_bottom = 57.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 667.0
+offset_bottom = 56.0
 theme_override_colors/font_placeholder_color = Color(0.446777, 0.446777, 0.446777, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 alignment = 1
@@ -104,9 +110,9 @@ flat = true
 
 [node name="Label" type="Label" parent="Email/LabelEmail"]
 layout_mode = 0
-offset_top = -36.0
-offset_right = 241.0
-offset_bottom = -8.0
+offset_top = -37.0
+offset_right = 264.0
+offset_bottom = -9.0
 theme_override_font_sizes/font_size = 20
 text = "Email address or username"
 
@@ -177,7 +183,7 @@ offset_top = 791.0
 offset_right = 670.0
 offset_bottom = 817.0
 
-[node name="Label2" type="Label" parent="RememberMe"]
+[node name="Remember me lab" type="Label" parent="RememberMe"]
 layout_mode = 0
 offset_left = 34.0
 offset_top = 1.0
@@ -186,15 +192,29 @@ offset_bottom = 50.0
 text = "Remember me
 "
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="google btn" type="TextureButton" parent="."]
 offset_left = 623.0
 offset_top = 407.0
 offset_right = 1292.0
 offset_bottom = 458.0
 texture_normal = ExtResource("3_nhusd")
 
+[node name="Reset Pass Btn" type="Button" parent="."]
+offset_left = 1152.0
+offset_top = 791.0
+offset_right = 1285.0
+offset_bottom = 819.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_iy3od")
+text = "Reset Password ?"
+
+[node name="ForgotPasswordPopup" parent="." instance=ExtResource("12_6qrxc")]
+visible = false
+position = Vector2(409, 138)
+
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]
 [connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="Password/LabelPassword/HideButton/Area2D/AnimatedSprite2D_hide" method="_on_area_2d_input_event"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="google btn" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Reset Pass Btn" to="." method="_on_reset_pass_btn_pressed"]
