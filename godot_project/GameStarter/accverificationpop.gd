@@ -16,7 +16,7 @@ extends Node2D
 
 var remaining_seconds := 60
 
-func _ready():
+func _ready():	
 	for i in range(code_fields.size()):
 		var field = code_fields[i]
 		field.max_length = 1
