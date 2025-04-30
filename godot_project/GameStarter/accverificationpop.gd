@@ -17,11 +17,6 @@ extends Node2D
 var remaining_seconds := 60
 
 func _ready():
-	var file = FileAccess.open("res://data.json", FileAccess.READ)
-	var json_string = file.get_as_text()
-	file.close()
-	var data = JSON.parse_string(json_string)
-	
 	for i in range(code_fields.size()):
 		var field = code_fields[i]
 		field.max_length = 1
