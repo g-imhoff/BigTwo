@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dui1hqinflue4"]
+[gd_scene load_steps=18 format=3 uid="uid://dui1hqinflue4"]
 
 [ext_resource type="Script" uid="uid://c5juqf70v43tr" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
-[ext_resource type="Texture2D" uid="uid://wusfm5iffkwg" path="res://assets/ui/login google.png" id="3_nhusd"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_qpq5i"]
-[ext_resource type="Texture2D" uid="uid://ckmwq5fbp3g6e" path="res://assets/ui/Divider create page.png" id="4_3wjrt"]
 [ext_resource type="Texture2D" uid="uid://cp6gvl7q3kwp0" path="res://assets/ui/Text field.png" id="4_cl3p3"]
+[ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="5_ymmrh"]
 [ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="7_wdso3"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="8_i56jj"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="8_uobxe"]
@@ -29,17 +28,33 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qixxl"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0saa"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aayhj"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yg8a2"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy3od"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -48,7 +63,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 script = ExtResource("1_6t1k7")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(962, 542)
+position = Vector2(960, 540)
 texture = ExtResource("1_wx55c")
 
 [node name="BackButton login" type="TextureButton" parent="Background"]
@@ -59,42 +74,26 @@ offset_bottom = -415.0
 texture_normal = ExtResource("8_i56jj")
 
 [node name="Logo" type="Sprite2D" parent="."]
-position = Vector2(960, 130)
+position = Vector2(964, 143)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_qpq5i")
 
 [node name="LOG IN" type="Label" parent="."]
-offset_left = 875.0
-offset_top = 270.0
-offset_right = 1045.0
-offset_bottom = 339.0
-theme_override_font_sizes/font_size = 50
+offset_left = 797.0
+offset_top = 302.0
+offset_right = 1145.0
+offset_bottom = 395.0
+theme_override_fonts/font = ExtResource("5_ymmrh")
+theme_override_font_sizes/font_size = 64
 text = "LOG IN
 "
 
-[node name="OR and Divider" type="Label" parent="."]
-offset_left = 940.0
-offset_top = 470.0
-offset_right = 983.0
-offset_bottom = 512.0
-theme_override_font_sizes/font_size = 30
-text = "OR"
-
-[node name="DividerLeft" type="Sprite2D" parent="OR and Divider"]
-position = Vector2(-170.5, 22)
-scale = Vector2(0.942177, 1)
-texture = ExtResource("4_3wjrt")
-
-[node name="DividerRight" type="Sprite2D" parent="OR and Divider"]
-position = Vector2(214.5, 22)
-scale = Vector2(0.942177, 1)
-texture = ExtResource("4_3wjrt")
-
 [node name="Email" type="TextureRect" parent="."]
-offset_left = 628.0
-offset_top = 580.0
-offset_right = 1293.0
-offset_bottom = 636.0
+offset_left = 559.0
+offset_top = 486.0
+offset_right = 1224.0
+offset_bottom = 542.0
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_cl3p3")
 
 [node name="LabelEmail" type="LineEdit" parent="Email"]
@@ -117,10 +116,11 @@ theme_override_font_sizes/font_size = 20
 text = "Email address or username"
 
 [node name="Password" type="TextureRect" parent="."]
-offset_left = 628.0
-offset_top = 690.0
-offset_right = 1293.0
-offset_bottom = 746.0
+offset_left = 559.0
+offset_top = 620.0
+offset_right = 1224.0
+offset_bottom = 676.0
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("4_cl3p3")
 
 [node name="LabelPassword" type="LineEdit" parent="Password"]
@@ -143,9 +143,11 @@ text = "Password"
 
 [node name="Label2" type="Label" parent="Password/LabelPassword"]
 layout_mode = 0
-offset_top = 60.0
-offset_right = 515.0
-offset_bottom = 83.0
+offset_left = 4.16668
+offset_top = 69.1667
+offset_right = 519.167
+offset_bottom = 92.1667
+scale = Vector2(1.2, 1.2)
 text = "Use 8 or more characters with a mix of letters, numbers & symbols"
 
 [node name="HideButton" type="Label" parent="Password/LabelPassword"]
@@ -160,6 +162,7 @@ text = "Hide"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Password/LabelPassword/HideButton/Area2D"]
 position = Vector2(5, 13)
+scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_tb2qk")
 
 [node name="AnimatedSprite2D_hide" type="AnimatedSprite2D" parent="Password/LabelPassword/HideButton/Area2D"]
@@ -169,19 +172,25 @@ sprite_frames = SubResource("SpriteFrames_c1d45")
 script = ExtResource("9_uobxe")
 
 [node name="LoginButton" type="Button" parent="."]
-offset_left = 629.0
-offset_top = 850.0
-offset_right = 1294.0
-offset_bottom = 907.0
+offset_left = 719.0
+offset_top = 860.0
+offset_right = 1121.0
+offset_bottom = 917.0
+scale = Vector2(1.2, 1.2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxFlat_qixxl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c0saa")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aayhj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yg8a2")
 text = "Login"
 
 [node name="RememberMe" type="CheckBox" parent="."]
-offset_left = 644.0
-offset_top = 791.0
-offset_right = 670.0
-offset_bottom = 817.0
+offset_left = 569.0
+offset_top = 759.0
+offset_right = 595.0
+offset_bottom = 785.0
+scale = Vector2(1.3, 1.3)
 
 [node name="Remember me lab" type="Label" parent="RememberMe"]
 layout_mode = 0
@@ -189,21 +198,16 @@ offset_left = 34.0
 offset_top = 1.0
 offset_right = 149.0
 offset_bottom = 50.0
+scale = Vector2(1.3, 1.3)
 text = "Remember me
 "
 
-[node name="google btn" type="TextureButton" parent="."]
-offset_left = 623.0
-offset_top = 407.0
-offset_right = 1292.0
-offset_bottom = 458.0
-texture_normal = ExtResource("3_nhusd")
-
 [node name="Reset Pass Btn" type="Button" parent="."]
-offset_left = 1152.0
-offset_top = 791.0
-offset_right = 1285.0
-offset_bottom = 819.0
+offset_left = 1131.0
+offset_top = 759.0
+offset_right = 1264.0
+offset_bottom = 787.0
+scale = Vector2(1.5, 1.5)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_iy3od")
 text = "Reset Password ?"
@@ -216,5 +220,4 @@ position = Vector2(409, 138)
 [connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]
 [connection signal="input_event" from="Password/LabelPassword/HideButton/Area2D" to="Password/LabelPassword/HideButton/Area2D/AnimatedSprite2D_hide" method="_on_area_2d_input_event"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_login_pressed"]
-[connection signal="pressed" from="google btn" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="Reset Pass Btn" to="." method="_on_reset_pass_btn_pressed"]

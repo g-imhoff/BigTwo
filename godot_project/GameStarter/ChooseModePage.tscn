@@ -1,11 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://di6wty806vwb0"]
+[gd_scene load_steps=10 format=3 uid="uid://di6wty806vwb0"]
 
 [ext_resource type="Script" uid="uid://2u1ijm3jkue2" path="res://GameStarter/choose_mode_page.gd" id="1_s85bu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_c5bal"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_u0mlp"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_vsw86"]
-[ext_resource type="Texture2D" uid="uid://sgbtpscvfbhe" path="res://assets/ui/singleplayerbutton.png" id="4_0sxgh"]
-[ext_resource type="Texture2D" uid="uid://bmb7slh7p6pyj" path="res://assets/ui/multiplayerbutton.png" id="5_pvoy8"]
+[ext_resource type="Texture2D" uid="uid://ccan16fna51bx" path="res://assets/ui/single_2_yellow.png" id="5_8rvos"]
+[ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="6_gb7kl"]
+[ext_resource type="Texture2D" uid="uid://dmostb7clvewr" path="res://assets/ui/multi_2_yellow.png" id="7_fu0mq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ai54j"]
+font = ExtResource("6_gb7kl")
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bpsu"]
+font = ExtResource("6_gb7kl")
+font_size = 45
 
 [node name="ChooseModePage" type="Node2D"]
 script = ExtResource("1_s85bu")
@@ -26,36 +35,40 @@ offset_bottom = -391.0
 texture_normal = ExtResource("3_u0mlp")
 
 [node name="Single BTN" type="TextureButton" parent="Background"]
-offset_left = -344.0
-offset_top = 157.0
-offset_right = -135.0
-offset_bottom = 367.0
-texture_normal = ExtResource("4_0sxgh")
+offset_left = -351.0
+offset_top = 148.0
+offset_right = 149.0
+offset_bottom = 648.0
+scale = Vector2(0.5, 0.47)
+texture_normal = ExtResource("5_8rvos")
 
 [node name="Label single" type="Label" parent="Background/Single BTN"]
 layout_mode = 0
-offset_left = -6.0
-offset_top = 223.0
-offset_right = 214.0
-offset_bottom = 265.0
+offset_left = -66.0
+offset_top = 474.468
+offset_right = 633.0
+offset_bottom = 609.468
 theme_override_font_sizes/font_size = 30
 text = "SINGLE PLAYER"
+label_settings = SubResource("LabelSettings_ai54j")
 
 [node name="MultI BTN" type="TextureButton" parent="Background"]
-offset_left = 128.0
-offset_top = 157.0
-offset_right = 347.0
-offset_bottom = 367.0
-texture_normal = ExtResource("5_pvoy8")
+offset_left = 116.0
+offset_top = 148.0
+offset_right = 746.0
+offset_bottom = 648.0
+scale = Vector2(0.5, 0.47)
+texture_normal = ExtResource("7_fu0mq")
 
 [node name="Label" type="Label" parent="Background/MultI BTN"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 223.0
-offset_right = 216.0
-offset_bottom = 265.0
+offset_left = -7.62939e-05
+offset_top = 465.957
+offset_right = 526.0
+offset_bottom = 600.957
 theme_override_font_sizes/font_size = 30
 text = "MULTI PLAYER"
+label_settings = SubResource("LabelSettings_3bpsu")
 
 [connection signal="pressed" from="Background/backicon chooseMode page" to="." method="_on_backicon_choose_mode_page_pressed"]
 [connection signal="pressed" from="Background/Single BTN" to="." method="_on_single_btn_pressed"]

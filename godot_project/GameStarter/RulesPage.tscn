@@ -1,9 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg2v1sunut0tk"]
+[gd_scene load_steps=8 format=3 uid="uid://bg2v1sunut0tk"]
 
 [ext_resource type="Script" uid="uid://suhxenbpik0k" path="res://GameStarter/rules_page.gd" id="1_0hlb0"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_b84sh"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="2_56ugk"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_ndtx7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nwuc"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3emye"]
+bg_color = Color(0, 0.631373, 0.964706, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwug3"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
 
 [node name="RulesPage" type="Node2D"]
 script = ExtResource("1_0hlb0")
@@ -13,14 +34,12 @@ position = Vector2(960, 540)
 texture = ExtResource("1_b84sh")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 44.0
-offset_top = 392.0
-offset_right = 1904.0
-offset_bottom = 952.0
+offset_left = 65.0
+offset_top = 363.0
+offset_right = 1925.0
+offset_bottom = 923.0
 theme_override_font_sizes/normal_font_size = 33
-text = "Big Two 
-
-🃏 Objective
+text = "🃏 Objective
 Big Two is a strategic card game where the goal is to be the first to discard all your cards by playing stronger combinations than your opponents.
 
 🃏 Card Distribution
@@ -77,7 +96,11 @@ offset_left = 786.0
 offset_top = 980.0
 offset_right = 1134.0
 offset_bottom = 1043.0
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_8nwuc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3emye")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fwug3")
 text = "Let's Play !"
 
 [node name="Backicon rules" type="TextureButton" parent="."]
