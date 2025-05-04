@@ -40,6 +40,8 @@ func _http_request_completed(result, response_code, headers, body):
 	
 	if(response["result"] == 1):
 		Global.username = Global.remaining_data.username
+	else: 
+		SaveData.clear_all_saves()
 
 func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
