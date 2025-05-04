@@ -28,10 +28,12 @@ login_account_error = [
 def login(data: dict = Body(...)):
     username_email = data.get("username_email")
     password = data.get("password")
+    rememberme = data.get("rememberme")
     token = data.get("token")
 
     print("Trying a login from", username_email, password)
-    result, username, email, token = login_account(username_email, password, token)
+    result, username, email, token = login_account(
+        username_email, password, token)
     print(login_account_error[result],
           username_email, password)
 
@@ -39,7 +41,7 @@ def login(data: dict = Body(...)):
         verification_code: int = send_email(email)
         set_verification_code(verification_code, email)
 
-    return {"code": result, "message": login_account_error[result], "username": username, "email": email, "connection_token": token}
+    return {"code": result, "rememberme": rememberme, "message": login_account_error[result], "username": username, "email": email, "connection_token": token}
 
 
 @app.post("/auth/register")

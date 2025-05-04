@@ -28,6 +28,7 @@ func _on_login_pressed() -> void:
 	var content = JSON.stringify({
 		"username_email": profile_name_email,
 		"password": password_hash, 
+		"rememberme": rememberme,
 		"token": Global.remaining_data.connection_token
 	})
 		
@@ -46,15 +47,17 @@ func _http_request_completed(result, response_code, headers, body):
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
-	print(response)
 
 	if (response["code"] == 0):
 		# Needs to setup a token of connection
 		Global.username = response["username"]
+		Global.connection_token = response["connection_token"]
 		
-		Global.remaining_data.username = response["username"]
-		Global.remaining_data.connection_token = response["connection_token"]
-		Global.remaining_data.save_to_disk()
+		if response["rememberme"]:
+			Global.remaining_data.username = response["username"]
+			Global.remaining_data.connection_token = response["connection_token"]
+			Global.remaining_data.save_to_disk()
+		
 		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 	elif (response["code"] == 5): 
 		Global.email = response["email"]

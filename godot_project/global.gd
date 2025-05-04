@@ -3,6 +3,7 @@ extends Node
 var api_url = "http://185.155.93.105:18005" 
 var server_url = "ws://185.155.93.105:18006" # turn into wss://185.155.93.105:18006
 var username = ""
+var connection_token = ""
 var email = ""
 var online_game_id = 1000 # no game
 var index=1
