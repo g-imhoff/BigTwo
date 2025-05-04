@@ -62,20 +62,22 @@ def verify_code(code: int, email: str) -> bool:
         SELECT verification_code 
         FROM users 
         WHERE email = %s""",
-                    (code, email))
+                    (email,))
 
-        verification_code = cur.fetchone()
+        verification_code, = cur.fetchone()
 
         if verification_code == code:
             cur.execute("""
             UPDATE users 
             SET verified_account = true
             WHERE email = %s""", (email,))
+            conn.commit()
             return True
         else:
             return False
     except psycopg2.Error as e:
         print("Database error : ", e)
+        return False
 
 
 def login_account(profile_name_email, password, connection_token):
