@@ -1,5 +1,6 @@
 import psycopg2
 import re
+from uuid import uuid4
 
 DB_PARAMS = {
     "host": "localhost",
@@ -66,6 +67,10 @@ def verify_code(code: int, email: str) -> bool:
         verification_code = cur.fetchone()
 
         if verification_code == code:
+            cur.execute("""
+            UPDATE users 
+            SET verified_account = true
+            WHERE email = %s""", (email,))
             return True
         else:
             return False
@@ -73,7 +78,7 @@ def verify_code(code: int, email: str) -> bool:
         print("Database error : ", e)
 
 
-def login_account(profile_name_email, password):
+def login_account(profile_name_email, password, connection_token):
     """
     Check if an account exists in the database, and create it if it doesn't.
 
@@ -83,42 +88,68 @@ def login_account(profile_name_email, password):
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
-        cur.execute("SELECT * FROM users WHERE username = %s OR email = %s",
+        cur.execute("SELECT id, username, password, verified_account, connection_token FROM users WHERE username = %s OR email = %s",
                     (profile_name_email, profile_name_email))
 
         result = cur.fetchone()
         if result:
-            bdd_id, bdd_username, bdd_email, bdd_password, bdd_connected = result
+            bdd_id, bdd_username, bdd_password, bdd_verified, bdd_token = result
 
             if bdd_password == password:
-                if bdd_connected:
-                    return 4, ""  # Somebody is already connected
+                if bdd_token == -1:
+                    token = generate_token(bdd_username)
+                    if token == -1:
+                        return 6, "", ""  # failed to generate a token
+                    else:
+                        return 0, bdd_username, token  # connection worked
+                elif bdd_token == connection_token:
+                    return 0, bdd_username, ""  # connection worked
                 else:
-                    cur.execute("""
-                            UPDATE users 
-                            SET connected = TRUE 
-                            WHERE username = %s""", (bdd_username,))
-
-                    conn.commit()
-                    return 0, bdd_username  # connection worked
+                    return 4, "", ""  # Somebody is already connected
             else:
-                return 3, ""  # wrong password
+                return 3, "", ""  # wrong password
         else:
-            return 1, ""  # account not found
+            return 1, "", ""  # account not found
     except psycopg2.Error as e:
         print("Database error : ", e)
-        return 2, ""  # Error psycopg2
+        return 2, "", ""  # Error psycopg2
 
 
-def bdd_logout(username: str) -> None:
+def generate_token(email):
+    rand_token = uuid4()
+
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
         cur.execute("""
-                UPDATE users 
-                SET connected = FALSE 
-                WHERE username = %s""", (username, ))
+        UPDATE users
+        SET connection_token = %s
+        WHERE username = %s
+        """, (rand_token, email))
+
         conn.commit()
+        return rand_token
+    except psycopg2.Error as e:
+        print("Database error : ", e)
+        return -1
+
+
+def check_token(username, token):
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute("""
+        SELECT connection_token 
+        FROM users 
+        WHERE username = %s""",
+                    (username, ))
+
+        connection_token = cur.fetchone()
+
+        if connection_token == token:
+            return True
+        else:
+            return False
     except psycopg2.Error as e:
         print("Database error : ", e)
 
