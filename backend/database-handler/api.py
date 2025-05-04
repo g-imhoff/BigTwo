@@ -72,6 +72,15 @@ def confirm_register(data: dict = Body(...)):
         return {"code": 1, "message": "wrong verification code"}
 
 
+@app.post("/auth/new_email_code")
+def new_email_code(data: dict = Body(...)):
+    email: str = data.get("email")
+
+    verification_code: int = send_email(email)
+    set_verification_code(verification_code, email)
+    return {}
+
+
 @app.post("/auth/check_connectivity")
 def check_connectivity(data: dict = Body(...)):
     username: str = data.get("username")
