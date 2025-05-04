@@ -90,31 +90,34 @@ def login_account(profile_name_email, password, connection_token):
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
-        cur.execute("SELECT id, username, password, verified_account, connection_token FROM users WHERE username = %s OR email = %s",
+        cur.execute("SELECT id, username, email, password, verified_account, connection_token FROM users WHERE username = %s OR email = %s",
                     (profile_name_email, profile_name_email))
 
         result = cur.fetchone()
         if result:
-            bdd_id, bdd_username, bdd_password, bdd_verified, bdd_token = result
+            bdd_id, bdd_username, bdd_email, bdd_password, bdd_verified, bdd_token = result
+
+            if not bdd_verified:
+                return 7, "", bdd_email, ""  # the account is not verified
 
             if bdd_password == password:
                 if bdd_token == -1:
                     token = generate_token(bdd_username)
                     if token == -1:
-                        return 6, "", ""  # failed to generate a token
+                        return 6, "", "", ""  # failed to generate a token
                     else:
-                        return 0, bdd_username, token  # connection worked
+                        return 0, bdd_username, bdd_email, token  # connection worked
                 elif bdd_token == connection_token:
-                    return 0, bdd_username, ""  # connection worked
+                    return 0, bdd_username, bdd_email, ""  # connection worked
                 else:
-                    return 4, "", ""  # Somebody is already connected
+                    return 4, "", "", ""  # Somebody is already connected
             else:
-                return 3, "", ""  # wrong password
+                return 3, "", "", ""  # wrong password
         else:
-            return 1, "", ""  # account not found
+            return 1, "", "", ""  # account not found
     except psycopg2.Error as e:
         print("Database error : ", e)
-        return 2, "", ""  # Error psycopg2
+        return 2, "", "", ""  # Error psycopg2
 
 
 def generate_token(email):

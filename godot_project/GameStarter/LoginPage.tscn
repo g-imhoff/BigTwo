@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dui1hqinflue4"]
+[gd_scene load_steps=19 format=3 uid="uid://dui1hqinflue4"]
 
 [ext_resource type="Script" uid="uid://c5juqf70v43tr" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="8_i56jj"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="8_uobxe"]
 [ext_resource type="Script" uid="uid://dxxgr84dsusln" path="res://GameStarter/animated_hide.gd" id="9_uobxe"]
+[ext_resource type="PackedScene" uid="uid://dcblllx72cd53" path="res://GameStarter/accverificationpop.tscn" id="11_c1d45"]
 [ext_resource type="PackedScene" uid="uid://c5ptrro73l43e" path="res://GameStarter/Forgot_Password_Popup.tscn" id="12_6qrxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb2qk"]
@@ -215,6 +216,10 @@ text = "Reset Password ?"
 [node name="ForgotPasswordPopup" parent="." instance=ExtResource("12_6qrxc")]
 visible = false
 position = Vector2(409, 138)
+
+[node name="Accverificationpop" parent="." instance=ExtResource("11_c1d45")]
+visible = false
+position = Vector2(411, 289)
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]

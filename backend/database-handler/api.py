@@ -18,7 +18,9 @@ login_account_error = [
     "This account doesn't exist",
     "There is an error with psycopg2",
     "This is the wrong password",
-    "Somebody is already logged on this account"
+    "Somebody is already logged on this account",
+    "Failed to generate a token",
+    "The account isn't verified"
 ]
 
 
@@ -28,9 +30,13 @@ def login(data: dict = Body(...)):
     password = data.get("password")
 
     print("Trying a login from", username_email, password)
-    result, username, token = login_account(username_email, password)
+    result, username, email, token = login_account(username_email, password)
     print(login_account_error[result],
           username_email, password)
+
+    if result == 7:
+        verification_code: int = send_email(email)
+        set_verification_code(verification_code, email)
 
     return {"code": result, "message": login_account_error[result], "username": username, "token": token}
 

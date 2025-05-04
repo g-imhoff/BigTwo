@@ -3,6 +3,7 @@ extends Node2D
 @onready var profile_name_email_line_edit = $Email/LabelEmail
 @onready var password_line_edit = $Password/LabelPassword
 @onready var rememberme_checkbox = $RememberMe
+@onready var accverificationpopup = $Accverificationpop
 
 var Hash = load("res://hashage.gd")
 
@@ -53,6 +54,8 @@ func _http_request_completed(result, response_code, headers, body):
 		Global.remaining_data.connection_token = response["connection_token"]
 		Global.remaining_data.save_to_disk()
 		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
+	elif (response["code"] == 7): 
+		accverificationpopup.visible = true
 	else :
 		Notification.show_side(response["message"])
 

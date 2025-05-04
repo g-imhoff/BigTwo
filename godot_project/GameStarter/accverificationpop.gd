@@ -78,7 +78,7 @@ func _on_submit_btn_pressed() -> void:
 	
 	var content = JSON.stringify({
 		"email": Global.email,
-		"verification_code": code
+		"verification_code": int(code)
 	})
 		
 	var error = http_request.request(Global.api_url + "/auth/confirm_register", [], HTTPClient.METHOD_POST, content)
