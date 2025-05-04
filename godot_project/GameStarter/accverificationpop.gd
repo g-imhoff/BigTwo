@@ -13,11 +13,13 @@ extends Node2D
 @onready var resend_button = $"resend code"
 @onready var cooldown_timer = $Timer
 @onready var cooldown_label = $CooldownLabel
+@onready var message_send_label = $Label3
 
 var remaining_seconds := 60
 var code: String = ""
 
 func _ready():	
+	message_send_label.text += Global.email
 	_set_submit_button_state(false)
 	for i in range(code_fields.size()):
 		var field = code_fields[i]
@@ -68,7 +70,20 @@ func _on_timer_timeout() -> void:
 		cooldown_label.visible = false
 
 func _on_resend_code_pressed() -> void:
-	# Your resend code logic here (e.g., socket.send_text or API call)
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(_http_request_completed)
+	
+	print(Global.email)
+	
+	var content = JSON.stringify({
+		"email": Global.email,
+	})
+		
+	var error = http_request.request(Global.api_url + "/auth/new_email_code", [], HTTPClient.METHOD_POST, content)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+	await http_request.request_completed  # Wait for the request to finish
 	start_cooldown()
 
 func _on_submit_btn_pressed() -> void:

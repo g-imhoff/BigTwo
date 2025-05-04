@@ -29,7 +29,3 @@ static func clear_all_saves() -> void:
 		var error = dir.remove(save_path)
 		if error != OK:
 			push_error("Échec de la suppression : ", save_path, " | Erreur: ", error)
-		else:
-			print("Sauvegarde supprimée avec succès")
-	else:
-		print("Aucune sauvegarde trouvée")
