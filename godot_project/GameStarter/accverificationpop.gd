@@ -108,7 +108,8 @@ func _http_request_completed(result, response_code, headers, body):
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
 	
-	if(response["code"] == 0):
-		get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
-	else :
-		Notification.show_side(response["message"])
+	if(response["function"] == "confirm_register"):
+		if(response["code"] == 0):
+			get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
+		else :
+			Notification.show_side(response["message"])
