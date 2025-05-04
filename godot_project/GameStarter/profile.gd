@@ -22,3 +22,13 @@ func _on_avatar_button_pressed(button: TextureButton) -> void:
 	GlobalAvatar.selected_character_texture = button.texture_normal
 	$AvatarImage.texture = button.texture_normal
 	$AvatarPopup.hide()
+
+
+func _on_disconnect_pressed() -> void:
+	SaveData.clear_all_saves()
+	Global.username = ""
+	Global.email = ""
+	Global.connection_token = ""
+	Global.remaining_data.username = ""
+	Global.remaining_data.connection_token = ""
+	get_tree().change_scene_to_file("res://GameStarter/HomePage.tscn")

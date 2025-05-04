@@ -76,5 +76,15 @@ offset_right = 674.0
 offset_bottom = 742.0
 texture = ExtResource("6_dt6kw")
 
+[node name="Disconnect" type="Button" parent="."]
+offset_left = 849.0
+offset_top = 686.0
+offset_right = 1140.0
+offset_bottom = 770.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_13uxv")
+text = "Disconnect "
+
 [connection signal="pressed" from="Back Btn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="Change Avatar" to="." method="_on_change_avatar_pressed"]
+[connection signal="pressed" from="Disconnect" to="." method="_on_disconnect_pressed"]

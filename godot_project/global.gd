@@ -21,7 +21,7 @@ func check_connectivity():
 	var http_request = HTTPRequest.new()
 	get_tree().root.add_child(http_request)
 	http_request.request_completed.connect(_http_request_completed)
-	
+	print(Global.remaining_data.username, Global.remaining_data.connection_token)
 	var content = JSON.stringify({
 		"username": Global.remaining_data.username,
 		"token": Global.remaining_data.connection_token
