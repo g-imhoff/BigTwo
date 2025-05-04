@@ -67,9 +67,9 @@ def confirm_register(data: dict = Body(...)):
     result: bool = verify_code(verification_code, email)
 
     if result:
-        return {"code": 0, "message": "connection success"}
+        return {"function": "confirm_register", "code": 0, "message": "connection success"}
     else:
-        return {"code": 1, "message": "wrong verification code"}
+        return {"function": "confirm_register", "code": 1, "message": "wrong verification code"}
 
 
 @app.post("/auth/new_email_code")
@@ -78,7 +78,7 @@ def new_email_code(data: dict = Body(...)):
 
     verification_code: int = send_email(email)
     set_verification_code(verification_code, email)
-    return {}
+    return {"function": "new_email_code"}
 
 
 @app.post("/auth/check_connectivity")
