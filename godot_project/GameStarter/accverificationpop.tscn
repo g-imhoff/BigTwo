@@ -92,13 +92,16 @@ verification"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="."]
-offset_left = 284.0
+offset_left = 184.0
 offset_top = 220.0
-offset_right = 903.0
+offset_right = 1003.0
 offset_bottom = 248.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
-text = "Enter code that we have sent to your email your...@domain.com"
+text = "Enter code that we have sent to your email"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 371.0
