@@ -48,6 +48,10 @@ func _http_request_completed(result, response_code, headers, body):
 	if (response["code"] == 0):
 		# Needs to setup a token of connection
 		Global.username = response["username"]
+		
+		Global.remaining_data.username = response["username"]
+		Global.remaining_data.connection_token = response["connection_token"]
+		Global.remaining_data.save_to_disk()
 		get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 	else :
 		Notification.show_side(response["message"])

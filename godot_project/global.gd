@@ -6,6 +6,33 @@ var username = ""
 var online_game_id = 1000 # no game
 var index=1
 var endcardpos=0
+var remaining_data: SaveData = SaveData.load_or_create()
+
+func _ready() -> void:
+	if remaining_data.username != "":
+		check_connectivity(remaining_data.connection_token)
+
+func check_connectivity(token):
+	var http_request = HTTPRequest.new()
+	get_tree().root.add_child(http_request)
+	http_request.request_completed.connect(_http_request_completed)
+	
+	var content = JSON.stringify({
+		"username": remaining_data.username,
+		"token": remaining_data.connection_token
+	})
+		
+	var error = http_request.request(Global.api_url + "/auth/check_connectivity", [], HTTPClient.METHOD_POST, content)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+func _http_request_completed(result, response_code, headers, body): 
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	
+	if(response["result"] == 1):
+		Global.username = remaining_data.username
 
 func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
@@ -90,25 +117,3 @@ var card_images=[
 ]
 
 var card_duplicate = card_images.duplicate()
-
-var close_dialog: ConfirmationDialog
-
-func _ready() -> void:
-	get_tree().set_auto_accept_quit(false)
-
-func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		if username != "":
-			var http_request = HTTPRequest.new()
-			get_tree().root.add_child(http_request)
-			
-			var content = JSON.stringify({
-				"username": username,
-			})
-			
-			var error = http_request.request(Global.api_url + "/auth/logout", [], HTTPClient.METHOD_POST, content)
-			if error != OK:
-				push_error("An error occurred in the HTTP request.")
-				
-			await http_request.request_completed  # Wait for the request to finish
-		get_tree().quit() # default behavior
