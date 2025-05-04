@@ -47,7 +47,7 @@ def register(data: dict = Body(...)):
         verification_code: int = send_email(email)
         set_verification_code(verification_code, email)
 
-    return {"code": result}
+    return {"code": result, "email": email}
 
 
 @app.post("/auth/confirm_register")

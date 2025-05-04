@@ -15,8 +15,10 @@ extends Node2D
 @onready var cooldown_label = $CooldownLabel
 
 var remaining_seconds := 60
+var code: String = ""
 
 func _ready():	
+	_set_submit_button_state(false)
 	for i in range(code_fields.size()):
 		var field = code_fields[i]
 		field.max_length = 1
@@ -32,12 +34,12 @@ func _on_code_input(new_text: String, index: int):
 	elif new_text.length() == 1:
 		if index < code_fields.size() - 1:
 			code_fields[index + 1].grab_focus()
-	var code := ""
 	if (_check_code_filled()):
 		for field in code_fields:
 			code += field.text
 		_set_submit_button_state(true)
-	_set_submit_button_state(false)
+	else : 
+		_set_submit_button_state(false)
 
 func _check_code_filled():
 	for field in code_fields:
@@ -70,11 +72,25 @@ func _on_resend_code_pressed() -> void:
 	start_cooldown()
 
 func _on_submit_btn_pressed() -> void:
-	var value = 0;
-	var mult = 1;
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(_http_request_completed)
 	
-	for field in code_fields:
-		value += int(field.text) * mult
-		mult *= 10
+	var content = JSON.stringify({
+		"email": Global.email,
+		"verification_code": code
+	})
 		
-	print(value)
+	var error = http_request.request(Global.api_url + "/auth/confirm_register", [], HTTPClient.METHOD_POST, content)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+func _http_request_completed(result, response_code, headers, body): 
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	
+	if(response["code"] == 0):
+		get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
+	else :
+		Notification.show_side(response["message"])

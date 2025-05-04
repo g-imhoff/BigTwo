@@ -24,12 +24,12 @@ MusicPlayer="*res://GameStarter/MusicPlayer.tscn"
 Config="*res://GameStarter/Config.gd"
 GlobalAvatar="*res://Game/scripts/Global_avatar.gd"
 SocketOnline="*res://GameOnline/socket_online.gd"
-RemainingData="*res://remainingdata.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [editor]

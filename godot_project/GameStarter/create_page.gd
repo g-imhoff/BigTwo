@@ -49,6 +49,7 @@ func _http_request_completed(result, response_code, headers, body):
 	
 	if(response["code"] == 0):
 		accverifi_popup.visible = true
+		Global.email = response["email"]
 	else :
 		Notification.show_side(response["message"])
 
