@@ -10,7 +10,8 @@ create_account_error = [
     "The creation of the account worked well for",
     "This account already exist",
     "There is an error with psycopg2",
-    "This is not a valid email"
+    "This is not a valid email",
+    "Your username looks like an email"
 ]
 
 login_account_error = [
@@ -18,7 +19,6 @@ login_account_error = [
     "This account doesn't exist",
     "There is an error with psycopg2",
     "This is the wrong password",
-    "Somebody is already logged on this account",
     "Failed to generate a token",
     "The account isn't verified"
 ]
@@ -28,17 +28,18 @@ login_account_error = [
 def login(data: dict = Body(...)):
     username_email = data.get("username_email")
     password = data.get("password")
+    token = data.get("token")
 
     print("Trying a login from", username_email, password)
-    result, username, email, token = login_account(username_email, password)
+    result, username, email, token = login_account(username_email, password, token)
     print(login_account_error[result],
           username_email, password)
 
-    if result == 7:
+    if result == 5:
         verification_code: int = send_email(email)
         set_verification_code(verification_code, email)
 
-    return {"code": result, "message": login_account_error[result], "username": username, "token": token}
+    return {"code": result, "message": login_account_error[result], "username": username, "email": email, "connection_token": token}
 
 
 @app.post("/auth/register")

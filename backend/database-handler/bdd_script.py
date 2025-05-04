@@ -20,8 +20,9 @@ def create_account(profile_name, email, password):
     :param username: username of the user
     :param password: password of the user
     """
-
-    if re.match(pattern_email, email):
+    if re.match(pattern_email, profile_name): 
+        return 4 # error username looks like an email
+    elif re.match(pattern_email, email):
         try:
             conn = psycopg2.connect(**DB_PARAMS)
             cur = conn.cursor()
@@ -66,6 +67,7 @@ def verify_code(code: int, email: str) -> bool:
 
         verification_code, = cur.fetchone()
 
+        print(verification_code, code)
         if verification_code == code:
             cur.execute("""
             UPDATE users 
@@ -97,20 +99,17 @@ def login_account(profile_name_email, password, connection_token):
         if result:
             bdd_id, bdd_username, bdd_email, bdd_password, bdd_verified, bdd_token = result
 
-            if not bdd_verified:
-                return 7, "", bdd_email, ""  # the account is not verified
-
             if bdd_password == password:
-                if bdd_token == -1:
-                    token = generate_token(bdd_username)
-                    if token == -1:
-                        return 6, "", "", ""  # failed to generate a token
-                    else:
-                        return 0, bdd_username, bdd_email, token  # connection worked
+                if not bdd_verified:
+                    return 5, "", bdd_email, ""  # the account is not verified
                 elif bdd_token == connection_token:
                     return 0, bdd_username, bdd_email, ""  # connection worked
-                else:
-                    return 4, "", "", ""  # Somebody is already connected
+                else : 
+                    token = generate_token(bdd_username)
+                    if token == -1:
+                        return 4, "", "", ""  # failed to generate a token
+                    else:
+                        return 0, bdd_username, bdd_email, token  # connection worked
             else:
                 return 3, "", "", ""  # wrong password
         else:
@@ -121,7 +120,7 @@ def login_account(profile_name_email, password, connection_token):
 
 
 def generate_token(email):
-    rand_token = uuid4()
+    rand_token = str(uuid4())
 
     try:
         conn = psycopg2.connect(**DB_PARAMS)
@@ -149,7 +148,7 @@ def check_token(username, token):
         WHERE username = %s""",
                     (username, ))
 
-        connection_token = cur.fetchone()
+        connection_token, = cur.fetchone()
 
         if connection_token == token:
             return True
