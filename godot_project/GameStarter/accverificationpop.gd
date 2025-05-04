@@ -76,6 +76,8 @@ func _on_submit_btn_pressed() -> void:
 	add_child(http_request)
 	http_request.request_completed.connect(_http_request_completed)
 	
+	print(Global.email)
+	
 	var content = JSON.stringify({
 		"email": Global.email,
 		"verification_code": int(code)
@@ -84,6 +86,7 @@ func _on_submit_btn_pressed() -> void:
 	var error = http_request.request(Global.api_url + "/auth/confirm_register", [], HTTPClient.METHOD_POST, content)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
+	await http_request.request_completed  # Wait for the request to finish
 
 func _http_request_completed(result, response_code, headers, body): 
 	var json = JSON.new()

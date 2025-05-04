@@ -1,5 +1,6 @@
 extends Node2D
 
+
 func _ready() -> void:
 	# Activer les sons UI sur tous les boutons de cette scène
 	UISounds.install_sounds(self)

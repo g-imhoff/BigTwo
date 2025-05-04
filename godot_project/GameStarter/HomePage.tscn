@@ -22,13 +22,16 @@ func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx
 	if event.is_action_pressed(\"leftclick\"):
 		get_tree().change_scene_to_file(\"res://GameStarter/RulesPage.tscn\")
 
+
 # Function called when the \"Play Now\" button is pressed.
 func _on_play_now_pressed() -> void:
 	if (Global.username != \"\"):
 		get_tree().change_scene_to_file(\"res://GameStarter/ChooseModePage.tscn\")
 	else:
 		get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
-	
+
+
+
 func _on_profile_btn_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://GameStarter/Profile.tscn\")
 

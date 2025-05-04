@@ -10,30 +10,35 @@ var endcardpos=0
 var remaining_data: SaveData = SaveData.load_or_create()
 
 func _ready() -> void:
-	if remaining_data.username != "":
-		check_connectivity(remaining_data.connection_token)
+	print("a")
+	if Global.remaining_data.username != "":
+		check_connectivity()
 
-func check_connectivity(token):
+func check_connectivity():
+	await get_tree().process_frame
+	
 	var http_request = HTTPRequest.new()
 	get_tree().root.add_child(http_request)
 	http_request.request_completed.connect(_http_request_completed)
 	
 	var content = JSON.stringify({
-		"username": remaining_data.username,
-		"token": remaining_data.connection_token
+		"username": Global.remaining_data.username,
+		"token": Global.remaining_data.connection_token
 	})
 		
 	var error = http_request.request(Global.api_url + "/auth/check_connectivity", [], HTTPClient.METHOD_POST, content)
 	if error != OK:
-		push_error("An error occurred in the HTTP request.")
+		push_error(error, "An error occurred in the HTTP request.")
+	await http_request.request_completed  # Wait for the request to finish
 
 func _http_request_completed(result, response_code, headers, body): 
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
+	print(response)
 	
 	if(response["result"] == 1):
-		Global.username = remaining_data.username
+		Global.username = Global.remaining_data.username
 
 func get_card_info_from_texture(path:String)->Array:
 	var card_info=[null, null]
