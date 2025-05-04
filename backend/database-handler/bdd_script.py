@@ -148,7 +148,10 @@ def check_token(username, token):
         WHERE username = %s""",
                     (username, ))
 
-        connection_token, = cur.fetchone()
+        try: 
+            connection_token, = cur.fetchone()
+        except TypeError as e: 
+            return False
 
         if connection_token == token:
             return True
