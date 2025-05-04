@@ -15,8 +15,10 @@ extends Node2D
 @onready var cooldown_label = $CooldownLabel
 
 var remaining_seconds := 60
+var code: String = ""
 
 func _ready():	
+	_set_submit_button_state(false)
 	for i in range(code_fields.size()):
 		var field = code_fields[i]
 		field.max_length = 1
@@ -32,19 +34,18 @@ func _on_code_input(new_text: String, index: int):
 	elif new_text.length() == 1:
 		if index < code_fields.size() - 1:
 			code_fields[index + 1].grab_focus()
-	var code := ""
 	if (_check_code_filled()):
 		for field in code_fields:
 			code += field.text
 		_set_submit_button_state(true)
-	_set_submit_button_state(false)
+	else : 
+		_set_submit_button_state(false)
 
 func _check_code_filled():
 	for field in code_fields:
 		if field.text.length() != 1 or !field.text.is_valid_int():
 			return false
 	return true
-
 
 func _set_submit_button_state(enabled: bool):
 	submit_button.disabled = !enabled
@@ -70,10 +71,29 @@ func _on_resend_code_pressed() -> void:
 	# Your resend code logic here (e.g., socket.send_text or API call)
 	start_cooldown()
 
-func check_code_correct(test_code : String, data):
-	for field in code_fields:
-		test_code += field.text
-	if (test_code == data[0]):
-		return true
-	else:
-		return false
+func _on_submit_btn_pressed() -> void:
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.request_completed.connect(_http_request_completed)
+	
+	print(Global.email)
+	
+	var content = JSON.stringify({
+		"email": Global.email,
+		"verification_code": int(code)
+	})
+		
+	var error = http_request.request(Global.api_url + "/auth/confirm_register", [], HTTPClient.METHOD_POST, content)
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+	await http_request.request_completed  # Wait for the request to finish
+
+func _http_request_completed(result, response_code, headers, body): 
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	
+	if(response["code"] == 0):
+		get_tree().change_scene_to_file("res://GameStarter/LoginPage.tscn")
+	else :
+		Notification.show_side(response["message"])
