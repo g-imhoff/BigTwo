@@ -8,6 +8,8 @@ var avatar_path = [
 	"res://assets/ui/23.png",
 	"res://assets/ui/24.png",
 ]
+@onready var games_label = $games
+@onready var wins_label = $wins
 
 func _ready():
 	UISounds.install_sounds(self)
@@ -15,6 +17,8 @@ func _ready():
 	# Set p"res://assets/ui/18.png"reviously selected avatar if any
 	var texture = load(avatar_path[Global.avatar])
 	$AvatarImage.texture = texture
+	games_label = Global.game_played
+	wins_label = Global.game_won
 
 	# Dynamically connect all TextureButtons in AvatarPopup
 	for button in $AvatarPopup/PopupSettings.get_children():

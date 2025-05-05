@@ -30,8 +30,6 @@ func _on_play_now_pressed() -> void:
 	else:
 		get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
 
-
-
 func _on_profile_btn_pressed() -> void:
 	if Global.username != \"\":
 		var http_request = HTTPRequest.new()
