@@ -178,7 +178,7 @@ def set_reset_password_code(verification_code: str,
 
 
 def modify_avatar_database(username: str, avatar: int):
-    result = 0, ""
+    result = [0, ""]
 
     try:
         conn = psycopg2.connect(**DB_PARAMS)
@@ -191,7 +191,7 @@ def modify_avatar_database(username: str, avatar: int):
 
     except psycopg2.Error as e:
         print("Database error : ", e)
-        result[0:1] = 1, "Database error"
+        result[0:2] = 1, "Database error"
     finally:
         cur.close()
         conn.close()
@@ -199,7 +199,7 @@ def modify_avatar_database(username: str, avatar: int):
 
 
 def get_user_info(username: str):
-    result = 0, -1, 0, 0
+    result = [0, -1, 0, 0]
 
     try:
         conn = psycopg2.connect(**DB_PARAMS)
@@ -211,7 +211,7 @@ def get_user_info(username: str):
         placeholder = cur.fetchone()
 
         if placeholder:
-            result[1:3] = placeholder
+            result[1:4] = placeholder
         else:
             result[0] = 1
     except psycopg2.Error as e:
@@ -230,7 +230,7 @@ def login_account(profile_name_email, password, connection_token):
     :param profile_name_email: profile_name or email of the user
     :param password: password of the user
     """
-    result = -1, "", "", "", "", "", ""
+    result = [-1, "", "", "", "", "", ""]
 
     try:
         conn = psycopg2.connect(**DB_PARAMS)
@@ -243,7 +243,7 @@ def login_account(profile_name_email, password, connection_token):
         placeholder = cur.fetchone()
         if placeholder:
             bdd_id, bdd_username, bdd_email, bdd_password, bdd_verified, bdd_token, bdd_avatar, bdd_game_won, bdd_game_played = placeholder
-            result[1:5] = bdd_username, bdd_email, bdd_avatar, bdd_game_won, bdd_game_played
+            result[1:6] = bdd_username, bdd_email, bdd_avatar, bdd_game_won, bdd_game_played
 
             if bdd_password == password:
                 if not bdd_verified:
