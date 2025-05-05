@@ -3,13 +3,14 @@ class Card:
         self.value = value
         self.form = form
 
-    def __eq__ (self, other): 
+    def __eq__(self, other):
         return (
             self.value == other.value and
-            self.form == other.form 
+            self.form == other.form
         )
 
-def get_list_card_info_from_texture(l): 
+
+def get_list_card_info_from_texture(l):
     result = []
     i = 0
     for path in l:
@@ -20,31 +21,32 @@ def get_list_card_info_from_texture(l):
 
     return result
 
-def get_card_info_from_texture(path):
-    form = -1 
-    if path.find("clubs")!=-1:
-        form=2
-    elif path.find("diamonds")!=-1:
-        form=1
-    elif path.find("hearts")!=-1:
-        form=3
-    elif path.find("spades")!=-1:
-        form=4
 
-    value_str=path.split("_")[2].split(".")[0]
+def get_card_info_from_texture(path):
+    form = -1
+    if path.find("clubs") != -1:
+        form = 2
+    elif path.find("diamonds") != -1:
+        form = 1
+    elif path.find("hearts") != -1:
+        form = 3
+    elif path.find("spades") != -1:
+        form = 4
+
+    value_str = path.split("_")[2].split(".")[0]
     value = -1
 
-    if value_str=="A":
-        value=14
-    elif value_str=="K":
-        value=13
-    elif value_str=="Q":
-        value=12
-    elif value_str=="J":
-        value=11
-    elif value_str=="02":
-        value=15
-    elif value_str.isnumeric() :
+    if value_str == "A":
+        value = 14
+    elif value_str == "K":
+        value = 13
+    elif value_str == "Q":
+        value = 12
+    elif value_str == "J":
+        value = 11
+    elif value_str == "02":
+        value = 15
+    elif value_str.isnumeric():
         value = int(value_str)
 
-    return form, value 
+    return form, value

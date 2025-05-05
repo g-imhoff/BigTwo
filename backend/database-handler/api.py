@@ -2,7 +2,7 @@ from fastapi import FastAPI, Body
 import uvicorn
 from bdd_script import login_account, create_account
 from verification import random_code, send_email, email_reset_password
-from bdd_script import set_verification_code, verify_code, check_token, check_and_reset_password, set_reset_password_code
+from bdd_script import set_verification_code, verify_code, check_token, check_and_reset_password, set_reset_password_code, get_user_info, modify_avatar_database
 
 app = FastAPI()
 
@@ -24,6 +24,30 @@ login_account_error = [
 ]
 
 
+@app.post("/user/change_avatar")
+def change_avatar(data: dict = Body(...)):
+    username = data.get("username")
+    avatar = data.get("avatar")
+
+    result, message = modify_avatar_database(username, avatar)
+
+    return {"function": "change_avatar", "code": result, "message": message}
+
+
+@app.post("/user/info")
+def info(data: dict = Body(...)):
+    username = data.get("username")
+
+    result, avatar, game_won, game_played = get_user_info(username)
+
+    return {
+        "function": "info",
+        "code": result,
+        "avatar": avatar,
+        "game_won": game_won,
+        "game_played": game_played}
+
+
 @app.post("/auth/login")
 def login(data: dict = Body(...)):
     username_email = data.get("username_email")
@@ -32,7 +56,7 @@ def login(data: dict = Body(...)):
     token = data.get("token")
 
     print("Trying a login from", username_email, password)
-    result, username, email, token = login_account(
+    result, username, email, avatar, game_won, game_played, token = login_account(
         username_email, password, token)
     print(login_account_error[result],
           username_email, password)
@@ -41,7 +65,16 @@ def login(data: dict = Body(...)):
         verification_code: int = send_email(email)
         set_verification_code(verification_code, email)
 
-    return {"code": result, "rememberme": rememberme, "message": login_account_error[result], "username": username, "email": email, "connection_token": token}
+    return {
+        "code": result,
+        "rememberme": rememberme,
+        "message": login_account_error[result],
+        "username": username,
+        "email": email,
+        "avatar": avatar,
+        "game_won": game_won,
+        "game_played": game_played,
+        "connection_token": token}
 
 
 @app.post("/auth/register")
@@ -56,7 +89,8 @@ def register(data: dict = Body(...)):
         verification_code: int = send_email(email)
         set_verification_code(verification_code, email)
 
-    return {"code": result, "message": create_account_error[result], "email": email}
+    return {"code": result,
+            "message": create_account_error[result], "email": email}
 
 
 @app.post("/auth/confirm_register")
@@ -66,7 +100,8 @@ def confirm_register(data: dict = Body(...)):
 
     result: tuple[int, str] = verify_code(verification_code, email)
 
-    return {"function": "confirm_register", "code": result[0], "message": result[1]}
+    return {"function": "confirm_register",
+            "code": result[0], "message": result[1]}
 
 
 @app.post("/auth/new_email_code")
@@ -100,7 +135,8 @@ def send_email_reset_password(data: dict = Body(...)):
             verification_code, email)
         result = reset_passord_code
 
-    return {"function": "send_email_reset_password", "code": result[0], "message": result[1]}
+    return {"function": "send_email_reset_password",
+            "code": result[0], "message": result[1]}
 
 
 @app.post("/auth/reset_password")
@@ -112,7 +148,8 @@ def reset_passord(data: dict = Body(...)):
     result: tuple[int, str] = check_and_reset_password(
         email, reset_password_code, new_password)
 
-    return {"function": "reset_password", "code": result[0], "message": result[1]}
+    return {"function": "reset_password",
+            "code": result[0], "message": result[1]}
 
 
 if __name__ == "main":

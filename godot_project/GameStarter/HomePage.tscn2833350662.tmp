@@ -30,6 +30,8 @@ func _on_play_now_pressed() -> void:
 	else:
 		get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
 
+
+
 func _on_profile_btn_pressed() -> void:
 	if Global.username != \"\":
 		var http_request = HTTPRequest.new()
@@ -53,12 +55,8 @@ func _http_request_completed(result, response_code, headers, body):
 	var response = json.get_data()
 	
 	if (response[\"code\"] == 0):
-		Global.avatar = response[\"avatar\"]
-		Global.game_played = response[\"game_played\"]
-		Global.game_won = response[\"game_won\"]
+		Global.
 		get_tree().change_scene_to_file(\"res://GameStarter/Profile.tscn\")
-	else:
-		Notification.show_side(\"Failed to load profile\")
 
 # Function called when an input event is detected on the Instagram button.
 # _viewport: The viewport node associated with the event.
