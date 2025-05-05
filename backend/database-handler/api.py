@@ -112,7 +112,7 @@ def reset_passord(data: dict = Body(...)):
     result: tuple[int, str] = check_and_reset_password(
         email, reset_password_code, new_password)
 
-    return {"function": "reset_passord", "result": result[0], "message": result[1]}
+    return {"function": "reset_password", "result": result[0], "message": result[1]}
 
 
 if __name__ == "main":
