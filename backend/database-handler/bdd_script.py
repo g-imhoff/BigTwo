@@ -188,9 +188,11 @@ def modify_avatar_database(username: str, avatar: int):
         SET avatar = %s
         WHERE username = %s
         """, (avatar, username))
+        conn.commit()
 
     except psycopg2.Error as e:
         print("Database error : ", e)
+        conn.rollback()
         result[0:2] = 1, "Database error"
     finally:
         cur.close()
@@ -302,7 +304,7 @@ def check_token(username, token):
 
         result = cur.fetchone()
         if result:
-            connection_token, = cur.fetchone()
+            connection_token, = result
             if connection_token == token:
                 return True
             else:
