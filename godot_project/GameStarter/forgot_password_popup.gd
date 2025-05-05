@@ -5,6 +5,7 @@ extends Node2D
 @onready var labelnewpassword: LineEdit = $PopupSettings/NewPassword4/LabelNewPassword
 
 var email = ""
+var Hash = load("res://hashage.gd")
 
 func _on_back_button_login_pressed() -> void:
 	$".".visible = not $".".visible
@@ -42,10 +43,15 @@ func _on_reset_btn_pressed() -> void:
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.request_completed.connect(_http_request_completed)
+	var password = labelnewpassword.text
+	var password_hash = ""
+	
+	if password != "":
+		password_hash = Hash.hash_password(password)	
 	
 	var content = JSON.stringify({
 		"email": email if email != "" else labelemail.text,
-		"new_password": labelnewpassword.text,
+		"new_password": password_hash,
 		"reset_password_code": labelcode.text
 	})
 		
