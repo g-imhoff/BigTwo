@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Body
 import uvicorn
 from bdd_script import login_account, create_account
-from verification import random_code, send_email, email_reset_password, set_reset_password_code
-from bdd_script import set_verification_code, verify_code, check_token, check_and_reset_password
+from verification import random_code, send_email, email_reset_password
+from bdd_script import set_verification_code, verify_code, check_token, check_and_reset_password, set_reset_password_code
 
 app = FastAPI()
 
