@@ -31,7 +31,7 @@ def change_avatar(data: dict = Body(...)):
 
     result, message = modify_avatar_database(username, avatar)
 
-    return {"code": result, "message": message}
+    return {"function": "change_avatar", "code": result, "message": message}
 
 
 @app.post("/user/info")
@@ -41,6 +41,7 @@ def info(data: dict = Body(...)):
     result, avatar, game_won, game_played = get_user_info(username)
 
     return {
+        "function": "info",
         "code": result,
         "avatar": avatar,
         "game_won": game_won,
