@@ -17,8 +17,8 @@ func _ready():
 	# Set p"res://assets/ui/18.png"reviously selected avatar if any
 	var texture = load(avatar_path[Global.avatar])
 	$AvatarImage.texture = texture
-	games_label = Global.game_played
-	wins_label = Global.game_won
+	games_label.text = str(Global.game_played)
+	wins_label.text = str(Global.game_won)
 
 	# Dynamically connect all TextureButtons in AvatarPopup
 	for button in $AvatarPopup/PopupSettings.get_children():
