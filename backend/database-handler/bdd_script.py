@@ -36,7 +36,7 @@ def check_and_reset_password(email: str, user_reset_password_code: str, new_pass
             # Update password AND reset the code (optional)
             cur.execute("""
                 UPDATE users
-                SET password = %s,
+                SET password = %s
                 WHERE email = %s
                 """, (new_password, email))
             conn.commit()
@@ -112,7 +112,7 @@ def verify_code(code: int, email: str) -> tuple[int, str]:
         SELECT verification_code
         FROM users
         WHERE email = %s
-        AND verification_code_updated_at < NOW() - INTERVAL '10 minutes'""",
+        AND verification_code_updated_at >= NOW() - INTERVAL '10 minutes'""",
                     (email,))
 
         result = cur.fetchone()
