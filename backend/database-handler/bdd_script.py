@@ -230,7 +230,7 @@ def login_account(profile_name_email, password, connection_token):
     :param profile_name_email: profile_name or email of the user
     :param password: password of the user
     """
-    result = [-1, "", "", "", "", "", ""]
+    result = [0, "", "", "", "", "", ""]
 
     try:
         conn = psycopg2.connect(**DB_PARAMS)
