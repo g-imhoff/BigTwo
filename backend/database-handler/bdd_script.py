@@ -104,7 +104,7 @@ def set_verification_code(code: int, email: str) -> None:
         conn.close()
 
 
-def verify_code(code: int, email: str) -> tuple(int, str):
+def verify_code(code: int, email: str) -> tuple[int, str]:
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
@@ -141,7 +141,7 @@ def verify_code(code: int, email: str) -> tuple(int, str):
         conn.close()
 
 
-def set_reset_password_code(verification_code: str, email: str) -> tuple(int, str):
+def set_reset_password_code(verification_code: str, email: str) -> tuple[int, str]:
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()

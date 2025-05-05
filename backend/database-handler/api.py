@@ -64,7 +64,7 @@ def confirm_register(data: dict = Body(...)):
     email: str = data.get("email")
     verification_code: int = data.get("verification_code")
 
-    result: tuple(int, str) = verify_code(verification_code, email)
+    result: tuple[int, str] = verify_code(verification_code, email)
 
     return {"function": "confirm_register", "code": result[0], "message": result[1]}
 
@@ -93,10 +93,10 @@ def send_email_reset_password(data: dict = Body(...)):
     email: str = data.get("email")
     verification_code = random_code(6)
 
-    result: tuple(int, str) = set_reset_password_code(verification_code, email)
+    result: tuple[int, str] = set_reset_password_code(verification_code, email)
 
     if result[0] == 0:
-        reset_passord_code: tuple(int, str) = email_reset_password(
+        reset_passord_code: tuple[int, str] = email_reset_password(
             verification_code, email)
         result = reset_passord_code
 
@@ -109,7 +109,7 @@ def reset_passord(data: dict = Body(...)):
     reset_password_code: str = data.get("reset_password_code")
     new_password: str = data.get("new_password")
 
-    result: tuple(int, str) = check_and_reset_password(
+    result: tuple[int, str] = check_and_reset_password(
         email, reset_password_code, new_password)
 
     return {"function": "reset_passord", "result": result[0], "message": result[1]}
