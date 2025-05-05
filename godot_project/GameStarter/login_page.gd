@@ -52,6 +52,9 @@ func _http_request_completed(result, response_code, headers, body):
 		# Needs to setup a token of connection
 		Global.username = response["username"]
 		Global.connection_token = response["connection_token"]
+		Global.avatar = response["avatar"]
+		Global.game_played = response["game_played"]
+		Global.game_won = response["game_won"]
 		
 		if response["rememberme"]:
 			Global.remaining_data.username = response["username"]

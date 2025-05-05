@@ -59,8 +59,6 @@ func _http_request_completed(result, response_code, headers, body):
 		Global.game_played = response[\"game_played\"]
 		Global.game_won = response[\"game_won\"]
 		get_tree().change_scene_to_file(\"res://GameStarter/Profile.tscn\")
-	else:
-		Notification.show_side(\"Failed to load profile\")
 
 # Function called when an input event is detected on the Instagram button.
 # _viewport: The viewport node associated with the event.

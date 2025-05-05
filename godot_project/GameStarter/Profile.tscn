@@ -85,6 +85,24 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_13uxv")
 text = "Disconnect "
 
+[node name="games" type="Label" parent="."]
+offset_left = 779.0
+offset_top = 372.0
+offset_right = 1058.0
+offset_bottom = 510.0
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="wins" type="Label" parent="."]
+offset_left = 1337.0
+offset_top = 411.0
+offset_right = 1616.0
+offset_bottom = 549.0
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="Back Btn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="Change Avatar" to="." method="_on_change_avatar_pressed"]
 [connection signal="pressed" from="Disconnect" to="." method="_on_disconnect_pressed"]

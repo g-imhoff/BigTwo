@@ -29,7 +29,8 @@ def random_code(length):
     return ''.join(random.choice(characters) for _ in range(length))
 
 
-def email_reset_password(verification_code: str, email: str) -> tuple[int, str]:
+def email_reset_password(verification_code: str,
+                         email: str) -> tuple[int, str]:
     # Générer un code aléatoire de 6 chiffres
 
     # Contenu de l'email
@@ -41,7 +42,8 @@ def email_reset_password(verification_code: str, email: str) -> tuple[int, str]:
 
     Here is your verification code:
 
-    CODE: {verification_code}
+    CODE: {
+        verification_code}
 
     This code is valid for 10 minutes.
 
@@ -87,7 +89,8 @@ def send_email(email_user) -> int:
 
     Here is your verification code:
 
-    CODE: {verification_code}
+    CODE: {
+        verification_code}
 
     This code is valid for 10 minutes.
 
