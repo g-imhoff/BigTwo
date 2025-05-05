@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Body
 import uvicorn
 from bdd_script import login_account, create_account
-from verification import send_email
-from bdd_script import set_verification_code, verify_code, check_token
+from verification import random_code, send_email, email_reset_password
+from bdd_script import set_verification_code, verify_code, check_token, check_and_reset_password, set_reset_password_code
 
 app = FastAPI()
 
@@ -64,12 +64,9 @@ def confirm_register(data: dict = Body(...)):
     email: str = data.get("email")
     verification_code: int = data.get("verification_code")
 
-    result: bool = verify_code(verification_code, email)
+    result: tuple[int, str] = verify_code(verification_code, email)
 
-    if result:
-        return {"function": "confirm_register", "code": 0, "message": "connection success"}
-    else:
-        return {"function": "confirm_register", "code": 1, "message": "wrong verification code"}
+    return {"function": "confirm_register", "code": result[0], "message": result[1]}
 
 
 @app.post("/auth/new_email_code")
@@ -89,6 +86,33 @@ def check_connectivity(data: dict = Body(...)):
     result: bool = check_token(username, token)
 
     return {"result": 1 if result else 0}
+
+
+@app.post("/auth/send_email_reset_password")
+def send_email_reset_password(data: dict = Body(...)):
+    email: str = data.get("email")
+    verification_code = random_code(6)
+
+    result: tuple[int, str] = set_reset_password_code(verification_code, email)
+
+    if result[0] == 0:
+        reset_passord_code: tuple[int, str] = email_reset_password(
+            verification_code, email)
+        result = reset_passord_code
+
+    return {"function": "send_email_reset_password", "code": result[0], "message": result[1]}
+
+
+@app.post("/auth/reset_password")
+def reset_passord(data: dict = Body(...)):
+    email: str = data.get("email")
+    reset_password_code: str = data.get("reset_password_code")
+    new_password: str = data.get("new_password")
+
+    result: tuple[int, str] = check_and_reset_password(
+        email, reset_password_code, new_password)
+
+    return {"function": "reset_password", "code": result[0], "message": result[1]}
 
 
 if __name__ == "main":

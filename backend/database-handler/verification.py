@@ -29,6 +29,51 @@ def random_code(length):
     return ''.join(random.choice(characters) for _ in range(length))
 
 
+def email_reset_password(verification_code: str, email: str) -> tuple[int, str]:
+    # Générer un code aléatoire de 6 chiffres
+
+    # Contenu de l'email
+    subject = "Your Reset Password Code"
+    body = f"""
+    Hello,
+
+    To confirm your reset password, please enter the code below in the application.
+
+    Here is your verification code:
+
+    CODE: {verification_code}
+
+    This code is valid for 10 minutes.
+
+    If you did not request this registration, please ignore this message.
+
+    The Support Team
+    """
+
+    # Création du message
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = email
+    message["Subject"] = subject
+
+    message.attach(MIMEText(body, "plain"))
+
+    # Envoi de l'email
+    try:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.send_message(message)
+        print("Email sent successfully!")
+    except Exception as e:
+        return -1, "Can't send the email"
+        print("Error when the email was sent :", e)
+    finally:
+        server.quit()
+
+    return 0, "Email has been send"
+
+
 def send_email(email_user) -> int:
     # Générer un code aléatoire de 6 chiffres
     verification_code = random_code(6)

@@ -91,8 +91,6 @@ func _on_submit_btn_pressed() -> void:
 	add_child(http_request)
 	http_request.request_completed.connect(_http_request_completed)
 	
-	print(Global.email)
-	
 	var content = JSON.stringify({
 		"email": Global.email,
 		"verification_code": int(code)
