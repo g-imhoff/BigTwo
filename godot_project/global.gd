@@ -42,7 +42,6 @@ func _http_request_completed(result, response_code, headers, body):
 	var json = JSON.new()
 	json.parse(body.get_string_from_utf8())
 	var response = json.get_data()
-	print(response)
 	
 	if(response["result"] == 1):
 		Global.username = Global.remaining_data.username
