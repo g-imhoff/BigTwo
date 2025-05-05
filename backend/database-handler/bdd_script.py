@@ -12,6 +12,39 @@ DB_PARAMS = {
 pattern_email = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 
 
+def check_and_reset_password(email: str, user_reset_password_code: str, new_password: str) -> tuple(int, str):
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute("""
+        SELECT reset_password_code
+        FROM users
+        WHERE email = %s
+        AND reset_password_code_updated_at < NOW() - INTERVAL '10 minutes'""",
+                    (email,))
+
+        try:
+            reset_password_code, = cur.fetchone()
+
+            if reset_password_code == user_reset_password_code:
+                cur.execute("""
+                UPDATE users
+                SET password = %s
+                WHERE email = %s""",
+                            (new_password, email,))
+                conn.commit()
+
+                return 0, "reset worked"
+            else:
+                return 1, "wrong code"
+        except TypeError:
+            return 2, "Account not find or password code limit timer passed"
+
+    except psycopg2.Error as e:
+        print("Database error : ", e)
+        return 3, "Database error"
+
+
 def create_account(profile_name, email, password):
     """
     Check if an account exists in the database, and create it if it doesn't.
@@ -20,8 +53,8 @@ def create_account(profile_name, email, password):
     :param username: username of the user
     :param password: password of the user
     """
-    if re.match(pattern_email, profile_name): 
-        return 4 # error username looks like an email
+    if re.match(pattern_email, profile_name):
+        return 4  # error username looks like an email
     elif re.match(pattern_email, email):
         try:
             conn = psycopg2.connect(**DB_PARAMS)
@@ -55,31 +88,61 @@ def set_verification_code(code: int, email: str) -> None:
         print("Database error : ", e)
 
 
-def verify_code(code: int, email: str) -> bool:
+def verify_code(code: int, email: str) -> tuple(int, str):
     try:
         conn = psycopg2.connect(**DB_PARAMS)
         cur = conn.cursor()
         cur.execute("""
-        SELECT verification_code 
-        FROM users 
+        SELECT verification_code
+        FROM users
+        WHERE email = %s
+        AND verification_code_updated_at < NOW() - INTERVAL '10 minutes'""",
+                    (email,))
+
+        try:
+            verification_code, = cur.fetchone()
+
+            if verification_code == code:
+                cur.execute("""
+                UPDATE users
+                SET verified_account = true
+                WHERE email = %s""", (email,))
+                conn.commit()
+                return 0, "account verified"
+            else:
+                return 1, "Wrong code"
+        except TypeError:
+            return 2, "Account not find or verification code limit timer passed"
+
+    except psycopg2.Error as e:
+        print("Database error : ", e)
+        return 3, "Database error"
+
+
+def set_reset_password_code(verification_code: str, email: str) -> tuple(int, str):
+    try:
+        conn = psycopg2.connect(**DB_PARAMS)
+        cur = conn.cursor()
+        cur.execute("""
+        SELECT email
+        FROM users
         WHERE email = %s""",
                     (email,))
 
-        verification_code, = cur.fetchone()
+        try:
+            cur.fetchone()  # Check if there is an account
 
-        print(verification_code, code)
-        if verification_code == code:
             cur.execute("""
-            UPDATE users 
-            SET verified_account = true
-            WHERE email = %s""", (email,))
+            UPDATE users
+            SET reset_password_code = %s
+            WHERE email = %s""", (verification_code, email,))
             conn.commit()
-            return True
-        else:
-            return False
+            return 0, "password was set"
+        except TypeError:
+            return 1, "Email not existing"
     except psycopg2.Error as e:
         print("Database error : ", e)
-        return False
+        return 2, "Database got an error"
 
 
 def login_account(profile_name_email, password, connection_token):
@@ -104,7 +167,7 @@ def login_account(profile_name_email, password, connection_token):
                     return 5, "", bdd_email, ""  # the account is not verified
                 elif bdd_token == connection_token:
                     return 0, bdd_username, bdd_email, ""  # connection worked
-                else : 
+                else:
                     token = generate_token(bdd_username)
                     if token == -1:
                         return 4, "", "", ""  # failed to generate a token
@@ -148,9 +211,9 @@ def check_token(username, token):
         WHERE username = %s""",
                     (username, ))
 
-        try: 
+        try:
             connection_token, = cur.fetchone()
-        except TypeError as e: 
+        except TypeError as e:
             return False
 
         if connection_token == token:
