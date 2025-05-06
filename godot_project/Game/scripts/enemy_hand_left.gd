@@ -14,10 +14,12 @@ var card_scale=Vector2(0.5,0.5)
 
 @onready var hand_player=$"../PlayerHand"
 @onready var card_l = $".."
+@onready var playerusername = $"../PlayerUsername"
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	playerusername.text = Global.username
 	center_screen_y=get_viewport().size.y/2
 	var card_scene=preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
@@ -68,7 +70,6 @@ func calculate_card_position(index):
 	
 	
 func animate_card_to_position(card,new_position):
-	print(card)
 	var tween = get_tree().create_tween()
 	tween.tween_property(card,"position", new_position,0.1 )
 	

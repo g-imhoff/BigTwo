@@ -1,18 +1,18 @@
 [gd_scene load_steps=21 format=3 uid="uid://d20ku6m670vr1"]
 
-[ext_resource type="Script" uid="uid://boxikanrw7nlg" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
-[ext_resource type="Script" uid="uid://pqjsg5seivy0" path="res://Game/scripts/start.gd" id="1_8ka4x"]
-[ext_resource type="Script" uid="uid://bqvwuuqmwqm6p" path="res://Game/scenes/main.gd" id="1_gouob"]
-[ext_resource type="Script" uid="uid://f3vq31h7iapx" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
-[ext_resource type="Script" uid="uid://vyh7baaq7fjf" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
-[ext_resource type="Script" uid="uid://b51gk1h1ii64t" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
-[ext_resource type="Script" uid="uid://dpjxni5fp5s2b" path="res://Game/scripts/card_manager_enemy_right.gd" id="3_isv1k"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
+[ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
+[ext_resource type="Script" path="res://Game/scenes/main.gd" id="1_gouob"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
+[ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_right.gd" id="3_isv1k"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="3_j44is"]
-[ext_resource type="Script" uid="uid://bqkmy83iawai4" path="res://Game/scripts/card_manager_enemy_left.gd" id="4_awnpp"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_left.gd" id="4_awnpp"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="5_dlrfd"]
-[ext_resource type="Script" uid="uid://bpkdcx4g5grjk" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
-[ext_resource type="Script" uid="uid://btqcwfhm4177j" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
-[ext_resource type="Script" uid="uid://bbfxd5w2h70pp" path="res://Game/scripts/bot_player_func.gd" id="12_5o7ou"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
+[ext_resource type="Script" path="res://Game/scripts/bot_player_func.gd" id="12_5o7ou"]
 [ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="13_ee3kj"]
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="14_td723"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="15_1d6tm"]
@@ -232,6 +232,50 @@ texture_normal = ExtResource("18_e7axl")
 
 [node name="EndGame" parent="." instance=ExtResource("20_rng3j")]
 visible = false
+
+[node name="PlayerUsername" type="Label" parent="."]
+offset_left = 940.0
+offset_top = 1029.0
+offset_right = 980.0
+offset_bottom = 1052.0
+text = "Test"
+
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerUsername"]
+visible = false
+position = Vector2(-30, 18)
+
+[node name="EnemyUsernameRight" type="Label" parent="."]
+offset_left = 1865.0
+offset_top = 558.0
+offset_right = 1905.0
+offset_bottom = 581.0
+text = "Bot 3"
+
+[node name="EnemySpriteRight" type="Sprite2D" parent="EnemyUsernameRight"]
+visible = false
+position = Vector2(-30, 21)
+
+[node name="EnemyUsernameLeft" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 522.0
+offset_right = 95.0
+offset_bottom = 545.0
+text = "Bot 1"
+
+[node name="EnemySpriteLeft" type="Sprite2D" parent="EnemyUsernameLeft"]
+visible = false
+position = Vector2(-30, 21)
+
+[node name="EnemyUsernameTop" type="Label" parent="."]
+offset_left = 940.0
+offset_top = 15.0
+offset_right = 980.0
+offset_bottom = 38.0
+text = "Bot 2"
+
+[node name="EnemySpriteTop" type="Sprite2D" parent="EnemyUsernameTop"]
+visible = false
+position = Vector2(-30, 17)
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]
 [connection signal="enemy_right" from="card_manager_enemy" to="card_manager_enemy_right" method="_on_card_manager_enemy_enemy_right"]

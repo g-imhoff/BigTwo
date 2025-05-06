@@ -251,8 +251,9 @@ func remove_card_in_slot():
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
-		Global.index+=1
-		Global.endcardpos+=0.2
+			Global.index+=1
+			Global.endcardpos+=0.2
+
 
 func end_game():
 	print("tu a gagné")
@@ -299,7 +300,6 @@ func check_other_cards():
 	var lst_card=card_clicked.duplicate()
 	lst_card.sort_custom(func(a, b): return a.value < b.value)
 	var check_combi=check_cards_clicked()
-	print(check_combi)
 	if children_slots_right[0].combi==null and check_combi!=null:
 		return true
 	var combi_enemy
@@ -464,7 +464,6 @@ func check_for_fullhouse(lst_card, children_slots, hand, children_slots_right):
 func check_for_four_kind(lst_card, children_slots, hand, children_slots_right):
 	var card_to_put=[0]
 	card_to_put = check_for_simple_combi(lst_card, children_slots, children_slots_right)
-	print(hand.player_hand)
 	if card_to_put[0]==4 and hand.player_hand.size()>4:#check four of a kind
 		for card in lst_card:
 			if card not in card_to_put[2]:

@@ -209,8 +209,8 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
-		Global.index+=1
-		Global.endcardpos+=0.2
+			Global.index+=1
+			Global.endcardpos+=0.2
 
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot,player):
 	if played==false:

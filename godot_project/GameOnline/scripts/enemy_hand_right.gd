@@ -1,5 +1,7 @@
 extends Node2D
 
+signal send_card_player
+
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
 const CARD_WIDTH=60 #60
@@ -11,10 +13,14 @@ var lst_card_in_slot=[]
 var card_scale=Vector2(0.5,0.5)
 var center_screen_y
 
+@onready var hand_up=$"../EnemyHandUp"
+
 func on_started() -> void:
+	print("here right")
 	center_screen_y=get_viewport().size.y/2
 	var card_scene=preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
+		await hand_up.send_card_right
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
 		
@@ -29,6 +35,8 @@ func on_started() -> void:
 		
 		new_card.name="Card"
 		add_card_to_hand(new_card)
+		await get_tree().create_timer(0.1).timeout
+		emit_signal("send_card_player")
 
 func add_card_to_hand(card):
 	if card not in player_hand:
