@@ -1,12 +1,48 @@
-[gd_scene load_steps=9 format=3 uid="uid://44gfaxbm8iqt"]
+[gd_scene load_steps=16 format=3 uid="uid://44gfaxbm8iqt"]
 
-[ext_resource type="Script" uid="uid://cxu8y7xb0ppef" path="res://GameOnline/scripts/lobby.gd" id="1_lgl66"]
+[ext_resource type="Script" path="res://GameOnline/scripts/lobby.gd" id="1_lgl66"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_4kbjn"]
 [ext_resource type="Texture2D" uid="uid://by85xnwxgoq7o" path="res://assets/ui/pokerboard.png" id="3_f727l"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="4_nio05"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="5_geggd"]
 [ext_resource type="PackedScene" uid="uid://doe8bwwuydqex" path="res://GameOnline/scenes/Createroompop.tscn" id="6_ns74r"]
 [ext_resource type="PackedScene" uid="uid://b1jq8d0fre7vu" path="res://GameOnline/scenes/Joinroompop.tscn" id="7_r0qeh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gr0i"]
+bg_color = Color(0.803922, 0.603922, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ut5ui"]
+bg_color = Color(0.802035, 0.603629, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncdph"]
+bg_color = Color(0.803922, 0.603922, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ddch8"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
@@ -15,10 +51,49 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(1, 0.756863, 0.027451, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcsj2"]
+bg_color = Color(0.803922, 0.603922, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bknc5"]
+bg_color = Color(0.803922, 0.603922, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulak6"]
+bg_color = Color(0.803922, 0.603922, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_nw42c"]
+font_size = 80
 
 [node name="Lobby" type="Node2D"]
 script = ExtResource("1_lgl66")
@@ -35,50 +110,55 @@ offset_bottom = 151.0
 texture_normal = ExtResource("5_geggd")
 
 [node name="Pokerboard" type="TextureRect" parent="."]
-offset_left = 17.0
-offset_top = -102.0
-offset_right = 1906.0
-offset_bottom = 1235.0
+offset_left = 3.0
+offset_top = -114.0
+offset_right = 1892.0
+offset_bottom = 1223.0
 texture = ExtResource("3_f727l")
 
 [node name="Create room btn" type="Button" parent="."]
-offset_left = 484.0
-offset_top = 580.0
-offset_right = 759.0
-offset_bottom = 644.0
+offset_left = 526.0
+offset_top = 571.0
+offset_right = 872.0
+offset_bottom = 647.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_5gr0i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ut5ui")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ncdph")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ddch8")
 text = "Create Room"
 
 [node name="Join room btn" type="Button" parent="."]
-offset_left = 1072.0
-offset_top = 575.0
-offset_right = 1418.0
-offset_bottom = 651.0
+offset_left = 1032.0
+offset_top = 571.0
+offset_right = 1378.0
+offset_bottom = 647.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_mcsj2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bknc5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ulak6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ddch8")
 text = "Join Room"
 
 [node name="Createroompop" parent="." instance=ExtResource("6_ns74r")]
 visible = false
 position = Vector2(2141, 331)
-scale = Vector2(1, 1)
 
 [node name="Joinroompop" parent="." instance=ExtResource("7_r0qeh")]
 visible = false
 position = Vector2(2137, 329)
-scale = Vector2(1, 1)
 
 [node name="Label" type="Label" parent="."]
-offset_left = 615.0
-offset_top = 273.0
-offset_right = 1451.0
-offset_bottom = 417.0
+offset_left = 637.0
+offset_top = 344.0
+offset_right = 1306.0
+offset_bottom = 488.0
 theme_override_fonts/font = ExtResource("4_nio05")
 theme_override_font_sizes/font_size = 100
 text = "Hey user"
+label_settings = SubResource("LabelSettings_nw42c")
 
 [connection signal="pressed" from="Back Btn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="Create room btn" to="." method="_on_create_room_btn_pressed"]
