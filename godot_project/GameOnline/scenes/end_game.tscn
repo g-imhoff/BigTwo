@@ -11,20 +11,24 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bymlf"]
+bg_color = Color(1, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cx2a8"]
+bg_color = Color(0.164706, 0.556863, 0.164706, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -69,18 +73,19 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Home" type="Button" parent="."]
-offset_left = 297.0
-offset_top = 416.0
-offset_right = 457.0
-offset_bottom = 456.0
+offset_left = 278.0
+offset_top = 413.0
+offset_right = 438.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_bymlf")
 text = "Home"
 
 [node name="Play Again" type="Button" parent="."]
-offset_left = 503.0
-offset_top = 415.0
-offset_right = 663.0
-offset_bottom = 455.0
+offset_left = 500.0
+offset_top = 413.0
+offset_right = 660.0
+offset_bottom = 453.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_cx2a8")
 text = "Play again"
 
