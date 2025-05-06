@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b1jq8d0fre7vu"]
 
-[ext_resource type="Script" path="res://GameOnline/scripts/joinroompop.gd" id="1_361u7"]
+[ext_resource type="Script" uid="uid://b4wukwi1klpbn" path="res://GameOnline/scripts/joinroompop.gd" id="1_361u7"]
 [ext_resource type="Texture2D" uid="uid://cyd656ov8b6ty" path="res://assets/ui/lobbyPopUp.png" id="1_utvtk"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="3_p7w81"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://k4ebvk3lxk6r"]
 
-[ext_resource type="Script" path="res://GameStarter/setting.gd" id="1_5qr03"]
+[ext_resource type="Script" uid="uid://cbogcr2eu72gs" path="res://GameStarter/setting.gd" id="1_5qr03"]
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_l204h"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_aw5tj"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_4hd25"]
