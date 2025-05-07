@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://k4ebvk3lxk6r"]
 
-[ext_resource type="Script" uid="uid://cbogcr2eu72gs" path="res://GameStarter/setting.gd" id="1_5qr03"]
+[ext_resource type="Script" path="res://GameStarter/setting.gd" id="1_5qr03"]
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_l204h"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_aw5tj"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="4_4hd25"]
@@ -115,7 +115,7 @@ z_index = 999
 script = ExtResource("1_5qr03")
 
 [node name="PopupSettings" type="Sprite2D" parent="."]
-position = Vector2(0, 6.00001)
+position = Vector2(0, 1)
 scale = Vector2(1.00705, 1.0665)
 texture = ExtResource("1_l204h")
 centered = false
@@ -228,11 +228,11 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_pmj4t")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ni351")
 text = "Exit to main menu"
 
-[node name="TextureButton" type="TextureButton" parent="."]
-offset_left = 56.0
-offset_top = 55.0
-offset_right = 130.0
-offset_bottom = 129.0
+[node name="TextureButton" type="TextureButton" parent="PopupSettings"]
+offset_left = 55.608
+offset_top = 45.9447
+offset_right = 129.608
+offset_bottom = 119.945
 texture_normal = ExtResource("4_4hd25")
 
 [connection signal="value_changed" from="PopupSettings/vol bar" to="." method="_on_h_slider_value_changed"]
@@ -240,4 +240,4 @@ texture_normal = ExtResource("4_4hd25")
 [connection signal="toggled" from="PopupSettings/sound btn" to="." method="_on_check_button_button_sound_toggled"]
 [connection signal="pressed" from="PopupSettings/Exit Desk btn" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="PopupSettings/Exit menu btn" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="PopupSettings/TextureButton" to="." method="_on_texture_button_pressed"]
