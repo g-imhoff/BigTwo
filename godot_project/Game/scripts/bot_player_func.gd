@@ -306,7 +306,9 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 
 func end_game():
 	print("tu a gagné")
-	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
+	$"../EndGame".set_visible(true)
+	$"../EndGame/PlayerWinner".text = "You lost"
+	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func show_message(text: String, duration: float = 2.0):

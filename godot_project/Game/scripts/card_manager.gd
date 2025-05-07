@@ -261,6 +261,8 @@ func remove_card_in_slot():
 func end_game():
 	print("tu a gagné")
 	$"../EndGame".set_visible(true)
+	$"../EndGame/PlayerWinner".text = "You win"
+	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func _on_button_2_pressed() -> void:
