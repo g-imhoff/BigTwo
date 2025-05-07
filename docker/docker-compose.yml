@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      # Mount the export directory into the container
+      # This allows you to update the exported game without rebuilding the container
+      - ../godot_project/export:/usr/share/nginx/html
+    restart: unless-stopped
+    
+  # Uncomment this if you have a backend service
+  # backend:
+  #   build:
+  #     context: ../backend
+  #   ports:
+  #     - "8000:8000"
+  #   restart: unless-stopped
