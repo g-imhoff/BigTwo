@@ -3,10 +3,11 @@ extends Node2D
 @onready var join_room = $Background/Joinroompop
 
 func _ready() -> void:
-	var err = SocketOnline.socket.connect_to_url(Global.server_url)
-	if err != OK:
-		print("Unable to connect")
-		set_process(false)
+	if SocketOnline.socket.get_ready_state()!= WebSocketPeer.STATE_OPEN:
+		var err = SocketOnline.socket.connect_to_url(Global.server_url)
+		if err != OK:
+			print("Unable to connect")
+			set_process(false)
 	else:
 		while SocketOnline.socket.get_ready_state() != WebSocketPeer.STATE_OPEN:
 			SocketOnline.socket.poll()
