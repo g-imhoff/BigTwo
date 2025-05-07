@@ -242,7 +242,8 @@ offset_bottom = 1081.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerUsername"]
 visible = false
-position = Vector2(-30, 18)
+position = Vector2(-30, 12)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("21_y53yt")
 
 [node name="EnemyUsernameRight" type="Label" parent="."]
@@ -256,6 +257,7 @@ text = "Bot 3"
 [node name="EnemySpriteRight" type="Sprite2D" parent="EnemyUsernameRight"]
 visible = false
 position = Vector2(-30, 21)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("21_y53yt")
 
 [node name="EnemyUsernameLeft" type="Label" parent="."]
@@ -269,6 +271,7 @@ text = "Bot 1"
 [node name="EnemySpriteLeft" type="Sprite2D" parent="EnemyUsernameLeft"]
 visible = false
 position = Vector2(-30, 21)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("21_y53yt")
 
 [node name="EnemyUsernameTop" type="Label" parent="."]
@@ -281,6 +284,7 @@ text = "Bot 2"
 [node name="EnemySpriteTop" type="Sprite2D" parent="EnemyUsernameTop"]
 visible = false
 position = Vector2(-30, 17)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("21_y53yt")
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]

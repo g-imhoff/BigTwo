@@ -24,6 +24,7 @@ var straightForFlush=[]
 @onready var message=$"../message"
 @onready var timer =$"../Timer"
 @onready var endslot=$"../cardendslot"
+@onready var circle_sprite=$"../PlayerUsername/PlayerSprite"
 
 
 func _ready() -> void:
@@ -152,6 +153,7 @@ func _on_button_pressed() -> void:
 			if hand.player_hand.size()==0:
 				end_game()
 			message.visible = false
+			circle_sprite.visible=false
 			emit_signal("card_played")
 	else:
 		for card in card_clicked:
@@ -185,7 +187,7 @@ func _on_button_pressed() -> void:
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 		if hand.player_hand.size()==0:
 			end_game()
-		message.visible = false
+		circle_sprite.visible=false
 		emit_signal("card_played")
 
 
@@ -277,7 +279,7 @@ func _on_button_2_pressed() -> void:
 		children_slots[0].combi_value = children_slots_right[0].combi_value
 		children_slots[0].combi_form = children_slots_right[0].combi_form
 		children_slots[0].passing = 1 + children_slots_right[0].passing
-		message.visible = false
+		circle_sprite.visible=false
 		emit_signal("card_played")
 
 
@@ -286,6 +288,7 @@ func _on_card_manager_enemy_right_enemy() -> void:
 	#await get_tree().create_timer(2.0).timeout
 	#print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
 	played=false
+	circle_sprite.visible=true
 	show_message("Your turn")
 	for card in card_clicked.duplicate():
 		#card.queue_free()
@@ -297,6 +300,7 @@ func _on_card_manager_enemy_right_enemy() -> void:
 
 #test pour faire commencé celui qui a le 3 de diamonds
 func on_card_played():
+	circle_sprite.visible=true
 	played = false
 	show_message("Your turn")
 
