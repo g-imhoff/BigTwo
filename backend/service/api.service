@@ -1,0 +1,14 @@
+[Unit]
+Description=Chor Dai Bi - Backend FastAPI Server
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/projet_chor_dai_di/backend/database-handler/
+ExecStart=/home/ubuntu/projet_chor_dai_di/backend/database-handler/.env/bin/uvicorn api:app --host 0.0.0.0 --port 10005
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

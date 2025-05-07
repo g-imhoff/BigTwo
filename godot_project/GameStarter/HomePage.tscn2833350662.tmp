@@ -1,0 +1,174 @@
+[gd_scene load_steps=13 format=3 uid="uid://7mcc8557hsh8"]
+
+[ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_gu8ip"]
+[ext_resource type="Texture2D" uid="uid://k232put81nvn" path="res://assets/ui/user button.png" id="3_q42id"]
+[ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="4_b1bmy"]
+[ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="5_hq1fw"]
+[ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="6_dni38"]
+[ext_resource type="Texture2D" uid="uid://covt4p0qo7kmh" path="res://assets/ui/circle.png" id="6_w6ksr"]
+[ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="9_18r8e"]
+
+[sub_resource type="GDScript" id="GDScript_ppnjs"]
+script/source = "extends Node2D
+
+func _ready():
+	UISounds.install_sounds(self)
+
+# Function called when an input event is detected on the rules button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event.
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_rules_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed(\"leftclick\"):
+		get_tree().change_scene_to_file(\"res://GameStarter/RulesPage.tscn\")
+
+
+# Function called when the \"Play Now\" button is pressed.
+func _on_play_now_pressed() -> void:
+	if (Global.username != \"\"):
+		get_tree().change_scene_to_file(\"res://GameStarter/ChooseModePage.tscn\")
+	else:
+		get_tree().change_scene_to_file(\"res://GameStarter/ConnectionPage.tscn\")
+
+
+
+func _on_profile_btn_pressed() -> void:
+	if Global.username != \"\":
+		var http_request = HTTPRequest.new()
+		add_child(http_request)
+		http_request.request_completed.connect(_http_request_completed)
+		
+		var content = JSON.stringify({
+			\"username\": Global.username,
+		})
+			
+		var error = http_request.request(Global.api_url + \"/user/info\", [], HTTPClient.METHOD_POST, content)
+		if error != OK:
+			push_error(\"An error occurred in the HTTP request.\")
+		await http_request.request_completed
+	else:
+		Notification.show_side(\"You need to login before !\")
+
+func _http_request_completed(result, response_code, headers, body): 
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	
+	if (response[\"code\"] == 0):
+		Global.
+		get_tree().change_scene_to_file(\"res://GameStarter/Profile.tscn\")
+
+# Function called when an input event is detected on the Instagram button.
+# _viewport: The viewport node associated with the event.
+# event: The detected input event.
+# _shape_idx: The shape index in the case of a collision shape node.
+func _on_instagram_button_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event.is_action_pressed(\"leftclick\"):
+		print(\"InstagramButtonClicked\")
+
+func _on_texture_button_2_pressed() -> void:
+		get_tree().change_scene_to_file(\"res://GameStarter/RulesPage.tscn\") 
+
+func _on_texture_button_pressed() -> void:
+	$Setting.visible = not $Setting.visible
+
+
+func _on_social_media_pressed() -> void:
+	OS.shell_open(\"https://linktr.ee/bigtwo2\")
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i47ee"]
+bg_color = Color(0.0196078, 0.0156863, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0f1fm"]
+bg_color = Color(0.0196078, 0.0156863, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85523"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upulg"]
+bg_color = Color(0.0190904, 0.014443, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Homepage" type="Node2D"]
+script = SubResource("GDScript_ppnjs")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_gu8ip")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(960, 300)
+texture = ExtResource("5_hq1fw")
+
+[node name="Settings Btn" type="TextureButton" parent="."]
+offset_left = 1752.0
+offset_top = 920.0
+offset_right = 1832.0
+offset_bottom = 1000.0
+texture_normal = ExtResource("6_dni38")
+
+[node name="PlayNow" type="Button" parent="."]
+offset_left = 783.0
+offset_top = 800.0
+offset_right = 1138.0
+offset_bottom = 913.0
+theme_override_font_sizes/font_size = 55
+theme_override_styles/focus = SubResource("StyleBoxFlat_i47ee")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0f1fm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_85523")
+theme_override_styles/normal = SubResource("StyleBoxFlat_upulg")
+text = "PLAY NOW"
+
+[node name="Profile Btn" type="TextureButton" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 173.0
+offset_bottom = 177.0
+scale = Vector2(1.2, 1.2)
+texture_normal = ExtResource("3_q42id")
+
+[node name="Rules Btn" type="TextureButton" parent="."]
+offset_left = 1720.0
+offset_top = 56.0
+offset_right = 1835.0
+offset_bottom = 180.0
+scale = Vector2(1.2, 1.2)
+texture_normal = ExtResource("4_b1bmy")
+
+[node name="Social media" type="TextureButton" parent="."]
+offset_left = 72.0
+offset_top = 904.0
+offset_right = 181.0
+offset_bottom = 1017.0
+texture_normal = ExtResource("6_w6ksr")
+
+[node name="Setting" parent="." instance=ExtResource("9_18r8e")]
+visible = false
+position = Vector2(424, 80)
+
+[connection signal="pressed" from="Settings Btn" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="PlayNow" to="." method="_on_play_now_pressed"]
+[connection signal="pressed" from="Profile Btn" to="." method="_on_profile_btn_pressed"]
+[connection signal="pressed" from="Rules Btn" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="Social media" to="." method="_on_social_media_pressed"]

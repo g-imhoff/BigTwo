@@ -1,0 +1,14 @@
+/Unit]
+Description=Chor Dai Di - Game Online Python Service
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/projet_chor_dai_di/backend/game_online/
+ExecStart=/home/ubuntu/projet_chor_dai_di/backend/game_online/.env/bin/python main.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
