@@ -1,8 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcblllx72cd53"]
+[gd_scene load_steps=16 format=3 uid="uid://dcblllx72cd53"]
 
 [ext_resource type="Texture2D" uid="uid://cbnhdmxantoom" path="res://assets/ui/Popup Settings.png" id="1_ha4bm"]
-[ext_resource type="Script" uid="uid://dhtdkd38k55dp" path="res://GameStarter/accverificationpop.gd" id="1_nbojv"]
+[ext_resource type="Script" path="res://GameStarter/accverificationpop.gd" id="1_nbojv"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_auh1l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7m2g"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhert"]
 draw_center = false
@@ -55,10 +59,22 @@ corner_radius_bottom_right = 65
 corner_radius_bottom_left = 65
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_heius"]
+bg_color = Color(0.870588, 0, 0, 1)
 draw_center = false
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vh46"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(0.870387, 2.88785e-07, 1.2514e-06, 1)
+corner_radius_top_left = 65
+corner_radius_top_right = 65
+corner_radius_bottom_right = 65
+corner_radius_bottom_left = 65
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bfq7"]
+bg_color = Color(0.870588, 0, 0, 1)
 corner_radius_top_left = 65
 corner_radius_top_right = 65
 corner_radius_bottom_right = 65
@@ -75,27 +91,28 @@ corner_radius_bottom_left = 65
 script = ExtResource("1_nbojv")
 
 [node name="PopupAccverification" type="Sprite2D" parent="."]
-position = Vector2(569, 329.125)
+position = Vector2(568, 324)
 scale = Vector2(1, 0.810226)
 texture = ExtResource("1_ha4bm")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 339.0
-offset_top = 44.0
-offset_right = 821.0
-offset_bottom = 179.0
+offset_left = 289.0
+offset_top = 108.0
+offset_right = 851.0
+offset_bottom = 257.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_auh1l")
 theme_override_font_sizes/font_size = 40
 text = "account 
 verification"
+label_settings = SubResource("LabelSettings_r7m2g")
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="."]
-offset_left = 184.0
-offset_top = 220.0
-offset_right = 1003.0
-offset_bottom = 248.0
+offset_left = 157.0
+offset_top = 288.0
+offset_right = 976.0
+offset_bottom = 316.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Enter code that we have sent to your email"
@@ -104,10 +121,10 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = 371.0
-offset_top = 297.0
-offset_right = 793.0
-offset_bottom = 366.0
+offset_left = 349.0
+offset_top = 351.0
+offset_right = 771.0
+offset_bottom = 420.0
 alignment = 1
 
 [node name="LineEdit1" type="LineEdit" parent="HBoxContainer"]
@@ -153,12 +170,13 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_xfelb")
 alignment = 1
 
 [node name="SubmitBtn" type="Button" parent="."]
-offset_left = 511.0
-offset_top = 440.0
-offset_right = 658.0
-offset_bottom = 489.0
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
+offset_left = 481.0
+offset_top = 469.0
+offset_right = 628.0
+offset_bottom = 518.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
 theme_override_styles/focus = SubResource("StyleBoxFlat_ygsmg")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_kshx0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_vcug5")
@@ -167,36 +185,28 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_v4hek")
 text = "Submit"
 
 [node name="resend code" type="Button" parent="."]
-offset_left = 619.0
-offset_top = 579.0
-offset_right = 752.0
-offset_bottom = 624.0
+offset_left = 494.0
+offset_top = 543.0
+offset_right = 614.0
+offset_bottom = 583.0
 theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
 theme_override_styles/focus = SubResource("StyleBoxFlat_heius")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_1vh46")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0bfq7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_d5bim")
 text = "Resend Code"
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="CooldownLabel" type="Label" parent="."]
-offset_left = 765.0
-offset_top = 583.0
-offset_right = 817.0
-offset_bottom = 618.0
+offset_left = 629.0
+offset_top = 545.0
+offset_right = 681.0
+offset_bottom = 580.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
-
-[node name="change mail" type="Button" parent="."]
-offset_left = 457.0
-offset_top = 589.0
-offset_right = 565.0
-offset_bottom = 620.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/focus = SubResource("StyleBoxFlat_heius")
-theme_override_styles/normal = SubResource("StyleBoxFlat_d5bim")
-text = "change mail"
 
 [connection signal="pressed" from="SubmitBtn" to="." method="_on_submit_btn_pressed"]
 [connection signal="pressed" from="resend code" to="." method="_on_resend_code_pressed"]

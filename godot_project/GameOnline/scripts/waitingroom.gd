@@ -60,3 +60,7 @@ func _on_start_btn_pressed() -> void:
 		SocketOnline.socket.send_text(message)
 	else: 
 		Notification.show_side("Wait for the server to be full!")
+
+
+func _on_cancel_btn_pressed() -> void:
+	get_tree().change_scene_to_file("res://GameOnline/scenes/Lobby.tscn")

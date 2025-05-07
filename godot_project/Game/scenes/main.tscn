@@ -1,18 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=23 format=3 uid="uid://d20ku6m670vr1"]
 
-[ext_resource type="Script" uid="uid://boxikanrw7nlg" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
-[ext_resource type="Script" uid="uid://pqjsg5seivy0" path="res://Game/scripts/start.gd" id="1_8ka4x"]
-[ext_resource type="Script" uid="uid://bqvwuuqmwqm6p" path="res://Game/scenes/main.gd" id="1_gouob"]
-[ext_resource type="Script" uid="uid://f3vq31h7iapx" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
-[ext_resource type="Script" uid="uid://vyh7baaq7fjf" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
-[ext_resource type="Script" uid="uid://b51gk1h1ii64t" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
-[ext_resource type="Script" uid="uid://dpjxni5fp5s2b" path="res://Game/scripts/card_manager_enemy_right.gd" id="3_isv1k"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
+[ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
+[ext_resource type="Script" path="res://Game/scenes/main.gd" id="1_gouob"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
+[ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_right.gd" id="3_isv1k"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="3_j44is"]
-[ext_resource type="Script" uid="uid://bqkmy83iawai4" path="res://Game/scripts/card_manager_enemy_left.gd" id="4_awnpp"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_left.gd" id="4_awnpp"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="5_dlrfd"]
-[ext_resource type="Script" uid="uid://bpkdcx4g5grjk" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
-[ext_resource type="Script" uid="uid://btqcwfhm4177j" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
-[ext_resource type="Script" uid="uid://bbfxd5w2h70pp" path="res://Game/scripts/bot_player_func.gd" id="12_5o7ou"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
+[ext_resource type="Script" path="res://Game/scripts/bot_player_func.gd" id="12_5o7ou"]
 [ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="13_ee3kj"]
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="14_td723"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="15_1d6tm"]
@@ -20,6 +20,20 @@
 [ext_resource type="PackedScene" uid="uid://db0d4jn5sok86" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
 [ext_resource type="PackedScene" uid="uid://p7n3ewamh80a" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifjai"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlubl"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gouob")
@@ -52,17 +66,21 @@ script = ExtResource("6_brei5")
 [node name="Background" parent="." instance=ExtResource("3_j44is")]
 
 [node name="Button" type="Button" parent="."]
-offset_left = 606.0
-offset_top = 1027.0
-offset_right = 764.0
-offset_bottom = 1075.0
+offset_left = 611.0
+offset_top = 1019.0
+offset_right = 769.0
+offset_bottom = 1067.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ifjai")
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1081.0
-offset_top = 1027.0
-offset_right = 1239.0
-offset_bottom = 1075.0
+offset_left = 1075.0
+offset_top = 1016.0
+offset_right = 1233.0
+offset_bottom = 1064.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_jlubl")
 text = "PASS
 "
 
