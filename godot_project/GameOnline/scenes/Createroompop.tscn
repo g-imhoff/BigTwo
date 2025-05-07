@@ -1,23 +1,113 @@
-[gd_scene load_steps=8 format=3 uid="uid://doe8bwwuydqex"]
+[gd_scene load_steps=16 format=3 uid="uid://doe8bwwuydqex"]
 
 [ext_resource type="Texture2D" uid="uid://cyd656ov8b6ty" path="res://assets/ui/lobbyPopUp.png" id="1_75slp"]
-[ext_resource type="Script" uid="uid://dxwyg4igrt63l" path="res://GameOnline/scripts/createroompop.gd" id="1_ip36j"]
+[ext_resource type="Script" path="res://GameOnline/scripts/createroompop.gd" id="1_ip36j"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_ik73d"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knjx3"]
+bg_color = Color(0.113725, 0.403922, 0.113725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uldt3"]
+bg_color = Color(0.114399, 0.404179, 0.113747, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwvno"]
+bg_color = Color(0.113725, 0.403922, 0.113725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yafnm"]
-bg_color = Color(0.0784314, 0.682353, 0.360784, 1)
-border_color = Color(0.0784314, 0.682353, 0.360784, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+bg_color = Color(0.163743, 0.556945, 0.164086, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xeyra"]
+bg_color = Color(0.788235, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiu8a"]
+bg_color = Color(0.787542, 4.16331e-06, 5.77569e-07, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dyuf"]
+bg_color = Color(0.788235, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_08x2o"]
 bg_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_nfkdb"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n5rqj"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p74fe"]
 bg_color = Color(1, 1, 1, 1)
@@ -37,73 +127,81 @@ corner_radius_bottom_left = 65
 script = ExtResource("1_ip36j")
 
 [node name="LobbyPopUp" type="Sprite2D" parent="."]
-position = Vector2(509, 272)
+position = Vector2(508, 268)
 texture = ExtResource("1_75slp")
 
 [node name="Title" type="Label" parent="LobbyPopUp"]
-offset_left = -293.0
-offset_top = -229.0
-offset_right = 267.0
-offset_bottom = -159.0
+offset_left = -283.0
+offset_top = -196.0
+offset_right = 277.0
+offset_bottom = -126.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ik73d")
 theme_override_font_sizes/font_size = 48
 text = "Create Room"
 
 [node name="Create Btn" type="Button" parent="LobbyPopUp"]
-offset_left = 90.0
-offset_top = 181.0
-offset_right = 237.0
-offset_bottom = 217.0
+offset_left = 38.0
+offset_top = 179.0
+offset_right = 208.0
+offset_bottom = 224.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_knjx3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uldt3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wwvno")
 theme_override_styles/normal = SubResource("StyleBoxFlat_yafnm")
 text = "Create
 "
 
 [node name="Cancel Btn" type="Button" parent="LobbyPopUp"]
-offset_left = -226.0
+offset_left = -211.0
 offset_top = 180.0
-offset_right = -78.0
-offset_bottom = 214.0
+offset_right = -41.0
+offset_bottom = 225.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_xeyra")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iiu8a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1dyuf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_08x2o")
 text = "Cancel"
 
 [node name="Room name" type="Label" parent="LobbyPopUp"]
-offset_left = -430.0
-offset_top = -51.0
-offset_right = -164.0
-offset_bottom = -14.0
+offset_left = -331.0
+offset_top = -54.0
+offset_right = 10.0
+offset_bottom = -7.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ik73d")
 theme_override_font_sizes/font_size = 25
 text = "room name :"
+label_settings = SubResource("LabelSettings_nfkdb")
 
 [node name="Room Password" type="Label" parent="LobbyPopUp"]
-offset_left = -425.0
-offset_top = 47.0
-offset_right = -160.0
-offset_bottom = 84.0
+offset_left = -328.0
+offset_top = 33.0
+offset_right = 11.0
+offset_bottom = 80.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_ik73d")
 theme_override_font_sizes/font_size = 25
 text = "Password  :
 "
+label_settings = SubResource("LabelSettings_n5rqj")
 
 [node name="RoomName" type="LineEdit" parent="LobbyPopUp"]
-offset_left = -137.0
-offset_top = -45.0
-offset_right = 94.0
-offset_bottom = -9.0
+offset_left = 51.0
+offset_top = -48.0
+offset_right = 282.0
+offset_bottom = -12.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_p74fe")
 alignment = 1
 
 [node name="Password" type="LineEdit" parent="LobbyPopUp"]
-offset_left = -140.0
-offset_top = 53.0
-offset_right = 99.0
-offset_bottom = 90.0
+offset_left = 51.0
+offset_top = 36.0
+offset_right = 282.0
+offset_bottom = 73.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_he3kb")
 alignment = 1
