@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var join_room = $Joinroompop
+@onready var join_room = $Background/Joinroompop
 
 func _ready() -> void:
 	var err = SocketOnline.socket.connect_to_url(Global.server_url)
@@ -44,7 +44,7 @@ func _on_back_btn_pressed() -> void:
 	get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 func _on_create_room_btn_pressed() -> void:
-	$Createroompop.visible = not $Createroompop.visible
+	$Background/Createroompop.visible = not $Background/Createroompop.visible
 
 func _on_join_room_btn_pressed() -> void:
 	var message = JSON.stringify({
@@ -52,4 +52,4 @@ func _on_join_room_btn_pressed() -> void:
 	})
 	
 	SocketOnline.socket.send_text(message)
-	$Joinroompop.visible = not $Joinroompop.visible
+	$Background/Joinroompop.visible = not $Background/Joinroompop.visible
