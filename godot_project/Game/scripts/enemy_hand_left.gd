@@ -6,7 +6,7 @@ var start = true
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
 const CARD_WIDTH=60 #60
-const HAND_X_POSITION=100
+const HAND_X_POSITION=140
 
 var player_hand=[]
 var center_screen_y

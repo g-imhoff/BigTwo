@@ -191,6 +191,7 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 	if lst_card_in_slot.size() != 0:
 		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
+		var check_cards=false
 		children_slots[0].combi=null
 		for card in cards_to_remove:
 			endslot.position.x+=Global.endcardpos
@@ -209,8 +210,10 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
+			check_cards=true
+		if check_cards==true:
 			Global.index+=1
-			Global.endcardpos+=0.2
+			Global.endcardpos+=0.1
 
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot,player):
 	if played==false:

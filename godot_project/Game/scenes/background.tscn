@@ -6,11 +6,12 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -3
 position = Vector2(960, 540)
 texture = ExtResource("1_4cva7")
 
 [node name="Logo" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(960, 540)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_1uw4c")
