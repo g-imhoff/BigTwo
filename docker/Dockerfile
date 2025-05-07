@@ -1,10 +1,10 @@
 FROM nginx:alpine
 
 # Copy the Nginx configuration file
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy the game files to the appropriate location
-COPY ../export /usr/share/nginx/html
+# Note: We don't need to copy export files here
+# They will be mounted as a volume in docker-compose.yml
 
 # Expose port 80
 EXPOSE 80
