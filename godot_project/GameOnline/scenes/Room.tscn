@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bfx80wmptn24i"]
 
-[ext_resource type="Script" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
+[ext_resource type="Script" uid="uid://dgnxwhm60j1vf" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
 [ext_resource type="Texture2D" uid="uid://tf6uk0k44kxk" path="res://assets/ui/roomframe.png" id="2_25qoi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wolkb"]

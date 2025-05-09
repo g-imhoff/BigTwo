@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://44gfaxbm8iqt"]
 
-[ext_resource type="Script" path="res://GameOnline/scripts/lobby.gd" id="1_lgl66"]
+[ext_resource type="Script" uid="uid://cxu8y7xb0ppef" path="res://GameOnline/scripts/lobby.gd" id="1_lgl66"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_4kbjn"]
 [ext_resource type="Texture2D" uid="uid://by85xnwxgoq7o" path="res://assets/ui/pokerboard.png" id="3_f727l"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="4_nio05"]
