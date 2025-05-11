@@ -7,6 +7,14 @@ extends Node2D
 @onready var accverifi_popup = $Accverificationpop
 
 var Hash = load("res://hashage.gd")
+var PasswordChecker = load("res://password_check.gd")
+
+@onready var password_popup = $PasswordErrorPopup
+@onready var password_label = $PasswordErrorPopup/Label
+
+func show_password_popup(message: String):
+	password_label.text = message
+	password_popup.popup_centered()
 
 func _on_create_account_pressed() -> void:
 	# Assuming these are the variable names for the LineEdit nodes
@@ -19,6 +27,10 @@ func _on_create_account_pressed() -> void:
 	var password = password_line_edit.text
 	var password_hash = ""
 	
+	if not PasswordChecker.is_password_strong(password):
+		show_password_popup("Mot de passe trop faible.\n Minimum 8 Caractères avec des symboles,lettres et chiffres")
+		return
+		
 	if password != "":
 		password_hash = Hash.hash_password(password)	
 		
