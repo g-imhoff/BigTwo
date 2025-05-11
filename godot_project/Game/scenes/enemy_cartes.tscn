@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0hr5sw6b080y"]
 
-[ext_resource type="Script" uid="uid://dlslt3ja8v8db" path="res://Game/scripts/cartes_enemy.gd" id="1_b45h2"]
+[ext_resource type="Script" path="res://Game/scripts/cartes_enemy.gd" id="1_b45h2"]
 [ext_resource type="Texture2D" uid="uid://d28uptq7kpfli" path="res://assets/cards/card_clubs_02.png" id="2_y5b18"]
 
 [node name="cartes" type="Node2D"]
