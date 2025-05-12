@@ -100,6 +100,8 @@ func get_card_with_hightest_z_index(card):
 
 func _on_button_pressed() -> void:
 	var three_of_diamonds = null
+	for card in card_clicked:
+		print(card.value)
 	for card in hand.player_hand:
 		if card.value == 3 and card.form ==1:
 			three_of_diamonds = card
@@ -117,9 +119,14 @@ func _on_button_pressed() -> void:
 		#for card in cards:
 			#if card and not played:  # Si une carte est cliquée et que le jeu n'a pas encore été joué
 				#move_card_up_or_down(card)  # Déclenche le déplacement avec une seule ligne
-		if check_other_cards()==false:
-			show_message("combinaison incorrect")
-		elif check!=true:
+		#print("-------------") test for debug
+		#for card in card_clicked:
+			#print(card.value)
+		#print("--------------")
+		card_clicked.sort_custom(func(a, b): return a.value < b.value)
+		#for card in card_clicked:
+			#print(card.value)
+		if check!=true:
 			show_message("doit jouer 3 diamonds")
 		else:
 			for card in card_clicked:
@@ -156,6 +163,13 @@ func _on_button_pressed() -> void:
 			circle_sprite.visible=false
 			emit_signal("card_played")
 	else:
+		#print("-------------") test for debug
+		#for card in card_clicked:
+			#print(card.value)
+		#print("--------------")
+		card_clicked.sort_custom(func(a, b): return a.value < b.value)
+		#for card in card_clicked:
+			#print(card.value)
 		for card in card_clicked:
 			if card_clicked.size() < 5:
 				move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction

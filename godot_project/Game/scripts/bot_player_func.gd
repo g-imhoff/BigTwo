@@ -267,7 +267,8 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 					card_to_put.erase(card_to_put[0])
 				#print("combi de :",card_to_put.size()," cartes")
 				children_slots[0].combi=str(card_to_put.size())
-				can_play = true
+				if card_to_put != null:
+					can_play = true
 			else:
 				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
 				var check_size = children_slots_right[0].combi
