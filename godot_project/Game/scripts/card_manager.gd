@@ -256,15 +256,18 @@ func remove_card_in_slot():
 			check_cards=true
 		if check_cards==true:
 			Global.index+=1
-			Global.endcardpos+=0.1
+			Global.endcardpos+=0.02
 
 
 
 func end_game():
 	print("tu a gagné")
+	Global.index==1
+	Global.endcardpos==0
 	$"../EndGame".set_visible(true)
 	$"../EndGame/PlayerWinner".text = "You win"
 	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
+
 
 
 func _on_button_2_pressed() -> void:
@@ -287,6 +290,8 @@ func _on_button_2_pressed() -> void:
 func _on_card_manager_enemy_right_enemy() -> void:
 	#await get_tree().create_timer(2.0).timeout
 	#print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
+	print("index:",Global.index)
+	print("endcardpos:",Global.endcardpos)
 	played=false
 	circle_sprite.visible=true
 	show_message("Your turn")
