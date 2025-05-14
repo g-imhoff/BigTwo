@@ -1,24 +1,66 @@
-[gd_scene load_steps=7 format=3 uid="uid://cj5sl8hqn8e36"]
+[gd_scene load_steps=13 format=3 uid="uid://cj5sl8hqn8e36"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_j300w"]
 [ext_resource type="Script" uid="uid://c26o4a36pj8pl" path="res://GameOnline/scripts/waitingroom.gd" id="1_t5fdx"]
 [ext_resource type="Texture2D" uid="uid://by85xnwxgoq7o" path="res://assets/ui/pokerboard.png" id="2_wkyg2"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_xaltb"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjjui"]
+bg_color = Color(0.133333, 0.462745, 0.133333, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esni4"]
+bg_color = Color(0.134088, 0.461685, 0.133571, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pccj"]
+bg_color = Color(0.133333, 0.462745, 0.133333, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adqo7"]
-bg_color = Color(0.0784314, 0.682353, 0.360784, 1)
+bg_color = Color(0.164706, 0.556863, 0.164706, 1)
 border_color = Color(0.0784314, 0.682353, 0.360784, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dhrvp"]
+bg_color = Color(0.752941, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eu4cs"]
+bg_color = Color(0.75339, 2.38247e-06, 5.77569e-07, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kyjw7"]
+bg_color = Color(0.752941, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rn7b1"]
 bg_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="Waitingroom" type="Node2D"]
 script = ExtResource("1_t5fdx")
@@ -33,18 +75,19 @@ scale = Vector2(3.17157, 3.21569)
 texture = ExtResource("2_wkyg2")
 
 [node name="Waiting Room" type="Label" parent="."]
-offset_left = 482.0
-offset_top = 73.0
-offset_right = 1429.0
-offset_bottom = 189.0
+offset_left = 487.0
+offset_top = 47.0
+offset_right = 1434.0
+offset_bottom = 163.0
 theme_override_fonts/font = ExtResource("2_xaltb")
 theme_override_font_sizes/font_size = 80
 text = "Waiting Room"
 
 [node name="Room name" type="Label" parent="."]
-offset_top = 180.0
-offset_right = 1920.0
-offset_bottom = 309.0
+offset_left = -5.0
+offset_top = 297.0
+offset_right = 1915.0
+offset_bottom = 426.0
 theme_override_fonts/font = ExtResource("2_xaltb")
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
@@ -52,29 +95,34 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Start Btn" type="Button" parent="."]
-visible = false
-offset_left = 1046.0
-offset_top = 778.0
-offset_right = 1269.0
-offset_bottom = 876.0
+offset_left = 1022.0
+offset_top = 750.0
+offset_right = 1260.0
+offset_bottom = 830.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 29
+theme_override_styles/focus = SubResource("StyleBoxFlat_bjjui")
+theme_override_styles/hover = SubResource("StyleBoxFlat_esni4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7pccj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_adqo7")
 text = "Start Game
 "
 
 [node name="Cancel Btn" type="Button" parent="."]
-visible = false
 anchors_preset = -1
 anchor_left = -2.969
 anchor_top = -10.625
 anchor_right = -2.969
 anchor_bottom = -10.625
-offset_left = 503.0
-offset_top = 781.0
-offset_right = 741.0
-offset_bottom = 895.0
+offset_left = 638.0
+offset_top = 749.0
+offset_right = 876.0
+offset_bottom = 829.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_dhrvp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_eu4cs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kyjw7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_rn7b1")
 text = "Cancel
 "
@@ -86,3 +134,4 @@ offset_right = 1820.0
 offset_bottom = 700.0
 
 [connection signal="pressed" from="Start Btn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="Cancel Btn" to="." method="_on_cancel_btn_pressed"]

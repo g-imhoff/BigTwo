@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://p7n3ewamh80a"]
 
-[ext_resource type="Script" path="res://Game/scripts/end_game.gd" id="1_e5pko"]
+[ext_resource type="Script" uid="uid://usfi1mg72juf" path="res://Game/scripts/end_game.gd" id="1_e5pko"]
 [ext_resource type="Texture2D" uid="uid://dxoa8li7qro71" path="res://assets/ui/logonowelcome.png" id="2_p2cqn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp4nt"]

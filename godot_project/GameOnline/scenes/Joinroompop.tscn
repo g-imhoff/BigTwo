@@ -1,14 +1,104 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1jq8d0fre7vu"]
+[gd_scene load_steps=12 format=3 uid="uid://b1jq8d0fre7vu"]
 
 [ext_resource type="Script" uid="uid://b4wukwi1klpbn" path="res://GameOnline/scripts/joinroompop.gd" id="1_361u7"]
 [ext_resource type="Texture2D" uid="uid://cyd656ov8b6ty" path="res://assets/ui/lobbyPopUp.png" id="1_utvtk"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="3_p7w81"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tg4sq"]
+bg_color = Color(0.135585, 0.466152, 0.135083, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7deq"]
+bg_color = Color(0.164706, 0.556863, 0.164706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 0.988235, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsm1x"]
+bg_color = Color(0.164706, 0.556863, 0.164706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7d20"]
-bg_color = Color(0.0784314, 0.682353, 0.360784, 1)
+bg_color = Color(0.164706, 0.556863, 0.164706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jlod"]
+bg_color = Color(0.849549, 8.95473e-05, 4.83233e-05, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1e36"]
+bg_color = Color(0.85098, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mu1s"]
+bg_color = Color(0.85098, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu5wy"]
 bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="Joinroompop" type="Node2D"]
 script = ExtResource("1_361u7")
@@ -28,21 +118,27 @@ theme_override_font_sizes/font_size = 48
 text = "Join Room"
 
 [node name="Join Btn" type="Button" parent="."]
-offset_left = 613.0
-offset_top = 462.0
-offset_right = 749.0
-offset_bottom = 491.0
+offset_left = 510.0
+offset_top = 460.0
+offset_right = 670.0
+offset_bottom = 500.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_tg4sq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h7deq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qsm1x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_x7d20")
 text = "Join
 "
 
 [node name="Cancel Btn" type="Button" parent="."]
-offset_left = 298.0
-offset_top = 459.0
-offset_right = 434.0
-offset_bottom = 488.0
+offset_left = 316.0
+offset_top = 460.0
+offset_right = 476.0
+offset_bottom = 500.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_6jlod")
+theme_override_styles/hover = SubResource("StyleBoxFlat_q1e36")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5mu1s")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu5wy")
 text = "Cancel"
 

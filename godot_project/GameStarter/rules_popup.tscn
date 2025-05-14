@@ -49,7 +49,7 @@ text = "RULES"
 
 [node name="Straight" type="Sprite2D" parent="."]
 z_index = 1500
-position = Vector2(293, 257)
+position = Vector2(292, 251)
 texture = ExtResource("3_jco7a")
 
 [node name="Label" type="Label" parent="Straight"]
@@ -62,7 +62,7 @@ label_settings = SubResource("LabelSettings_q7lpf")
 
 [node name="Flush" type="Sprite2D" parent="."]
 z_index = 1500
-position = Vector2(825, 257)
+position = Vector2(824, 252)
 texture = ExtResource("4_6fqa6")
 
 [node name="Label" type="Label" parent="Flush"]
@@ -88,7 +88,7 @@ label_settings = SubResource("LabelSettings_xwa54")
 
 [node name="FullHouse" type="Sprite2D" parent="."]
 z_index = 1500
-position = Vector2(826, 475)
+position = Vector2(820, 475)
 texture = ExtResource("6_buuth")
 
 [node name="Label" type="Label" parent="FullHouse"]

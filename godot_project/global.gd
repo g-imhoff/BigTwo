@@ -20,6 +20,13 @@ func _ready() -> void:
 	print("a")
 	if Global.remaining_data.username != "":
 		check_connectivity()
+	
+	# Setup timer for checking connectivity every 30 seconds
+	var timer = Timer.new()
+	timer.wait_time = 30.0  # 30 seconds
+	timer.autostart = true
+	timer.timeout.connect(periodic_connectivity_check)
+	add_child(timer)
 
 func check_connectivity():
 	await get_tree().process_frame
@@ -131,3 +138,75 @@ var card_images=[
 ]
 
 var card_duplicate = card_images.duplicate()
+
+# Function to check connectivity every 30 seconds
+func periodic_connectivity_check() -> void:
+	print("test")
+	# Only check if we're logged in
+	if Global.username == "" or remaining_data.connection_token == "":
+		return
+	
+	var http_request = HTTPRequest.new()
+	get_tree().root.add_child(http_request)
+	http_request.request_completed.connect(_periodic_connectivity_completed)
+	
+	var content = JSON.stringify({
+		"username": remaining_data.username,
+		"token": remaining_data.connection_token
+	})
+	
+	var error = http_request.request(api_url + "/auth/check_connectivity", [], HTTPClient.METHOD_POST, content)
+	if error != OK:
+		push_error(error, "An error occurred in the HTTP request.")
+
+# Handle completion of periodic connectivity check
+func _periodic_connectivity_completed(result, response_code, headers, body):
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	var response = json.get_data()
+	
+	# If not connected (result != 1), reset and go to home page
+	if response.has("result") and response["result"] != 1:
+		disconnect_user()
+
+# Reset user variables and return to home page
+func disconnect_user() -> void:
+	# Reset user variables to default values
+	Global.username = ""
+	Global.avatar = -1
+	Global.game_won = 0
+	Global.game_played = 0
+	Global.connection_token = ""
+	Global.email = ""
+	Global.online_game_id = 1000
+	
+	# Clear saved data
+	SaveData.clear_all_saves()
+	
+	# Show disconnection message
+	show_disconnection_message()
+	
+	# Navigate back to home page
+	var current_scene = get_tree().current_scene
+	if current_scene.name != "Login":
+		get_tree().change_scene_to_file("res://GameStarter/HomePage.tscn")
+
+# Display disconnection message to the user
+func show_disconnection_message() -> void:
+	# Create popup notification
+	var popup = AcceptDialog.new()
+	popup.title = "Connection Lost"
+	popup.dialog_text = "You have been disconnected from your account."
+	popup.dialog_autowrap = true
+	
+	# Set a proper size for the dialog
+	var dialog_size = Vector2(300, 150) # Width of 300px, height of 150px
+	popup.min_size = dialog_size
+	
+	get_tree().root.add_child(popup)
+	popup.popup_centered(dialog_size) # Pass the size to popup_centered
+	
+	# Auto-remove popup after showing
+	await get_tree().create_timer(5.0).timeout
+	if is_instance_valid(popup):
+		popup.queue_free()

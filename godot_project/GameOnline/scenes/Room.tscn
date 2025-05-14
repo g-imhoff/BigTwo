@@ -41,7 +41,7 @@ corner_radius_bottom_left = 65
 script = ExtResource("1_a8nc6")
 
 [node name="Roomframe" type="Sprite2D" parent="."]
-position = Vector2(150, 110)
+position = Vector2(145, 103)
 scale = Vector2(0.289551, 0.281006)
 texture = ExtResource("2_25qoi")
 
@@ -58,13 +58,13 @@ offset_right = 254.0
 offset_bottom = 95.0
 
 [node name="Join" type="Button" parent="."]
-offset_left = 97.0
-offset_top = 177.0
-offset_right = 214.0
-offset_bottom = 208.0
+offset_left = 94.0
+offset_top = 173.0
+offset_right = 211.0
+offset_bottom = 198.0
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_wolkb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mdww5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_kv6a1")
@@ -72,10 +72,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2w8y6")
 text = "Join"
 
 [node name="Password" type="LineEdit" parent="."]
-offset_left = 89.0
-offset_top = 134.0
-offset_right = 219.0
-offset_bottom = 165.0
+offset_left = 87.0
+offset_top = 130.0
+offset_right = 217.0
+offset_bottom = 161.0
 theme_override_colors/font_placeholder_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_u3u5s")
