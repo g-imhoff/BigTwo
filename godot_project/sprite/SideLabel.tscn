@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1j6iempxgpwu"]
 
-[ext_resource type="Script" path="res://sprite/side_label.gd" id="1_ain4h"]
 
+[ext_resource type="Script" path="res://sprite/side_label.gd" id="1_ain4h"]
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htipv"]
 content_margin_left = 20.0
 content_margin_top = 10.0
@@ -13,6 +13,9 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="Resource" id="Resource_mwwi2"]
+metadata/__load_path__ = "res://sprite/side_label.gd"
+
 [node name="Label" type="Label"]
 offset_right = 121.0
 offset_bottom = 75.0
@@ -20,4 +23,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_htipv")
 text = "Test"
+
 script = ExtResource("1_ain4h")
+
+script = SubResource("Resource_mwwi2")
+
