@@ -6,7 +6,9 @@ var card_scale=Vector2(0.5,0.5)
 signal verification_worked
 
 var game_won = false
+var message
 
+@onready var endslot=$cardenslot
 @onready var hand = $PlayerHand
 @onready var enemyhandleft = $EnemyHandLeft
 @onready var enemyhandup = $EnemyHandUp
@@ -25,6 +27,9 @@ var game_won = false
 @onready var enemyleftsprite = $EnemyUsernameLeft/EnemyLeftSprite
 @onready var enemyrightsprite = $EnemyUsernameRight/EnemyRightSprite
 @onready var endgamepopup = $EndGame
+@onready var message_left=$message_left
+@onready var message_right=$message_right
+@onready var message_top=$message_up
 
 func _process(_delta):
 	SocketOnline.socket.poll()
@@ -44,6 +49,7 @@ func _process(_delta):
 			get_tree().change_scene_to_file("res://GameStarter/ChooseModePage.tscn")
 
 func _data_received_handler(data):
+	print("here")
 	print(data)
 	match data["function"]:
 		"game_won": 
@@ -76,14 +82,20 @@ func _data_received_handler(data):
 		"passed":
 			match (int((data["id"] - Global.online_game_id + 4)) % 4):
 				1: 
+					message=message_left
+					show_message("player has passed")
 					remove_card_in_slot(enemyhandleft, cardslotleft)
 					enemyleftsprite.visible = false
 					enemytopsprite.visible = true
 				2: 
+					message=message_top
+					show_message("player has passed")
 					remove_card_in_slot(enemyhandup, cardslotup)
 					enemytopsprite.visible = false
 					enemyrightsprite.visible = true
 				3:
+					message=message_right
+					show_message("player has passed")
 					remove_card_in_slot(enemyhandright, cardslotright)
 					manager.played = false
 					remove_card_in_slot(hand, mycardslot)
@@ -149,8 +161,17 @@ func remove_card_in_slot(hand, cardslot):
 		var i = 0
 		
 		for card in cards_to_remove:
-			card.queue_free()  # Marque la carte pour suppression
+			#card.queue_free()  # Marque la carte pour suppression
+			endslot.position.x+=Global.endcardpos
+			var sprite=card.get_node("Sprite")
+			if sprite.rotation_degrees == 90:
+				sprite.rotation_degrees-=90
+			if sprite.rotation_degrees == -90:
+				sprite.rotation_degrees+=90
+			card.z_index=Global.index
 			hand.lst_card_in_slot.erase(card)  # Retire la carte de la liste
+			sprite.texture=preload("res://assets/cards/card_back.png")
+			hand.animate_card_to_position(card,endslot.position)
 			var children_slots = cardslot.get_children()
 			children_slots[i].card_in_slot=false
 			children_slots[i].card_value=null
@@ -159,6 +180,8 @@ func remove_card_in_slot(hand, cardslot):
 			children_slots[i].combi_value=null
 			children_slots[i].combi_form=null
 			i += 1
+			Global.index+=1
+			Global.endcardpos+=0.2
 
 func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 	var card_scene=preload(CARD_SCENE_PATH)
@@ -204,3 +227,21 @@ func _on_settings_btn_pressed() -> void:
 
 func _on_texture_button_pressed() -> void:
 	$Rules_Popup.visible = not $Rules_Popup.visible
+	
+
+func show_message(text: String, duration: float = 2.0):
+	
+	message.text = text
+	message.visible = true
+	message.add_theme_font_size_override("font_size", 24)
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.4)  # R, G, B, A → noir, 50% opaque 
+	style.set_content_margin_all(15)
+
+	message.add_theme_stylebox_override("normal", style)
+	hide_message_after_delay(duration)
+
+
+func hide_message_after_delay(duration: float) -> void:
+	await get_tree().create_timer(duration).timeout
+	message.visible = false

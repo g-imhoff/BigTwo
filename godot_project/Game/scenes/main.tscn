@@ -1,18 +1,18 @@
 [gd_scene load_steps=25 format=3 uid="uid://d20ku6m670vr1"]
 
-[ext_resource type="Script" uid="uid://boxikanrw7nlg" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
-[ext_resource type="Script" uid="uid://pqjsg5seivy0" path="res://Game/scripts/start.gd" id="1_8ka4x"]
-[ext_resource type="Script" uid="uid://bqvwuuqmwqm6p" path="res://Game/scenes/main.gd" id="1_gouob"]
-[ext_resource type="Script" uid="uid://f3vq31h7iapx" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
-[ext_resource type="Script" uid="uid://vyh7baaq7fjf" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
-[ext_resource type="Script" uid="uid://b51gk1h1ii64t" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
-[ext_resource type="Script" uid="uid://dpjxni5fp5s2b" path="res://Game/scripts/card_manager_enemy_right.gd" id="3_isv1k"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
+[ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
+[ext_resource type="Script" path="res://Game/scenes/main.gd" id="1_gouob"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy.gd" id="2_a261a"]
+[ext_resource type="Script" path="res://Game/scripts/player_hand.gd" id="2_mnt7b"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_up.gd" id="3_exhj1"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_right.gd" id="3_isv1k"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="3_j44is"]
-[ext_resource type="Script" uid="uid://bqkmy83iawai4" path="res://Game/scripts/card_manager_enemy_left.gd" id="4_awnpp"]
+[ext_resource type="Script" path="res://Game/scripts/card_manager_enemy_left.gd" id="4_awnpp"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="5_dlrfd"]
-[ext_resource type="Script" uid="uid://bpkdcx4g5grjk" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
-[ext_resource type="Script" uid="uid://btqcwfhm4177j" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
-[ext_resource type="Script" uid="uid://bbfxd5w2h70pp" path="res://Game/scripts/bot_player_func.gd" id="12_5o7ou"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_right.gd" id="5_ppmxl"]
+[ext_resource type="Script" path="res://Game/scripts/enemy_hand_left.gd" id="6_brei5"]
+[ext_resource type="Script" path="res://Game/scripts/bot_player_func.gd" id="12_5o7ou"]
 [ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="13_ee3kj"]
 [ext_resource type="Texture2D" uid="uid://ch4ncwi1g4dlq" path="res://assets/game/form.jpg" id="14_td723"]
 [ext_resource type="PackedScene" uid="uid://k4ebvk3lxk6r" path="res://GameStarter/setting.tscn" id="15_1d6tm"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://db0d4jn5sok86" path="res://GameStarter/rules_popup.tscn" id="17_x7aqy"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
 [ext_resource type="PackedScene" uid="uid://p7n3ewamh80a" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
+[ext_resource type="Texture2D" uid="uid://bm1fera3ije3g" path="res://assets/circle-white.png" id="21_y53yt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tn0b1"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -96,82 +97,82 @@ text = "PASS
 [node name="Cardslots" type="Node2D" parent="."]
 
 [node name="cardslot" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(1000, 620)
+position = Vector2(960, 740)
 
 [node name="cardslot2" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(1100, 620)
+position = Vector2(1060, 740)
 
 [node name="cardslot3" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(900, 620)
+position = Vector2(860, 740)
 
 [node name="cardslot4" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(800, 620)
+position = Vector2(760, 740)
 
 [node name="cardslot5" parent="Cardslots" instance=ExtResource("5_dlrfd")]
-position = Vector2(1200, 620)
+position = Vector2(1160, 740)
 
 [node name="Cardslots2" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(1000, 230)
+position = Vector2(960, 340)
 
 [node name="cardslot2" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(1100, 230)
+position = Vector2(1060, 340)
 
 [node name="cardslot3" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(900, 230)
+position = Vector2(860, 340)
 
 [node name="cardslot4" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(800, 230)
+position = Vector2(760, 340)
 
 [node name="cardslot5" parent="Cardslots2" instance=ExtResource("5_dlrfd")]
-position = Vector2(1200, 230)
+position = Vector2(1160, 340)
 
 [node name="Cardslots3" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(500, 500)
+position = Vector2(600, 540)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(500, 600)
+position = Vector2(600, 640)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(500, 400)
+position = Vector2(600, 440)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(500, 300)
+position = Vector2(600, 340)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(500, 700)
+position = Vector2(600, 740)
 rotation = 1.5708
 
 [node name="Cardslots4" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1500, 500)
+position = Vector2(1320, 540)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1500, 600)
+position = Vector2(1320, 640)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1500, 400)
+position = Vector2(1320, 440)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1500, 300)
+position = Vector2(1320, 340)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1500, 700)
+position = Vector2(1320, 740)
 rotation = 1.5708
 
 [node name="start" type="Node2D" parent="."]
@@ -182,17 +183,17 @@ script = ExtResource("12_5o7ou")
 
 [node name="sort_value" type="TextureButton" parent="."]
 texture_filter = 1
-offset_left = 215.0
-offset_top = 954.0
-offset_right = 256.0
-offset_bottom = 1011.0
+offset_left = 20.0
+offset_top = 1003.0
+offset_right = 61.0
+offset_bottom = 1061.0
 texture_normal = ExtResource("13_ee3kj")
 
 [node name="sort_form" type="TextureButton" parent="."]
-offset_left = 287.0
-offset_top = 954.0
-offset_right = 328.0
-offset_bottom = 1012.0
+offset_left = 92.0
+offset_top = 1003.0
+offset_right = 133.0
+offset_bottom = 1061.0
 texture_normal = ExtResource("14_td723")
 
 [node name="message" type="Label" parent="."]
@@ -212,9 +213,9 @@ horizontal_alignment = 1
 uppercase = true
 
 [node name="message_right" type="Label" parent="."]
-offset_left = 1500.0
+offset_left = 1450.0
 offset_top = 450.0
-offset_right = 1540.0
+offset_right = 1490.0
 offset_bottom = 473.0
 horizontal_alignment = 1
 uppercase = true
@@ -230,7 +231,7 @@ uppercase = true
 [node name="Timer" type="Timer" parent="."]
 
 [node name="cardendslot" parent="." instance=ExtResource("5_dlrfd")]
-position = Vector2(1000, 425)
+position = Vector2(960, 540)
 
 [node name="Setting" parent="." instance=ExtResource("15_1d6tm")]
 visible = false
@@ -259,6 +260,59 @@ texture_normal = ExtResource("18_e7axl")
 
 [node name="EndGame" parent="." instance=ExtResource("20_rng3j")]
 visible = false
+
+[node name="PlayerUsername" type="Label" parent="."]
+offset_left = 940.0
+offset_top = 1050.0
+offset_right = 980.0
+offset_bottom = 1081.0
+
+[node name="PlayerSprite" type="Sprite2D" parent="PlayerUsername"]
+visible = false
+position = Vector2(-30, 12)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("21_y53yt")
+
+[node name="EnemyUsernameRight" type="Label" parent="."]
+offset_left = 1890.0
+offset_top = 558.0
+offset_right = 1930.0
+offset_bottom = 589.0
+rotation = -1.5708
+text = "Bot 3"
+
+[node name="EnemySpriteRight" type="Sprite2D" parent="EnemyUsernameRight"]
+visible = false
+position = Vector2(-18, 12.9999)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("21_y53yt")
+
+[node name="EnemyUsernameLeft" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 522.0
+offset_right = 70.0
+offset_bottom = 553.0
+rotation = 1.5708
+text = "Bot 1"
+
+[node name="EnemySpriteLeft" type="Sprite2D" parent="EnemyUsernameLeft"]
+visible = false
+position = Vector2(-23, 13.0001)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("21_y53yt")
+
+[node name="EnemyUsernameTop" type="Label" parent="."]
+offset_left = 940.0
+offset_top = 5.0
+offset_right = 980.0
+offset_bottom = 36.0
+text = "Bot 2"
+
+[node name="EnemySpriteTop" type="Sprite2D" parent="EnemyUsernameTop"]
+visible = false
+position = Vector2(-23, 14)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("21_y53yt")
 
 [connection signal="card_played" from="card_manager" to="card_manager_enemy_left" method="_on_card_manager_card_played"]
 [connection signal="enemy_right" from="card_manager_enemy" to="card_manager_enemy_right" method="_on_card_manager_enemy_enemy_right"]

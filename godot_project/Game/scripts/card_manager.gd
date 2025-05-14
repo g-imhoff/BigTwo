@@ -24,6 +24,7 @@ var straightForFlush=[]
 @onready var message=$"../message"
 @onready var timer =$"../Timer"
 @onready var endslot=$"../cardendslot"
+@onready var circle_sprite=$"../PlayerUsername/PlayerSprite"
 
 
 func _ready() -> void:
@@ -99,6 +100,8 @@ func get_card_with_hightest_z_index(card):
 
 func _on_button_pressed() -> void:
 	var three_of_diamonds = null
+	for card in card_clicked:
+		print(card.value)
 	for card in hand.player_hand:
 		if card.value == 3 and card.form ==1:
 			three_of_diamonds = card
@@ -116,9 +119,14 @@ func _on_button_pressed() -> void:
 		#for card in cards:
 			#if card and not played:  # Si une carte est cliquée et que le jeu n'a pas encore été joué
 				#move_card_up_or_down(card)  # Déclenche le déplacement avec une seule ligne
-		if check_other_cards()==false:
-			show_message("combinaison incorrect")
-		elif check!=true:
+		#print("-------------") test for debug
+		#for card in card_clicked:
+			#print(card.value)
+		#print("--------------")
+		card_clicked.sort_custom(func(a, b): return a.value < b.value)
+		#for card in card_clicked:
+			#print(card.value)
+		if check!=true:
 			show_message("doit jouer 3 diamonds")
 		else:
 			for card in card_clicked:
@@ -152,8 +160,16 @@ func _on_button_pressed() -> void:
 			if hand.player_hand.size()==0:
 				end_game()
 			message.visible = false
+			circle_sprite.visible=false
 			emit_signal("card_played")
 	else:
+		#print("-------------") test for debug
+		#for card in card_clicked:
+			#print(card.value)
+		#print("--------------")
+		card_clicked.sort_custom(func(a, b): return a.value < b.value)
+		#for card in card_clicked:
+			#print(card.value)
 		for card in card_clicked:
 			if card_clicked.size() < 5:
 				move_card_to_slot(card, children_slots[cmpt_card_in_slot])  # Déplace la carte avec la nouvelle fonction
@@ -185,7 +201,7 @@ func _on_button_pressed() -> void:
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 		if hand.player_hand.size()==0:
 			end_game()
-		message.visible = false
+		circle_sprite.visible=false
 		emit_signal("card_played")
 
 
@@ -236,7 +252,7 @@ func remove_card_in_slot():
 	if lst_card_in_slot.size() != 0:
 		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
-		
+		var check_cards=false
 		for card in cards_to_remove:
 			lst_card_in_slot.erase(card)  # Retire la carte de la liste
 			endslot.position.x+=Global.endcardpos
@@ -251,12 +267,18 @@ func remove_card_in_slot():
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
-		Global.index+=1
-		Global.endcardpos+=0.2
+			check_cards=true
+		if check_cards==true:
+			Global.index+=1
+			Global.endcardpos+=0.1
+
+
 
 func end_game():
 	print("tu a gagné")
 	$"../EndGame".set_visible(true)
+	$"../EndGame/PlayerWinner".text = "You win"
+	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func _on_button_2_pressed() -> void:
@@ -271,7 +293,7 @@ func _on_button_2_pressed() -> void:
 		children_slots[0].combi_value = children_slots_right[0].combi_value
 		children_slots[0].combi_form = children_slots_right[0].combi_form
 		children_slots[0].passing = 1 + children_slots_right[0].passing
-		message.visible = false
+		circle_sprite.visible=false
 		emit_signal("card_played")
 
 
@@ -280,6 +302,7 @@ func _on_card_manager_enemy_right_enemy() -> void:
 	#await get_tree().create_timer(2.0).timeout
 	#print(children_slots_right[0].combi_value," ",children_slots_right[0].combi_form)
 	played=false
+	circle_sprite.visible=true
 	show_message("Your turn")
 	for card in card_clicked.duplicate():
 		#card.queue_free()
@@ -291,6 +314,7 @@ func _on_card_manager_enemy_right_enemy() -> void:
 
 #test pour faire commencé celui qui a le 3 de diamonds
 func on_card_played():
+	circle_sprite.visible=true
 	played = false
 	show_message("Your turn")
 
@@ -299,7 +323,6 @@ func check_other_cards():
 	var lst_card=card_clicked.duplicate()
 	lst_card.sort_custom(func(a, b): return a.value < b.value)
 	var check_combi=check_cards_clicked()
-	print(check_combi)
 	if children_slots_right[0].combi==null and check_combi!=null:
 		return true
 	var combi_enemy
@@ -464,7 +487,6 @@ func check_for_fullhouse(lst_card, children_slots, hand, children_slots_right):
 func check_for_four_kind(lst_card, children_slots, hand, children_slots_right):
 	var card_to_put=[0]
 	card_to_put = check_for_simple_combi(lst_card, children_slots, children_slots_right)
-	print(hand.player_hand)
 	if card_to_put[0]==4 and hand.player_hand.size()>4:#check four of a kind
 		for card in lst_card:
 			if card not in card_to_put[2]:

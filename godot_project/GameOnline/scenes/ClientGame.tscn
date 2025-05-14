@@ -134,6 +134,10 @@ rotation = 1.5708
 position = Vector2(1408.95, 695.9)
 rotation = 1.5708
 
+[node name="cardenslot" parent="." instance=ExtResource("8_x66yg")]
+position = Vector2(1003, 463)
+rotation = 1.5708
+
 [node name="PlayerUsername" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -272,6 +276,24 @@ offset_right = 1909.0
 offset_bottom = 133.0
 scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("16_8njk5")
+
+[node name="message_up" type="Label" parent="."]
+offset_left = 900.0
+offset_top = 206.0
+offset_right = 940.0
+offset_bottom = 229.0
+
+[node name="message_right" type="Label" parent="."]
+offset_left = 1500.0
+offset_top = 450.0
+offset_right = 1540.0
+offset_bottom = 473.0
+
+[node name="message_left" type="Label" parent="."]
+offset_left = 330.0
+offset_top = 450.0
+offset_right = 370.0
+offset_bottom = 473.0
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="verification_worked" from="." to="card_manager" method="_on_connect_server_verification_worked"]

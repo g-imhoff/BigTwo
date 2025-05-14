@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var winnertext = $PlayerWinner
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,9 +17,6 @@ func _on_home_pressed() -> void:
 
 
 func _on_play_again_pressed() -> void:
-	get_tree().change_scene_to_file("res://GameOnline/scenes/ClientGame.tscn")
+	get_tree().change_scene_to_file("res://Game/scenes/main.tscn")
 	pass # Replace with function body.
-
-func show_popup(winner): 
-	winnertext.text = winner + " Won !"
 	

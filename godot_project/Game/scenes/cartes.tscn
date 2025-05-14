@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnlrkcnuhetqm"]
 
-[ext_resource type="Script" uid="uid://cg466ye8k2ogc" path="res://Game/scripts/cartes.gd" id="1_dk0el"]
+[ext_resource type="Script" path="res://Game/scripts/cartes.gd" id="1_dk0el"]
 [ext_resource type="Texture2D" uid="uid://d28uptq7kpfli" path="res://assets/cards/card_clubs_02.png" id="2_r5uji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ledpc"]
