@@ -1,5 +1,9 @@
 extends Node2D
 
+signal send_card_left
+signal finished_distribution
+var start = true
+
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 var player_hand=[]
 const HAND_Y_POSITION=870
@@ -13,10 +17,18 @@ var lst_card_in_slot=[]
 @onready var manager = $"../card_manager"
 
 func _card_hand_init(id, list_card, bool_first_player):
+	print("here player")
 	Global.online_game_id = id
 	var center_screen_x=DisplayServer.window_get_size().x/2
 	var card_scene=preload(CARD_SCENE_PATH)
+	enemyUp.on_started()
+	enemyRight.on_started()
+	enemyLeft.on_started()
 	for card in list_card: 
+		if start==true:
+			start=false
+		else:
+			await enemyRight.send_card_player
 		var new_card=card_scene.instantiate()
 		var sprite=new_card.get_node("Sprite")
 		
@@ -30,9 +42,8 @@ func _card_hand_init(id, list_card, bool_first_player):
 		sprite.texture=new_texture
 		$"../card_manager".add_child(new_card)
 		add_card_to_hand(new_card)
-	enemyUp.on_started()
-	enemyRight.on_started()
-	enemyLeft.on_started()
+		await get_tree().create_timer(0.1).timeout
+		emit_signal("send_card_left")
 	if bool_first_player == 1:
 		manager.played = false
 

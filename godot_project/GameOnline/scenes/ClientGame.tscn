@@ -1,12 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://bn3olflapan7j"]
+[gd_scene load_steps=21 format=3 uid="uid://bn3olflapan7j"]
 
-[ext_resource type="Script" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
-[ext_resource type="Script" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
-[ext_resource type="Script" path="res://GameOnline/scripts/card_manager.gd" id="2_dxq6t"]
-[ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_up.gd" id="5_2b27f"]
-[ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_right.gd" id="6_nswuf"]
+[ext_resource type="Script" uid="uid://btq28qsetldab" path="res://GameOnline/scripts/client_game.gd" id="1_abxww"]
+[ext_resource type="Script" uid="uid://bqvsk36nmwyjs" path="res://GameOnline/scripts/player_hand.gd" id="2_c7fq1"]
+[ext_resource type="Script" uid="uid://bx8wklebik2er" path="res://GameOnline/scripts/card_manager.gd" id="2_dxq6t"]
+[ext_resource type="Script" uid="uid://cr5yayl7wyxib" path="res://GameOnline/scripts/enemy_hand_up.gd" id="5_2b27f"]
+[ext_resource type="Script" uid="uid://m158xu2hii18" path="res://GameOnline/scripts/enemy_hand_right.gd" id="6_nswuf"]
 [ext_resource type="PackedScene" uid="uid://dn7t4aj4tu0v4" path="res://Game/scenes/background.tscn" id="7_5otmk"]
-[ext_resource type="Script" path="res://GameOnline/scripts/enemy_hand_left.gd" id="7_f6iy4"]
+[ext_resource type="Script" uid="uid://d1wa2bw073dn2" path="res://GameOnline/scripts/enemy_hand_left.gd" id="7_f6iy4"]
 [ext_resource type="PackedScene" uid="uid://dsam111tltxan" path="res://Game/scenes/CardSlot.tscn" id="8_x66yg"]
 [ext_resource type="Texture2D" uid="uid://bkssgbqvrsxwb" path="res://assets/game/value.jpg" id="9_n0mij"]
 [ext_resource type="Texture2D" uid="uid://bm1fera3ije3g" path="res://assets/circle-white.png" id="9_not63"]
@@ -16,6 +16,36 @@
 [ext_resource type="Texture2D" uid="uid://4cpm4ryw30kv" path="res://assets/ui/Settings.png" id="14_y18d6"]
 [ext_resource type="PackedScene" uid="uid://db0d4jn5sok86" path="res://GameStarter/rules_popup.tscn" id="15_kkcok"]
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="16_8njk5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qig0c"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbqxb"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3tsg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyl61"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="ConnectServer" type="Node2D"]
 script = ExtResource("1_abxww")
@@ -39,17 +69,23 @@ script = ExtResource("6_nswuf")
 script = ExtResource("7_f6iy4")
 
 [node name="Button" type="Button" parent="."]
-offset_left = 561.0
-offset_top = 1032.0
-offset_right = 719.0
-offset_bottom = 1080.0
+offset_left = 1048.0
+offset_top = 1018.0
+offset_right = 1206.0
+offset_bottom = 1066.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_qig0c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mbqxb")
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1201.0
-offset_top = 1027.0
-offset_right = 1359.0
-offset_bottom = 1075.0
+offset_left = 726.0
+offset_top = 1018.0
+offset_right = 884.0
+offset_bottom = 1066.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_g3tsg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qyl61")
 text = "PASS
 "
 
@@ -132,6 +168,10 @@ rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots4" instance=ExtResource("8_x66yg")]
 position = Vector2(1408.95, 695.9)
+rotation = 1.5708
+
+[node name="cardenslot" parent="." instance=ExtResource("8_x66yg")]
+position = Vector2(1003, 463)
 rotation = 1.5708
 
 [node name="PlayerUsername" type="Label" parent="."]
@@ -272,6 +312,24 @@ offset_right = 1909.0
 offset_bottom = 133.0
 scale = Vector2(0.9, 0.9)
 texture_normal = ExtResource("16_8njk5")
+
+[node name="message_up" type="Label" parent="."]
+offset_left = 900.0
+offset_top = 206.0
+offset_right = 940.0
+offset_bottom = 229.0
+
+[node name="message_right" type="Label" parent="."]
+offset_left = 1500.0
+offset_top = 450.0
+offset_right = 1540.0
+offset_bottom = 473.0
+
+[node name="message_left" type="Label" parent="."]
+offset_left = 330.0
+offset_top = 450.0
+offset_right = 370.0
+offset_bottom = 473.0
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="verification_worked" from="." to="card_manager" method="_on_connect_server_verification_worked"]

@@ -154,11 +154,11 @@ text = "Join Room"
 
 [node name="Joinroompop" parent="Background" instance=ExtResource("7_r0qeh")]
 visible = false
-position = Vector2(-522, -211)
+position = Vector2(-524, -266)
 
 [node name="Createroompop" parent="Background" instance=ExtResource("6_ns74r")]
 visible = false
-position = Vector2(-522, -211)
+position = Vector2(-524, -268)
 
 [connection signal="pressed" from="Background/Back Btn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="Background/Create room btn" to="." method="_on_create_room_btn_pressed"]

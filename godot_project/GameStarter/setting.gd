@@ -28,7 +28,6 @@ func _on_button_2_pressed() -> void:
 func _on_h_slider_value_changed(value: float) -> void:
 	Config.volume_value = value  # Modifie la valeur du volume dans le script autoload
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGMusic"), value)
-	print(value)
 
 
 func _on_check_button_music_toggled(toggled_on: bool) -> void:

@@ -5,7 +5,7 @@ signal send_card_player
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/enemy_cartes.tscn"
 const CARD_WIDTH=60 #60
-const HAND_X_POSITION=1860
+const HAND_X_POSITION=1820
 
 var player_hand=[]
 var card_scale=Vector2(0.5,0.5)

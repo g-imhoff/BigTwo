@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://fq8y23pl3rwf"]
+[gd_scene load_steps=17 format=3 uid="uid://fq8y23pl3rwf"]
 
-[ext_resource type="Script" path="res://GameStarter/create_page.gd" id="1_5iowa"]
+[ext_resource type="Script" uid="uid://bcqiogvtqlkol" path="res://GameStarter/create_page.gd" id="1_5iowa"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="2_ssd5f"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_jap0u"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="3_vm0o5"]
@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="5_5ruod"]
 [ext_resource type="Texture2D" uid="uid://b0qup0knwas1j" path="res://assets/ui/Eye off.png" id="6_nlrc0"]
 [ext_resource type="Texture2D" uid="uid://by4gb7jifow7n" path="res://assets/ui/Eye.png" id="7_fy10r"]
-[ext_resource type="Script" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
+[ext_resource type="Script" uid="uid://cf35oj3sh0te1" path="res://GameStarter/animated_hide_2.gd" id="8_nlrc0"]
 [ext_resource type="PackedScene" uid="uid://dcblllx72cd53" path="res://GameStarter/accverificationpop.tscn" id="10_hnp6v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_45qsa"]
@@ -32,14 +32,14 @@ animations = [{
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ercrd"]
-bg_color = Color(0, 0.631373, 0.964706, 1)
+bg_color = Color(0.882353, 0.666667, 0, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrh6b"]
-bg_color = Color(0, 0.631373, 0.964706, 1)
+bg_color = Color(0.882353, 0.666667, 0, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -51,9 +51,6 @@ corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2wew"]
-bg_color = Color(0.918992, 0.149279, 0.128766, 1)
 
 [node name="CreatePage" type="Node2D"]
 script = ExtResource("1_5iowa")
@@ -203,13 +200,6 @@ text = "Create Account"
 [node name="Accverificationpop" parent="." instance=ExtResource("10_hnp6v")]
 visible = false
 position = Vector2(411, 289)
-
-[node name="PasswordErrorPopup" type="PopupPanel" parent="."]
-theme_override_styles/panel = SubResource("StyleBoxFlat_b2wew")
-
-[node name="Label" type="Label" parent="PasswordErrorPopup"]
-offset_right = 100.0
-offset_bottom = 100.0
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/backicon connection page" to="." method="_on_backicon_connection_page_pressed"]

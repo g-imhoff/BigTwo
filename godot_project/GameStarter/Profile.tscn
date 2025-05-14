@@ -1,24 +1,46 @@
-[gd_scene load_steps=9 format=3 uid="uid://20pkkhkt0f7u"]
+[gd_scene load_steps=13 format=3 uid="uid://20pkkhkt0f7u"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_58fyg"]
-[ext_resource type="Script" uid="uid://vwkboq8hiqte" path="res://GameStarter/profile.gd" id="1_65wxg"]
+[ext_resource type="Script" path="res://GameStarter/profile.gd" id="1_65wxg"]
 [ext_resource type="PackedScene" uid="uid://dwot7sxv4k3c8" path="res://GameStarter/Avatar POPUP.tscn" id="3_bajs7"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_fdaiq"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="3_vyuf8"]
 [ext_resource type="Texture2D" uid="uid://dq53onfa628lf" path="res://assets/ui/profilepicdefault.png" id="6_dt6kw"]
-[ext_resource type="Script" uid="uid://c5gpmxu0s6w5p" path="res://GameStarter/avatar_popup.gd" id="6_udx4q"]
+[ext_resource type="Script" path="res://GameStarter/avatar_popup.gd" id="6_udx4q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ph2b"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_odvq5"]
+bg_color = Color(0.85098, 0.643137, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13uxv"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_s6r82"]
+font = ExtResource("3_vyuf8")
+font_size = 130
+
+[sub_resource type="LabelSettings" id="LabelSettings_qufro"]
+font = ExtResource("3_vyuf8")
+font_size = 130
 
 [node name="Profile" type="Node2D"]
 script = ExtResource("1_65wxg")
@@ -29,30 +51,32 @@ position = Vector2(960, 540)
 texture = ExtResource("1_58fyg")
 
 [node name="Back Btn" type="TextureButton" parent="."]
-offset_left = 100.0
-offset_top = 62.0
-offset_right = 174.0
-offset_bottom = 136.0
+offset_left = 69.0
+offset_top = 49.0
+offset_right = 143.0
+offset_bottom = 123.0
 texture_normal = ExtResource("3_fdaiq")
 
 [node name="Games stat" type="RichTextLabel" parent="."]
-offset_left = 734.0
-offset_top = 274.0
-offset_right = 1134.0
-offset_bottom = 367.0
+offset_left = 843.0
+offset_top = 357.0
+offset_right = 1296.0
+offset_bottom = 484.0
 theme_override_fonts/normal_font = ExtResource("3_vyuf8")
 theme_override_font_sizes/normal_font_size = 64
 text = "Games"
+scroll_active = false
 tab_size = 5
 
 [node name="wins stat" type="RichTextLabel" parent="."]
-offset_left = 1369.0
-offset_top = 268.0
-offset_right = 1636.0
-offset_bottom = 361.0
+offset_left = 1392.0
+offset_top = 353.0
+offset_right = 1659.0
+offset_bottom = 446.0
 theme_override_fonts/normal_font = ExtResource("3_vyuf8")
 theme_override_font_sizes/normal_font_size = 64
 text = "WINS"
+scroll_active = false
 tab_size = 5
 
 [node name="Change Avatar" type="Button" parent="."]
@@ -61,11 +85,15 @@ offset_top = 780.0
 offset_right = 550.0
 offset_bottom = 864.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = SubResource("StyleBoxFlat_0ph2b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_odvq5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_13uxv")
-text = "change my avatar"
+text = "CHANGE MY AVATAR"
 
 [node name="AvatarPopup" parent="." instance=ExtResource("3_bajs7")]
 visible = false
+z_index = 4096
 position = Vector2(701, 126)
 script = ExtResource("6_udx4q")
 
@@ -77,29 +105,33 @@ offset_bottom = 742.0
 texture = ExtResource("6_dt6kw")
 
 [node name="Disconnect" type="Button" parent="."]
-offset_left = 849.0
-offset_top = 686.0
-offset_right = 1140.0
-offset_bottom = 770.0
+offset_left = 259.0
+offset_top = 877.0
+offset_right = 550.0
+offset_bottom = 961.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_13uxv")
-text = "Disconnect "
+text = "DISCONNECT
+"
 
 [node name="games" type="Label" parent="."]
-offset_left = 779.0
-offset_top = 372.0
-offset_right = 1058.0
-offset_bottom = 510.0
+offset_left = 874.0
+offset_top = 484.0
+offset_right = 1153.0
+offset_bottom = 671.0
 theme_override_font_sizes/font_size = 30
+label_settings = SubResource("LabelSettings_s6r82")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="wins" type="Label" parent="."]
-offset_left = 1337.0
-offset_top = 411.0
-offset_right = 1616.0
-offset_bottom = 549.0
+offset_left = 1369.0
+offset_top = 480.0
+offset_right = 1648.0
+offset_bottom = 667.0
 theme_override_font_sizes/font_size = 30
+label_settings = SubResource("LabelSettings_qufro")
 horizontal_alignment = 1
 vertical_alignment = 1
 

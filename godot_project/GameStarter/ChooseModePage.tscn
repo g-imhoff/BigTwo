@@ -44,10 +44,10 @@ texture_normal = ExtResource("5_8rvos")
 
 [node name="Label single" type="Label" parent="Background/Single BTN"]
 layout_mode = 0
-offset_left = -66.0
-offset_top = 474.468
-offset_right = 633.0
-offset_bottom = 609.468
+offset_left = -40.0
+offset_top = 468.085
+offset_right = 542.0
+offset_bottom = 540.085
 theme_override_font_sizes/font_size = 30
 text = "SINGLE PLAYER"
 label_settings = SubResource("LabelSettings_ai54j")
@@ -62,10 +62,10 @@ texture_normal = ExtResource("7_fu0mq")
 
 [node name="Label" type="Label" parent="Background/MultI BTN"]
 layout_mode = 0
-offset_left = -7.62939e-05
-offset_top = 465.957
-offset_right = 526.0
-offset_bottom = 600.957
+offset_left = -10.0
+offset_top = 457.447
+offset_right = 516.0
+offset_bottom = 523.447
 theme_override_font_sizes/font_size = 30
 text = "MULTI PLAYER"
 label_settings = SubResource("LabelSettings_3bpsu")
