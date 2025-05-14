@@ -7,6 +7,8 @@ extends Node2D
 
 var Hash = load("res://hashage.gd")
 
+	
+	
 func _on_oauth_google_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("leftclick"):
 		print("OAuthGoogleClicked")
@@ -22,6 +24,7 @@ func _on_login_pressed() -> void:
 	var rememberme = rememberme_checkbox.is_pressed()
 	var password_hash = ""
 	
+		
 	if password != "":
 		password_hash = Hash.hash_password(password)
 	

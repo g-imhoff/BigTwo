@@ -191,6 +191,7 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 	if lst_card_in_slot.size() != 0:
 		# Crée une copie de la liste pour éviter la modification pendant l'itération
 		var cards_to_remove = lst_card_in_slot.duplicate()
+		var check_cards=false
 		children_slots[0].combi=null
 		for card in cards_to_remove:
 			endslot.position.x+=Global.endcardpos
@@ -209,8 +210,10 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 			children_slots[cmpt_card_in_slot-1].combi_value=null
 			children_slots[cmpt_card_in_slot-1].combi_form=null
 			cmpt_card_in_slot-=1
-		Global.index+=1
-		Global.endcardpos+=0.2
+			check_cards=true
+		if check_cards==true:
+			Global.index+=1
+			Global.endcardpos+=0.1
 
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot,player):
 	if played==false:
@@ -264,7 +267,8 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 					card_to_put.erase(card_to_put[0])
 				#print("combi de :",card_to_put.size()," cartes")
 				children_slots[0].combi=str(card_to_put.size())
-				can_play = true
+				if card_to_put != null:
+					can_play = true
 			else:
 				card_to_put=check_for_simple_combi(card_to_put,lst_card, children_slots, children_slots_right)
 				var check_size = children_slots_right[0].combi
@@ -303,7 +307,9 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 
 func end_game():
 	print("tu a gagné")
-	get_tree().change_scene_to_file("res://Game/scenes/popup.tscn")
+	$"../EndGame".set_visible(true)
+	$"../EndGame/PlayerWinner".text = "You lost"
+	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func show_message(text: String, duration: float = 2.0):

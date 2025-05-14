@@ -7,7 +7,7 @@ signal finished_distribution
 const HAND_COUNT=13
 const CARD_SCENE_PATH= "res://Game/scenes/cartes.tscn"
 const CARD_WIDTH=80
-const HAND_Y_POSITION=870
+const HAND_Y_POSITION=910
 
 var player_hand=[]
 var center_screen_x
