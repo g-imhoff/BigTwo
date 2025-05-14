@@ -11,7 +11,11 @@ func _process(delta: float) -> void:
 	pass
 
 # Vérifie si le mot de passe est suffisamment fort
-func is_password_strong(password: String) -> bool:
+static func is_password_strong(password: String) -> bool:
+	password = password.strip_edges()
+	print("Password entré :", password)
+	print("Longueur du mot de passe :", password.length())
+
 	if password.length() < 8:
 		return false
 
@@ -19,7 +23,7 @@ func is_password_strong(password: String) -> bool:
 	var has_digit := false
 	var has_special := false
 
-	for i in password.length():
+	for i in range(password.length()):
 		var c := password[i]
 		var ascii := c.unicode_at(0)
 
@@ -29,5 +33,6 @@ func is_password_strong(password: String) -> bool:
 			has_letter = true
 		elif c in "!@#$%^&*()-_=+[]{};:,.<>?/|\\~`":
 			has_special = true
+	print("Lettre:", has_letter, " Chiffre:", has_digit, " Spécial:", has_special)
 
 	return has_letter and has_digit and has_special

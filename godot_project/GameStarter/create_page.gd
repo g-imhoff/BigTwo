@@ -27,7 +27,7 @@ func _on_create_account_pressed() -> void:
 	var password = password_line_edit.text
 	var password_hash = ""
 	
-	if  PasswordChecker.is_password_strong(password):
+	if not PasswordChecker.is_password_strong(password):
 		show_password_popup("Mot de passe trop faible.\n Minimum 8 Caractères avec des symboles,lettres et chiffres")
 		return
 		
