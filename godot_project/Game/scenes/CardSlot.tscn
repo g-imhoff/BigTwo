@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dsam111tltxan"]
 
-[ext_resource type="Script" path="res://Game/scripts/card_slot.gd" id="1_il8qn"]
+[ext_resource type="Script" uid="uid://bgknbsth5pixl" path="res://Game/scripts/card_slot.gd" id="1_il8qn"]
 [ext_resource type="Texture2D" uid="uid://cdg3extkxc84s" path="res://assets/game/CardSlot.png" id="2_dqojk"]
 
 [node name="cardslot" type="Node2D"]
