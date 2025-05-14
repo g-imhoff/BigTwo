@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dui1hqinflue4"]
+[gd_scene load_steps=20 format=3 uid="uid://dui1hqinflue4"]
 
 [ext_resource type="Script" uid="uid://c5juqf70v43tr" path="res://GameStarter/login_page.gd" id="1_6t1k7"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_wx55c"]
@@ -59,6 +59,9 @@ corner_radius_bottom_left = 60
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iy3od"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfoay"]
+bg_color = Color(0.918992, 0.149279, 0.128766, 1)
 
 [node name="LoginPage" type="Node2D"]
 script = ExtResource("1_6t1k7")
@@ -220,6 +223,13 @@ position = Vector2(409, 138)
 [node name="Accverificationpop" parent="." instance=ExtResource("11_c1d45")]
 visible = false
 position = Vector2(411, 289)
+
+[node name="PasswordErrorPopup" type="PopupPanel" parent="."]
+theme_override_styles/panel = SubResource("StyleBoxFlat_lfoay")
+
+[node name="Label" type="Label" parent="PasswordErrorPopup"]
+offset_right = 100.0
+offset_bottom = 100.0
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="pressed" from="Background/BackButton login" to="." method="_on_back_button_login_pressed"]
