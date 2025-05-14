@@ -8,6 +8,7 @@ extends Node2D
 
 var Hash = load("res://hashage.gd")
 var PasswordChecker = load("res://password_check.gd")
+@onready var password_checker_label = $Password/LabelPassword/Label2
 
 @onready var password_popup = $PasswordErrorPopup
 @onready var password_label = $PasswordErrorPopup/Label
@@ -27,8 +28,8 @@ func _on_create_account_pressed() -> void:
 	var password = password_line_edit.text
 	var password_hash = ""
 	
-	if  PasswordChecker.is_password_strong(password):
-		show_password_popup("Mot de passe trop faible.\n Minimum 8 Caractères avec des symboles,lettres et chiffres")
+	if not PasswordChecker.is_password_strong(password):
+		password_checker_label.add_theme_color_override("font_color", Color.RED)
 		return
 		
 	if password != "":

@@ -24,6 +24,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_6fhow")
 theme_override_font_sizes/normal_font_size = 60
 text = "AVATARS"
+scroll_active = false
 
 [node name="TextureButton" type="TextureButton" parent="PopupSettings"]
 offset_left = -390.0
