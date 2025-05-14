@@ -15,6 +15,7 @@ var card_base_scale=Vector2(0.5,0.5)
 var card_highlight_scale=Vector2(0.55,0.55)
 var brelan=[]
 var straightForFlush=[]
+var first_to_play = false
 
 @onready var hand=$"../PlayerHand"
 @onready var Cardslots=$"../Cardslots"
@@ -160,6 +161,7 @@ func _on_button_pressed() -> void:
 			if hand.player_hand.size()==0:
 				end_game()
 			message.visible = false
+			first_to_play = false
 			circle_sprite.visible=false
 			emit_signal("card_played")
 	else:
@@ -201,6 +203,7 @@ func _on_button_pressed() -> void:
 		hand.update_hand_position()  # Met à jour l'affichage de la main
 		if hand.player_hand.size()==0:
 			end_game()
+		message.visible = false
 		circle_sprite.visible=false
 		emit_signal("card_played")
 
@@ -282,7 +285,7 @@ func end_game():
 
 
 func _on_button_2_pressed() -> void:
-	if played == false :
+	if played == false and first_to_play == false:
 		played=true
 		var card_to_remove=card_clicked.duplicate()
 		for card in card_to_remove:
@@ -316,6 +319,7 @@ func _on_card_manager_enemy_right_enemy() -> void:
 func on_card_played():
 	circle_sprite.visible=true
 	played = false
+	first_to_play = true
 	show_message("Your turn")
 
 

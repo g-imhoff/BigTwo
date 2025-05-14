@@ -62,7 +62,7 @@ label_settings = SubResource("LabelSettings_q7lpf")
 
 [node name="Flush" type="Sprite2D" parent="."]
 z_index = 1500
-position = Vector2(824, 252)
+position = Vector2(810, 251)
 texture = ExtResource("4_6fqa6")
 
 [node name="Label" type="Label" parent="Flush"]
@@ -72,10 +72,11 @@ offset_right = 59.0
 offset_bottom = 84.0
 text = "FLUSH"
 label_settings = SubResource("LabelSettings_52ol0")
+metadata/_edit_use_anchors_ = true
 
 [node name="FourOfAKind" type="Sprite2D" parent="."]
 z_index = 1500
-position = Vector2(289, 479)
+position = Vector2(812, 471)
 texture = ExtResource("5_5rib8")
 
 [node name="Label" type="Label" parent="FourOfAKind"]
@@ -88,7 +89,7 @@ label_settings = SubResource("LabelSettings_xwa54")
 
 [node name="FullHouse" type="Sprite2D" parent="."]
 z_index = 1500
-position = Vector2(820, 475)
+position = Vector2(291, 471)
 texture = ExtResource("6_buuth")
 
 [node name="Label" type="Label" parent="FullHouse"]
@@ -98,10 +99,11 @@ offset_right = 112.0
 offset_bottom = 88.0
 text = "FULL HOUSE"
 label_settings = SubResource("LabelSettings_fqs8e")
+metadata/_edit_use_anchors_ = true
 
 [node name="StraightFlush" type="Sprite2D" parent="."]
 z_index = 1500
-position = Vector2(291, 686)
+position = Vector2(557, 688)
 texture = ExtResource("7_7csc6")
 
 [node name="Label" type="Label" parent="StraightFlush"]

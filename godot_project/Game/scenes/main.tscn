@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=27 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
 [ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
@@ -25,6 +25,13 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tn0b1"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ieb04"]
+bg_color = Color(0.85098, 0.643137, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifjai"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
 corner_radius_top_left = 25
@@ -35,6 +42,13 @@ corner_radius_bottom_left = 25
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1qys"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7ucw"]
+bg_color = Color(0.852876, 0.6427, 1.15514e-06, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlubl"]
 bg_color = Color(1, 0.756863, 0.027451, 1)
@@ -74,22 +88,24 @@ script = ExtResource("6_brei5")
 [node name="Background" parent="." instance=ExtResource("3_j44is")]
 
 [node name="Button" type="Button" parent="."]
-offset_left = 611.0
-offset_top = 1019.0
-offset_right = 769.0
-offset_bottom = 1067.0
+offset_left = 1048.0
+offset_top = 1018.0
+offset_right = 1206.0
+offset_bottom = 1066.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_tn0b1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ieb04")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ifjai")
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1075.0
-offset_top = 1016.0
-offset_right = 1233.0
-offset_bottom = 1064.0
+offset_left = 726.0
+offset_top = 1018.0
+offset_right = 884.0
+offset_bottom = 1066.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_q1qys")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h7ucw")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jlubl")
 text = "PASS
 "
