@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://20pkkhkt0f7u"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_58fyg"]
-[ext_resource type="Script" path="res://GameStarter/profile.gd" id="1_65wxg"]
+[ext_resource type="Script" uid="uid://vwkboq8hiqte" path="res://GameStarter/profile.gd" id="1_65wxg"]
 [ext_resource type="PackedScene" uid="uid://dwot7sxv4k3c8" path="res://GameStarter/Avatar POPUP.tscn" id="3_bajs7"]
 [ext_resource type="Texture2D" uid="uid://buk34li2ffbo0" path="res://assets/ui/BackIcon.png" id="3_fdaiq"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="3_vyuf8"]
 [ext_resource type="Texture2D" uid="uid://dq53onfa628lf" path="res://assets/ui/profilepicdefault.png" id="6_dt6kw"]
-[ext_resource type="Script" path="res://GameStarter/avatar_popup.gd" id="6_udx4q"]
+[ext_resource type="Script" uid="uid://c5gpmxu0s6w5p" path="res://GameStarter/avatar_popup.gd" id="6_udx4q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ph2b"]
 bg_color = Color(1, 0.756863, 0.027451, 1)

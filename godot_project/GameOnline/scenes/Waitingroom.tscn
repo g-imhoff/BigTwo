@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cj5sl8hqn8e36"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_j300w"]
-[ext_resource type="Script" path="res://GameOnline/scripts/waitingroom.gd" id="1_t5fdx"]
+[ext_resource type="Script" uid="uid://c26o4a36pj8pl" path="res://GameOnline/scripts/waitingroom.gd" id="1_t5fdx"]
 [ext_resource type="Texture2D" uid="uid://by85xnwxgoq7o" path="res://assets/ui/pokerboard.png" id="2_wkyg2"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_xaltb"]
 
