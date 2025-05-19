@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://6wqgrvrccnso"]
 
-[ext_resource type="Script" path="res://GameStarter/connection_page.gd" id="1_euxgu"]
+[ext_resource type="Script" uid="uid://0ktypdx7tcgv" path="res://GameStarter/connection_page.gd" id="1_euxgu"]
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_ynr6k"]
 [ext_resource type="Texture2D" uid="uid://cw203koi7bphl" path="res://assets/ui/logo.png" id="2_a85sy"]
 [ext_resource type="Texture2D" uid="uid://d01s88i8stsj" path="res://assets/ui/connection page divider.png" id="4_n7tl5"]
