@@ -17,6 +17,7 @@ func _on_home_pressed() -> void:
 
 
 func _on_play_again_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Game/scenes/main.tscn")
 	pass # Replace with function body.
 	

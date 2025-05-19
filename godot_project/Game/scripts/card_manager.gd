@@ -276,10 +276,9 @@ func remove_card_in_slot():
 
 func end_game():
 	print("tu a gagné")
-	Global.index==1
-	Global.endcardpos==0
+	get_tree().paused = true
 	$"../EndGame".set_visible(true)
-	$"../EndGame/PlayerWinner".text = "You win"
+	$"../EndGame/Panel/PlayerWinner".text = "You win"
 	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
 
 

@@ -307,11 +307,10 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 
 func end_game():
 	print("tu a gagné")
-	Global.index-=Global.index-1
-	Global.endcardpos-=Global.endcardpos
-	print("finale",Global.index,"/",Global.endcardpos)
+	get_tree().paused = true
 	$"../EndGame".set_visible(true)
-	$"../EndGame/PlayerWinner".text = "You lost"
+	$"../EndGame/Panel/Label".text = "SORRY, You lost"
+	$"../EndGame/Panel/PlayerWinner".text = "The Bot Won"
 	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
 
 
