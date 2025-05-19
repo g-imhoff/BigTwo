@@ -181,7 +181,7 @@ func remove_card_in_slot(hand, cardslot):
 			children_slots[i].combi_form=null
 			i += 1
 			Global.index+=1
-			Global.endcardpos+=0.2
+			Global.endcardpos+=0.05
 
 func enemy_played(hand, cardslot, list_card, lst_card_in_slot):
 	var card_scene=preload(CARD_SCENE_PATH)

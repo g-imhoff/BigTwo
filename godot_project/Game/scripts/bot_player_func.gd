@@ -213,7 +213,7 @@ func remove_card_in_slot(lst_card_in_slot, children_slots, cmpt_card_in_slot):
 			check_cards=true
 		if check_cards==true:
 			Global.index+=1
-			Global.endcardpos+=0.1
+			Global.endcardpos+=0.02
 
 func on_card_played(children_slots_right, children_slots, played, hand, cmpt_card_in_slot, lst_card_in_slot,player):
 	if played==false:
@@ -307,9 +307,12 @@ func on_card_played(children_slots_right, children_slots, played, hand, cmpt_car
 
 func end_game():
 	print("tu a gagné")
+	get_tree().paused = true
 	$"../EndGame".set_visible(true)
-	$"../EndGame/PlayerWinner".text = "You lost"
+	$"../EndGame/Panel/Label".text = "SORRY, You lost"
+	$"../EndGame/Panel/PlayerWinner".text = "The Bot Won"
 	$"../EndGame".process_mode = Node.PROCESS_MODE_ALWAYS
+
 
 
 func show_message(text: String, duration: float = 2.0):

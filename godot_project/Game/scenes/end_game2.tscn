@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://p7n3ewamh80a"]
+[gd_scene load_steps=6 format=3 uid="uid://p7n3ewamh80a"]
 
 [ext_resource type="Script" uid="uid://usfi1mg72juf" path="res://Game/scripts/end_game.gd" id="1_e5pko"]
 [ext_resource type="Texture2D" uid="uid://dxoa8li7qro71" path="res://assets/ui/logonowelcome.png" id="2_p2cqn"]
@@ -10,19 +10,46 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0kvp"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ww5h5"]
+bg_color = Color(0.164706, 0.556863, 0.164706, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [node name="EndGame" type="Node2D"]
 script = ExtResource("1_e5pko")
 
 [node name="Panel" type="Panel" parent="."]
-offset_right = 949.0
-offset_bottom = 507.0
+z_index = 100
+offset_left = 509.0
+offset_top = 289.0
+offset_right = 1458.0
+offset_bottom = 796.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dp4nt")
 
-[node name="Logonowelcome" type="Sprite2D" parent="."]
+[node name="Logonowelcome" type="Sprite2D" parent="Panel"]
 position = Vector2(474, 100)
 texture = ExtResource("2_p2cqn")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="Panel"]
 offset_left = 192.0
 offset_top = 160.0
 offset_right = 757.0
@@ -30,16 +57,17 @@ offset_bottom = 236.0
 theme_override_font_sizes/font_size = 55
 text = "CONGRATULATIONS !"
 
-[node name="PlayerWinner" type="Label" parent="."]
+[node name="PlayerWinner" type="Label" parent="Panel"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 174.0
-offset_top = 250.0
-offset_right = 774.0
-offset_bottom = 326.0
+offset_left = -300.5
+offset_top = -3.5
+offset_right = 299.5
+offset_bottom = 72.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 55
@@ -48,19 +76,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Home" type="Button" parent="."]
-offset_left = 289.0
-offset_top = 446.0
-offset_right = 344.0
-offset_bottom = 477.0
+[node name="Home" type="Button" parent="Panel"]
+offset_left = 278.0
+offset_top = 413.0
+offset_right = 438.0
+offset_bottom = 453.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_h0kvp")
 text = "Home"
 
-[node name="Play Again" type="Button" parent="."]
-offset_left = 589.0
-offset_top = 446.0
-offset_right = 676.0
-offset_bottom = 477.0
+[node name="Play Again" type="Button" parent="Panel"]
+offset_left = 500.0
+offset_top = 413.0
+offset_right = 660.0
+offset_bottom = 453.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ww5h5")
 text = "Play again"
 
-[connection signal="pressed" from="Home" to="." method="_on_home_pressed"]
-[connection signal="pressed" from="Play Again" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="Panel/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="Panel/Play Again" to="." method="_on_play_again_pressed"]
