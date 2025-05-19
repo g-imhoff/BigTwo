@@ -151,6 +151,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Home" type="Button" parent="Panel"]
+layout_mode = 0
 offset_left = 278.0
 offset_top = 413.0
 offset_right = 438.0
@@ -163,6 +164,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_o2k65")
 text = "Home"
 
 [node name="Play Again" type="Button" parent="Panel"]
+layout_mode = 0
 offset_left = 500.0
 offset_top = 413.0
 offset_right = 660.0
