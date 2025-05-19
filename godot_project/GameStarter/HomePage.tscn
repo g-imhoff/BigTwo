@@ -76,7 +76,15 @@ func _on_texture_button_pressed() -> void:
 
 
 func _on_social_media_pressed() -> void:
-	OS.shell_open(\"https://linktr.ee/bigtwo2\")
+	var url := [\"https://linktr.ee/bigtwo2\"]
+	if OS.get_name() == \"Linux\":
+		var result = OS.execute(\"xdg-open\", url)
+		if result != OK:
+			push_error(\"Failed to open URL with xdg-open\")
+	else:
+		var success := OS.shell_open(url[0])
+
+	
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i47ee"]
