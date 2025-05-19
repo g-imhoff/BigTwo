@@ -12,4 +12,4 @@ func display_room(list):
 		var room_instance = room_scene.instantiate()
 		scroll_bar.add_child(room_instance)  # Add first
 		await get_tree().process_frame  # Wait for next frame
-		room_instance.set_values(room["room_name"], room["players"])  # Now safe
+		room_instance.set_values(room["room_name"], int(room["players"]))  # Now safe

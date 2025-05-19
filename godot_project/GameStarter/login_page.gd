@@ -31,9 +31,6 @@ func _on_login_pressed() -> void:
 	var rememberme = rememberme_checkbox.is_pressed()
 	var password_hash = ""
 	
-	if not PasswordChecker.is_password_strong(password):
-		show_password_popup("Mot de passe trop faible.\n Minimum 8 Caractères avec des symboles,lettres et chiffres")
-		return
 		
 	if password != "":
 		password_hash = Hash.hash_password(password)

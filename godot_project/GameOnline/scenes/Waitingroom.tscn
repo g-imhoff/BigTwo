@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cj5sl8hqn8e36"]
 
 [ext_resource type="Texture2D" uid="uid://cavhbnn0b3qoj" path="res://assets/ui/background.png" id="1_j300w"]
-[ext_resource type="Script" uid="uid://c26o4a36pj8pl" path="res://GameOnline/scripts/waitingroom.gd" id="1_t5fdx"]
+[ext_resource type="Script" path="res://GameOnline/scripts/waitingroom.gd" id="1_t5fdx"]
 [ext_resource type="Texture2D" uid="uid://by85xnwxgoq7o" path="res://assets/ui/pokerboard.png" id="2_wkyg2"]
 [ext_resource type="FontFile" uid="uid://dui23xil84umq" path="res://assets/fonts/porter-sans-inline-block-webfont.ttf" id="2_xaltb"]
 
@@ -83,22 +83,14 @@ theme_override_fonts/font = ExtResource("2_xaltb")
 theme_override_font_sizes/font_size = 80
 text = "Waiting Room"
 
-[node name="Waiting Room" type="Label" parent="Waiting Room"]
-offset_left = 249.0
-offset_top = 313.0
-offset_right = 1149.0
-offset_bottom = 429.0
-theme_override_fonts/font = ExtResource("2_xaltb")
-theme_override_font_sizes/font_size = 60
-text = "Players:"
-
 [node name="Room name" type="Label" parent="."]
-offset_left = -5.0
-offset_top = 170.0
-offset_right = 1915.0
-offset_bottom = 299.0
+offset_left = 497.0
+offset_top = 292.0
+offset_right = 1304.0
+offset_bottom = 392.0
 theme_override_fonts/font = ExtResource("2_xaltb")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
+text = "ff"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -137,10 +129,19 @@ text = "Cancel
 "
 
 [node name="HBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 861.0
-offset_top = 477.0
-offset_right = 1368.0
-offset_bottom = 661.0
+offset_left = 656.0
+offset_top = 399.0
+offset_right = 1163.0
+offset_bottom = 583.0
+
+[node name="players label" type="Label" parent="."]
+offset_left = 324.0
+offset_top = 386.0
+offset_right = 646.0
+offset_bottom = 445.0
+theme_override_fonts/font = ExtResource("2_xaltb")
+theme_override_font_sizes/font_size = 40
+text = "Players:"
 
 [connection signal="pressed" from="Start Btn" to="." method="_on_start_btn_pressed"]
 [connection signal="pressed" from="Cancel Btn" to="." method="_on_cancel_btn_pressed"]

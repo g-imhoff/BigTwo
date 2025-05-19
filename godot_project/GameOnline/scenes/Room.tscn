@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bfx80wmptn24i"]
 
-[ext_resource type="Script" uid="uid://dgnxwhm60j1vf" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
+[ext_resource type="Script" path="res://GameOnline/scripts/room.gd" id="1_a8nc6"]
 [ext_resource type="Texture2D" uid="uid://tf6uk0k44kxk" path="res://assets/ui/roomframe.png" id="2_25qoi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wolkb"]
@@ -50,12 +50,14 @@ offset_left = 58.0
 offset_top = 69.0
 offset_right = 150.0
 offset_bottom = 92.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="NbOfUsers" type="Label" parent="."]
 offset_left = 214.0
 offset_top = 72.0
 offset_right = 254.0
 offset_bottom = 95.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 
 [node name="Join" type="Button" parent="."]
 offset_left = 94.0
