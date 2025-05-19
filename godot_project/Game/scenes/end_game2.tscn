@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://p7n3ewamh80a"]
+[gd_scene load_steps=12 format=3 uid="uid://p7n3ewamh80a"]
 
-[ext_resource type="Script" uid="uid://usfi1mg72juf" path="res://Game/scripts/end_game.gd" id="1_e5pko"]
+[ext_resource type="Script" path="res://Game/scripts/end_game.gd" id="1_e5pko"]
 [ext_resource type="Texture2D" uid="uid://dxoa8li7qro71" path="res://assets/ui/logonowelcome.png" id="2_p2cqn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp4nt"]
@@ -10,24 +10,96 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0kvp"]
-bg_color = Color(1, 0, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g12kk"]
+bg_color = Color(0.698039, 0, 0.00784314, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ww5h5"]
-bg_color = Color(0.164706, 0.556863, 0.164706, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_joa53"]
+bg_color = Color(0.698039, 0, 0.00784314, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ltda"]
+bg_color = Color(0.698039, 0, 0.00784314, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2k65"]
+bg_color = Color(1, 0, 0.0156863, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k0ye"]
+bg_color = Color(0.0784314, 0.301961, 0.0745098, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7e70g"]
+bg_color = Color(0.0784314, 0.301961, 0.0745098, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbdi3"]
+bg_color = Color(0.0784314, 0.301961, 0.0745098, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ow3nw"]
+bg_color = Color(0.14902, 0.509804, 0.14902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -50,12 +122,14 @@ position = Vector2(474, 100)
 texture = ExtResource("2_p2cqn")
 
 [node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
 offset_left = 192.0
 offset_top = 160.0
 offset_right = 757.0
 offset_bottom = 236.0
 theme_override_font_sizes/font_size = 55
 text = "CONGRATULATIONS !"
+horizontal_alignment = 1
 
 [node name="PlayerWinner" type="Label" parent="Panel"]
 layout_mode = 1
@@ -82,7 +156,10 @@ offset_top = 413.0
 offset_right = 438.0
 offset_bottom = 453.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_h0kvp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_g12kk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_joa53")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2ltda")
+theme_override_styles/normal = SubResource("StyleBoxFlat_o2k65")
 text = "Home"
 
 [node name="Play Again" type="Button" parent="Panel"]
@@ -90,7 +167,10 @@ offset_left = 500.0
 offset_top = 413.0
 offset_right = 660.0
 offset_bottom = 453.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_ww5h5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1k0ye")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7e70g")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dbdi3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ow3nw")
 text = "Play again"
 
 [connection signal="pressed" from="Panel/Home" to="." method="_on_home_pressed"]

@@ -6,6 +6,9 @@ extends Node2D
 
 var email = ""
 var Hash = load("res://hashage.gd")
+var PasswordChecker = load("res://password_check.gd")
+@onready var password_checker_label = $PopupSettings/NewPassword4/PasswordCheck
+
 
 func _on_back_button_login_pressed() -> void:
 	$".".visible = not $".".visible
@@ -45,6 +48,10 @@ func _on_reset_btn_pressed() -> void:
 	http_request.request_completed.connect(_http_request_completed)
 	var password = labelnewpassword.text
 	var password_hash = ""
+		
+	if not PasswordChecker.is_password_strong(password):
+		password_checker_label.add_theme_color_override("font_color", Color.RED)
+		return
 	
 	if password != "":
 		password_hash = Hash.hash_password(password)	
