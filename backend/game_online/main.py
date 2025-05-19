@@ -6,8 +6,8 @@ from websockets.asyncio.server import serve, ServerConnection
 import asyncio
 import random
 import json
-import ssl
 from typing import Any, Dict, List, Tuple, TypedDict
+from bdd import increment_game_played, increment_game_won
 
 # Others file import
 from debut_jeu import get_list_card_info_from_texture, Card
@@ -60,6 +60,7 @@ class Room:
             self.nb_players += 1
             await self.accept_new_connection(websocket)
             await self.broadcast_new_connection(username)
+            increment_game_played(username)
 
     async def accept_new_connection(self, websocket: ServerConnection) -> None:
         players_name: List[str] = []
@@ -178,6 +179,7 @@ class Room:
                 self.players[username].card -= len(list_card)
                 if (self.players[username].card <= 0):
                     await self.game_won(username)
+                    increment_game_won(username)
 
             await Room.send_verification(result_verif[0], websocket, result_verif[1], False)
         else:

@@ -46,6 +46,8 @@
 - [ ] [Rapport de la réunion du 23 avril](https://docs.google.com/document/d/1suY7cZBdXXHljtLWDpQCPajb6iiM-cEtarJyezFYCRA/edit?usp=sharing)
 - [ ] [Rapport d'activité du 29 avril](https://docs.google.com/document/d/1yJDVcBpB4hfgseF6tKFKMwfWFcow91cbVDPkFs8EeYM/edit?usp=sharing)
 - [ ] [Rapport de la réunion du 30 avril](https://docs.google.com/document/d/1DsWNnhT1SsfOM2I2duMa4ETOxd6KZrwSnIen6iIMyzU/edit?usp=sharing)
+- [ ] [Rapport d'activité du 06 mai](https://docs.google.com/document/d/1-aLrlrASREMNdERfFDjCjPpGtPhKhohnCFExiqOgu5k/edit?usp=sharing)
+- [ ] [Rapport de la réunion du 07 mai](https://docs.google.com/document/d/1pmbg6Q6cdltEpXmHZ1rhGokUatButaINC2Uoyl9Wyqw/edit?usp=sharing)
 
 
 

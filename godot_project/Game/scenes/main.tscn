@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d20ku6m670vr1"]
+[gd_scene load_steps=25 format=3 uid="uid://d20ku6m670vr1"]
 
 [ext_resource type="Script" path="res://Game/scripts/card_manager.gd" id="1_4ysun"]
 [ext_resource type="Script" path="res://Game/scripts/start.gd" id="1_8ka4x"]
@@ -21,6 +21,27 @@
 [ext_resource type="Texture2D" uid="uid://dpf8x1ngdjwn4" path="res://assets/ui/RULES BUTTON.png" id="18_e7axl"]
 [ext_resource type="PackedScene" uid="uid://p7n3ewamh80a" path="res://Game/scenes/end_game2.tscn" id="20_rng3j"]
 [ext_resource type="Texture2D" uid="uid://bm1fera3ije3g" path="res://assets/circle-white.png" id="21_y53yt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tn0b1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifjai"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1qys"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlubl"]
+bg_color = Color(1, 0.756863, 0.027451, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gouob")
@@ -53,17 +74,23 @@ script = ExtResource("6_brei5")
 [node name="Background" parent="." instance=ExtResource("3_j44is")]
 
 [node name="Button" type="Button" parent="."]
-offset_left = 640.0
-offset_top = 1027.0
-offset_right = 798.0
-offset_bottom = 1075.0
+offset_left = 611.0
+offset_top = 1019.0
+offset_right = 769.0
+offset_bottom = 1067.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_tn0b1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ifjai")
 text = "PLAY"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 1080.0
-offset_top = 1027.0
-offset_right = 1238.0
-offset_bottom = 1075.0
+offset_left = 1075.0
+offset_top = 1016.0
+offset_right = 1233.0
+offset_bottom = 1064.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_q1qys")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jlubl")
 text = "PASS
 "
 
@@ -106,46 +133,46 @@ position = Vector2(1160, 340)
 z_index = -1
 
 [node name="cardslot" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(620, 540)
+position = Vector2(600, 540)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(620, 640)
+position = Vector2(600, 640)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(620, 440)
+position = Vector2(600, 440)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(620, 340)
+position = Vector2(600, 340)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots3" instance=ExtResource("5_dlrfd")]
-position = Vector2(620, 740)
+position = Vector2(600, 740)
 rotation = 1.5708
 
 [node name="Cardslots4" type="Node2D" parent="."]
 z_index = -1
 
 [node name="cardslot" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1300, 540)
+position = Vector2(1320, 540)
 rotation = 1.5708
 
 [node name="cardslot2" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1300, 640)
+position = Vector2(1320, 640)
 rotation = 1.5708
 
 [node name="cardslot3" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1300, 440)
+position = Vector2(1320, 440)
 rotation = 1.5708
 
 [node name="cardslot4" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1300, 340)
+position = Vector2(1320, 340)
 rotation = 1.5708
 
 [node name="cardslot5" parent="Cardslots4" instance=ExtResource("5_dlrfd")]
-position = Vector2(1300, 740)
+position = Vector2(1320, 740)
 rotation = 1.5708
 
 [node name="start" type="Node2D" parent="."]
@@ -156,17 +183,17 @@ script = ExtResource("12_5o7ou")
 
 [node name="sort_value" type="TextureButton" parent="."]
 texture_filter = 1
-offset_left = 235.0
-offset_top = 954.0
-offset_right = 276.0
-offset_bottom = 1011.0
+offset_left = 20.0
+offset_top = 1003.0
+offset_right = 61.0
+offset_bottom = 1061.0
 texture_normal = ExtResource("13_ee3kj")
 
 [node name="sort_form" type="TextureButton" parent="."]
-offset_left = 305.0
-offset_top = 954.0
-offset_right = 346.0
-offset_bottom = 1012.0
+offset_left = 92.0
+offset_top = 1003.0
+offset_right = 133.0
+offset_bottom = 1061.0
 texture_normal = ExtResource("14_td723")
 
 [node name="message" type="Label" parent="."]
@@ -256,7 +283,7 @@ text = "Bot 3"
 
 [node name="EnemySpriteRight" type="Sprite2D" parent="EnemyUsernameRight"]
 visible = false
-position = Vector2(-30, 21)
+position = Vector2(-18, 12.9999)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("21_y53yt")
 
@@ -270,7 +297,7 @@ text = "Bot 1"
 
 [node name="EnemySpriteLeft" type="Sprite2D" parent="EnemyUsernameLeft"]
 visible = false
-position = Vector2(-30, 21)
+position = Vector2(-23, 13.0001)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("21_y53yt")
 
@@ -283,7 +310,7 @@ text = "Bot 2"
 
 [node name="EnemySpriteTop" type="Sprite2D" parent="EnemyUsernameTop"]
 visible = false
-position = Vector2(-30, 17)
+position = Vector2(-23, 14)
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("21_y53yt")
 
